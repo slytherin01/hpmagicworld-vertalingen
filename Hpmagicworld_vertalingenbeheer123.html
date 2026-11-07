@@ -11,7 +11,7 @@ html,body{margin:0;min-height:100%;background:#0d1522;color:#edf2fa}
 body{padding:54px 0 0;background:#0d1522 url("https://i28.servimg.com/u/f28/11/54/28/73/backgr10.png") center top/cover fixed no-repeat}
 .portal-nav{height:54px;position:fixed;z-index:1000;top:0;left:0;right:0;display:flex;align-items:center;background:linear-gradient(180deg,#111c2c,#0b1320);border-bottom:1px solid #26384d;box-shadow:0 4px 16px #0008;padding:0 22px;gap:18px}
 .portal-nav a{display:inline-flex;align-items:center;gap:9px;color:#d9e3f0;text-decoration:none;font-size:13px;font-weight:700;white-space:nowrap;padding:7px 10px;border-radius:8px}
-.portal-nav a:hover{background:#1b2b40;color:#fff}
+.portal-nav a:hover{background:#1b2b40;color:#fff}\n.portal-nav .tool-nav-btn{padding:7px 12px;background:transparent;color:#d9e3f0;border:1px solid #3b5673;border-radius:8px;font-size:13px;font-weight:700;white-space:nowrap}.portal-nav .tool-nav-btn.active{background:#20354e;border-color:#c9a45c;color:#f5d995}.portal-nav .tool-nav-btn:hover{filter:brightness(1.15)}
 .portal-nav .nav-icon{width:29px;height:29px;display:inline-flex;align-items:center;justify-content:center;background:#20354e;border:1px solid #3b5673;border-radius:8px;color:#d8e7f8;font-size:15px}
 .language-picker{margin-left:auto;display:flex;align-items:center;gap:8px;color:#cbd7e5;font-size:12px;font-weight:700;white-space:nowrap}.language-picker select{width:auto;min-width:66px;padding:6px 9px;border-radius:7px;background:#17283c;border:1px solid #3b5673;color:#f5f8fc;font-weight:700}\n.tool-heading{text-align:center!important}.tool-heading h1{margin:0 0 8px}.tool-heading p{margin:0;text-align:center}\nmain{max-width:1180px;margin:40px auto 80px;padding:0 10px}
 .panel{background:rgba(13,22,35,.97);border:1px solid #26394d;border-radius:15px;padding:22px;margin:18px 0;box-shadow:0 12px 34px #0006}
@@ -77,10 +77,10 @@ td input{margin:2px 0}.save{white-space:nowrap;padding:9px 12px}.hidden{display:
 </style>
 </head>
 <body>
-<header class="portal-nav"><a href="https://testforumjoost.forumactie.com/forum" target="_blank" rel="noopener"><span class="nav-icon">☏</span>Forum</a><a href="https://testforumjoost.forumactie.com/h3-portaal"><span class="nav-icon">⌂</span>Portaal</a><a href="https://testforumjoost.forumactie.com/h13-dev-sorting-hat" target="_blank" rel="noopener"><span class="nav-icon">♙</span>De Sorteerhoed</a><a href="https://testforumjoost.forumactie.com/h6-beta-nieuws" target="_blank" rel="noopener"><span class="nav-icon">▤</span>HP Nieuws</a><div class="language-picker"><label for="toolLanguage">Taal</label><select id="toolLanguage" aria-label="Taal"><option value="nl">NL</option><option value="en">EN</option><option value="pt">PT</option></select></div></header>
+<header class="portal-nav"><a href="https://testforumjoost.forumactie.com/forum" target="_blank" rel="noopener"><span class="nav-icon">☏</span>Forum</a><a href="https://testforumjoost.forumactie.com/h3-portaal"><span class="nav-icon">⌂</span>Portaal</a><a href="https://testforumjoost.forumactie.com/h13-dev-sorting-hat" target="_blank" rel="noopener"><span class="nav-icon">♙</span>De Sorteerhoed</a><a href="https://testforumjoost.forumactie.com/h6-beta-nieuws" target="_blank" rel="noopener"><span class="nav-icon">▤</span>HP Nieuws</a><button type="button" class="tool-nav-btn active" id="translationMenu">Vertalingen</button><button type="button" class="tool-nav-btn" id="pageMenu">Pagina’s</button><div class="language-picker"><label for="toolLanguage">Taal</label><select id="toolLanguage" aria-label="Taal"><option value="nl">NL</option><option value="en">EN</option><option value="pt">PT</option></select></div></header>
 <main>
-  <div class="portal-hero"><img src="https://i28.servimg.com/u/f28/11/54/28/73/logo10.png" alt="Hpmagicworld logo"><h1>Admin Tool</h1></div>
   <div class="panel tool-heading">
+    <img class="tool-heading-logo" src="https://i28.servimg.com/u/f28/11/54/28/73/logo10.png" alt="Hpmagicworld logo">
     <h1 id="toolMainTitle">Muggle Ministry – Vertalingen &amp; Beheer</h1>
     <p id="toolTagline">Dit is onze interne tool voor het portaal!</p>
   </div>
@@ -90,25 +90,16 @@ td input{margin:2px 0}.save{white-space:nowrap;padding:9px 12px}.hidden{display:
     <p><button id="loginBtn">Inloggen</button></p>
   </section>
   <section id="app" class="panel hidden">
-    <div class="toolbar" style="justify-content:space-between;margin-bottom:14px">
-      <strong>Beheerportaal</strong>
-      <button class="secondary" id="logoutBtn">Uitloggen</button>
-    </div>
-    <div class="app-layout">
-      <nav class="side-menu" aria-label="Beheermenu">
-        <h3>MENU</h3>
-        <button type="button" class="menu-btn active" id="translationMenu">Vertaal tool</button>
-        <button type="button" class="menu-btn" id="pageMenu">Forumotion-pagina’s</button>
-      </nav>
-      <div class="tool-view">
+    <div class="toolbar app-account-bar" style="justify-content:flex-end;margin-bottom:14px"><button class="secondary" id="logoutBtn">Uitloggen</button></div>
+    <div class="tool-view">
         <section id="translationView">
-          <h2>Vertaal tool</h2>
+          <p id="count" class="small count-top"></p>
+          <h2>Vertalingen</h2>
           <div class="toolbar">
             <input id="search" placeholder="Zoek een vertaling…">
             <button class="secondary" id="reloadBtn">Vernieuwen</button>
             <button id="syncGithubBtn">↥ Sync naar GitHub</button>
           </div>
-          <p id="count" class="small"></p>
           <div style="overflow-x:auto">
             <table><thead><tr><th>Sleutel</th><th>Nederlands</th><th>English</th><th>Português</th><th></th></tr></thead><tbody id="rows"></tbody></table>
           </div>
@@ -142,7 +133,6 @@ td input{margin:2px 0}.save{white-space:nowrap;padding:9px 12px}.hidden{display:
           </form>
           <div id="contentList"></div></details>
         </section>
-      </div>
     </div>
   </section>
   <div id="status" role="status">Vul je beheerdersgegevens in om te beginnen.</div>
@@ -365,8 +355,7 @@ td input{margin:2px 0}.save{white-space:nowrap;padding:9px 12px}.hidden{display:
   fmSave:"savePage",fmClear:"clear",fmDownload:"download",fmList:"noPages"
  };
  const textTargets={
-  "#login h2":"login","#app .toolbar strong":"adminPortal",
-  ".side-menu h3":"menu","#translationView h2":"translationTool","#pageView h2":"forumPages",
+  "#login h2":"login","#translationView h2":"translationTool","#pageView h2":"forumPages",
   "#pageView>p":"pageIntro","#pageView .content-item h3":"addEdit",
   "#pageView>h3":"savedPages","#contentForm label:nth-child(1)":"type"
  };
