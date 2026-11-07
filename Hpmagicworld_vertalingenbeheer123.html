@@ -149,8 +149,7 @@ td.key{width:24%;font-size:13px;overflow-wrap:anywhere;color:#586174}td input{ma
       const {data,error}=await db.functions.invoke('sync-translations',{body:{}});
       if(error)throw error;
       if(!data||!data.success)throw new Error(data?.error||'Synchronisatie is niet bevestigd.');
-      status(data.message+(data.commit?'\
-GitHub commit: '+data.commit:''),'ok');
+      status(data.message+(data.commit?String.fromCharCode(10)+'GitHub commit: '+data.commit:''),'ok');
     }catch(e){status('Synchroniseren mislukt: '+(e.message||String(e)),'error');}
     finally{btn.disabled=false;btn.textContent='↥ Sync naar GitHub';}
   });
