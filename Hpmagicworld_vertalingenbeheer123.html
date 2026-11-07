@@ -212,7 +212,7 @@ main{
 #app.panel{background:transparent!important;border:0!important;border-radius:0!important;padding:0!important;margin:0!important;box-shadow:none!important}
 #login.panel{max-width:620px;margin:0 auto!important;background:rgba(13,25,42,.96);border:1px solid #405a78;border-radius:16px;box-shadow:0 12px 32px #0005}
 #translationView{background:rgba(11,22,37,.96);border:1px solid #344d69;border-radius:16px;padding:22px;box-shadow:0 12px 32px #0005}
-#status{display:none!important}
+#status{display:block!important;margin:12px auto;max-width:900px}
 #status.translation-status{display:block!important;margin:0 0 16px!important;padding:12px 16px!important;border-radius:10px!important;background:rgba(18,54,43,.96)!important;border:1px solid #397b61!important;color:#dcf7e9!important}
 .tool-footer{
  width:100%;margin-top:auto!important;padding:17px 18px!important;text-align:center;
@@ -399,6 +399,7 @@ button.content-edit:hover,button.content-delete:hover{
     <h1 id="toolMainTitle">Muggle Ministry – Vertalingen &amp; Beheer</h1>
     <p id="toolTagline">Dit is onze interne tool voor het portaal!</p>
   </div>
+  <div id="status" role="status" aria-live="polite" style="display:none"></div>
   <section id="login" class="panel">
     <h2>Inloggen</h2>
     <div class="row"><input id="email" type="email" placeholder="E-mailadres" autocomplete="username"><input id="password" type="password" placeholder="Wachtwoord" autocomplete="current-password"></div>
@@ -408,7 +409,6 @@ button.content-edit:hover,button.content-delete:hover{
     
     <div class="tool-view">
         <section id="translationView" style="display:none">
-          <div id="status" role="status">Vul je beheerdersgegevens in om te beginnen.</div>
           <p id="count" class="small count-top"></p>
           <h2>Vertalingen</h2>
           <div class="toolbar">
@@ -435,7 +435,7 @@ button.content-edit:hover,button.content-delete:hover{
   const $ = id => document.getElementById(id);
   let allRows = [];
   let activeTool = null;
-  const status = (message, kind='') => { $('status').textContent=message; $('status').className=kind+(activeTool==='translations'?' translation-status':''); };
+  const status = (message, kind='') => { const el=$('status'); el.textContent=message; el.className=kind+(activeTool==='translations'?' translation-status':''); el.style.display=message?'block':'none'; };
   const showApp = yes => { $('app').classList.toggle('hidden',!yes); $('login').classList.toggle('hidden',yes); $('logoutBtn').classList.toggle('hidden',!yes); };
 
   async function checkAdmin() {
@@ -483,6 +483,8 @@ button.content-edit:hover,button.content-delete:hover{
     if(index>=0)allRows[index]={...allRows[index],...values};
     status('Opgeslagen: '+original.translation_key+'. Vernieuw daarna het forum met Ctrl + F5.','ok');
   }
+  $('logoutBtn').addEventListener('click',async()=>{ await db.auth.signOut(); allRows=[]; $('password').value=''; showApp(false); showTool('home'); status('Je bent uitgelogd.'); });
+
   $('loginBtn').addEventListener('click',async()=>{
     const email=$('email').value.trim(),password=$('password').value;
     if(!email||!password){status('Vul je e-mailadres en wachtwoord in.','error');return;}
@@ -490,7 +492,7 @@ button.content-edit:hover,button.content-delete:hover{
     const {error}=await db.auth.signInWithPassword({email,password});
     $('loginBtn').disabled=false;
     if(error){status('Inloggen mislukt: '+error.message,'error');return;}
-    try{await loadRows();}catch(e){status('Fout bij laden: '+e.message,'error');}
+    try{await loadRows();}catch(e){showApp(false);status('Fout bij laden: '+e.message,'error');}
   });
   $('reloadBtn').addEventListener('click',async()=>{try{await loadRows();}catch(e){status('Fout bij laden: '+e.message,'error');}});
   $('syncGithubBtn').addEventListener('click',async()=>{
