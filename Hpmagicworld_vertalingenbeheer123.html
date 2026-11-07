@@ -388,6 +388,10 @@ button.content-edit:hover,button.content-delete:hover{
 .existing-preview{background:#f4f0e6!important;border:1px solid #d8c18c!important;border-radius:16px!important;padding:18px!important}
 .existing-preview h3{color:#172b43!important}
 
+
+.row-actions{display:flex;gap:7px;flex-wrap:wrap;min-width:145px}
+.delete-translation{background:#542b35!important;border:1px solid #a75b68!important;color:#fff!important;padding:9px 11px!important}
+.delete-translation:hover{background:#713744!important}
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
@@ -468,8 +472,12 @@ button.content-edit:hover,button.content-delete:hover{
         const input=document.createElement('input');input.value=r[lang]||'';input.dataset.lang=lang;input.setAttribute('aria-label',lang+' '+r.translation_key);
         td.append(input);tr.append(td);
       }
-      const action=document.createElement('td');const btn=document.createElement('button');btn.className='save';btn.textContent='Opslaan';
-      btn.addEventListener('click',()=>saveRow(r,tr,btn));action.append(btn);tr.append(action);body.append(tr);
+      const action=document.createElement('td');action.className='row-actions';
+      const btn=document.createElement('button');btn.className='save';btn.textContent='Opslaan';
+      btn.addEventListener('click',()=>saveRow(r,tr,btn));
+      const del=document.createElement('button');del.className='secondary delete-translation';del.textContent='Verwijderen';del.type='button';
+      del.addEventListener('click',()=>deleteRow(r,del));
+      action.append(btn,del);tr.append(action);body.append(tr);
     });
   }
   async function saveRow(original,tr,btn) {
@@ -483,6 +491,17 @@ button.content-edit:hover,button.content-delete:hover{
     if(index>=0)allRows[index]={...allRows[index],...values};
     status('Opgeslagen: '+original.translation_key+'. Vernieuw daarna het forum met Ctrl + F5.','ok');
   }
+  async function deleteRow(row,button){
+    if(!confirm('Deze vertaling definitief verwijderen?\\n\\n'+row.translation_key+'\\n'+(row.nl||''))) return;
+    button.disabled=true;
+    const {error}=await db.from('translations').delete().eq('translation_key',row.translation_key);
+    button.disabled=false;
+    if(error){status('Verwijderen mislukt: '+error.message,'error');return;}
+    allRows=allRows.filter(item=>item.translation_key!==row.translation_key);
+    render();
+    status('Vertaling verwijderd. Klik daarna op “Alle vertalingen automatisch synchroniseren” om de wijziging naar GitHub te sturen.','ok');
+  }
+
   $('logoutBtn').addEventListener('click',async()=>{ const btn=$('logoutBtn'); btn.disabled=true; try { const {error}=await db.auth.signOut(); if(error) throw error; allRows=[]; $('password').value=''; showApp(false); showTool('home'); status('Je bent uitgelogd.','ok'); } catch(e) { status('Uitloggen mislukt: '+(e.message||String(e)),'error'); } finally { btn.disabled=false; } });
 
   $('loginBtn').addEventListener('click',async()=>{
