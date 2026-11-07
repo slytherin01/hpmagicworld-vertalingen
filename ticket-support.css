@@ -2335,3 +2335,27 @@ main.shell>.view#homeView::before{content:none!important;display:none!important;
 /* Portalpagina: logo nog eens circa 72px omhoog, zonder de welkomsttekst mee te verplaatsen. */
 #introView .hpmw-portal-logo{transform:translateY(-72px)!important;}
 @media(max-width:600px){#introView .hpmw-portal-logo{transform:translateY(-72px)!important;}}
+
+
+/* Grotere tellers in de navigatie: Mijn tickets en Ticketbeheer */
+#myTicketsCount,
+#adminTicketsCount{
+  min-width:27px!important;
+  height:27px!important;
+  padding:0 8px!important;
+  border-radius:999px!important;
+  font-size:14px!important;
+  line-height:1!important;
+  font-weight:900!important;
+  display:inline-grid!important;
+  place-items:center!important;
+}
+@media(max-width:600px){
+  #myTicketsCount,
+  #adminTicketsCount{
+    min-width:24px!important;
+    height:24px!important;
+    padding:0 7px!important;
+    font-size:13px!important;
+  }
+}
