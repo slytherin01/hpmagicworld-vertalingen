@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hpmagicworld – Vertaalbeheer</title>
+<style>
+:root{font-family:Arial,sans-serif;color:#202431;background:#f4f6fa}
+*{box-sizing:border-box}body{margin:0;padding:22px}
+main{max-width:1100px;margin:0 auto}.panel{background:#fff;border:1px solid #e1e5ed;border-radius:14px;padding:20px;margin:14px 0;box-shadow:0 3px 14px #15213b0b}
+h1{font-size:25px;margin:0 0 8px}p{line-height:1.45;color:#596273}
+input,button,textarea{font:inherit;border-radius:8px;padding:10px;border:1px solid #cbd2df}
+input{width:100%;min-width:0}button{background:#273b67;color:white;border:0;cursor:pointer;font-weight:600}button:disabled{opacity:.55;cursor:wait}
+button.secondary{background:#e9edf5;color:#26324a}.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.row>*{flex:1}
+#status{padding:10px;border-radius:8px;background:#eef2f8;color:#34415b;margin-top:12px;white-space:pre-wrap}
+#status.error{background:#fff0ef;color:#9b2820}#status.ok{background:#eaf8ef;color:#176334}
+.toolbar{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center}
+table{width:100%;border-collapse:collapse;margin-top:12px}th,td{padding:9px;border-bottom:1px solid #e7eaf0;text-align:left;vertical-align:top}th{font-size:13px;color:#596273}
+td.key{width:24%;font-size:13px;overflow-wrap:anywhere;color:#586174}td input{margin:2px 0}
+.save{white-space:nowrap;padding:9px 12px}
+.small{font-size:12px;color:#6b7280}
+.hidden{display:none}
+@media(max-width:720px){body{padding:10px}.toolbar{grid-template-columns:1fr}.panel{padding:14px}table,tbody,tr,td{display:block}thead{display:none}tr{border:1px solid #e1e5ed;border-radius:10px;margin:12px 0;padding:8px}td{border:0;padding:5px}td.key{width:auto;font-weight:bold}td:before{display:block;font-size:11px;color:#737d8f;margin-bottom:3px}td.nl:before{content:"Nederlands"}td.en:before{content:"English"}td.pt:before{content:"Português"}}</style>
+</head>
+<body>
+<main>
+  <div class="panel">
+    <h1>Hpmagicworld – Vertaalbeheer</h1>
+    <p>Beheer de Nederlandse, Engelse en Portugese teksten. Log in met het beheerdersaccount van je vertaalomgeving.</p>
+  </div>
+  <section id="login" class="panel">
+    <h2>Inloggen</h2>
+    <div class="row"><input id="email" type="email" placeholder="E-mailadres" autocomplete="username"><input id="password" type="password" placeholder="Wachtwoord" autocomplete="current-password"></div>
+    <p><button id="loginBtn">Inloggen</button></p>
+  </section>
+  <section id="app" class="panel hidden">
+    <div class="toolbar">
+      <input id="search" placeholder="Zoek een vertaling…">
+      <button class="secondary" id="reloadBtn">Vernieuwen</button>
+      <button class="secondary" id="logoutBtn">Uitloggen</button>
+    </div>
+    <p id="count" class="small"></p>
+    <div style="overflow-x:auto">
+      <table><thead><tr><th>Sleutel</th><th>Nederlands</th><th>English</th><th>Português</th><th></th></tr></thead><tbody id="rows"></tbody></table>
+    </div>
+  </section>
+  <div id="status" role="status">Vul je beheerdersgegevens in om te beginnen.</div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(() => {
+  const SUPABASE_URL = 'https://vuaajsjjluwgqmneinds.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_tto6sNxZPLv1VhUdMRlPHg_ptzg9odx';
+  const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  const $ = id => document.getElementById(id);
+  let allRows = [];
+  const status = (message, kind='') => { $('status').textContent=message; $('status').className=kind; };
+  const showApp = yes => { $('app').classList.toggle('hidden',!yes); $('login').classList.toggle('hidden',yes); };
+
+  async function checkAdmin() {
+    const {data:{user},error:userError}=await db.auth.getUser();
+    if(userError || !user) return false;
+    const {data,error}=await db.from('translation_admins').select('user_id').eq('user_id',user.id).maybeSingle();
+    if(error) throw error;
+    return !!data;
+  }
+  async function loadRows() {
+    status('Vertalingen laden…');
+    const allowed=await checkAdmin();
+    if(!allowed){showApp(false);status('Dit account staat niet in translation_admins. Log in met het juiste beheerdersaccount.','error');return;}
+    const {data,error}=await db.from('translations').select('translation_key,nl,en,pt').order('translation_key');
+    if(error) throw error;
+    allRows=data||[];
+    showApp(true); render();
+    status(allRows.length+' vertalingen geladen.','ok');
+  }
+  function render() {
+    const q=$('search').value.trim().toLowerCase();
+    const filtered=allRows.filter(r=>[r.translation_key,r.nl,r.en,r.pt].some(v=>(v||'').toLowerCase().includes(q)));
+    $('count').textContent=filtered.length+' van '+allRows.length+' vertalingen';
+    const body=$('rows'); body.replaceChildren();
+    filtered.forEach(r=>{
+      const tr=document.createElement('tr');
+      const key=document.createElement('td');key.className='key';key.textContent=r.translation_key;tr.append(key);
+      for(const lang of ['nl','en','pt']){
+        const td=document.createElement('td');td.className=lang;
+        const input=document.createElement('input');input.value=r[lang]||'';input.dataset.lang=lang;input.setAttribute('aria-label',lang+' '+r.translation_key);
+        td.append(input);tr.append(td);
+      }
+      const action=document.createElement('td');const btn=document.createElement('button');btn.className='save';btn.textContent='Opslaan';
+      btn.addEventListener('click',()=>saveRow(r,tr,btn));action.append(btn);tr.append(action);body.append(tr);
+    });
+  }
+  async function saveRow(original,tr,btn) {
+    btn.disabled=true;btn.textContent='Opslaan…';status('Wijziging opslaan…');
+    const values={translation_key:original.translation_key};
+    tr.querySelectorAll('input[data-lang]').forEach(i=>values[i.dataset.lang]=i.value);
+    const {error}=await db.from('translations').upsert(values,{onConflict:'translation_key'});
+    btn.disabled=false;btn.textContent='Opslaan';
+    if(error){status('Opslaan mislukt: '+error.message,'error');return;}
+    const index=allRows.findIndex(x=>x.translation_key===original.translation_key);
+    if(index>=0)allRows[index]={...allRows[index],...values};
+    status('Opgeslagen: '+original.translation_key+'. Vernieuw daarna het forum met Ctrl + F5.','ok');
+  }
+  $('loginBtn').addEventListener('click',async()=>{
+    const email=$('email').value.trim(),password=$('password').value;
+    if(!email||!password){status('Vul je e-mailadres en wachtwoord in.','error');return;}
+    $('loginBtn').disabled=true;status('Inloggen…');
+    const {error}=await db.auth.signInWithPassword({email,password});
+    $('loginBtn').disabled=false;
+    if(error){status('Inloggen mislukt: '+error.message,'error');return;}
+    try{await loadRows();}catch(e){status('Fout bij laden: '+e.message,'error');}
+  });
+  $('reloadBtn').addEventListener('click',async()=>{try{await loadRows();}catch(e){status('Fout bij laden: '+e.message,'error');}});
+  $('logoutBtn').addEventListener('click',async()=>{await db.auth.signOut();allRows=[];showApp(false);status('Je bent uitgelogd.');});
+  $('search').addEventListener('input',render);
+  db.auth.getSession().then(async({data})=>{if(data.session){try{await loadRows();}catch(e){status('Fout bij laden: '+e.message,'error');}}});
+})();
+</script>
+</body>
+</html>
