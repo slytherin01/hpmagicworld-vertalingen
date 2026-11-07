@@ -11,7 +11,7 @@ html,body{margin:0;min-height:100%;background:#0d1522;color:#edf2fa}
 body{padding:54px 0 0;background:#0d1522 url("https://i28.servimg.com/u/f28/11/54/28/73/backgr10.png") center top/cover fixed no-repeat}
 .portal-nav{height:54px;position:fixed;z-index:1000;top:0;left:0;right:0;display:flex;align-items:center;background:linear-gradient(180deg,#111c2c,#0b1320);border-bottom:1px solid #26384d;box-shadow:0 4px 16px #0008;padding:0 22px;gap:18px}
 .portal-nav a{display:inline-flex;align-items:center;gap:9px;color:#d9e3f0;text-decoration:none;font-size:13px;font-weight:700;white-space:nowrap;padding:7px 10px;border-radius:8px}
-.portal-nav a:hover{background:#1b2b40;color:#fff}\n.portal-nav .tool-nav-btn{padding:7px 12px;background:transparent;color:#d9e3f0;border:1px solid #3b5673;border-radius:8px;font-size:13px;font-weight:700;white-space:nowrap}.portal-nav .tool-nav-btn.active{background:#20354e;border-color:#c9a45c;color:#f5d995}.portal-nav .tool-nav-btn:hover{filter:brightness(1.15)}
+.portal-nav a:hover{background:#1b2b40;color:#fff}\n.portal-nav .tool-nav-btn{padding:7px 12px;background:transparent;color:#d9e3f0;border:1px solid #3b5673;border-radius:8px;font-size:13px;font-weight:700;white-space:nowrap}.portal-nav .tool-nav-btn.active{background:#20354e;border-color:#c9a45c;color:#f5d995}.portal-nav .tool-nav-btn:hover{filter:brightness(1.15)}.portal-nav .tool-nav-btn{flex:0 0 auto}
 .portal-nav .nav-icon{width:29px;height:29px;display:inline-flex;align-items:center;justify-content:center;background:#20354e;border:1px solid #3b5673;border-radius:8px;color:#d8e7f8;font-size:15px}
 .language-picker{margin-left:auto;display:flex;align-items:center;gap:8px;color:#cbd7e5;font-size:12px;font-weight:700;white-space:nowrap}.language-picker select{width:auto;min-width:66px;padding:6px 9px;border-radius:7px;background:#17283c;border:1px solid #3b5673;color:#f5f8fc;font-weight:700}\n.tool-heading{text-align:center!important}.tool-heading h1{margin:0 0 8px}.tool-heading p{margin:0;text-align:center}\nmain{max-width:1180px;margin:40px auto 80px;padding:0 10px}
 .panel{background:rgba(13,22,35,.97);border:1px solid #26394d;border-radius:15px;padding:22px;margin:18px 0;box-shadow:0 12px 34px #0006}
@@ -35,11 +35,7 @@ button.secondary{background:#1b2b3e;color:#dbe6f4;border:1px solid #344a62}
 #status.error{background:#351c28;color:#ffd9df;border-color:#874b5a}
 #status.ok{background:#153329;color:#d4f5e5;border-color:#397b61}
 .toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-.app-layout{display:grid;grid-template-columns:205px minmax(0,1fr);gap:14px;align-items:start}
-.side-menu{background:#111d2c;border:1px solid #293c50;border-radius:12px;padding:12px;position:sticky;top:68px}
-.side-menu h3{font-size:13px;color:#c9a45c;margin:4px 8px 12px}
-.menu-btn{display:block;width:100%;text-align:left;margin:5px 0;background:transparent;color:#cbd7e5;border:1px solid transparent}
-.menu-btn.active{background:#1a2c40;border-color:#3c5872;color:#fff}
+.app-layout{display:block;width:100%;max-width:100%;min-width:0}.tool-view{width:100%;max-width:100%;min-width:0}
 .tool-view{min-width:0}.tool-view>h2{margin:0 0 14px;padding-bottom:10px;border-bottom:1px solid #2a3d52}
 .page-tools{margin-top:18px;border-top:1px solid #2a3d52;padding-top:16px}
 .page-tools h2{margin:0 0 8px}
@@ -56,7 +52,7 @@ td.key{width:24%;font-size:13px;overflow-wrap:anywhere;color:#b7c5d8}
 td input{margin:2px 0}.save{white-space:nowrap;padding:9px 12px}.hidden{display:none}
 @media(max-width:720px){
  body{padding-top:54px;background-attachment:scroll}
- .portal-nav{overflow-x:auto;padding:0 8px;gap:3px}
+ .portal-nav{overflow-x:auto;padding:0 8px;gap:3px;white-space:nowrap}.portal-nav .tool-nav-btn{flex:0 0 auto}
  .portal-nav a{font-size:11px;padding:5px}.language-picker{padding-right:8px}.language-picker label{display:none}.language-picker select{min-width:56px}
  main{margin:20px auto 45px;padding:0 9px}
  main>.portal-hero{min-height:130px;padding:12px}
