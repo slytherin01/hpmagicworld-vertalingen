@@ -284,11 +284,21 @@ button.content-delete::before{content:"\\f2ed"}
 #scrollTopBtn i,#scrollBottomBtn i{font-size:16px}
 #translationMenu .nav-fa-icon,#pageMenu .nav-fa-icon,#logoutBtn .nav-fa-icon{font-family:"Font Awesome 6 Free";font-weight:900}
 
+
+/* Home als interne startpagina en intro gecentreerd */
+#homeMenu{display:inline-flex!important}
+.tool-heading{
+ width:min(900px,100%)!important;margin:0 auto 24px!important;
+ text-align:center!important;align-items:center!important;justify-content:center!important;
+}
+.tool-heading .tool-heading-logo{margin-left:auto!important;margin-right:auto!important}
+.tool-heading h1,.tool-heading p{text-align:center!important;margin-left:auto!important;margin-right:auto!important}
+
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
-<header class="portal-nav"><a class="portal-home-link" href="https://testforumjoost.forumactie.com/h3-portaal" target="_blank" rel="noopener"><i class="fa-solid fa-house nav-fa-icon" aria-hidden="true"></i><span>Portaal</span></a><a href="https://testforumjoost.forumactie.com/forum" target="_blank" rel="noopener"><i class="fa-solid fa-comments nav-fa-icon" aria-hidden="true"></i><span>Terug naar forum</span></a><button type="button" class="tool-nav-btn" id="translationMenu"><i class="fa-solid fa-language nav-fa-icon" aria-hidden="true"></i><span>Vertalingen</span></button><button type="button" class="tool-nav-btn" id="pageMenu"><i class="fa-solid fa-file-code nav-fa-icon" aria-hidden="true"></i><span>Pagina’s</span></button><div class="language-picker"><label for="toolLanguage">Taal</label><select id="toolLanguage" aria-label="Taal"><option value="nl">NL</option><option value="en">EN</option><option value="pt">PT</option></select></div><button type="button" class="tool-nav-btn nav-logout hidden" id="logoutBtn"><i class="fa-solid fa-right-from-bracket nav-fa-icon" aria-hidden="true"></i><span>Uitloggen</span></button></header>
+<header class="portal-nav"><a class="portal-home-link" href="https://testforumjoost.forumactie.com/h3-portaal" target="_blank" rel="noopener"><i class="fa-solid fa-house nav-fa-icon" aria-hidden="true"></i><span>Portaal</span></a><a href="https://testforumjoost.forumactie.com/forum" target="_blank" rel="noopener"><i class="fa-solid fa-comments nav-fa-icon" aria-hidden="true"></i><span>Terug naar forum</span></a><button type="button" class="tool-nav-btn" id="homeMenu"><i class="fa-solid fa-house nav-fa-icon" aria-hidden="true"></i><span>Home</span></button><button type="button" class="tool-nav-btn" id="translationMenu"><i class="fa-solid fa-language nav-fa-icon" aria-hidden="true"></i><span>Vertalingen</span></button><button type="button" class="tool-nav-btn" id="pageMenu"><i class="fa-solid fa-file-code nav-fa-icon" aria-hidden="true"></i><span>Pagina’s</span></button><div class="language-picker"><label for="toolLanguage">Taal</label><select id="toolLanguage" aria-label="Taal"><option value="nl">NL</option><option value="en">EN</option><option value="pt">PT</option></select></div><button type="button" class="tool-nav-btn nav-logout hidden" id="logoutBtn"><i class="fa-solid fa-right-from-bracket nav-fa-icon" aria-hidden="true"></i><span>Uitloggen</span></button></header>
 <main>
   <div class="panel tool-heading">
     <img class="tool-heading-logo" src="https://i28.servimg.com/u/f28/11/54/28/73/logo10.png" alt="Hpmagicworld logo">
@@ -498,15 +508,18 @@ button.content-delete::before{content:"\\f2ed"}
   function showTool(which){
     activeTool=which;
     const translations=which==='translations';
+    const home=which==='home';
     $('status').classList.toggle('translation-status',translations);
     $('translationView').style.display=translations?'block':'none';
-    $('pageView').style.display=translations?'none':'block';
+    $('pageView').style.display=which==='pages'?'block':'none';
+    $('homeMenu').classList.toggle('active',home);
     $('translationMenu').classList.toggle('active',translations);
-    $('pageMenu').classList.toggle('active',!translations);
-    if(!translations){loadContent();loadFmPages();}
+    $('pageMenu').classList.toggle('active',which==='pages');
+    if(which==='pages'){loadContent();loadFmPages();}
   }
   $('scrollTopBtn').addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
   $('scrollBottomBtn').addEventListener('click',()=>window.scrollTo({top:document.documentElement.scrollHeight,behavior:'smooth'}));
+  $('homeMenu').addEventListener('click',()=>showTool('home'));
   $('translationMenu').addEventListener('click',()=>showTool('translations'));
   $('pageMenu').addEventListener('click',()=>showTool('pages'));
   $('search').addEventListener('input',render);
