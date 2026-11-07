@@ -229,6 +229,38 @@ main{
  #translationView,#pageView{padding:14px!important}
 }
 
+
+/* Correcte navigatie-uitlijning en compacte statusmelding */
+header.portal-nav{
+ display:flex!important;justify-content:flex-start!important;align-items:center!important;
+ flex-wrap:nowrap!important;gap:9px!important;min-height:62px!important;
+ padding:9px 18px!important;background:rgba(8,17,30,.97)!important;
+ border-radius:0!important;border-bottom:1px solid rgba(201,164,92,.38)!important;
+}
+header.portal-nav>a,header.portal-nav>button.tool-nav-btn{
+ display:inline-flex!important;visibility:visible!important;opacity:1!important;
+ flex:0 0 auto!important;position:relative!important;
+}
+header.portal-nav .language-picker{margin-left:auto!important;flex:0 0 auto!important}
+header.portal-nav #logoutBtn{margin-left:0!important}
+#status{display:none!important}
+#status.translation-status{display:block!important}
+.tool-footer{display:block!important}
+.scroll-controls{
+ position:fixed;right:18px;bottom:20px;z-index:1200;display:flex;flex-direction:column;gap:8px;
+}
+.scroll-controls button{
+ width:42px;height:42px;padding:0;border-radius:50%;display:flex;align-items:center;justify-content:center;
+ background:rgba(24,43,65,.96);border:1px solid #c9a45c;color:#f5d995;
+ box-shadow:0 4px 14px #0007;font-size:16px;cursor:pointer;
+}
+.scroll-controls button:hover{background:#304c6c;transform:translateY(-2px)}
+@media(max-width:720px){
+ header.portal-nav{overflow-x:auto!important;flex-wrap:nowrap!important;justify-content:flex-start!important}
+ header.portal-nav .language-picker{margin-left:auto!important}
+ .scroll-controls{right:10px;bottom:12px}
+}
+
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
@@ -294,6 +326,7 @@ main{
   <div id="status" role="status">Vul je beheerdersgegevens in om te beginnen.</div>
 </main>
 <footer class="tool-footer"><span>Hpmagicworld · Beheeromgeving</span></footer>
+<div class="scroll-controls" aria-label="Pagina navigatie"><button type="button" id="scrollTopBtn" aria-label="Naar boven" title="Naar boven"><i class="fa-solid fa-arrow-up"></i></button><button type="button" id="scrollBottomBtn" aria-label="Naar beneden" title="Naar beneden"><i class="fa-solid fa-arrow-down"></i></button></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 (() => {
@@ -302,7 +335,8 @@ main{
   const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
   const $ = id => document.getElementById(id);
   let allRows = [];
-  const status = (message, kind='') => { $('status').textContent=message; $('status').className=kind; };
+  let activeTool = null;
+  const status = (message, kind='') => { $('status').textContent=message; $('status').className=kind+(activeTool==='translations'?' translation-status':''); };
   const showApp = yes => { $('app').classList.toggle('hidden',!yes); $('login').classList.toggle('hidden',yes); $('logoutBtn').classList.toggle('hidden',!yes); };
 
   async function checkAdmin() {
@@ -439,6 +473,7 @@ main{
 
   $('logoutBtn').addEventListener('click',async()=>{await db.auth.signOut();allRows=[];showApp(false);status('Je bent uitgelogd.');});
   function showTool(which){
+    activeTool=which;
     const translations=which==='translations';
     $('status').classList.toggle('translation-status',translations);
     $('translationView').style.display=translations?'block':'none';
@@ -447,6 +482,8 @@ main{
     $('pageMenu').classList.toggle('active',!translations);
     if(!translations){loadContent();loadFmPages();}
   }
+  $('scrollTopBtn').addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+  $('scrollBottomBtn').addEventListener('click',()=>window.scrollTo({top:document.documentElement.scrollHeight,behavior:'smooth'}));
   $('translationMenu').addEventListener('click',()=>showTool('translations'));
   $('pageMenu').addEventListener('click',()=>showTool('pages'));
   $('search').addEventListener('input',render);
