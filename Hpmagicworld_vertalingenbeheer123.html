@@ -83,11 +83,20 @@ main{width:80%!important;max-width:80%!important;margin-left:auto!important;marg
 .portal-nav .nav-fa-icon{display:inline-flex;align-items:center;justify-content:center;width:29px;height:29px;flex:0 0 29px;border-radius:8px;background:#20354e;border:1px solid #3b5673;color:#d8e7f8;font-size:14px}
 .portal-nav .tool-nav-btn{display:inline-flex!important;align-items:center;gap:9px}
 .portal-nav .tool-nav-btn.active{background:#20354e!important;border-color:#3b5673!important;color:#f5d995!important}
+
+/* Consistent navigation controls */
+.portal-nav{gap:10px}
+.portal-nav>a,.portal-nav>.tool-nav-btn{display:inline-flex!important;align-items:center;justify-content:flex-start;gap:9px;min-height:40px;padding:5px 10px!important;border:1px solid transparent!important;border-radius:8px!important;background:transparent!important;color:#d9e3f0!important;text-decoration:none!important;font:700 13px/1.2 Inter,ui-sans-serif,system-ui,sans-serif!important;white-space:nowrap;box-shadow:none!important;cursor:pointer}
+.portal-nav>a:hover,.portal-nav>.tool-nav-btn:hover{background:#1b2b40!important;border-color:#3b5673!important;color:#fff!important}
+.portal-nav>.tool-nav-btn.active{background:#20354e!important;border-color:#3b5673!important;color:#f5d995!important}
+.portal-nav .nav-fa-icon{width:29px;height:29px;flex:0 0 29px;display:inline-flex;align-items:center;justify-content:center;border-radius:8px;background:#20354e;border:1px solid #3b5673;color:#d8e7f8;font-size:14px}
+.portal-nav #logoutBtn{margin-left:10px}
+.portal-nav #logoutBtn.hidden{display:none!important}
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
-<header class="portal-nav"><a class="portal-home-link" href="https://testforumjoost.forumactie.com/h3-portaal" target="_blank" rel="noopener"><i class="fa-solid fa-house nav-fa-icon" aria-hidden="true"></i><span>Portaal</span></a><a href="https://testforumjoost.forumactie.com/forum" target="_blank" rel="noopener"><i class="fa-solid fa-comments nav-fa-icon" aria-hidden="true"></i><span>Terug naar forum</span></a><button type="button" class="tool-nav-btn" id="translationMenu"><i class="fa-solid fa-language nav-fa-icon" aria-hidden="true"></i><span>Vertalingen</span></button><button type="button" class="tool-nav-btn" id="pageMenu"><i class="fa-solid fa-file-code nav-fa-icon" aria-hidden="true"></i><span>Pagina’s</span></button><div class="language-picker"><label for="toolLanguage">Taal</label><select id="toolLanguage" aria-label="Taal"><option value="nl">NL</option><option value="en">EN</option><option value="pt">PT</option></select></div></header>
+<header class="portal-nav"><a class="portal-home-link" href="https://testforumjoost.forumactie.com/h3-portaal" target="_blank" rel="noopener"><i class="fa-solid fa-house nav-fa-icon" aria-hidden="true"></i><span>Portaal</span></a><a href="https://testforumjoost.forumactie.com/forum" target="_blank" rel="noopener"><i class="fa-solid fa-comments nav-fa-icon" aria-hidden="true"></i><span>Terug naar forum</span></a><button type="button" class="tool-nav-btn" id="translationMenu"><i class="fa-solid fa-language nav-fa-icon" aria-hidden="true"></i><span>Vertalingen</span></button><button type="button" class="tool-nav-btn" id="pageMenu"><i class="fa-solid fa-file-code nav-fa-icon" aria-hidden="true"></i><span>Pagina’s</span></button><div class="language-picker"><label for="toolLanguage">Taal</label><select id="toolLanguage" aria-label="Taal"><option value="nl">NL</option><option value="en">EN</option><option value="pt">PT</option></select></div><button type="button" class="tool-nav-btn nav-logout hidden" id="logoutBtn"><i class="fa-solid fa-right-from-bracket nav-fa-icon" aria-hidden="true"></i><span>Uitloggen</span></button></header>
 <main>
   <div class="panel tool-heading">
     <img class="tool-heading-logo" src="https://i28.servimg.com/u/f28/11/54/28/73/logo10.png" alt="Hpmagicworld logo">
@@ -100,7 +109,7 @@ main{width:80%!important;max-width:80%!important;margin-left:auto!important;marg
     <p><button id="loginBtn">Inloggen</button></p>
   </section>
   <section id="app" class="panel hidden">
-    <div class="toolbar app-account-bar" style="justify-content:flex-end;margin-bottom:14px"><button class="secondary" id="logoutBtn">Uitloggen</button></div>
+    
     <div class="tool-view">
         <section id="translationView" style="display:none">
           <p id="count" class="small count-top"></p>
@@ -156,7 +165,7 @@ main{width:80%!important;max-width:80%!important;margin-left:auto!important;marg
   const $ = id => document.getElementById(id);
   let allRows = [];
   const status = (message, kind='') => { $('status').textContent=message; $('status').className=kind; };
-  const showApp = yes => { $('app').classList.toggle('hidden',!yes); $('login').classList.toggle('hidden',yes); };
+  const showApp = yes => { $('app').classList.toggle('hidden',!yes); $('login').classList.toggle('hidden',yes); $('logoutBtn').classList.toggle('hidden',!yes); };
 
   async function checkAdmin() {
     const {data:{user},error:userError}=await db.auth.getUser();
