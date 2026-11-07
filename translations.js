@@ -117,10 +117,15 @@ async function loadSupabaseTranslations(){
    rows.forEach(row=>{
     // De Nederlandse tekst is de zichtbare brontekst op het forum.
     // Gebruik die daarom als sleutel; val terug op translation_key indien nodig.
-    const key=(row.nl && row.nl.trim()) || (row.translation_key && row.translation_key.trim());
-    if(key && row[lang] !== null && row[lang] !== undefined && row[lang] !== ''){
-     translations[lang][key]=row[lang];
-    }
+    const keys=[row.nl,row.translation_key]
+ .filter(value=>typeof value==='string' && value.trim())
+ .map(value=>value.trim());
+
+if(row[lang] !== null && row[lang] !== undefined && row[lang] !== ''){
+ [...new Set(keys)].forEach(key=>{
+  translations[lang][key]=row[lang];
+ });
+}
    });
   });
  }catch(error){
