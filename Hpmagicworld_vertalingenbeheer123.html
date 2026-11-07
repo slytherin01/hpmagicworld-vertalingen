@@ -309,6 +309,27 @@ button.content-delete::before{content:"\f2ed"}
  display:inline-block!important;visibility:visible!important;opacity:1!important
 }
 
+/* Alleen tekst in navigatieknopstijl: geen pseudo-iconen */
+#reloadBtn:before,#syncGithubBtn:before,#fmSave:before,#fmClear:before,#fmDownload:before,
+#contentSave:before,#contentCancel:before,#loginBtn:before,button.save:before,
+button.content-edit:before,button.content-delete:before{content:none!important;display:none!important}
+#reloadBtn,#syncGithubBtn,#fmSave,#fmClear,#fmDownload,#contentSave,#contentCancel,
+#loginBtn,button.save,button.content-edit,button.content-delete{
+ display:inline-flex!important;align-items:center!important;justify-content:center!important;
+ gap:0!important;min-height:40px!important;padding:8px 14px!important;
+ border:1px solid #405a78!important;border-radius:9px!important;
+ background:#1d3149!important;color:#e5edf7!important;
+ font:700 13px/1.2 Inter,ui-sans-serif,system-ui,sans-serif!important;
+ box-shadow:none!important;letter-spacing:.1px
+}
+#reloadBtn:hover,#syncGithubBtn:hover,#fmSave:hover,#fmClear:hover,#fmDownload:hover,
+#contentSave:hover,#contentCancel:hover,#loginBtn:hover,button.save:hover,
+button.content-edit:hover,button.content-delete:hover{
+ background:#294665!important;border-color:#c9a45c!important;color:#fff!important
+}
+#syncGithubBtn,#fmSave,#contentSave,button.save{background:#1d3149!important;color:#e5edf7!important;border-color:#405a78!important}
+#reloadBtn:disabled,#syncGithubBtn:disabled,#fmDownload:disabled{opacity:.55}
+
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
