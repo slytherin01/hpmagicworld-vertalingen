@@ -124,5 +124,37 @@ function init(){
  const observer=new MutationObserver(records=>{observer.disconnect();apply(current);observer.observe(document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['placeholder','title','aria-label']})});
  observer.observe(document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['placeholder','title','aria-label']});
 }
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+// Haal de actuele vertalingen op uit Supabase.
+// De bestaande vertalingen hierboven blijven beschikbaar als reserve.
+async function loadSupabaseTranslations(){
+ const supabaseUrl='https://vuaajsjjluwgqmneinds.supabase.co';
+ const publishableKey='sb_publishable_tto6sNxZPLv1VhUdMRlPHg_ptzg9odx';
+ try{
+  const response=await fetch(supabaseUrl+'/rest/v1/translations?select=translation_key,nl,en,pt&order=translation_key',{
+   method:'GET',
+   headers:{
+    apikey:publishableKey,
+    Authorization:'Bearer '+publishableKey
+   },
+   cache:'no-store'
+  });
+  if(!response.ok)throw new Error('Supabase gaf HTTP '+response.status);
+  const rows=await response.json();
+  rows.forEach(row=>{
+   const key=row.nl||row.translation_key;
+   if(!key)return;
+   if(row.en)translations.en[key]=row.en;
+   if(row.pt)translations.pt[key]=row.pt;
+  });
+  console.info('Hpmagicworld: '+rows.length+' vertaalregels uit Supabase geladen.');
+ }catch(error){
+  console.error('Hpmagicworld: vertalingen uit Supabase konden niet worden geladen.',error);
+ }
+}
+async function startTranslations(){
+ await loadSupabaseTranslations();
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);
+ else init();
+}
+startTranslations();
 })();
