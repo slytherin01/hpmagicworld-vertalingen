@@ -25,7 +25,8 @@ button.secondary{background:#e9edf5;color:#26324a}.row{display:flex;gap:10px;ali
 .content-item{border:1px solid #e1e5ed;border-radius:10px;padding:12px;margin:10px 0;background:#fff}
 .content-item p{white-space:pre-wrap;margin:8px 0}
 @media(max-width:720px){.content-form{grid-template-columns:1fr}}
-\ntable{width:100%;border-collapse:collapse;margin-top:12px}th,td{padding:9px;border-bottom:1px solid #e7eaf0;text-align:left;vertical-align:top}th{font-size:13px;color:#596273}
+
+table{width:100%;border-collapse:collapse;margin-top:12px}th,td{padding:9px;border-bottom:1px solid #e7eaf0;text-align:left;vertical-align:top}th{font-size:13px;color:#596273}
 td.key{width:24%;font-size:13px;overflow-wrap:anywhere;color:#586174}td input{margin:2px 0}
 .save{white-space:nowrap;padding:9px 12px}
 .small{font-size:12px;color:#6b7280}
@@ -100,7 +101,7 @@ td.key{width:24%;font-size:13px;overflow-wrap:anywhere;color:#586174}td input{ma
     const {data,error}=await db.from('translations').select('translation_key,nl,en,pt').order('translation_key');
     if(error) throw error;
     allRows=data||[];
-    showApp(true); render();
+    showApp(true); render(); await loadContent();
     status(allRows.length+' vertalingen geladen.','ok');
   }
   function render() {
@@ -148,7 +149,8 @@ td.key{width:24%;font-size:13px;overflow-wrap:anywhere;color:#586174}td input{ma
       const {data,error}=await db.functions.invoke('sync-translations',{body:{}});
       if(error)throw error;
       if(!data||!data.success)throw new Error(data?.error||'Synchronisatie is niet bevestigd.');
-      status(data.message+(data.commit?'\\nGitHub commit: '+data.commit:''),'ok');
+      status(data.message+(data.commit?'\
+GitHub commit: '+data.commit:''),'ok');
     }catch(e){status('Synchroniseren mislukt: '+(e.message||String(e)),'error');}
     finally{btn.disabled=false;btn.textContent='↥ Sync naar GitHub';}
   });
@@ -184,7 +186,8 @@ td.key{width:24%;font-size:13px;overflow-wrap:anywhere;color:#586174}td input{ma
     $('contentForm').reset();editingContentId=null;$('contentSave').textContent='Onderdeel toevoegen';$('contentCancel').style.display='none';$('contentType').dispatchEvent(new Event('change'));status('Pagina-onderdeel opgeslagen.','ok');await loadContent();
   });
   $('contentCancel').addEventListener('click',()=>{$('contentForm').reset();editingContentId=null;$('contentSave').textContent='Onderdeel toevoegen';$('contentCancel').style.display='none';$('contentType').dispatchEvent(new Event('change'));});
-\n  $('logoutBtn').addEventListener('click',async()=>{await db.auth.signOut();allRows=[];showApp(false);status('Je bent uitgelogd.');});
+
+  $('logoutBtn').addEventListener('click',async()=>{await db.auth.signOut();allRows=[];showApp(false);status('Je bent uitgelogd.');});
   $('search').addEventListener('input',render);
   db.auth.getSession().then(async({data})=>{if(data.session){try{await loadRows();}catch(e){status('Fout bij laden: '+e.message,'error');}}});
 })();
