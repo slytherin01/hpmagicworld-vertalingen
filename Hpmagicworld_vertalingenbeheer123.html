@@ -104,6 +104,19 @@ main{width:80%!important;max-width:80%!important;margin-left:auto!important;marg
 .portal-nav #logoutBtn{margin-left:0}
 .portal-nav #logoutBtn.hidden{display:none!important}
 @media(max-width:720px){.portal-nav{overflow-x:auto;white-space:nowrap}}
+
+/* Navigation tool buttons: preserve icons and match forum links */
+.portal-nav #translationMenu,.portal-nav #pageMenu{
+ display:inline-flex!important;align-items:center!important;justify-content:flex-start!important;
+ gap:9px!important;min-height:40px!important;padding:5px 10px!important;
+ border:1px solid #3b5673!important;border-radius:8px!important;
+ background:#17283c!important;color:#d9e3f0!important;
+ font:700 13px/1.2 Inter,ui-sans-serif,system-ui,sans-serif!important;
+ cursor:pointer!important;white-space:nowrap!important
+}
+.portal-nav #translationMenu:hover,.portal-nav #pageMenu:hover{background:#20354e!important;color:#fff!important}
+.portal-nav #translationMenu.active,.portal-nav #pageMenu.active{background:#20354e!important;border-color:#c9a45c!important;color:#f5d995!important}
+.portal-nav #translationMenu .nav-fa-icon,.portal-nav #pageMenu .nav-fa-icon{display:inline-flex!important;visibility:visible!important;opacity:1!important}
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
@@ -393,7 +406,7 @@ main{width:80%!important;max-width:80%!important;margin-left:auto!important;marg
  function applyLanguage(lang){
   const d=dictionaries[lang]||dictionaries.nl;
   document.documentElement.lang=lang;
-  Object.entries(ids).forEach(([id,key])=>{const el=document.getElementById(id);if(el&&d[key]){if(el.tagName==="INPUT"||el.tagName==="TEXTAREA")el.placeholder=d[key];else if(el.tagName==="BUTTON"||el.tagName==="H1"||el.tagName==="H2"||el.tagName==="STRONG")el.textContent=d[key];}});
+  Object.entries(ids).forEach(([id,key])=>{const el=document.getElementById(id);if(el&&d[key]){if(el.tagName==="INPUT"||el.tagName==="TEXTAREA")el.placeholder=d[key];else if(el.tagName==="BUTTON"&&el.querySelector("span"))el.querySelector("span").textContent=d[key];else if(el.tagName==="BUTTON"||el.tagName==="H1"||el.tagName==="H2"||el.tagName==="STRONG")el.textContent=d[key];}});
   Object.entries(textTargets).forEach(([selector,key])=>{const el=document.querySelector(selector);if(el&&d[key])el.textContent=d[key];});
   const status=document.getElementById("status");if(status&&status.textContent==="Vul je beheerdersgegevens in om te beginnen.")status.textContent=d.loginPrompt;
   const labels=document.querySelectorAll("#pageView .content-item label");
