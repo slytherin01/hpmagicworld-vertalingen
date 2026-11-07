@@ -137,6 +137,35 @@ header.portal-nav{background:transparent!important;border:0!important;box-shadow
 #syncGithubBtn:before{font-family:"Font Awesome 6 Free";font-weight:900;content:"\\f0ee";margin-right:8px}
 #fmSave:before{font-family:"Font Awesome 6 Free";font-weight:900;content:"\\f0c7";margin-right:8px}
 
+
+/* Header en footer: nette, vaste portaalstijl */
+html,body{min-height:100%;margin:0}
+body{min-height:100vh;display:flex;flex-direction:column;padding-top:0!important}
+header.portal-nav{
+ position:relative!important;inset:auto!important;width:100%;min-height:58px!important;height:auto!important;
+ display:flex!important;align-items:center!important;justify-content:center!important;flex-wrap:wrap!important;
+ gap:10px!important;padding:9px 18px!important;margin:0!important;
+ background:rgba(9,18,31,.96)!important;border:0!important;border-bottom:1px solid #344a63!important;
+ border-radius:0!important;box-shadow:0 4px 14px #0006!important;
+}
+header.portal-nav>a,header.portal-nav>.tool-nav-btn{
+ min-height:40px!important;padding:5px 11px!important;border:1px solid #3b5673!important;
+ border-radius:8px!important;background:#17283c!important;color:#e5edf7!important;
+}
+header.portal-nav .language-picker{margin-left:8px!important}
+main{flex:1 0 auto!important;margin-top:28px!important;margin-bottom:32px!important}
+#status{max-width:100%}
+.tool-footer{
+ flex:0 0 auto;width:100%;margin-top:auto;padding:15px 18px;text-align:center;
+ color:#aebbd0;font-size:12px;background:rgba(9,18,31,.96);
+ border-top:1px solid #344a63;box-shadow:0 -4px 14px #0004;
+}
+@media(max-width:720px){
+ header.portal-nav{justify-content:flex-start!important;padding:8px!important;gap:6px!important}
+ header.portal-nav .language-picker{margin-left:0!important}
+ main{margin-top:18px!important;margin-bottom:22px!important}
+}
+
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
@@ -201,6 +230,7 @@ header.portal-nav{background:transparent!important;border:0!important;box-shadow
   </section>
   <div id="status" role="status">Vul je beheerdersgegevens in om te beginnen.</div>
 </main>
+<footer class="tool-footer"><span>Hpmagicworld · Beheeromgeving</span></footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 (() => {
