@@ -117,6 +117,25 @@ main{width:80%!important;max-width:80%!important;margin-left:auto!important;marg
 .portal-nav #translationMenu:hover,.portal-nav #pageMenu:hover{background:#20354e!important;color:#fff!important}
 .portal-nav #translationMenu.active,.portal-nav #pageMenu.active{background:#20354e!important;border-color:#c9a45c!important;color:#f5d995!important}
 .portal-nav #translationMenu .nav-fa-icon,.portal-nav #pageMenu .nav-fa-icon{display:inline-flex!important;visibility:visible!important;opacity:1!important}
+
+/* Verfijning op verzoek: geen lege bovenbalk en status alleen bij Vertalingen */
+.portal-nav{
+  position:relative!important;top:auto!important;left:auto!important;right:auto!important;
+  height:auto!important;min-height:0!important;padding:8px 12px!important;
+  background:transparent!important;border:0!important;box-shadow:none!important;
+  justify-content:center!important;flex-wrap:wrap!important;
+}
+body{padding-top:0!important}
+#status{display:none!important}
+#status.translation-status{display:block!important}
+#translationMenu .nav-fa-icon,#pageMenu .nav-fa-icon,
+.portal-nav a .nav-fa-icon,.portal-nav #logoutBtn .nav-fa-icon{
+  display:inline-flex!important;visibility:visible!important;opacity:1!important;
+}
+#reloadBtn:before{font-family:"Font Awesome 6 Free";font-weight:900;content:"\\f021";margin-right:8px}
+#syncGithubBtn:before{font-family:"Font Awesome 6 Free";font-weight:900;content:"\\f0ee";margin-right:8px}
+#fmSave:before{font-family:"Font Awesome 6 Free";font-weight:900;content:"\\f0c7";margin-right:8px}
+
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
@@ -327,6 +346,7 @@ main{width:80%!important;max-width:80%!important;margin-left:auto!important;marg
   $('logoutBtn').addEventListener('click',async()=>{await db.auth.signOut();allRows=[];showApp(false);status('Je bent uitgelogd.');});
   function showTool(which){
     const translations=which==='translations';
+    $('status').classList.toggle('translation-status',translations);
     $('translationView').style.display=translations?'block':'none';
     $('pageView').style.display=translations?'none':'block';
     $('translationMenu').classList.toggle('active',translations);
@@ -423,7 +443,7 @@ main{width:80%!important;max-width:80%!important;margin-left:auto!important;marg
   const sync=document.getElementById("syncGithubBtn");if(sync&&!sync.disabled)sync.textContent=d.sync;
   const reload=document.getElementById("reloadBtn");if(reload)reload.textContent=d.refresh;
   const loginBtn=document.getElementById("loginBtn");if(loginBtn)loginBtn.textContent=d.login;
-  const logout=document.getElementById("logoutBtn");if(logout)logout.textContent=d.logout;
+  const logout=document.getElementById("logoutBtn");if(logout){const label=logout.querySelector("span");if(label)label.textContent=d.logout;}
   const count=document.getElementById("count");if(count&&count.textContent.includes("vertalingen"))count.textContent=count.textContent.replace("vertalingen",d.loaded);
  }
  const picker=document.getElementById("toolLanguage");
