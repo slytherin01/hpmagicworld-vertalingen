@@ -15,7 +15,17 @@ button.secondary{background:#e9edf5;color:#26324a}.row{display:flex;gap:10px;ali
 #status{padding:10px;border-radius:8px;background:#eef2f8;color:#34415b;margin-top:12px;white-space:pre-wrap}
 #status.error{background:#fff0ef;color:#9b2820}#status.ok{background:#eaf8ef;color:#176334}
 .toolbar{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center}
-table{width:100%;border-collapse:collapse;margin-top:12px}th,td{padding:9px;border-bottom:1px solid #e7eaf0;text-align:left;vertical-align:top}th{font-size:13px;color:#596273}
+
+.page-tools{margin-top:18px;border-top:1px solid #e1e5ed;padding-top:16px}
+.page-tools h2{margin:0 0 8px}
+.content-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0}
+.content-form label{font-size:13px;color:#596273;font-weight:600}
+.content-form input,.content-form textarea,.content-form select{display:block;width:100%;margin-top:5px}
+.content-form textarea{min-height:90px}
+.content-item{border:1px solid #e1e5ed;border-radius:10px;padding:12px;margin:10px 0;background:#fff}
+.content-item p{white-space:pre-wrap;margin:8px 0}
+@media(max-width:720px){.content-form{grid-template-columns:1fr}}
+\ntable{width:100%;border-collapse:collapse;margin-top:12px}th,td{padding:9px;border-bottom:1px solid #e7eaf0;text-align:left;vertical-align:top}th{font-size:13px;color:#596273}
 td.key{width:24%;font-size:13px;overflow-wrap:anywhere;color:#586174}td input{margin:2px 0}
 .save{white-space:nowrap;padding:9px 12px}
 .small{font-size:12px;color:#6b7280}
@@ -41,6 +51,24 @@ td.key{width:24%;font-size:13px;overflow-wrap:anywhere;color:#586174}td input{ma
       <button class="secondary" id="logoutBtn">Uitloggen</button>
     </div>
     <p id="count" class="small"></p>
+    <section class="page-tools">
+      <h2>Pagina-inhoud beheren</h2>
+      <p class="small">Voeg navigatieknoppen en tekstblokken toe. Kies zelf op welke pagina ze verschijnen.</p>
+      <form id="contentForm">
+        <div class="content-form">
+          <label>Soort onderdeel<select id="contentType"><option value="text">Tekstblok</option><option value="button">Navigatieknop</option></select></label>
+          <label>Pagina<select id="contentPage"><option value="all">Alle pagina's</option><option value="home">Startpagina</option><option value="forum">Forum</option><option value="profile">Profiel</option><option value="custom">Andere pagina</option></select></label>
+          <label>Naam / titel<input id="contentTitle" required placeholder="Bijv. Welkom op Hpmagicworld"></label>
+          <label>Link (alleen voor navigatieknoppen)<input id="contentUrl" placeholder="https://..."></label>
+          <label style="grid-column:1/-1">Tekst (alleen voor tekstblokken)<textarea id="contentBody" placeholder="Typ hier je tekst..."></textarea></label>
+          <label>Plek<select id="contentPlacement"><option value="top">Bovenaan</option><option value="bottom">Onderaan</option><option value="sidebar">Zijbalk</option></select></label>
+          <label>Andere pagina (optioneel)<input id="contentCustomPage" placeholder="Bijv. /h1-magie"></label>
+        </div>
+        <button type="submit" id="contentSave">Onderdeel toevoegen</button>
+        <button type="button" class="secondary" id="contentCancel" style="display:none">Annuleren</button>
+      </form>
+      <div id="contentList"></div>
+    </section>
     <div style="overflow-x:auto">
       <table><thead><tr><th>Sleutel</th><th>Nederlands</th><th>English</th><th>Português</th><th></th></tr></thead><tbody id="rows"></tbody></table>
     </div>
@@ -124,7 +152,39 @@ td.key{width:24%;font-size:13px;overflow-wrap:anywhere;color:#586174}td input{ma
     }catch(e){status('Synchroniseren mislukt: '+(e.message||String(e)),'error');}
     finally{btn.disabled=false;btn.textContent='↥ Sync naar GitHub';}
   });
-  $('logoutBtn').addEventListener('click',async()=>{await db.auth.signOut();allRows=[];showApp(false);status('Je bent uitgelogd.');});
+
+  let contentItems=[], editingContentId=null;
+  async function loadContent(){
+    const {data,error}=await db.from('page_content').select('*').order('created_at',{ascending:false});
+    if(error){status('Pagina-inhoud laden mislukt: '+error.message+' (mogelijk moet de tabel nog worden aangemaakt).','error');return;}
+    contentItems=data||[]; renderContent();
+  }
+  function renderContent(){
+    const host=$('contentList');host.replaceChildren();
+    if(!contentItems.length){host.textContent='Nog geen onderdelen toegevoegd.';return;}
+    contentItems.forEach(item=>{
+      const card=document.createElement('article');card.className='content-item';
+      const heading=document.createElement('strong');heading.textContent=(item.type==='button'?'Navigatieknop: ':'Tekstblok: ')+item.title;card.append(heading);
+      const meta=document.createElement('div');meta.className='small';meta.textContent='Pagina: '+item.page+' · Plek: '+item.placement;card.append(meta);
+      const detail=document.createElement('p');detail.textContent=item.type==='button'?(item.url||'Geen link ingesteld'):(item.body||'');card.append(detail);
+      const edit=document.createElement('button');edit.className='secondary';edit.textContent='Bewerken';edit.addEventListener('click',()=>{editingContentId=item.id;$('contentType').value=item.type;$('contentPage').value=['all','home','forum','profile','custom'].includes(item.page)?item.page:'custom';$('contentTitle').value=item.title;$('contentUrl').value=item.url||'';$('contentBody').value=item.body||'';$('contentPlacement').value=item.placement;$('contentCustomPage').value=item.page==='custom'?'':item.page;$('contentSave').textContent='Wijzigingen opslaan';$('contentCancel').style.display='inline-block';});
+      const del=document.createElement('button');del.textContent='Verwijderen';del.style.marginLeft='8px';del.addEventListener('click',async()=>{if(!confirm('Dit onderdeel verwijderen?'))return;const {error}=await db.from('page_content').delete().eq('id',item.id);if(error){status(error.message,'error');return;}status('Onderdeel verwijderd.','ok');await loadContent();});
+      card.append(edit,del);host.append(card);
+    });
+  }
+  $('contentType').addEventListener('change',()=>{const isButton=$('contentType').value==='button';$('contentUrl').disabled=!isButton;$('contentBody').disabled=isButton;});
+  $('contentForm').addEventListener('submit',async e=>{
+    e.preventDefault();
+    const page=$('contentPage').value==='custom'?$('contentCustomPage').value.trim():'';
+    const payload={type:$('contentType').value,page:page||$('contentPage').value,title:$('contentTitle').value.trim(),url:$('contentUrl').value.trim(),body:$('contentBody').value,placement:$('contentPlacement').value,updated_at:new Date().toISOString()};
+    if(!payload.title){status('Vul een naam of titel in.','error');return;}
+    const query=editingContentId?db.from('page_content').update(payload).eq('id',editingContentId):db.from('page_content').insert(payload);
+    const {error}=await query;
+    if(error){status('Opslaan mislukt: '+error.message,'error');return;}
+    $('contentForm').reset();editingContentId=null;$('contentSave').textContent='Onderdeel toevoegen';$('contentCancel').style.display='none';$('contentType').dispatchEvent(new Event('change'));status('Pagina-onderdeel opgeslagen.','ok');await loadContent();
+  });
+  $('contentCancel').addEventListener('click',()=>{$('contentForm').reset();editingContentId=null;$('contentSave').textContent='Onderdeel toevoegen';$('contentCancel').style.display='none';$('contentType').dispatchEvent(new Event('change'));});
+\n  $('logoutBtn').addEventListener('click',async()=>{await db.auth.signOut();allRows=[];showApp(false);status('Je bent uitgelogd.');});
   $('search').addEventListener('input',render);
   db.auth.getSession().then(async({data})=>{if(data.session){try{await loadRows();}catch(e){status('Fout bij laden: '+e.message,'error');}}});
 })();
