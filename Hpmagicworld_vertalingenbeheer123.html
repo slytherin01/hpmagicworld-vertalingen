@@ -392,8 +392,8 @@ button.content-edit:hover,button.content-delete:hover{
 .row-actions{display:flex;gap:7px;flex-wrap:wrap;min-width:145px}
 .delete-translation{background:#542b35!important;border:1px solid #a75b68!important;color:#fff!important;padding:9px 11px!important}
 .delete-translation:hover{background:#713744!important}
-.delete-translation{display:inline-flex!important;align-items:center!important;gap:8px!important}
-.delete-translation::before{content:"\\f2ed"!important;font-family:"Font Awesome 6 Free"!important;font-weight:900!important;display:inline-block!important;font-size:14px!important;color:#fff!important}
+.delete-translation{display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:8px!important;min-width:40px!important;padding:9px 11px!important}
+ .delete-translation::before{content:none!important}
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
@@ -477,7 +477,7 @@ button.content-edit:hover,button.content-delete:hover{
       const action=document.createElement('td');action.className='row-actions';
       const btn=document.createElement('button');btn.className='save';btn.textContent='Opslaan';
       btn.addEventListener('click',()=>saveRow(r,tr,btn));
-      const del=document.createElement('button');del.className='secondary delete-translation';del.textContent='Verwijderen';del.type='button';
+      const del=document.createElement('button');del.className='secondary delete-translation';del.innerHTML='<i class="fa-solid fa-trash" aria-hidden="true"></i>';del.setAttribute('aria-label','Vertaling verwijderen');del.title='Vertaling verwijderen';del.type='button';
       del.addEventListener('click',()=>deleteRow(r,del));
       action.append(btn,del);tr.append(action);body.append(tr);
     });
