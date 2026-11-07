@@ -453,7 +453,7 @@ section>
     const {data,error}=await db.from('translations').select('translation_key,nl,en,pt').order('translation_key');
     if(error) throw error;
     allRows=data||[];
-    showApp(true); render(); await loadContent();
+    showApp(true); render(); showTool('translations');
     status(allRows.length+' vertalingen geladen.','ok');
   }
   function render() {
@@ -521,7 +521,7 @@ section>
   $('homeMenu').addEventListener('click',()=>showTool('home'));
   $('translationMenu').addEventListener('click',()=>showTool('translations'));
   $('search').addEventListener('input',render);
-  db.auth.getSession().then(async({data})=>{if(data.session){try{await loadRows();}catch(e){status('Fout bij laden: '+e.message,'error');}}});
+  db.auth.getSession().then(async({data})=>{if(data.session){try{await loadRows();}catch(e){showApp(false);status('Fout bij laden: '+e.message,'error');}}});
 })();
 </script>
 
