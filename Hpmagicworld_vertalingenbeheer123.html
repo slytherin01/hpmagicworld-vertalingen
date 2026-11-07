@@ -376,6 +376,11 @@ button.content-edit:hover,button.content-delete:hover{
 #builderAdd{display:inline-flex!important;min-height:44px!important;padding:10px 18px!important;background:#1d3149!important;color:#fff!important;border:1px solid #c9a45c!important}
 @media(max-width:720px){#simpleBuilder .builder-fields{grid-template-columns:1fr}}
 
+
+.existing-preview{margin:18px 0;padding:16px;background:#101e30;border:1px solid #405a78;border-radius:12px}
+.existing-preview h3{margin:0 0 5px;color:#f5d995}
+#fmPreview{display:block;width:100%;height:360px;border:1px solid #526984;border-radius:8px;background:#fff}
+
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
@@ -437,6 +442,11 @@ button.content-edit:hover,button.content-delete:hover{
  <p><b>Stap 3.</b> Klik op de knop om het onderdeel toe te voegen.</p>
  <button type="button" id="builderAdd">Toevoegen aan mijn pagina</button>
  <p class="small">Daarna klik je onderaan op <b>Pagina bewaren</b>. Je bestaande pagina blijft behouden.</p>
+</div>
+<div class="existing-preview">
+ <h3>Zo ziet je pagina er nu uit</h3>
+ <p class="small">Hier zie je de bestaande inhoud. Als je iets toevoegt, zie je het hier terug.</p>
+ <iframe id="fmPreview" title="Voorbeeld van de pagina" sandbox="" loading="lazy"></iframe>
 </div>
 <details class="advanced-html"><summary>Voor gevorderden: HTML-code zelf aanpassen</summary>
  <label>HTML-code<textarea id="fmHtml" style="width:100%;min-height:260px;font-family:monospace" placeholder="Plak hier de HTML-code uit Forumotion"></textarea></label>
@@ -558,12 +568,14 @@ button.content-edit:hover,button.content-delete:hover{
       const card = document.createElement('article'); card.className = 'content-item';
       const name = document.createElement('strong'); name.textContent = page.title; card.append(name);
       const open = document.createElement('button'); open.className = 'secondary'; open.textContent = 'Openen / bewerken';
-      open.addEventListener('click', () => { $('fmTitle').value=page.title; $('fmUrl').value=page.page_url||''; $('fmHtml').value=page.html_content||''; fmEditId=page.id; $('fmDownload').disabled=false; });
+      open.addEventListener('click', () => { $('fmTitle').value=page.title; $('fmUrl').value=page.page_url||''; $('fmHtml').value=page.html_content||''; fmEditId=page.id; $('fmDownload').disabled=false; updateFmPreview(); });
       card.append(open); host.append(card);
     });
     if (!(result.data || []).length) host.textContent = 'Nog geen pagina’s opgeslagen.';
   }
-  function clearFmForm() { fmEditId=null; $('fmTitle').value=''; $('fmUrl').value=''; $('fmHtml').value=''; $('fmDownload').disabled=true; }
+  function updateFmPreview(){ const frame=$('fmPreview'); if(frame) frame.srcdoc=$('fmHtml').value||'<p style="font:16px Arial;padding:20px;color:#555">Nog geen inhoud. Open een bestaande pagina of voeg een onderdeel toe.</p>'; }
+  $('fmHtml').addEventListener('input',updateFmPreview);
+  function clearFmForm() { fmEditId=null; $('fmTitle').value=''; $('fmUrl').value=''; $('fmHtml').value=''; $('fmDownload').disabled=true; updateFmPreview(); }
 
   $('builderAdd').addEventListener('click',()=>{
     const type=$('builderType').value;
