@@ -261,6 +261,29 @@ header.portal-nav #logoutBtn{margin-left:0!important}
  .scroll-controls{right:10px;bottom:12px}
 }
 
+
+/* Font Awesome iconen voor alle actieknoppen */
+button:not(#translationMenu):not(#pageMenu):not(#logoutBtn):not(#scrollTopBtn):not(#scrollBottomBtn){
+ display:inline-flex;align-items:center;justify-content:center;gap:9px;
+}
+button:not(#translationMenu):not(#pageMenu):not(#logoutBtn):not(#scrollTopBtn):not(#scrollBottomBtn)::before{
+ font-family:"Font Awesome 6 Free";font-weight:900;font-size:14px;line-height:1;
+ display:inline-block;flex:0 0 auto;
+}
+#loginBtn::before{content:"\\f2f6"}
+#reloadBtn::before{content:"\\f021"}
+#syncGithubBtn::before{content:"\\f0ee"}
+#fmSave::before{content:"\\f0c7"}
+#fmClear::before{content:"\\f12d"}
+#fmDownload::before{content:"\\f019"}
+#contentSave::before{content:"\\f0c7"}
+#contentCancel::before{content:"\\f00d"}
+button.save::before{content:"\\f0c7"}
+button.content-edit::before{content:"\\f044"}
+button.content-delete::before{content:"\\f2ed"}
+#scrollTopBtn i,#scrollBottomBtn i{font-size:16px}
+#translationMenu .nav-fa-icon,#pageMenu .nav-fa-icon,#logoutBtn .nav-fa-icon{font-family:"Font Awesome 6 Free";font-weight:900}
+
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
@@ -453,8 +476,8 @@ header.portal-nav #logoutBtn{margin-left:0!important}
       const heading=document.createElement('strong');heading.textContent=(item.type==='button'?'Navigatieknop: ':'Tekstblok: ')+item.title;card.append(heading);
       const meta=document.createElement('div');meta.className='small';meta.textContent='Pagina: '+item.page+' · Plek: '+item.placement;card.append(meta);
       const detail=document.createElement('p');detail.textContent=item.type==='button'?(item.url||'Geen link ingesteld'):(item.body||'');card.append(detail);
-      const edit=document.createElement('button');edit.className='secondary';edit.textContent='Bewerken';edit.addEventListener('click',()=>{editingContentId=item.id;$('contentType').value=item.type;$('contentPage').value=['all','home','forum','profile','custom'].includes(item.page)?item.page:'custom';$('contentTitle').value=item.title;$('contentUrl').value=item.url||'';$('contentBody').value=item.body||'';$('contentPlacement').value=item.placement;$('contentCustomPage').value=item.page==='custom'?'':item.page;$('contentSave').textContent='Wijzigingen opslaan';$('contentCancel').style.display='inline-block';});
-      const del=document.createElement('button');del.textContent='Verwijderen';del.style.marginLeft='8px';del.addEventListener('click',async()=>{if(!confirm('Dit onderdeel verwijderen?'))return;const {error}=await db.from('page_content').delete().eq('id',item.id);if(error){status(error.message,'error');return;}status('Onderdeel verwijderd.','ok');await loadContent();});
+      const edit=document.createElement('button');edit.className='secondary content-edit';edit.textContent='Bewerken';edit.addEventListener('click',()=>{editingContentId=item.id;$('contentType').value=item.type;$('contentPage').value=['all','home','forum','profile','custom'].includes(item.page)?item.page:'custom';$('contentTitle').value=item.title;$('contentUrl').value=item.url||'';$('contentBody').value=item.body||'';$('contentPlacement').value=item.placement;$('contentCustomPage').value=item.page==='custom'?'':item.page;$('contentSave').textContent='Wijzigingen opslaan';$('contentCancel').style.display='inline-block';});
+      const del=document.createElement('button');del.className='content-delete';del.textContent='Verwijderen';del.style.marginLeft='8px';del.addEventListener('click',async()=>{if(!confirm('Dit onderdeel verwijderen?'))return;const {error}=await db.from('page_content').delete().eq('id',item.id);if(error){status(error.message,'error');return;}status('Onderdeel verwijderd.','ok');await loadContent();});
       card.append(edit,del);host.append(card);
     });
   }
