@@ -381,6 +381,17 @@ button.content-edit:hover,button.content-delete:hover{
 .existing-preview h3{margin:0 0 5px;color:#f5d995}
 #fmPreview{display:block;width:100%;height:360px;border:1px solid #526984;border-radius:8px;background:#fff}
 
+
+/* Eenvoudige klik-en-klaar paginabouwer */
+#simpleBuilder{background:#f4f0e6!important;color:#172b43!important;border:1px solid #d8c18c!important;border-radius:18px!important;padding:24px!important;margin:20px 0!important;box-shadow:0 8px 24px #0002!important}
+#simpleBuilder h3{color:#172b43!important;font-size:23px!important;margin:0 0 8px!important}
+#simpleBuilder p{color:#40536a!important}
+.quick-actions{display:flex;flex-wrap:wrap;gap:12px;margin:18px 0}
+.quick-actions button{min-height:54px!important;padding:12px 22px!important;border-radius:12px!important;background:#1d3149!important;color:#fff!important;border:1px solid #c9a45c!important;font-size:16px!important;font-weight:700!important;cursor:pointer}
+.quick-actions button:hover{background:#294766!important;transform:translateY(-1px)}
+.existing-preview{background:#f4f0e6!important;border:1px solid #d8c18c!important;border-radius:16px!important;padding:18px!important}
+.existing-preview h3{color:#172b43!important}
+
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
@@ -421,27 +432,16 @@ button.content-edit:hover,button.content-delete:hover{
 <label>Naam<input id="fmTitle" placeholder="Bijvoorbeeld: Ticket Support"></label><br><br>
 <label>Forumotion-link<input id="fmUrl" placeholder="https://..."></label><br><br>
 <div id="simpleBuilder" class="simple-builder">
- <h3>Pagina bouwen – stap voor stap</h3>
- <p><b>Stap 1.</b> Kies hieronder wat je op je pagina wilt zetten.</p>
- <label for="builderType">Ik wil toevoegen</label>
- <select id="builderType">
-  <option value="heading">Een grote titel</option>
-  <option value="text">Een tekst</option>
-  <option value="button">Een knop met link</option>
-  <option value="image">Een afbeelding</option>
-  <option value="divider">Een scheidingslijn</option>
- </select>
- <div class="builder-fields">
-  <label for="builderText">Stap 2. Typ je titel of tekst
-   <input id="builderText" placeholder="Typ hier je tekst">
-  </label>
-  <label for="builderUrl">Link (alleen nodig bij knop of afbeelding)
-   <input id="builderUrl" placeholder="Plak hier de link">
-  </label>
+ <h3>✨ Maak je pagina</h3>
+ <p>Klik op wat je wilt toevoegen. Klaar!</p>
+ <div class="quick-actions">
+  <button type="button" data-add="heading">＋ Titel</button>
+  <button type="button" data-add="text">＋ Tekst</button>
+  <button type="button" data-add="button">＋ Knop</button>
+  <button type="button" data-add="image">＋ Afbeelding</button>
+  <button type="button" data-add="divider">＋ Lijn</button>
  </div>
- <p><b>Stap 3.</b> Klik op de knop om het onderdeel toe te voegen.</p>
- <button type="button" id="builderAdd">Toevoegen aan mijn pagina</button>
- <p class="small">Daarna klik je onderaan op <b>Pagina bewaren</b>. Je bestaande pagina blijft behouden.</p>
+ <p class="small">Je bestaande pagina blijft staan. Onderdelen worden eronder toegevoegd.</p>
 </div>
 <div class="existing-preview">
  <h3>Zo ziet je pagina er nu uit</h3>
@@ -577,38 +577,46 @@ button.content-edit:hover,button.content-delete:hover{
   $('fmHtml').addEventListener('input',updateFmPreview);
   function clearFmForm() { fmEditId=null; $('fmTitle').value=''; $('fmUrl').value=''; $('fmHtml').value=''; $('fmDownload').disabled=true; updateFmPreview(); }
 
-  $('builderAdd').addEventListener('click',()=>{
-    const type=$('builderType').value;
-    const value=$('builderText').value.trim();
-    const url=$('builderUrl').value.trim();
-    const esc=t=>t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-    let block='';
-    if(type==='divider') block='<hr style="border:0;border-top:1px solid #c9a45c;margin:24px 0;">';
-    else if(!value){status('Vul eerst een titel of tekst in.','error');return;}
-    else if(type==='heading') block='<h2>'+esc(value)+'</h2>';
-    else if(type==='text') block='<p>'+esc(value).replace(/\n/g,'<br>')+'</p>';
-    else if(type==='button'){
-      if(!url){status('Vul ook de link van de knop in.','error');return;}
-      block='<p><a href="'+esc(url)+'" style="display:inline-block;padding:10px 18px;background:#1d3149;color:#fff;border:1px solid #c9a45c;border-radius:8px;text-decoration:none;font-weight:bold;">'+esc(value)+'</a></p>';
-    }else if(type==='image'){
-      if(!url){status('Vul de afbeeldingslink in.','error');return;}
-      block='<p><img src="'+esc(url)+'" alt="'+esc(value)+'" style="max-width:100%;height:auto;border-radius:8px;"></p>';
-    }
-    const area=$('fmHtml');
-    area.value=(area.value.trim()?area.value.trim()+'\n\n':'')+block;
-    $('builderText').value='';$('builderUrl').value='';
-    status('Onderdeel toegevoegd. Klik op Pagina bewaren om het op te slaan.','ok');
-  });
-  $('builderType').addEventListener('change',()=>{
-    const type=$('builderType').value;
-    $('builderText').placeholder=type==='heading'?'Typ de titel':type==='text'?'Typ je tekst':type==='button'?'Tekst op de knop':type==='image'?'Korte beschrijving van de afbeelding':'Niet nodig voor een lijn';
-    $('builderUrl').placeholder=type==='image'?'Link naar de afbeelding':'Link (alleen voor knop of afbeelding)';
+  document.querySelectorAll('[data-add]').forEach(button => {
+    button.addEventListener('click', () => {
+      const type=button.dataset.add;
+      const esc=t=>t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+      let block='';
+      if(type==='divider') block='<hr style="border:0;border-top:1px solid #c9a45c;margin:24px 0;">';
+      if(type==='heading'){
+        const value=prompt('Welke titel wil je plaatsen?');
+        if(value===null||!value.trim()) return;
+        block='<h2>'+esc(value.trim())+'</h2>';
+      }
+      if(type==='text'){
+        const value=prompt('Welke tekst wil je plaatsen?');
+        if(value===null||!value.trim()) return;
+        block='<p>'+esc(value.trim()).replace(/\\n/g,'<br>')+'</p>';
+      }
+      if(type==='button'){
+        const value=prompt('Welke tekst moet op de knop staan?');
+        if(value===null||!value.trim()) return;
+        const url=prompt('Welke link moet de knop openen?');
+        if(url===null||!url.trim()) return;
+        block='<p><a href="'+esc(url.trim())+'" style="display:inline-block;padding:12px 20px;background:#1d3149;color:#fff;border:1px solid #c9a45c;border-radius:9px;text-decoration:none;font-weight:bold;">'+esc(value.trim())+'</a></p>';
+      }
+      if(type==='image'){
+        const url=prompt('Plak de link van de afbeelding:');
+        if(url===null||!url.trim()) return;
+        const alt=prompt('Korte beschrijving (optioneel):')||'';
+        block='<p><img src="'+esc(url.trim())+'" alt="'+esc(alt)+'" style="max-width:100%;height:auto;border-radius:8px;"></p>';
+      }
+      const area=$('fmHtml');
+      area.value=(area.value.trim()?area.value.trim()+'\\n\\n':'')+block;
+      updateFmPreview();
+      status('Toegevoegd! Klik op Pagina bewaren.','ok');
+    });
   });
 
   $('fmClear').addEventListener('click', clearFmForm);
   $('fmSave').addEventListener('click', async () => {
     const title=$('fmTitle').value.trim(), html=$('fmHtml').value;
-    if (!title || !html.trim()) { status('Vul een naam in en plak de HTML-code.','error'); return; }
+    if (!title || !html.trim()) { status('Vul eerst een naam in en voeg iets toe aan de pagina.','error'); return; }
     const payload={title:title,page_url:$('fmUrl').value.trim(),html_content:html,updated_at:new Date().toISOString()};
     const query=fmEditId ? db.from('forumotion_pages').update(payload).eq('id',fmEditId) : db.from('forumotion_pages').insert(payload);
     const saved=await query;
