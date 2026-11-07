@@ -242,7 +242,7 @@ header.portal-nav>a,header.portal-nav>button.tool-nav-btn{
 }
 header.portal-nav .language-picker{margin-left:auto!important;flex:0 0 auto!important}
 header.portal-nav #logoutBtn{margin-left:0!important}
-#status{display:none!important}
+#status{display:block!important}
 #status.translation-status{display:block!important}
 .tool-footer{display:block!important}
 .scroll-controls{
@@ -435,7 +435,7 @@ button.content-edit:hover,button.content-delete:hover{
   const $ = id => document.getElementById(id);
   let allRows = [];
   let activeTool = null;
-  const status = (message, kind='') => { const el=$('status'); el.textContent=message; el.className=kind+(activeTool==='translations'?' translation-status':''); el.style.display=message?'block':'none'; };
+  const status = (message, kind='') => { const el=$('status'); el.textContent=message; el.className=kind+(activeTool==='translations'?' translation-status':''); el.style.setProperty('display',message?'block':'none','important'); };
   const showApp = yes => { $('app').classList.toggle('hidden',!yes); $('login').classList.toggle('hidden',yes); $('logoutBtn').classList.toggle('hidden',!yes); };
 
   async function checkAdmin() {
@@ -483,7 +483,7 @@ button.content-edit:hover,button.content-delete:hover{
     if(index>=0)allRows[index]={...allRows[index],...values};
     status('Opgeslagen: '+original.translation_key+'. Vernieuw daarna het forum met Ctrl + F5.','ok');
   }
-  $('logoutBtn').addEventListener('click',async()=>{ await db.auth.signOut(); allRows=[]; $('password').value=''; showApp(false); showTool('home'); status('Je bent uitgelogd.'); });
+  $('logoutBtn').addEventListener('click',async()=>{ const btn=$('logoutBtn'); btn.disabled=true; try { const {error}=await db.auth.signOut(); if(error) throw error; allRows=[]; $('password').value=''; showApp(false); showTool('home'); status('Je bent uitgelogd.','ok'); } catch(e) { status('Uitloggen mislukt: '+(e.message||String(e)),'error'); } finally { btn.disabled=false; } });
 
   $('loginBtn').addEventListener('click',async()=>{
     const email=$('email').value.trim(),password=$('password').value;
