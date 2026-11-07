@@ -64,6 +64,7 @@ body{margin:0;background:radial-gradient(ellipse at 50% -20%,#242747,transparent
 <input id="filter" class="search" placeholder="Zoek op sleutel of tekst">
 <button id="add" class="btn ghost">+ Nieuwe sleutel</button>
 <button id="refresh" class="btn ghost">Vernieuwen</button>
+<button id="syncGithub" class="btn primary" title="Synchroniseer Supabase-vertalingen naar GitHub">↥ Sync naar GitHub</button>
 <button id="logout" class="btn">Uitloggen</button>
 </div>
 </div>
@@ -193,6 +194,24 @@ await db.auth.signOut();
 await showSession();
 };
 $('refresh').onclick=load;
+$('syncGithub').onclick=async()=>{
+  const button=$('syncGithub');
+  if(!confirm('Alle actuele vertalingen uit Supabase synchroniseren naar translations.js op GitHub?'))return;
+  button.disabled=true;
+  button.textContent='Synchroniseren…';
+  status('saveStatus','Vertalingen naar GitHub synchroniseren…');
+  try{
+    const {data,error}=await db.functions.invoke('sync-translations',{body:{}});
+    if(error)throw error;
+    if(!data||!data.success)throw new Error(data?.error||'Synchronisatie is niet bevestigd.');
+    status('saveStatus',data.message+(data.commit?'\\nGitHub commit: '+data.commit:''),'ok');
+  }catch(error){
+    status('saveStatus','Synchroniseren mislukt: '+(error.message||String(error)),'error');
+  }finally{
+    button.disabled=false;
+    button.textContent='↥ Sync naar GitHub';
+  }
+};
 $('filter').oninput=render;
 
 $('add').onclick=async()=>{
