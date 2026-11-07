@@ -37,6 +37,7 @@ td.key{width:24%;font-size:13px;overflow-wrap:anywhere;color:#586174}td input{ma
     <div class="toolbar">
       <input id="search" placeholder="Zoek een vertaling…">
       <button class="secondary" id="reloadBtn">Vernieuwen</button>
+      <button id="syncGithubBtn">↥ Sync naar GitHub</button>
       <button class="secondary" id="logoutBtn">Uitloggen</button>
     </div>
     <p id="count" class="small"></p>
@@ -112,6 +113,17 @@ td.key{width:24%;font-size:13px;overflow-wrap:anywhere;color:#586174}td input{ma
     try{await loadRows();}catch(e){status('Fout bij laden: '+e.message,'error');}
   });
   $('reloadBtn').addEventListener('click',async()=>{try{await loadRows();}catch(e){status('Fout bij laden: '+e.message,'error');}});
+  $('syncGithubBtn').addEventListener('click',async()=>{
+    if(!confirm('Alle actuele vertalingen uit Supabase synchroniseren naar translations.js op GitHub?'))return;
+    const btn=$('syncGithubBtn');btn.disabled=true;btn.textContent='Synchroniseren…';status('Vertalingen naar GitHub synchroniseren…');
+    try{
+      const {data,error}=await db.functions.invoke('sync-translations',{body:{}});
+      if(error)throw error;
+      if(!data||!data.success)throw new Error(data?.error||'Synchronisatie is niet bevestigd.');
+      status(data.message+(data.commit?'\\nGitHub commit: '+data.commit:''),'ok');
+    }catch(e){status('Synchroniseren mislukt: '+(e.message||String(e)),'error');}
+    finally{btn.disabled=false;btn.textContent='↥ Sync naar GitHub';}
+  });
   $('logoutBtn').addEventListener('click',async()=>{await db.auth.signOut();allRows=[];showApp(false);status('Je bent uitgelogd.');});
   $('search').addEventListener('input',render);
   db.auth.getSession().then(async({data})=>{if(data.session){try{await loadRows();}catch(e){status('Fout bij laden: '+e.message,'error');}}});
