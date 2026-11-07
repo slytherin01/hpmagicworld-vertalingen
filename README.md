@@ -1,0 +1,2 @@
+# hpmagicworld-vertalingen
+Hpmagicworld Vertalingenbeheer
