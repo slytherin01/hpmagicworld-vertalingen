@@ -84,14 +84,26 @@ main{width:80%!important;max-width:80%!important;margin-left:auto!important;marg
 .portal-nav .tool-nav-btn{display:inline-flex!important;align-items:center;gap:9px}
 .portal-nav .tool-nav-btn.active{background:#20354e!important;border-color:#3b5673!important;color:#f5d995!important}
 
+
 /* Consistent navigation controls */
-.portal-nav{gap:10px}
-.portal-nav>a,.portal-nav>.tool-nav-btn{display:inline-flex!important;align-items:center;justify-content:flex-start;gap:9px;min-height:40px;padding:5px 10px!important;border:1px solid transparent!important;border-radius:8px!important;background:transparent!important;color:#d9e3f0!important;text-decoration:none!important;font:700 13px/1.2 Inter,ui-sans-serif,system-ui,sans-serif!important;white-space:nowrap;box-shadow:none!important;cursor:pointer}
-.portal-nav>a:hover,.portal-nav>.tool-nav-btn:hover{background:#1b2b40!important;border-color:#3b5673!important;color:#fff!important}
-.portal-nav>.tool-nav-btn.active{background:#20354e!important;border-color:#3b5673!important;color:#f5d995!important}
+.portal-nav{display:flex;align-items:center;gap:10px}
+.portal-nav>a,
+.portal-nav>.tool-nav-btn{
+ display:inline-flex!important;align-items:center;justify-content:flex-start;gap:9px;
+ min-height:40px;padding:5px 10px!important;
+ border:1px solid #3b5673!important;border-radius:8px!important;
+ background:#17283c!important;color:#d9e3f0!important;
+ text-decoration:none!important;font:700 13px/1.2 Inter,ui-sans-serif,system-ui,sans-serif!important;
+ white-space:nowrap;box-shadow:none!important;cursor:pointer
+}
+.portal-nav>a:hover,
+.portal-nav>.tool-nav-btn:hover{background:#20354e!important;color:#fff!important}
+.portal-nav>.tool-nav-btn.active{background:#20354e!important;border-color:#c9a45c!important;color:#f5d995!important}
 .portal-nav .nav-fa-icon{width:29px;height:29px;flex:0 0 29px;display:inline-flex;align-items:center;justify-content:center;border-radius:8px;background:#20354e;border:1px solid #3b5673;color:#d8e7f8;font-size:14px}
-.portal-nav #logoutBtn{margin-left:10px}
+.portal-nav .language-picker{margin-left:auto;flex:0 0 auto}
+.portal-nav #logoutBtn{margin-left:0}
 .portal-nav #logoutBtn.hidden{display:none!important}
+@media(max-width:720px){.portal-nav{overflow-x:auto;white-space:nowrap}}
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
