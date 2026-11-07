@@ -359,6 +359,23 @@ button.content-edit:hover,button.content-delete:hover{
 .advanced-html label{display:block;margin-top:12px}
 @media(max-width:720px){.builder-fields{grid-template-columns:1fr}}
 
+
+/* Duidelijk zichtbaar en eenvoudig bouwmenu */
+#pageView{display:block}
+#simpleBuilder{
+ display:block!important;visibility:visible!important;opacity:1!important;
+ width:100%;margin:18px 0 22px!important;padding:22px!important;
+ background:#172b43!important;border:2px solid #c9a45c!important;border-radius:14px!important;
+ box-shadow:0 8px 22px #0005!important;
+}
+#simpleBuilder h3{display:block!important;color:#ffe2a0!important;font-size:20px!important;margin:0 0 10px!important}
+#simpleBuilder p{color:#e2eaf4!important;line-height:1.55}
+#simpleBuilder label{display:block!important;color:#fff!important;font-weight:700!important;margin:12px 0!important}
+#simpleBuilder select,#simpleBuilder input{display:block!important;width:100%!important;margin-top:7px!important;min-height:42px}
+#simpleBuilder .builder-fields{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+#builderAdd{display:inline-flex!important;min-height:44px!important;padding:10px 18px!important;background:#1d3149!important;color:#fff!important;border:1px solid #c9a45c!important}
+@media(max-width:720px){#simpleBuilder .builder-fields{grid-template-columns:1fr}}
+
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
@@ -398,22 +415,28 @@ button.content-edit:hover,button.content-delete:hover{
 <h3>Pagina toevoegen of aanpassen</h3>
 <label>Naam<input id="fmTitle" placeholder="Bijvoorbeeld: Ticket Support"></label><br><br>
 <label>Forumotion-link<input id="fmUrl" placeholder="https://..."></label><br><br>
-<div class="simple-builder">
- <h3><i class="fa-solid fa-hammer"></i> Simpel bouwmenu</h3>
- <p>Kies wat je wilt toevoegen. Vul de tekst in en klik op <b>Toevoegen aan pagina</b>.</p>
- <label>Wat wil je toevoegen?
-  <select id="builderType">
-   <option value="heading">Een titel</option><option value="text">Een tekstblok</option>
-   <option value="button">Een knop met link</option><option value="image">Een afbeelding</option>
-   <option value="divider">Een lijn</option>
-  </select>
- </label>
+<div id="simpleBuilder" class="simple-builder">
+ <h3>Pagina bouwen – stap voor stap</h3>
+ <p><b>Stap 1.</b> Kies hieronder wat je op je pagina wilt zetten.</p>
+ <label for="builderType">Ik wil toevoegen</label>
+ <select id="builderType">
+  <option value="heading">Een grote titel</option>
+  <option value="text">Een tekst</option>
+  <option value="button">Een knop met link</option>
+  <option value="image">Een afbeelding</option>
+  <option value="divider">Een scheidingslijn</option>
+ </select>
  <div class="builder-fields">
-  <label>Titel of tekst<input id="builderText" placeholder="Typ hier je titel of tekst"></label>
-  <label>Link (voor knop of afbeelding)<input id="builderUrl" placeholder="https://..."></label>
+  <label for="builderText">Stap 2. Typ je titel of tekst
+   <input id="builderText" placeholder="Typ hier je tekst">
+  </label>
+  <label for="builderUrl">Link (alleen nodig bij knop of afbeelding)
+   <input id="builderUrl" placeholder="Plak hier de link">
+  </label>
  </div>
- <button type="button" class="secondary" id="builderAdd">Toevoegen aan pagina</button>
- <p class="small" id="builderHelp">Je nieuwe onderdeel wordt onderaan de pagina toegevoegd. Je bestaande inhoud blijft staan.</p>
+ <p><b>Stap 3.</b> Klik op de knop om het onderdeel toe te voegen.</p>
+ <button type="button" id="builderAdd">Toevoegen aan mijn pagina</button>
+ <p class="small">Daarna klik je onderaan op <b>Pagina bewaren</b>. Je bestaande pagina blijft behouden.</p>
 </div>
 <details class="advanced-html"><summary>Voor gevorderden: HTML-code zelf aanpassen</summary>
  <label>HTML-code<textarea id="fmHtml" style="width:100%;min-height:260px;font-family:monospace" placeholder="Plak hier de HTML-code uit Forumotion"></textarea></label>
