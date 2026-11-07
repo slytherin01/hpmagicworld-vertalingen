@@ -396,7 +396,7 @@ button.content-edit:hover,button.content-delete:hover{
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
-<header class="portal-nav"><a class="portal-home-link" href="https://testforumjoost.forumactie.com/h3-portaal" target="_blank" rel="noopener"><i class="fa-solid fa-house nav-fa-icon" aria-hidden="true"></i><span>Portaal</span></a><a href="https://testforumjoost.forumactie.com/forum" target="_blank" rel="noopener"><i class="fa-solid fa-comments nav-fa-icon" aria-hidden="true"></i><span>Terug naar forum</span></a><button type="button" class="tool-nav-btn" id="homeMenu"><i class="fa-solid fa-house nav-fa-icon" aria-hidden="true"></i><span>Home</span></button><button type="button" class="tool-nav-btn" id="translationMenu"><i class="fa-solid fa-language nav-fa-icon" aria-hidden="true"></i><span>Vertalingen</span></button><button type="button" class="tool-nav-btn" id="pageMenu"><i class="fa-solid fa-file-code nav-fa-icon" aria-hidden="true"></i><span>Pagina’s</span></button><div class="language-picker"><label for="toolLanguage">Taal</label><select id="toolLanguage" aria-label="Taal"><option value="nl">NL</option><option value="en">EN</option><option value="pt">PT</option></select></div><button type="button" class="tool-nav-btn nav-logout hidden" id="logoutBtn"><i class="fa-solid fa-right-from-bracket nav-fa-icon" aria-hidden="true"></i><span>Uitloggen</span></button></header>
+<header class="portal-nav"><a class="portal-home-link" href="https://testforumjoost.forumactie.com/h3-portaal" target="_blank" rel="noopener"><i class="fa-solid fa-house nav-fa-icon" aria-hidden="true"></i><span>Portaal</span></a><a href="https://testforumjoost.forumactie.com/forum" target="_blank" rel="noopener"><i class="fa-solid fa-comments nav-fa-icon" aria-hidden="true"></i><span>Terug naar forum</span></a><button type="button" class="tool-nav-btn" id="homeMenu"><i class="fa-solid fa-house nav-fa-icon" aria-hidden="true"></i><span>Home</span></button><button type="button" class="tool-nav-btn" id="translationMenu"><i class="fa-solid fa-language nav-fa-icon" aria-hidden="true"></i><span>Vertalingen</span></button><div class="language-picker"><label for="toolLanguage">Taal</label><select id="toolLanguage" aria-label="Taal"><option value="nl">NL</option><option value="en">EN</option><option value="pt">PT</option></select></div><button type="button" class="tool-nav-btn nav-logout hidden" id="logoutBtn"><i class="fa-solid fa-right-from-bracket nav-fa-icon" aria-hidden="true"></i><span>Uitloggen</span></button></header>
 <main>
   <div class="panel tool-heading">
     <img class="tool-heading-logo" src="https://i28.servimg.com/u/f28/11/54/28/73/logo10.png" alt="Hpmagicworld logo">
@@ -424,54 +424,7 @@ button.content-edit:hover,button.content-delete:hover{
             <table><thead><tr><th>Sleutel</th><th>Nederlands</th><th>English</th><th>Português</th><th></th></tr></thead><tbody id="rows"></tbody></table>
           </div>
         </section>
-        <section id="pageView" class="page-tools" style="display:none">
-          <h2>Forumotion-pagina’s</h2>
-          <p>Bewaar en bewerk hier kopieën van je bestaande Forumotion HTML-pagina’s. Opslaan in deze tool wijzigt Forumotion zelf niet.</p>
-<div class="content-item">
-<h3>Pagina toevoegen of aanpassen</h3>
-<label>Naam<input id="fmTitle" placeholder="Bijvoorbeeld: Ticket Support"></label><br><br>
-<label>Forumotion-link<input id="fmUrl" placeholder="https://..."></label><br><br>
-<div id="simpleBuilder" class="simple-builder">
- <h3>✨ Maak je pagina</h3>
- <p>Klik op wat je wilt toevoegen. Klaar!</p>
- <div class="quick-actions">
-  <button type="button" data-add="heading">＋ Titel</button>
-  <button type="button" data-add="text">＋ Tekst</button>
-  <button type="button" data-add="button">＋ Knop</button>
-  <button type="button" data-add="image">＋ Afbeelding</button>
-  <button type="button" data-add="divider">＋ Lijn</button>
- </div>
- <p class="small">Je bestaande pagina blijft staan. Onderdelen worden eronder toegevoegd.</p>
-</div>
-<div class="existing-preview">
- <h3>Zo ziet je pagina er nu uit</h3>
- <p class="small">Hier zie je de bestaande inhoud. Als je iets toevoegt, zie je het hier terug.</p>
- <iframe id="fmPreview" title="Voorbeeld van de pagina" sandbox="" loading="lazy"></iframe>
-</div>
-<details class="advanced-html"><summary>Voor gevorderden: HTML-code zelf aanpassen</summary>
- <label>HTML-code<textarea id="fmHtml" style="width:100%;min-height:260px;font-family:monospace" placeholder="Plak hier de HTML-code uit Forumotion"></textarea></label>
-</details>
-<br><button type="button" id="fmSave">Pagina bewaren</button>
-<button type="button" class="secondary" id="fmClear">Leegmaken</button>
-<button type="button" class="secondary" id="fmDownload" disabled>HTML downloaden</button>
-</div>
-<h3>Opgeslagen pagina’s</h3><div id="fmList">Pagina’s laden…</div>
-<details><summary>Oud beheer van tekstblokken en knoppen</summary>
-          <form id="contentForm">
-            <div class="content-form">
-              <label>Soort onderdeel<select id="contentType"><option value="text">Tekstblok</option><option value="button">Navigatieknop</option></select></label>
-              <label>Pagina<select id="contentPage"><option value="all">Alle pagina's</option><option value="home">Startpagina</option><option value="forum">Forum</option><option value="profile">Profiel</option><option value="custom">Andere pagina</option></select></label>
-              <label>Naam / titel<input id="contentTitle" required placeholder="Bijv. Welkom op Hpmagicworld"></label>
-              <label>Link (alleen voor navigatieknoppen)<input id="contentUrl" placeholder="https://..."></label>
-              <label style="grid-column:1/-1">Tekst (alleen voor tekstblokken)<textarea id="contentBody" placeholder="Typ hier je tekst..."></textarea></label>
-              <label>Plek<select id="contentPlacement"><option value="top">Bovenaan</option><option value="bottom">Onderaan</option><option value="sidebar">Zijbalk</option></select></label>
-              <label>Andere pagina (optioneel)<input id="contentCustomPage" placeholder="Bijv. /h1-magie"></label>
-            </div>
-            <button type="submit" id="contentSave">Onderdeel toevoegen</button>
-            <button type="button" class="secondary" id="contentCancel" style="display:none">Annuleren</button>
-          </form>
-          <div id="contentList"></div></details>
-        </section>
+section>
     </div>
   </section>
   
@@ -668,17 +621,13 @@ button.content-edit:hover,button.content-delete:hover{
     const home=which==='home';
     $('status').classList.toggle('translation-status',translations);
     $('translationView').style.display=translations?'block':'none';
-    $('pageView').style.display=which==='pages'?'block':'none';
     $('homeMenu').classList.toggle('active',home);
     $('translationMenu').classList.toggle('active',translations);
-    $('pageMenu').classList.toggle('active',which==='pages');
-    if(which==='pages'){loadContent();loadFmPages();}
   }
   $('scrollTopBtn').addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
   $('scrollBottomBtn').addEventListener('click',()=>window.scrollTo({top:document.documentElement.scrollHeight,behavior:'smooth'}));
   $('homeMenu').addEventListener('click',()=>showTool('home'));
   $('translationMenu').addEventListener('click',()=>showTool('translations'));
-  $('pageMenu').addEventListener('click',()=>showTool('pages'));
   $('search').addEventListener('input',render);
   db.auth.getSession().then(async({data})=>{if(data.session){try{await loadRows();}catch(e){status('Fout bij laden: '+e.message,'error');}}});
 })();
@@ -692,10 +641,6 @@ button.content-edit:hover,button.content-delete:hover{
    login:"Inloggen", email:"E-mailadres", password:"Wachtwoord", adminPortal:"Beheerportaal", logout:"Uitloggen",
    menu:"MENU", translationTool:"Vertaal tool", forumPages:"Forumotion-pagina’s", search:"Zoek een vertaling…",
    refresh:"Vernieuwen", sync:"↥ Sync naar GitHub", key:"Sleutel", dutch:"Nederlands", english:"English", portuguese:"Português",
-   pageIntro:"Bewaar en bewerk hier kopieën van je bestaande Forumotion HTML-pagina’s. Opslaan in deze tool wijzigt Forumotion zelf niet.",
-   addEdit:"Pagina toevoegen of aanpassen", name:"Naam", pageLink:"Forumotion-link", htmlCode:"HTML-code",
-   savePage:"Pagina bewaren", clear:"Leegmaken", download:"HTML downloaden", savedPages:"Opgeslagen pagina’s",
-   oldTools:"Oud beheer van tekstblokken en knoppen", type:"Soort onderdeel", textBlock:"Tekstblok", navButton:"Navigatieknop",
    page:"Pagina", allPages:"Alle pagina's", home:"Startpagina", forum:"Forum", profile:"Profiel", otherPage:"Andere pagina",
    itemTitle:"Naam / titel", link:"Link (alleen voor navigatieknoppen)", text:"Tekst (alleen voor tekstblokken)",
    placement:"Plek", top:"Bovenaan", bottom:"Onderaan", sidebar:"Zijbalk", customPage:"Andere pagina (optioneel)",
