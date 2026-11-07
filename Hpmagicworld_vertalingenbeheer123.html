@@ -294,6 +294,21 @@ button.content-delete::before{content:"\\f2ed"}
 .tool-heading .tool-heading-logo{margin-left:auto!important;margin-right:auto!important}
 .tool-heading h1,.tool-heading p{text-align:center!important;margin-left:auto!important;margin-right:auto!important}
 
+
+/* Statusmelding hoort bovenaan in de vertaaltool */
+#translationView #status{display:none!important}
+#translationView #status.translation-status{display:block!important;margin:0 0 14px!important}
+#reloadBtn{display:inline-flex!important;align-items:center!important;gap:9px!important}
+#reloadBtn:before{
+ content:"\\f021"!important;font-family:"Font Awesome 6 Free"!important;font-weight:900!important;
+ display:inline-block!important;visibility:visible!important;opacity:1!important
+}
+#syncGithubBtn{display:inline-flex!important;align-items:center!important;gap:9px!important}
+#syncGithubBtn:before{
+ content:"\\f0ee"!important;font-family:"Font Awesome 6 Free"!important;font-weight:900!important;
+ display:inline-block!important;visibility:visible!important;opacity:1!important
+}
+
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
@@ -314,12 +329,13 @@ button.content-delete::before{content:"\\f2ed"}
     
     <div class="tool-view">
         <section id="translationView" style="display:none">
+          <div id="status" role="status">Vul je beheerdersgegevens in om te beginnen.</div>
           <p id="count" class="small count-top"></p>
           <h2>Vertalingen</h2>
           <div class="toolbar">
             <input id="search" placeholder="Zoek een vertaling…">
             <button class="secondary" id="reloadBtn">Vernieuwen</button>
-            <button id="syncGithubBtn">↥ Sync naar GitHub</button>
+            <button id="syncGithubBtn">Sync naar GitHub</button>
           </div>
           <div style="overflow-x:auto">
             <table><thead><tr><th>Sleutel</th><th>Nederlands</th><th>English</th><th>Português</th><th></th></tr></thead><tbody id="rows"></tbody></table>
@@ -356,7 +372,7 @@ button.content-delete::before{content:"\\f2ed"}
         </section>
     </div>
   </section>
-  <div id="status" role="status">Vul je beheerdersgegevens in om te beginnen.</div>
+  
 </main>
 <footer class="tool-footer"><span>Hpmagicworld · Beheeromgeving</span></footer>
 <div class="scroll-controls" aria-label="Pagina navigatie"><button type="button" id="scrollTopBtn" aria-label="Naar boven" title="Naar boven"><i class="fa-solid fa-arrow-up"></i></button><button type="button" id="scrollBottomBtn" aria-label="Naar beneden" title="Naar beneden"><i class="fa-solid fa-arrow-down"></i></button></div>
