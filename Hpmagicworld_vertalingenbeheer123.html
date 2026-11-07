@@ -118,7 +118,7 @@ main{width:80%!important;max-width:80%!important;margin-left:auto!important;marg
 .portal-nav #translationMenu.active,.portal-nav #pageMenu.active{background:#20354e!important;border-color:#c9a45c!important;color:#f5d995!important}
 .portal-nav #translationMenu .nav-fa-icon,.portal-nav #pageMenu .nav-fa-icon{display:inline-flex!important;visibility:visible!important;opacity:1!important}
 
-/* Verfijning op verzoek: geen lege bovenbalk en status alleen bij Vertalingen */
+/* Verfijning: status direct zichtbaar, zonder lege balk erboven */
 .portal-nav{
   position:relative!important;top:auto!important;left:auto!important;right:auto!important;
   height:auto!important;min-height:0!important;padding:8px 12px!important;
@@ -126,8 +126,9 @@ main{width:80%!important;max-width:80%!important;margin-left:auto!important;marg
   justify-content:center!important;flex-wrap:wrap!important;
 }
 body{padding-top:0!important}
-#status{display:none!important}
+#status{display:block!important}
 #status.translation-status{display:block!important}
+header.portal-nav{background:transparent!important;border:0!important;box-shadow:none!important;outline:0!important;}
 #translationMenu .nav-fa-icon,#pageMenu .nav-fa-icon,
 .portal-nav a .nav-fa-icon,.portal-nav #logoutBtn .nav-fa-icon{
   display:inline-flex!important;visibility:visible!important;opacity:1!important;
