@@ -14,7 +14,15 @@ input{width:100%;min-width:0}button{background:#273b67;color:white;border:0;curs
 button.secondary{background:#e9edf5;color:#26324a}.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.row>*{flex:1}
 #status{padding:10px;border-radius:8px;background:#eef2f8;color:#34415b;margin-top:12px;white-space:pre-wrap}
 #status.error{background:#fff0ef;color:#9b2820}#status.ok{background:#eaf8ef;color:#176334}
-.toolbar{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center}
+.toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.app-layout{display:grid;grid-template-columns:205px minmax(0,1fr);gap:16px;align-items:start}
+.side-menu{background:#fff;border:1px solid #e1e5ed;border-radius:14px;padding:12px;position:sticky;top:14px}
+.side-menu h3{font-size:14px;color:#6b7280;margin:4px 8px 12px}
+.menu-btn{display:block;width:100%;text-align:left;margin:5px 0;background:transparent;color:#26324a;border:1px solid transparent}
+.menu-btn.active{background:#e9edf5;border-color:#d5dcea;color:#273b67}
+.tool-view{min-width:0}
+.tool-view>h2{margin:0 0 12px}
+@media(max-width:720px){.app-layout{grid-template-columns:1fr}.side-menu{position:static;display:flex;gap:8px}.side-menu h3{display:none}.menu-btn{margin:0;text-align:center}}
 
 .page-tools{margin-top:18px;border-top:1px solid #e1e5ed;padding-top:16px}
 .page-tools h2{margin:0 0 8px}
@@ -45,33 +53,48 @@ td.key{width:24%;font-size:13px;overflow-wrap:anywhere;color:#586174}td input{ma
     <p><button id="loginBtn">Inloggen</button></p>
   </section>
   <section id="app" class="panel hidden">
-    <div class="toolbar">
-      <input id="search" placeholder="Zoek een vertaling…">
-      <button class="secondary" id="reloadBtn">Vernieuwen</button>
-      <button id="syncGithubBtn">↥ Sync naar GitHub</button>
+    <div class="toolbar" style="justify-content:space-between;margin-bottom:14px">
+      <strong>Beheerportaal</strong>
       <button class="secondary" id="logoutBtn">Uitloggen</button>
     </div>
-    <p id="count" class="small"></p>
-    <section class="page-tools">
-      <h2>Pagina-inhoud beheren</h2>
-      <p class="small">Voeg navigatieknoppen en tekstblokken toe. Kies zelf op welke pagina ze verschijnen.</p>
-      <form id="contentForm">
-        <div class="content-form">
-          <label>Soort onderdeel<select id="contentType"><option value="text">Tekstblok</option><option value="button">Navigatieknop</option></select></label>
-          <label>Pagina<select id="contentPage"><option value="all">Alle pagina's</option><option value="home">Startpagina</option><option value="forum">Forum</option><option value="profile">Profiel</option><option value="custom">Andere pagina</option></select></label>
-          <label>Naam / titel<input id="contentTitle" required placeholder="Bijv. Welkom op Hpmagicworld"></label>
-          <label>Link (alleen voor navigatieknoppen)<input id="contentUrl" placeholder="https://..."></label>
-          <label style="grid-column:1/-1">Tekst (alleen voor tekstblokken)<textarea id="contentBody" placeholder="Typ hier je tekst..."></textarea></label>
-          <label>Plek<select id="contentPlacement"><option value="top">Bovenaan</option><option value="bottom">Onderaan</option><option value="sidebar">Zijbalk</option></select></label>
-          <label>Andere pagina (optioneel)<input id="contentCustomPage" placeholder="Bijv. /h1-magie"></label>
-        </div>
-        <button type="submit" id="contentSave">Onderdeel toevoegen</button>
-        <button type="button" class="secondary" id="contentCancel" style="display:none">Annuleren</button>
-      </form>
-      <div id="contentList"></div>
-    </section>
-    <div style="overflow-x:auto">
-      <table><thead><tr><th>Sleutel</th><th>Nederlands</th><th>English</th><th>Português</th><th></th></tr></thead><tbody id="rows"></tbody></table>
+    <div class="app-layout">
+      <nav class="side-menu" aria-label="Beheermenu">
+        <h3>MENU</h3>
+        <button type="button" class="menu-btn active" id="translationMenu">Vertaal tool</button>
+        <button type="button" class="menu-btn" id="pageMenu">Beheer tool</button>
+      </nav>
+      <div class="tool-view">
+        <section id="translationView">
+          <h2>Vertaal tool</h2>
+          <div class="toolbar">
+            <input id="search" placeholder="Zoek een vertaling…">
+            <button class="secondary" id="reloadBtn">Vernieuwen</button>
+            <button id="syncGithubBtn">↥ Sync naar GitHub</button>
+          </div>
+          <p id="count" class="small"></p>
+          <div style="overflow-x:auto">
+            <table><thead><tr><th>Sleutel</th><th>Nederlands</th><th>English</th><th>Português</th><th></th></tr></thead><tbody id="rows"></tbody></table>
+          </div>
+        </section>
+        <section id="pageView" class="page-tools" style="display:none">
+          <h2>Beheer tool</h2>
+          <p class="small">Beheer hier navigatieknoppen en tekstblokken voor je pagina's.</p>
+          <form id="contentForm">
+            <div class="content-form">
+              <label>Soort onderdeel<select id="contentType"><option value="text">Tekstblok</option><option value="button">Navigatieknop</option></select></label>
+              <label>Pagina<select id="contentPage"><option value="all">Alle pagina's</option><option value="home">Startpagina</option><option value="forum">Forum</option><option value="profile">Profiel</option><option value="custom">Andere pagina</option></select></label>
+              <label>Naam / titel<input id="contentTitle" required placeholder="Bijv. Welkom op Hpmagicworld"></label>
+              <label>Link (alleen voor navigatieknoppen)<input id="contentUrl" placeholder="https://..."></label>
+              <label style="grid-column:1/-1">Tekst (alleen voor tekstblokken)<textarea id="contentBody" placeholder="Typ hier je tekst..."></textarea></label>
+              <label>Plek<select id="contentPlacement"><option value="top">Bovenaan</option><option value="bottom">Onderaan</option><option value="sidebar">Zijbalk</option></select></label>
+              <label>Andere pagina (optioneel)<input id="contentCustomPage" placeholder="Bijv. /h1-magie"></label>
+            </div>
+            <button type="submit" id="contentSave">Onderdeel toevoegen</button>
+            <button type="button" class="secondary" id="contentCancel" style="display:none">Annuleren</button>
+          </form>
+          <div id="contentList"></div>
+        </section>
+      </div>
     </div>
   </section>
   <div id="status" role="status">Vul je beheerdersgegevens in om te beginnen.</div>
@@ -187,6 +210,16 @@ td.key{width:24%;font-size:13px;overflow-wrap:anywhere;color:#586174}td input{ma
   $('contentCancel').addEventListener('click',()=>{$('contentForm').reset();editingContentId=null;$('contentSave').textContent='Onderdeel toevoegen';$('contentCancel').style.display='none';$('contentType').dispatchEvent(new Event('change'));});
 
   $('logoutBtn').addEventListener('click',async()=>{await db.auth.signOut();allRows=[];showApp(false);status('Je bent uitgelogd.');});
+  function showTool(which){
+    const translations=which==='translations';
+    $('translationView').style.display=translations?'block':'none';
+    $('pageView').style.display=translations?'none':'block';
+    $('translationMenu').classList.toggle('active',translations);
+    $('pageMenu').classList.toggle('active',!translations);
+    if(!translations)loadContent();
+  }
+  $('translationMenu').addEventListener('click',()=>showTool('translations'));
+  $('pageMenu').addEventListener('click',()=>showTool('pages'));
   $('search').addEventListener('input',render);
   db.auth.getSession().then(async({data})=>{if(data.session){try{await loadRows();}catch(e){status('Fout bij laden: '+e.message,'error');}}});
 })();
