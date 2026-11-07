@@ -61,7 +61,7 @@ td.key{width:24%;font-size:13px;overflow-wrap:anywhere;color:#586174}td input{ma
       <nav class="side-menu" aria-label="Beheermenu">
         <h3>MENU</h3>
         <button type="button" class="menu-btn active" id="translationMenu">Vertaal tool</button>
-        <button type="button" class="menu-btn" id="pageMenu">Beheer tool</button>
+        <button type="button" class="menu-btn" id="pageMenu">Forumotion-pagina’s</button>
       </nav>
       <div class="tool-view">
         <section id="translationView">
@@ -77,8 +77,19 @@ td.key{width:24%;font-size:13px;overflow-wrap:anywhere;color:#586174}td input{ma
           </div>
         </section>
         <section id="pageView" class="page-tools" style="display:none">
-          <h2>Beheer tool</h2>
-          <p class="small">Beheer hier navigatieknoppen en tekstblokken voor je pagina's.</p>
+          <h2>Forumotion-pagina’s</h2>
+          <p>Bewaar en bewerk hier kopieën van je bestaande Forumotion HTML-pagina’s. Opslaan in deze tool wijzigt Forumotion zelf niet.</p>
+<div class="content-item">
+<h3>Pagina toevoegen of aanpassen</h3>
+<label>Naam<input id="fmTitle" placeholder="Bijvoorbeeld: Ticket Support"></label><br><br>
+<label>Forumotion-link<input id="fmUrl" placeholder="https://..."></label><br><br>
+<label>HTML-code<textarea id="fmHtml" style="width:100%;min-height:260px;font-family:monospace" placeholder="Plak hier de HTML-code uit Forumotion"></textarea></label><br>
+<button type="button" id="fmSave">Pagina bewaren</button>
+<button type="button" class="secondary" id="fmClear">Leegmaken</button>
+<button type="button" class="secondary" id="fmDownload" disabled>HTML downloaden</button>
+</div>
+<h3>Opgeslagen pagina’s</h3><div id="fmList">Pagina’s laden…</div>
+<details><summary>Oud beheer van tekstblokken en knoppen</summary>
           <form id="contentForm">
             <div class="content-form">
               <label>Soort onderdeel<select id="contentType"><option value="text">Tekstblok</option><option value="button">Navigatieknop</option></select></label>
@@ -92,7 +103,7 @@ td.key{width:24%;font-size:13px;overflow-wrap:anywhere;color:#586174}td input{ma
             <button type="submit" id="contentSave">Onderdeel toevoegen</button>
             <button type="button" class="secondary" id="contentCancel" style="display:none">Annuleren</button>
           </form>
-          <div id="contentList"></div>
+          <div id="contentList"></div></details>
         </section>
       </div>
     </div>
@@ -177,6 +188,39 @@ td.key{width:24%;font-size:13px;overflow-wrap:anywhere;color:#586174}td input{ma
     finally{btn.disabled=false;btn.textContent='↥ Sync naar GitHub';}
   });
 
+
+  let fmEditId = null;
+  async function loadFmPages() {
+    const host = $('fmList');
+    const result = await db.from('forumotion_pages').select('id,title,page_url,html_content').order('title');
+    if (result.error) { host.textContent = 'Pagina-opslag moet nog worden ingesteld in Supabase. ' + result.error.message; return; }
+    host.replaceChildren();
+    (result.data || []).forEach(page => {
+      const card = document.createElement('article'); card.className = 'content-item';
+      const name = document.createElement('strong'); name.textContent = page.title; card.append(name);
+      const open = document.createElement('button'); open.className = 'secondary'; open.textContent = 'Openen / bewerken';
+      open.addEventListener('click', () => { $('fmTitle').value=page.title; $('fmUrl').value=page.page_url||''; $('fmHtml').value=page.html_content||''; fmEditId=page.id; $('fmDownload').disabled=false; });
+      card.append(open); host.append(card);
+    });
+    if (!(result.data || []).length) host.textContent = 'Nog geen pagina’s opgeslagen.';
+  }
+  function clearFmForm() { fmEditId=null; $('fmTitle').value=''; $('fmUrl').value=''; $('fmHtml').value=''; $('fmDownload').disabled=true; }
+  $('fmClear').addEventListener('click', clearFmForm);
+  $('fmSave').addEventListener('click', async () => {
+    const title=$('fmTitle').value.trim(), html=$('fmHtml').value;
+    if (!title || !html.trim()) { status('Vul een naam in en plak de HTML-code.','error'); return; }
+    const payload={title:title,page_url:$('fmUrl').value.trim(),html_content:html,updated_at:new Date().toISOString()};
+    const query=fmEditId ? db.from('forumotion_pages').update(payload).eq('id',fmEditId) : db.from('forumotion_pages').insert(payload);
+    const saved=await query;
+    if (saved.error) { status('Bewaren mislukt: '+saved.error.message,'error'); return; }
+    status('HTML-kopie bewaard. Forumotion zelf is niet aangepast.','ok'); await loadFmPages();
+  });
+  $('fmDownload').addEventListener('click', () => {
+    const blob=new Blob([$('fmHtml').value],{type:'text/html;charset=utf-8'});
+    const url=URL.createObjectURL(blob); const a=document.createElement('a');
+    a.href=url; a.download=(($('fmTitle').value||'pagina')+'.html'); a.click(); URL.revokeObjectURL(url);
+  });
+
   let contentItems=[], editingContentId=null;
   async function loadContent(){
     const {data,error}=await db.from('page_content').select('*').order('created_at',{ascending:false});
@@ -216,7 +260,7 @@ td.key{width:24%;font-size:13px;overflow-wrap:anywhere;color:#586174}td input{ma
     $('pageView').style.display=translations?'none':'block';
     $('translationMenu').classList.toggle('active',translations);
     $('pageMenu').classList.toggle('active',!translations);
-    if(!translations)loadContent();
+    if(!translations){loadContent();loadFmPages();}
   }
   $('translationMenu').addEventListener('click',()=>showTool('translations'));
   $('pageMenu').addEventListener('click',()=>showTool('pages'));
