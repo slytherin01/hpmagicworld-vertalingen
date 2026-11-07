@@ -106,7 +106,7 @@ main{width:80%!important;max-width:80%!important;margin-left:auto!important;marg
 @media(max-width:720px){.portal-nav{overflow-x:auto;white-space:nowrap}}
 
 /* Navigation tool buttons: preserve icons and match forum links */
-.portal-nav #translationMenu,.portal-nav #pageMenu{
+.portal-nav #translationMenu{
  display:inline-flex!important;align-items:center!important;justify-content:flex-start!important;
  gap:9px!important;min-height:40px!important;padding:5px 10px!important;
  border:1px solid #3b5673!important;border-radius:8px!important;
@@ -114,9 +114,9 @@ main{width:80%!important;max-width:80%!important;margin-left:auto!important;marg
  font:700 13px/1.2 Inter,ui-sans-serif,system-ui,sans-serif!important;
  cursor:pointer!important;white-space:nowrap!important
 }
-.portal-nav #translationMenu:hover,.portal-nav #pageMenu:hover{background:#20354e!important;color:#fff!important}
-.portal-nav #translationMenu.active,.portal-nav #pageMenu.active{background:#20354e!important;border-color:#c9a45c!important;color:#f5d995!important}
-.portal-nav #translationMenu .nav-fa-icon,.portal-nav #pageMenu .nav-fa-icon{display:inline-flex!important;visibility:visible!important;opacity:1!important}
+.portal-nav #translationMenu:hover{background:#20354e!important;color:#fff!important}
+.portal-nav #translationMenu.active{background:#20354e!important;border-color:#c9a45c!important;color:#f5d995!important}
+.portal-nav #translationMenu .nav-fa-icon{display:inline-flex!important;visibility:visible!important;opacity:1!important}
 
 /* Verfijning: status direct zichtbaar, zonder lege balk erboven */
 .portal-nav{
@@ -129,13 +129,12 @@ body{padding-top:0!important}
 #status{display:block!important}
 #status.translation-status{display:block!important}
 header.portal-nav{background:transparent!important;border:0!important;box-shadow:none!important;outline:0!important;}
-#translationMenu .nav-fa-icon,#pageMenu .nav-fa-icon,
+#translationMenu .nav-fa-icon,
 .portal-nav a .nav-fa-icon,.portal-nav #logoutBtn .nav-fa-icon{
   display:inline-flex!important;visibility:visible!important;opacity:1!important;
 }
 #reloadBtn:before{font-family:"Font Awesome 6 Free";font-weight:900;content:"\f021";margin-right:8px}
 #syncGithubBtn:before{font-family:"Font Awesome 6 Free";font-weight:900;content:"\f0ee";margin-right:8px}
-#fmSave:before{font-family:"Font Awesome 6 Free";font-weight:900;content:"\f0c7";margin-right:8px}
 
 
 /* Header en footer: nette, vaste portaalstijl */
@@ -212,7 +211,7 @@ main{
 .tool-heading p{color:#d1dced!important;font-size:15px!important}
 #app.panel{background:transparent!important;border:0!important;border-radius:0!important;padding:0!important;margin:0!important;box-shadow:none!important}
 #login.panel{max-width:620px;margin:0 auto!important;background:rgba(13,25,42,.96);border:1px solid #405a78;border-radius:16px;box-shadow:0 12px 32px #0005}
-#translationView,#pageView{background:rgba(11,22,37,.96);border:1px solid #344d69;border-radius:16px;padding:22px;box-shadow:0 12px 32px #0005}
+#translationView{background:rgba(11,22,37,.96);border:1px solid #344d69;border-radius:16px;padding:22px;box-shadow:0 12px 32px #0005}
 #status{display:none!important}
 #status.translation-status{display:block!important;margin:0 0 16px!important;padding:12px 16px!important;border-radius:10px!important;background:rgba(18,54,43,.96)!important;border:1px solid #397b61!important;color:#dcf7e9!important}
 .tool-footer{
@@ -226,7 +225,7 @@ main{
  header.portal-nav .language-picker{margin-left:0!important}
  main{width:94%!important;margin:18px auto 28px!important}
  .tool-heading{padding:19px 14px!important}
- #translationView,#pageView{padding:14px!important}
+ #translationView{padding:14px!important}
 }
 
 
@@ -263,26 +262,23 @@ header.portal-nav #logoutBtn{margin-left:0!important}
 
 
 /* Font Awesome iconen voor alle actieknoppen */
-button:not(#translationMenu):not(#pageMenu):not(#logoutBtn):not(#scrollTopBtn):not(#scrollBottomBtn){
+button:not(#translationMenu):not(#logoutBtn):not(#scrollTopBtn):not(#scrollBottomBtn){
  display:inline-flex;align-items:center;justify-content:center;gap:9px;
 }
-button:not(#translationMenu):not(#pageMenu):not(#logoutBtn):not(#scrollTopBtn):not(#scrollBottomBtn)::before{
+button:not(#translationMenu):not(#logoutBtn):not(#scrollTopBtn):not(#scrollBottomBtn)::before{
  font-family:"Font Awesome 6 Free";font-weight:900;font-size:14px;line-height:1;
  display:inline-block;flex:0 0 auto;
 }
 #loginBtn::before{content:"\f2f6"}
 #reloadBtn::before{content:"\f021"}
 #syncGithubBtn::before{content:"\f0ee"}
-#fmSave::before{content:"\f0c7"}
-#fmClear::before{content:"\f12d"}
-#fmDownload::before{content:"\f019"}
 #contentSave::before{content:"\f0c7"}
 #contentCancel::before{content:"\f00d"}
 button.save::before{content:"\f0c7"}
 button.content-edit::before{content:"\f044"}
 button.content-delete::before{content:"\f2ed"}
 #scrollTopBtn i,#scrollBottomBtn i{font-size:16px}
-#translationMenu .nav-fa-icon,#pageMenu .nav-fa-icon,#logoutBtn .nav-fa-icon{font-family:"Font Awesome 6 Free";font-weight:900}
+#translationMenu .nav-fa-icon,#logoutBtn .nav-fa-icon{font-family:"Font Awesome 6 Free";font-weight:900}
 
 
 /* Home als interne startpagina en intro gecentreerd */
@@ -511,110 +507,6 @@ section>
   });
 
 
-  let fmEditId = null;
-  async function loadFmPages() {
-    const host = $('fmList');
-    const result = await db.from('forumotion_pages').select('id,title,page_url,html_content').order('title');
-    if (result.error) { host.textContent = 'Pagina-opslag moet nog worden ingesteld in Supabase. ' + result.error.message; return; }
-    host.replaceChildren();
-    (result.data || []).forEach(page => {
-      const card = document.createElement('article'); card.className = 'content-item';
-      const name = document.createElement('strong'); name.textContent = page.title; card.append(name);
-      const open = document.createElement('button'); open.className = 'secondary'; open.textContent = 'Openen / bewerken';
-      open.addEventListener('click', () => { $('fmTitle').value=page.title; $('fmUrl').value=page.page_url||''; $('fmHtml').value=page.html_content||''; fmEditId=page.id; $('fmDownload').disabled=false; updateFmPreview(); });
-      card.append(open); host.append(card);
-    });
-    if (!(result.data || []).length) host.textContent = 'Nog geen pagina’s opgeslagen.';
-  }
-  function updateFmPreview(){ const frame=$('fmPreview'); if(frame) frame.srcdoc=$('fmHtml').value||'<p style="font:16px Arial;padding:20px;color:#555">Nog geen inhoud. Open een bestaande pagina of voeg een onderdeel toe.</p>'; }
-  $('fmHtml').addEventListener('input',updateFmPreview);
-  function clearFmForm() { fmEditId=null; $('fmTitle').value=''; $('fmUrl').value=''; $('fmHtml').value=''; $('fmDownload').disabled=true; updateFmPreview(); }
-
-  document.querySelectorAll('[data-add]').forEach(button => {
-    button.addEventListener('click', () => {
-      const type=button.dataset.add;
-      const esc=t=>t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-      let block='';
-      if(type==='divider') block='<hr style="border:0;border-top:1px solid #c9a45c;margin:24px 0;">';
-      if(type==='heading'){
-        const value=prompt('Welke titel wil je plaatsen?');
-        if(value===null||!value.trim()) return;
-        block='<h2>'+esc(value.trim())+'</h2>';
-      }
-      if(type==='text'){
-        const value=prompt('Welke tekst wil je plaatsen?');
-        if(value===null||!value.trim()) return;
-        block='<p>'+esc(value.trim()).replace(/\\n/g,'<br>')+'</p>';
-      }
-      if(type==='button'){
-        const value=prompt('Welke tekst moet op de knop staan?');
-        if(value===null||!value.trim()) return;
-        const url=prompt('Welke link moet de knop openen?');
-        if(url===null||!url.trim()) return;
-        block='<p><a href="'+esc(url.trim())+'" style="display:inline-block;padding:12px 20px;background:#1d3149;color:#fff;border:1px solid #c9a45c;border-radius:9px;text-decoration:none;font-weight:bold;">'+esc(value.trim())+'</a></p>';
-      }
-      if(type==='image'){
-        const url=prompt('Plak de link van de afbeelding:');
-        if(url===null||!url.trim()) return;
-        const alt=prompt('Korte beschrijving (optioneel):')||'';
-        block='<p><img src="'+esc(url.trim())+'" alt="'+esc(alt)+'" style="max-width:100%;height:auto;border-radius:8px;"></p>';
-      }
-      const area=$('fmHtml');
-      area.value=(area.value.trim()?area.value.trim()+'\\n\\n':'')+block;
-      updateFmPreview();
-      status('Toegevoegd! Klik op Pagina bewaren.','ok');
-    });
-  });
-
-  $('fmClear').addEventListener('click', clearFmForm);
-  $('fmSave').addEventListener('click', async () => {
-    const title=$('fmTitle').value.trim(), html=$('fmHtml').value;
-    if (!title || !html.trim()) { status('Vul eerst een naam in en voeg iets toe aan de pagina.','error'); return; }
-    const payload={title:title,page_url:$('fmUrl').value.trim(),html_content:html,updated_at:new Date().toISOString()};
-    const query=fmEditId ? db.from('forumotion_pages').update(payload).eq('id',fmEditId) : db.from('forumotion_pages').insert(payload);
-    const saved=await query;
-    if (saved.error) { status('Bewaren mislukt: '+saved.error.message,'error'); return; }
-    status('HTML-kopie bewaard. Forumotion zelf is niet aangepast.','ok'); await loadFmPages();
-  });
-  $('fmDownload').addEventListener('click', () => {
-    const blob=new Blob([$('fmHtml').value],{type:'text/html;charset=utf-8'});
-    const url=URL.createObjectURL(blob); const a=document.createElement('a');
-    a.href=url; a.download=(($('fmTitle').value||'pagina')+'.html'); a.click(); URL.revokeObjectURL(url);
-  });
-
-  let contentItems=[], editingContentId=null;
-  async function loadContent(){
-    const {data,error}=await db.from('page_content').select('*').order('created_at',{ascending:false});
-    if(error){status('Pagina-inhoud laden mislukt: '+error.message+' (mogelijk moet de tabel nog worden aangemaakt).','error');return;}
-    contentItems=data||[]; renderContent();
-  }
-  function renderContent(){
-    const host=$('contentList');host.replaceChildren();
-    if(!contentItems.length){host.textContent='Nog geen onderdelen toegevoegd.';return;}
-    contentItems.forEach(item=>{
-      const card=document.createElement('article');card.className='content-item';
-      const heading=document.createElement('strong');heading.textContent=(item.type==='button'?'Navigatieknop: ':'Tekstblok: ')+item.title;card.append(heading);
-      const meta=document.createElement('div');meta.className='small';meta.textContent='Pagina: '+item.page+' · Plek: '+item.placement;card.append(meta);
-      const detail=document.createElement('p');detail.textContent=item.type==='button'?(item.url||'Geen link ingesteld'):(item.body||'');card.append(detail);
-      const edit=document.createElement('button');edit.className='secondary content-edit';edit.textContent='Bewerken';edit.addEventListener('click',()=>{editingContentId=item.id;$('contentType').value=item.type;$('contentPage').value=['all','home','forum','profile','custom'].includes(item.page)?item.page:'custom';$('contentTitle').value=item.title;$('contentUrl').value=item.url||'';$('contentBody').value=item.body||'';$('contentPlacement').value=item.placement;$('contentCustomPage').value=item.page==='custom'?'':item.page;$('contentSave').textContent='Wijzigingen opslaan';$('contentCancel').style.display='inline-block';});
-      const del=document.createElement('button');del.className='content-delete';del.textContent='Verwijderen';del.style.marginLeft='8px';del.addEventListener('click',async()=>{if(!confirm('Dit onderdeel verwijderen?'))return;const {error}=await db.from('page_content').delete().eq('id',item.id);if(error){status(error.message,'error');return;}status('Onderdeel verwijderd.','ok');await loadContent();});
-      card.append(edit,del);host.append(card);
-    });
-  }
-  $('contentType').addEventListener('change',()=>{const isButton=$('contentType').value==='button';$('contentUrl').disabled=!isButton;$('contentBody').disabled=isButton;});
-  $('contentForm').addEventListener('submit',async e=>{
-    e.preventDefault();
-    const page=$('contentPage').value==='custom'?$('contentCustomPage').value.trim():'';
-    const payload={type:$('contentType').value,page:page||$('contentPage').value,title:$('contentTitle').value.trim(),url:$('contentUrl').value.trim(),body:$('contentBody').value,placement:$('contentPlacement').value,updated_at:new Date().toISOString()};
-    if(!payload.title){status('Vul een naam of titel in.','error');return;}
-    const query=editingContentId?db.from('page_content').update(payload).eq('id',editingContentId):db.from('page_content').insert(payload);
-    const {error}=await query;
-    if(error){status('Opslaan mislukt: '+error.message,'error');return;}
-    $('contentForm').reset();editingContentId=null;$('contentSave').textContent='Onderdeel toevoegen';$('contentCancel').style.display='none';$('contentType').dispatchEvent(new Event('change'));status('Pagina-onderdeel opgeslagen.','ok');await loadContent();
-  });
-  $('contentCancel').addEventListener('click',()=>{$('contentForm').reset();editingContentId=null;$('contentSave').textContent='Onderdeel toevoegen';$('contentCancel').style.display='none';$('contentType').dispatchEvent(new Event('change'));});
-
-  $('logoutBtn').addEventListener('click',async()=>{await db.auth.signOut();allRows=[];showApp(false);status('Je bent uitgelogd.');});
   function showTool(which){
     activeTool=which;
     const translations=which==='translations';
@@ -653,10 +545,6 @@ section>
    login:"Log in", email:"Email address", password:"Password", adminPortal:"Admin portal", logout:"Log out",
    menu:"MENU", translationTool:"Translation tool", forumPages:"Forumotion pages", search:"Search translations…",
    refresh:"Refresh", sync:"↥ Sync to GitHub", key:"Key", dutch:"Dutch", english:"English", portuguese:"Portuguese",
-   pageIntro:"Save and edit copies of your existing Forumotion HTML pages here. Saving in this tool does not change Forumotion itself.",
-   addEdit:"Add or edit page", name:"Name", pageLink:"Forumotion link", htmlCode:"HTML code",
-   savePage:"Save page", clear:"Clear", download:"Download HTML", savedPages:"Saved pages",
-   oldTools:"Legacy management of text blocks and buttons", type:"Item type", textBlock:"Text block", navButton:"Navigation button",
    page:"Page", allPages:"All pages", home:"Home page", forum:"Forum", profile:"Profile", otherPage:"Other page",
    itemTitle:"Name / title", link:"Link (navigation buttons only)", text:"Text (text blocks only)",
    placement:"Placement", top:"Top", bottom:"Bottom", sidebar:"Sidebar", customPage:"Other page (optional)",
@@ -683,14 +571,11 @@ section>
  };
  const ids={
   toolMainTitle:"title",toolTagline:"tagline",login:"login",email:"email",password:"password",
-  logoutBtn:"logout",translationMenu:"translationTool",pageMenu:"forumPages",search:"search",
-  reloadBtn:"refresh",syncGithubBtn:"sync",fmTitle:"name",fmUrl:"pageLink",fmHtml:"htmlCode",
-  fmSave:"savePage",fmClear:"clear",fmDownload:"download",fmList:"noPages"
+  logoutBtn:"logout",translationMenu:"translationTool",search:"search",
+  reloadBtn:"refresh",syncGithubBtn:"sync"
  };
  const textTargets={
-  "#login h2":"login","#translationView h2":"translationTool","#pageView h2":"forumPages",
-  "#pageView>p":"pageIntro","#pageView .content-item h3":"addEdit",
-  "#pageView>h3":"savedPages","#contentForm label:nth-child(1)":"type"
+  "#login h2":"login","#translationView h2":"translationTool","#contentForm label:nth-child(1)":"type"
  };
  function applyLanguage(lang){
   const d=dictionaries[lang]||dictionaries.nl;
@@ -699,12 +584,6 @@ section>
   Object.entries(ids).forEach(([id,key])=>{const el=document.getElementById(id);if(el&&d[key]){if(el.tagName==="INPUT"||el.tagName==="TEXTAREA")el.placeholder=d[key];else if(el.tagName==="BUTTON"&&el.querySelector("span"))el.querySelector("span").textContent=d[key];else if(el.tagName==="BUTTON"||el.tagName==="H1"||el.tagName==="H2"||el.tagName==="STRONG")el.textContent=d[key];}});
   Object.entries(textTargets).forEach(([selector,key])=>{const el=document.querySelector(selector);if(el&&d[key])el.textContent=d[key];});
   const status=document.getElementById("status");if(status&&status.textContent==="Vul je beheerdersgegevens in om te beginnen.")status.textContent=d.loginPrompt;
-  const labels=document.querySelectorAll("#pageView .content-item label");
-  if(labels.length>=3){labels[0].childNodes[0].textContent=d.name;labels[1].childNodes[0].textContent=d.pageLink;labels[2].childNodes[0].textContent=d.htmlCode;}
-  const search=document.getElementById("search");if(search)search.placeholder=d.search;
-  const fmTitle=document.getElementById("fmTitle");if(fmTitle)fmTitle.placeholder=lang==="nl"?"Bijvoorbeeld: Ticket Support":lang==="en"?"For example: Ticket Support":"Por exemplo: Ticket Support";
-  const fmUrl=document.getElementById("fmUrl");if(fmUrl)fmUrl.placeholder="https://...";
-  const fmHtml=document.getElementById("fmHtml");if(fmHtml)fmHtml.placeholder=lang==="nl"?"Plak hier de HTML-code uit Forumotion":lang==="en"?"Paste the HTML code from Forumotion here":"Cole aqui o código HTML do Forumotion";
   const tableHeads=document.querySelectorAll("#translationView thead th");
   [d.key,d.dutch,d.english,d.portuguese,""].forEach((v,i)=>{if(tableHeads[i])tableHeads[i].textContent=v;});
   const langLabel=document.querySelector(".language-picker label");if(langLabel)langLabel.textContent=d.language;
