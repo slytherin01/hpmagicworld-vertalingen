@@ -394,6 +394,15 @@ button.content-edit:hover,button.content-delete:hover{
 .delete-translation:hover{background:#713744!important}
 .delete-translation{display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:8px!important;min-width:40px!important;padding:9px 11px!important}
  .delete-translation::before{content:none!important}
+.row-actions{display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:8px!important;flex-wrap:nowrap!important;min-width:118px!important}
+.row-actions button{min-height:36px!important;height:36px!important;border-radius:9px!important;box-shadow:0 2px 6px #0003!important;font-size:13px!important;transition:background .15s,border-color .15s,transform .15s!important}
+.row-actions .save{padding:7px 14px!important;background:linear-gradient(135deg,#294866,#172d46)!important;border:1px solid #547596!important;color:#f5f8fc!important}
+.row-actions .save:hover{background:#345879!important;transform:translateY(-1px)}
+.row-actions .delete-translation{width:38px!important;min-width:38px!important;padding:0!important;background:#38232d!important;border:1px solid #89505e!important;color:#f7dce1!important}
+.row-actions .delete-translation:hover{background:#653441!important;border-color:#c07886!important;transform:translateY(-1px)}
+.row-actions .delete-translation i{font-size:14px!important;line-height:1!important}
+.row-actions .delete-translation::before{display:none!important;content:none!important}
+@media(max-width:720px){.row-actions{min-width:0!important;gap:6px!important}.row-actions .save{padding:6px 10px!important}}
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
