@@ -32,8 +32,7 @@ Object.assign(translations.pt,{
 });
 // BEGIN SUPABASE TRANSLATIONS - automatisch beheerd
 Object.assign(translations.nl, {
-  "© 2026 Hpmagicworld zdddd": "© 2026 Hpmagicworld zdddd",
-  "© 2026 Hpmagicworld": "© 2026 Hpmagicworld zdddd",
+  "© 2026 Hpmagicworld": "© 2026 Hpmagicworld",
   "1. Hoe maak ik een nieuw ticket aan?": "1. Hoe maak ik een nieuw ticket aan?",
   "2. Welke categorie moet ik kiezen?": "2. Welke categorie moet ik kiezen?",
   "3. Waar kan ik mijn tickets terugvinden?": "3. Waar kan ik mijn tickets terugvinden?",
@@ -218,7 +217,6 @@ Object.assign(translations.nl, {
   "Zwadderich": "Zwadderich"
 });
 Object.assign(translations.en, {
-  "© 2026 Hpmagicworld zdddd": "© 2026 Hpmagicworld",
   "© 2026 Hpmagicworld": "© 2026 Hpmagicworld",
   "1. Hoe maak ik een nieuw ticket aan?": "1. How do I create a new ticket?",
   "2. Welke categorie moet ik kiezen?": "2. Which category should I choose?",
@@ -404,7 +402,6 @@ Object.assign(translations.en, {
   "Zwadderich": "Slytherin"
 });
 Object.assign(translations.pt, {
-  "© 2026 Hpmagicworld zdddd": "© 2026 Hpmagicworld",
   "© 2026 Hpmagicworld": "© 2026 Hpmagicworld",
   "1. Hoe maak ik een nieuw ticket aan?": "1. Como crio um novo ticket?",
   "2. Welke categorie moet ik kiezen?": "2. Que categoria devo escolher?",
