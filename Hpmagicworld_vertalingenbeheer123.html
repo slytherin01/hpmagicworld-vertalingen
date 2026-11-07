@@ -580,6 +580,7 @@ button.content-delete::before{content:"\\f2ed"}
  function applyLanguage(lang){
   const d=dictionaries[lang]||dictionaries.nl;
   document.documentElement.lang=lang;
+  const tagline=document.getElementById("toolTagline");if(tagline)tagline.textContent=d.tagline;
   Object.entries(ids).forEach(([id,key])=>{const el=document.getElementById(id);if(el&&d[key]){if(el.tagName==="INPUT"||el.tagName==="TEXTAREA")el.placeholder=d[key];else if(el.tagName==="BUTTON"&&el.querySelector("span"))el.querySelector("span").textContent=d[key];else if(el.tagName==="BUTTON"||el.tagName==="H1"||el.tagName==="H2"||el.tagName==="STRONG")el.textContent=d[key];}});
   Object.entries(textTargets).forEach(([selector,key])=>{const el=document.querySelector(selector);if(el&&d[key])el.textContent=d[key];});
   const status=document.getElementById("status");if(status&&status.textContent==="Vul je beheerdersgegevens in om te beginnen.")status.textContent=d.loginPrompt;
