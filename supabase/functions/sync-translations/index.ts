@@ -66,7 +66,7 @@ Deno.serve(async (req) => {
 
     const { data: rows, error: rowsError } = await adminClient
       .from("portal_translations")
-      .select("nl,en,pt")
+      .select("source_key,nl,en,pt")
       .order("nl");
     if (rowsError) return json({ error: "Vertalingen lezen mislukt: " + rowsError.message }, 500);
 
