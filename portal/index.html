@@ -3081,4 +3081,74 @@ footer.lux-footer .lux-footer-meta{display:flex!important;justify-content:center
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bind);else bind();
 })();
-</script></body></html>
+</script>
+<style id="hpmw-reference-screen-visibility-repair">
+/* Correctie op de live weergave: forceer de horizontale header en alle intro-elementen. */
+html,body{width:100%!important;min-height:100%!important;overflow-x:hidden!important}
+body{
+ background-color:#080b14!important;
+ background-image:linear-gradient(180deg,rgba(3,5,13,.08),rgba(3,5,13,.16) 58%,rgba(3,5,13,.42)),url("https://i28.servimg.com/u/f28/11/54/28/73/backgr10.png")!important;
+ background-position:center top,center top!important;
+ background-repeat:no-repeat,no-repeat!important;
+ background-size:cover,cover!important;
+ background-attachment:fixed,fixed!important;
+}
+body:before{display:none!important;content:none!important}
+header.topbar.luxury-nav-v2{
+ display:flex!important;position:relative!important;inset:auto!important;top:0!important;right:auto!important;bottom:auto!important;left:auto!important;
+ width:100%!important;min-width:100%!important;height:auto!important;min-height:65px!important;
+ flex-direction:row!important;align-items:center!important;justify-content:stretch!important;
+ padding:7px 22px!important;margin:0!important;overflow:visible!important;
+ border:0!important;border-bottom:1px solid rgba(155,119,255,.3)!important;
+ background:rgba(5,7,16,.96)!important;z-index:99999!important;
+}
+header.topbar.luxury-nav-v2 nav.top-actions{
+ display:flex!important;position:static!important;inset:auto!important;
+ width:100%!important;max-width:1800px!important;height:auto!important;min-height:49px!important;
+ margin:0 auto!important;padding:0!important;flex:1 1 auto!important;
+ flex-direction:row!important;flex-wrap:nowrap!important;align-items:center!important;
+ justify-content:flex-start!important;gap:8px!important;overflow:visible!important;
+}
+header.topbar.luxury-nav-v2 nav.top-actions:before,
+header.topbar.luxury-nav-v2 nav.top-actions:after{display:none!important;content:none!important}
+header.topbar.luxury-nav-v2 nav.top-actions>.lux-nav-item,
+header.topbar.luxury-nav-v2 nav.top-actions>.hpmw-language-wrap{
+ display:inline-flex!important;position:relative!important;visibility:visible!important;opacity:1!important;
+ flex:0 0 auto!important;width:auto!important;height:auto!important;min-height:42px!important;
+ align-items:center!important;justify-content:center!important;
+}
+header.topbar.luxury-nav-v2 nav.top-actions #myTicketsLaunch{margin-left:auto!important}
+main.shell{position:relative!important;z-index:2!important;width:min(1500px,calc(100% - 48px))!important;margin:0 auto!important;padding:20px 0 28px!important}
+#introView{display:flex!important;visibility:visible!important;opacity:1!important;position:relative!important;min-height:calc(100vh - 150px)!important;height:auto!important;flex-direction:column!important;align-items:center!important;justify-content:flex-start!important;padding:0 0 20px!important}
+#introView .hpmw-portal-logo{
+ display:flex!important;visibility:visible!important;opacity:1!important;position:relative!important;inset:auto!important;
+ z-index:10!important;width:100%!important;height:auto!important;min-height:180px!important;
+ align-items:center!important;justify-content:center!important;margin:0 auto 10px!important;padding:0!important;
+ transform:none!important;background:transparent!important;border:0!important;box-shadow:none!important;overflow:visible!important;
+}
+#introView .hpmw-portal-logo img{
+ display:block!important;visibility:visible!important;opacity:1!important;position:relative!important;
+ width:auto!important;height:auto!important;max-width:min(620px,80vw)!important;max-height:250px!important;
+ object-fit:contain!important;margin:0 auto!important;transform:none!important;
+}
+#introView .intro-login-layout{display:block!important;visibility:visible!important;opacity:1!important;position:relative!important;inset:auto!important;transform:none!important;width:min(960px,calc(100% - 24px))!important;max-width:960px!important;margin:0 auto!important}
+#introView .intro-static-card{display:flex!important;visibility:visible!important;opacity:1!important;width:100%!important;max-height:none!important;overflow:visible!important}
+#introView .hpmw-member-entry-actions{display:flex!important;visibility:visible!important;opacity:1!important;position:relative!important;width:100%!important;min-height:100px!important;max-height:none!important;overflow:visible!important}
+html.guest-login-ready #introView .hpmw-member-entry-actions{display:none!important}
+html.guest-login-ready #introView #hpmwGuestEntry{display:flex!important}
+#introView .hpmw-home-action{display:flex!important;visibility:visible!important;opacity:1!important;min-height:100px!important}
+#introView .hpmw-home-action i{display:block!important;font-size:30px!important;color:#9867ff!important}
+#introView .hpmw-home-action span{display:block!important;color:#fff!important}
+#introView .hpmw-entry-actions{display:flex!important}
+html.member-login-ready #introView #hpmwGuestEntry{display:none!important}
+footer.lux-footer{position:relative!important;inset:auto!important;width:100%!important;margin:0!important}
+@media(max-width:900px){
+ header.topbar.luxury-nav-v2{padding:6px 10px!important}
+ header.topbar.luxury-nav-v2 nav.top-actions{overflow-x:auto!important;overflow-y:hidden!important}
+}
+@media(max-width:620px){
+ header.topbar.luxury-nav-v2 .lux-nav-label,header.topbar.luxury-nav-v2 .lux-nav-usertext{display:none!important}
+ #introView .hpmw-portal-logo{min-height:130px!important}
+ #introView .hpmw-portal-logo img{max-width:90vw!important;max-height:160px!important}
+}
+</style></body></html>
