@@ -3620,4 +3620,31 @@ input:focus,select:focus,textarea:focus{outline:none!important;border-color:var(
  #homeView .intranet-service-panel,#homeView .intranet-info-panel{padding:15px}
 }
 </style>
-</body></html>
+<script id="hpmw-intranet-dashboard-actions">
+(function(){
+  function bindIntranetActions(){
+    const pairs=[["intranetNewTicket","ticketSupportLaunch"],["intranetSupport","ticketSupportLaunch"],["intranetMyTickets","myTicketsLaunch"],["intranetFaq","faqLaunch"]];
+    pairs.forEach(function(pair){
+      const source=document.getElementById(pair[0]);
+      const target=document.getElementById(pair[1]);
+      if(source && target && !source.dataset.intranetBound){
+        source.dataset.intranetBound="1";
+        source.addEventListener("click",function(){target.click();});
+      }
+    });
+    const syncName=function(){
+      const from=document.getElementById("username");
+      const to=document.getElementById("intranetWelcomeName");
+      if(from&&to){const name=(from.textContent||"").trim();to.textContent=name&&name!=="Gast"?name:"collega";}
+    };
+    syncName();
+    const nameNode=document.getElementById("username");
+    if(nameNode&&window.MutationObserver&&!nameNode.dataset.intranetObserver){
+      nameNode.dataset.intranetObserver="1";
+      new MutationObserver(syncName).observe(nameNode,{childList:true,subtree:true,characterData:true});
+    }
+  }
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",bindIntranetActions,{once:true});
+  else bindIntranetActions();
+})();
+</script></body></html>
