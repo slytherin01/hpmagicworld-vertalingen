@@ -429,7 +429,6 @@ button.content-edit:hover,button.content-delete:hover{
           <div class="toolbar">
             <input id="search" placeholder="Zoek een vertaling…">
             <button class="secondary" id="reloadBtn">Vernieuwen</button>
-            <button class="secondary" id="addFooterTranslationBtn" type="button">Footervertaling toevoegen</button>
             <button id="syncGithubBtn">Alle vertalingen automatisch synchroniseren</button>
           </div>
           <div style="overflow-x:auto">
@@ -492,25 +491,6 @@ button.content-edit:hover,button.content-delete:hover{
       action.append(btn,del);tr.append(action);body.append(tr);
     });
   }
-  async function addFooterTranslation() {
-    const key='footer_copyright';
-    if(allRows.some(row=>row.translation_key===key)){
-      status('De vertaling footer_copyright bestaat al. Zoek op die sleutel in de lijst.','error');
-      return;
-    }
-    const button=$('addFooterTranslationBtn');
-    button.disabled=true;
-    const values={translation_key:key,nl:'Onofficieel Harry Potter-fanforum, Alle rechten voorbehouden',en:'',pt:''};
-    const {error}=await db.from('translations').upsert(values,{onConflict:'translation_key'});
-    button.disabled=false;
-    if(error){status('Toevoegen mislukt: '+error.message,'error');return;}
-    allRows.push(values);
-    render();
-    $('search').value=key;
-    render();
-    status('Footervertaling toegevoegd. Vul eventueel English en Português in en klik daarna op synchroniseren.','ok');
-  }
-  $('addFooterTranslationBtn').addEventListener('click',addFooterTranslation);
   async function saveRow(original,tr,btn) {
     btn.disabled=true;btn.textContent='Opslaan…';status('Wijziging opslaan…');
     const values={translation_key:original.translation_key};
