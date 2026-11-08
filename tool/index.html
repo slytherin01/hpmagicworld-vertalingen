@@ -1181,6 +1181,7 @@ body:not(.supabase-authenticated)>:not(#supabaseAuthGate){display:none!important
 #supabaseLogout{position:fixed;right:18px;bottom:18px;z-index:9999;padding:10px 14px;border:1px solid #8063a3;border-radius:10px;background:#21172e;color:#fff;cursor:pointer;box-shadow:0 5px 20px #0005}
 </style>
 
+<meta name="hpmw-translation-ui-version" content="sync-all-visible-20261108">
 </head>
 <body>
 <div id="supabaseAuthGate" role="dialog" aria-modal="true" aria-labelledby="supabaseAuthTitle">
@@ -1252,7 +1253,7 @@ body:not(.supabase-authenticated)>:not(#supabaseAuthGate){display:none!important
 <div class="field full"><label>Nederlands (NL)</label><textarea id="trNl" placeholder="Nederlandse tekst"></textarea></div>
 <div class="field full"><label>English (EN)</label><textarea id="trEn" placeholder="English text"></textarea></div>
 <div class="field full"><label>Português (PT)</label><textarea id="trPt" placeholder="Texto em português"></textarea></div>
-</div><div class="actions"><button class="btn primary" id="trSave">Opslaan</button><button class="btn" id="trDelete">Verwijderen</button><button class="btn success" id="trSync">Sync naar portal</button></div></div><div id="trStatus" class="notice"></div><div id="translationListPanel" style="padding:0 24px 22px"><div class="translation-list-heading"><div><h3>Vertalingen</h3><p class="translation-filter-hint">Filter op alias, folder, taal of woorden in de vertaling.</p></div><button type="button" class="btn success" id="trSyncAll"><i class="fa-solid fa-rotate"></i> Sync alle vertalingen</button></div><div class="translation-filters"><label>Alias<input id="trAliasFilter" type="search" placeholder="Bijv. portal.account.login"></label><label>Folder<select id="trFolderFilter"><option value="">Alle folders</option></select></label><label>Taal<select id="trLanguageFilter"><option value="">Alle talen</option><option value="nl">Nederlands</option><option value="en">English</option><option value="pt">Português</option></select></label><label class="keyword-filter">Zoekwoord<input id="trSearch" type="search" placeholder="Zoek in de gekozen taal of alle teksten"></label><button type="button" class="btn" id="trFiltersReset">Wissen</button></div><div id="trResultCount" class="translation-result-count"></div><div id="trList" class="empty">Vertalingen laden…</div></div></div></section>
+</div><div class="actions"><button class="btn primary" id="trSave">Opslaan</button><button class="btn" id="trDelete">Verwijderen</button><button class="btn success" id="trSync">Sync naar portal</button></div></div><div id="trStatus" class="notice"></div><div id="translationListPanel" style="padding:0 24px 22px"><div class="translation-list-heading"><div><h3>Vertalingen</h3><p class="translation-filter-hint">Filter op alias, folder, taal of woorden in de vertaling.</p></div><button type="button" class="btn success" id="trSyncAll" style="display:inline-flex!important;align-items:center;justify-content:center;gap:9px;min-height:44px;padding:0 20px;background:#16734a!important;border:1px solid #49bd83!important;color:#fff!important;font-weight:800!important;white-space:nowrap;visibility:visible!important;opacity:1!important"><i class="fa-solid fa-rotate"></i> SYNC ALLE VERTALINGEN</button></div><div class="translation-filters"><label>Alias<input id="trAliasFilter" type="search" placeholder="Bijv. portal.account.login"></label><label>Folder<select id="trFolderFilter"><option value="">Alle folders</option></select></label><label>Taal<select id="trLanguageFilter"><option value="">Alle talen</option><option value="nl">Nederlands</option><option value="en">English</option><option value="pt">Português</option></select></label><label class="keyword-filter">Zoekwoord<input id="trSearch" type="search" placeholder="Zoek in de gekozen taal of alle teksten"></label><button type="button" class="btn" id="trFiltersReset">Wissen</button></div><div id="trResultCount" class="translation-result-count"></div><div id="trList" class="empty">Vertalingen laden…</div></div></div></section>
 
 <section class="view" id="homeView">
 <!-- EIGEN AFBEELDING VOOR DEZE PAGINA: vervang IMAGE_URL_HIER en LINK_URL_HIER.
@@ -3773,5 +3774,11 @@ html body.supabase-authenticated main.shell{
 @media(max-width:700px){#newTranslationsView .translation-list-heading #trSyncAll{width:100%}}
 </style>
 
+
+<style id="hpmw-sync-all-visible-fix">
+#newTranslationsView #translationListPanel .translation-list-heading #trSyncAll{display:inline-flex!important;visibility:visible!important;opacity:1!important;position:relative!important;z-index:5!important;min-height:44px!important;background:#16734a!important;border:1px solid #49bd83!important;color:#fff!important;font-weight:800!important;white-space:nowrap!important}
+#newTranslationsView #translationListPanel .translation-list-heading #trSyncAll:hover{background:#21895a!important}
+@media(max-width:700px){#newTranslationsView #translationListPanel .translation-list-heading #trSyncAll{width:100%!important}}
+</style>
 </body>
 </html>
