@@ -104,13 +104,47 @@ Deno.serve(async (req) => {
     let source = decodeBase64Utf8(file.content ?? "");
     const startMarker = "// BEGIN SUPABASE TRANSLATIONS - automatisch beheerd";
     const endMarker = "// END SUPABASE TRANSLATIONS";
+    // Remove keys from the previous Supabase publication before applying the
+    // current database snapshot. This preserves all hand-maintained base entries.
+    const previousKeys: Record<string, string[]> = { nl: [], en: [], pt: [] };
+    const existingStart = source.indexOf(startMarker);
+    const existingEnd = source.indexOf(endMarker);
+    if (existingStart >= 0 && existingEnd > existingStart) {
+      const previousBlock = source.slice(existingStart, existingEnd);
+      const keysComment = previousBlock.match(/\\/\\/ SUPABASE_MANAGED_KEYS: (\\{[^\\n]+\\})/);
+      if (keysComment) {
+        try {
+          const parsed = JSON.parse(keysComment[1]);
+          for (const lang of ["nl", "en", "pt"]) {
+            if (Array.isArray(parsed[lang])) previousKeys[lang] = parsed[lang];
+          }
+        } catch { /* Fall back to parsing the previous generated assignments. */ }
+      } else {
+        // Compatibility with the older generated block that had no key manifest.
+        const assignmentPattern = /Object\\.assign\\(translations\\.(nl|en|pt), (\\{[\\s\\S]*?\\})\\);/g;
+        for (const match of previousBlock.matchAll(assignmentPattern)) {
+          try {
+            const parsed = JSON.parse(match[2]);
+            previousKeys[match[1]] = Object.keys(parsed);
+          } catch { /* Ignore malformed legacy assignment; do not block publishing. */ }
+        }
+      }
+    }
+
+    const managedKeys = Object.fromEntries(
+      ["nl", "en", "pt"].map((lang) => [lang, Object.keys(dictionaries[lang])])
+    );
     const generated = [
       startMarker,
+      `// SUPABASE_MANAGED_KEYS: ${JSON.stringify(managedKeys)}`,
+      ...["nl", "en", "pt"].map((lang) =>
+        `for (const key of ${JSON.stringify(previousKeys[lang])}) delete translations.${lang}[key];`
+      ),
       ...["nl", "en", "pt"].map((lang) =>
         `Object.assign(translations.${lang}, ${JSON.stringify(dictionaries[lang], null, 2)});`
       ),
       endMarker,
-    ].join("\n");
+    ].join("\\n");
 
     const start = source.indexOf(startMarker);
     const end = source.indexOf(endMarker);
