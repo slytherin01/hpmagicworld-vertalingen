@@ -3,12 +3,12 @@
 (async function () {
   if (window.__muggleMinistryPortalLoading) return;
   window.__muggleMinistryPortalLoading = true;
-  const source = "https://raw.githubusercontent.com/slytherin01/muggle-ministry/main/portal/index.html";
+  const source = "https://raw.githubusercontent.com/slytherin01/muggle-ministry/main/portal/index.html?cachebust=20261108-5";
   try {
     const response = await fetch(source, { cache: "no-store", credentials: "omit" });
     if (!response.ok) throw new Error("Portalbestand niet bereikbaar (HTTP " + response.status + ")");
     const html = await response.text();
-    if (!html || html.length < 10000) throw new Error("Het opgehaalde portaalbestand is leeg of onvolledig");
+    if (!html || html.length < 10000) throw new Error("GitHub gaf geen volledig portaalbestand terug (lengte: " + html.length + ")");
     // document.write parses markup and scripts in their normal order; the visible URL
     // remains the Forumotion URL, so Forumotion cookies and window._userdata remain available.
     document.open();
