@@ -540,40 +540,8 @@ if(row[lang] !== null && row[lang] !== undefined && row[lang] !== ''){
   console.warn('Hpmagicworld: Supabase-vertalingen niet geladen; lokale vertalingen worden gebruikt.',error);
  }
 }
-// Houd reeds geopende portaalpagina's automatisch synchroon met de beheertool.
-const portalManagedKeys=new Set();
-let portalTranslationsSignature='';
-let portalTranslationsRequest=null;
-async function refreshPortalTranslations(){
- if(portalTranslationsRequest)return portalTranslationsRequest;
- portalTranslationsRequest=(async()=>{
-  try{
-   const response=await fetch('https://vuaajsjjluwgqmneinds.supabase.co/rest/v1/portal_translations?select=source_key,nl,en,pt',{
-    headers:{'apikey':'sb_publishable_tto6sNxZPLv1VhUdMRlPHg_ptzg9odx','Authorization':'Bearer sb_publishable_tto6sNxZPLv1VhUdMRlPHg_ptzg9odx'},
-    cache:'no-store'
-   });
-   if(!response.ok)throw new Error('Supabase HTTP '+response.status);
-   const rows=await response.json();
-   rows.sort((a,b)=>String(a.source_key||'').localeCompare(String(b.source_key||'')));
-   const signature=JSON.stringify(rows);
-   if(signature===portalTranslationsSignature)return;
-   portalTranslationsSignature=signature;
-   portalManagedKeys.forEach(key=>['nl','en','pt'].forEach(lang=>{delete translations[lang][key]}));
-   portalManagedKeys.clear();
-   rows.forEach(row=>{
-    const keys=[row.nl,row.source_key].filter(v=>typeof v==='string'&&v.trim()).map(v=>v.trim());
-    keys.forEach(key=>{
-     portalManagedKeys.add(key);
-     ['nl','en','pt'].forEach(lang=>{
-      if(row[lang]!==null&&row[lang]!==undefined&&row[lang]!=='')translations[lang][key]=row[lang];
-     });
-    });
-   });
-   apply(current);
-  }catch(error){console.warn('Hpmagicworld: live vertalingen konden niet worden bijgewerkt.',error);}
- })().finally(()=>{portalTranslationsRequest=null;});
- return portalTranslationsRequest;
-}
+// Vertalingen worden bij opslaan door de beheertool gepubliceerd in dit bestand.
+
 async function init(){
  const nav=document.querySelector('.top-actions'),account=document.getElementById('accountLink'),select=document.getElementById('hpmwLanguage');
  if(!nav||!select||document.getElementById('hpmwGlobeButton'))return;
@@ -589,8 +557,6 @@ async function init(){
  const initialLang=['nl','en','pt'].includes(savedLang)?savedLang:'nl';
  select.value=initialLang;
  apply(initialLang);
- refreshPortalTranslations();
- setInterval(refreshPortalTranslations,5000);
  select.addEventListener('change',()=>{const chosen=(select.value||'nl').toLowerCase();try{localStorage.setItem('hpmwSelectedLanguage',chosen)}catch(_){};location.reload()});
  // Geen MutationObserver: dynamische tekst wordt via de normale paginaflow bijgewerkt.
 }
