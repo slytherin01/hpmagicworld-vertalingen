@@ -522,7 +522,7 @@ Object.assign(translations.pt, {
   "Open tickets": "Tickets abertos",
   "Overige Support": "Outro Suporte",
   "Portaal": "Portal",
-  "Premium": "Membro Premium",
+  "Premium": "Premium",
   "Problemen rond de leerlingenkamers.": "Problemas relacionados com as salas comuns das casas.",
   "Ravenklauw": "Corvinal",
   "Reactie geplaatst.": "Resposta publicada.",
