@@ -1,0 +1,656 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hpmagicworld – Vertaalbeheer</title>
+<style>
+:root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:#edf2fa;background:#090d16;color-scheme:dark}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:#0d1522;color:#edf2fa}
+body{padding:54px 0 0;background:#0d1522 url("https://i28.servimg.com/u/f28/11/54/28/73/backgr10.png") center top/cover fixed no-repeat}
+.portal-nav{height:54px;position:fixed;z-index:1000;top:0;left:0;right:0;display:flex;align-items:center;background:linear-gradient(180deg,#111c2c,#0b1320);border-bottom:1px solid #26384d;box-shadow:0 4px 16px #0008;padding:0 22px;gap:18px}
+.portal-nav a{display:inline-flex;align-items:center;gap:9px;color:#d9e3f0;text-decoration:none;font-size:13px;font-weight:700;white-space:nowrap;padding:7px 10px;border-radius:8px}
+.portal-nav a:hover{background:#1b2b40;color:#fff}\n.portal-nav .tool-nav-btn{padding:7px 12px;background:transparent;color:#d9e3f0;border:1px solid #3b5673;border-radius:8px;font-size:13px;font-weight:700;white-space:nowrap}.portal-nav .tool-nav-btn.active{background:#20354e;border-color:#c9a45c;color:#f5d995}.portal-nav .tool-nav-btn:hover{filter:brightness(1.15)}.portal-nav .tool-nav-btn{flex:0 0 auto}
+.portal-nav .nav-icon{width:29px;height:29px;display:inline-flex;align-items:center;justify-content:center;background:#20354e;border:1px solid #3b5673;border-radius:8px;color:#d8e7f8;font-size:15px}
+.language-picker{margin-left:auto;display:flex;align-items:center;gap:8px;color:#cbd7e5;font-size:12px;font-weight:700;white-space:nowrap}.language-picker select{width:auto;min-width:66px;padding:6px 9px;border-radius:7px;background:#17283c;border:1px solid #3b5673;color:#f5f8fc;font-weight:700}\n.tool-heading{text-align:center!important;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;margin-left:auto!important;margin-right:auto!important}.tool-heading h1{margin:0 0 8px}.tool-heading p{margin:0;text-align:center;width:100%}.tool-heading-logo{display:block;width:42px!important;height:26px!important;max-width:42px;object-fit:contain;margin:0 auto 6px}.side-menu{display:none!important}.tool-heading{padding:14px 20px!important}.tool-heading h1{font-size:25px;text-align:center;width:100%;margin-left:auto;margin-right:auto}\nmain{width:80%;max-width:none;margin:40px auto 80px;padding:0 10px}
+.panel{background:rgba(13,22,35,.97);border:1px solid #26394d;border-radius:15px;padding:22px;margin:18px 0;box-shadow:0 12px 34px #0006}
+main>.portal-hero{position:relative;display:block;text-align:center;min-height:174px;padding:18px 24px 15px;background:#1b304b;border:1px solid #c9a45c;border-radius:14px;margin:0 0 20px;box-shadow:0 8px 24px #0006}
+.portal-hero img{display:block;width:150px;height:92px;object-fit:contain;margin:0 auto 8px}
+.portal-hero h1{font-size:34px;line-height:1.15;margin:0;color:#fff;font-weight:850;text-shadow:0 2px 4px #0008}
+h1,h2,h3,strong{color:#f5f8fc}
+h1{font-size:27px;letter-spacing:.2px;margin:0 0 8px}
+h2{font-size:20px;margin:0 0 14px}
+p{line-height:1.5;color:#c2ccda}
+.small{font-size:12px;color:#aebbd0}
+input,button,textarea,select{font:inherit;border-radius:8px;padding:10px 12px;border:1px solid #354760;background:#111d2d;color:#edf2fa}
+input::placeholder,textarea::placeholder{color:#8191a8}
+input{width:100%;min-width:0}
+button{background:linear-gradient(135deg,#e6cf91 0%,#c9a45c 55%,#ad8541 100%);color:#101827;border:1px solid #e0c27b;cursor:pointer;font-weight:750;transition:filter .16s}
+button:hover{filter:brightness(1.08)}
+button:disabled{opacity:.55;cursor:wait}
+button.secondary{background:#1b2b3e;color:#dbe6f4;border:1px solid #344a62}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.row>*{flex:1}
+#status{padding:11px 13px;border-radius:8px;background:#15263a;color:#e8eef7;border:1px solid #31465e;margin-top:12px;white-space:pre-wrap}
+#status.error{background:#351c28;color:#ffd9df;border-color:#874b5a}
+#status.ok{background:#153329;color:#d4f5e5;border-color:#397b61}
+.toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.app-layout{display:block;width:100%;max-width:100%;min-width:0}.tool-view{width:100%;max-width:100%;min-width:0}
+.tool-view{min-width:0}.tool-view>h2{margin:0 0 14px;padding-bottom:10px;border-bottom:1px solid #2a3d52}
+.page-tools{margin-top:18px;border-top:1px solid #2a3d52;padding-top:16px}
+.page-tools h2{margin:0 0 8px}
+.content-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0}
+.content-form label{font-size:13px;color:#c2ccda;font-weight:650}
+.content-form input,.content-form textarea,.content-form select{display:block;width:100%;margin-top:5px}
+.content-form textarea{min-height:90px}
+.content-item{border:1px solid #2b4056;border-radius:10px;padding:13px;margin:10px 0;background:#111d2c}
+.content-item p{white-space:pre-wrap;margin:8px 0}
+table{width:100%;border-collapse:collapse;margin-top:12px;color:#e6edf7}
+th,td{padding:10px;border-bottom:1px solid #2b3c53;text-align:left;vertical-align:top}
+th{font-size:12px;color:#d9e7f7;background:#17283c}
+td.key{width:24%;font-size:13px;overflow-wrap:anywhere;color:#b7c5d8}
+td input{margin:2px 0}.save{white-space:nowrap;padding:9px 12px}.hidden{display:none}
+@media(max-width:720px){
+ body{padding-top:54px;background-attachment:scroll}
+ .portal-nav{overflow-x:auto;padding:0 8px;gap:3px;white-space:nowrap}.portal-nav .tool-nav-btn{flex:0 0 auto}
+ .portal-nav a{font-size:11px;padding:5px}.language-picker{padding-right:8px}.language-picker label{display:none}.language-picker select{min-width:56px}
+ main{width:80%;max-width:none;margin:20px auto 45px;padding:0 9px}
+ main>.portal-hero{min-height:130px;padding:12px}
+ .portal-hero img{width:105px;height:65px}
+ .portal-hero h1{font-size:23px}
+ .app-layout{grid-template-columns:1fr}
+ .side-menu{position:static;display:flex;gap:7px;flex-wrap:wrap}
+ .side-menu h3{display:none}
+ .menu-btn{margin:0;text-align:center;width:auto;flex:1 1 130px}
+ .content-form{grid-template-columns:1fr}
+ .panel{padding:14px}
+ table,tbody,tr,td{display:block}thead{display:none}
+ tr{border:1px solid #354760;border-radius:10px;margin:12px 0;padding:8px;background:#111d2c}
+ td{border:0;padding:5px}td.key{width:auto;font-weight:bold}
+ td:before{display:block;font-size:11px;color:#c9a45c;margin-bottom:3px}
+ td.nl:before{content:"Nederlands"}td.en:before{content:"English"}td.pt:before{content:"Português"}
+}
+
+/* Final layout and navigation refinements */
+main{width:80%!important;max-width:80%!important;margin-left:auto!important;margin-right:auto!important}
+.tool-heading{width:100%!important;text-align:center!important}
+#login,#app{width:100%!important;max-width:100%!important}
+.portal-nav .portal-home-link{display:inline-flex!important;visibility:visible!important;opacity:1!important;align-items:center;gap:9px;padding:7px 10px;border-radius:8px;color:#d9e3f0!important;text-decoration:none!important;font-size:13px;font-weight:700;white-space:nowrap;background:transparent;border:1px solid #3b5673;flex:0 0 auto}.portal-nav .portal-home-link:hover{background:#1b2b40!important;color:#fff!important}\n.portal-nav .tool-nav-btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:7px 10px!important;background:transparent!important;color:#d9e3f0!important;border:1px solid transparent!important;border-radius:8px!important;font-size:13px!important;font-weight:700!important;white-space:nowrap;box-shadow:none!important}
+.portal-nav .tool-nav-btn:hover{background:#1b2b40!important;color:#fff!important}
+.portal-nav .tool-nav-btn.active{background:#20354e!important;border-color:#3b5673!important;color:#f5d995!important}
+@media(max-width:720px){main{width:94%!important;max-width:94%!important}.portal-nav{overflow-x:auto;white-space:nowrap}}
+
+.portal-nav .nav-fa-icon{display:inline-flex;align-items:center;justify-content:center;width:29px;height:29px;flex:0 0 29px;border-radius:8px;background:#20354e;border:1px solid #3b5673;color:#d8e7f8;font-size:14px}
+.portal-nav .tool-nav-btn{display:inline-flex!important;align-items:center;gap:9px}
+.portal-nav .tool-nav-btn.active{background:#20354e!important;border-color:#3b5673!important;color:#f5d995!important}
+
+
+/* Consistent navigation controls */
+.portal-nav{display:flex;align-items:center;gap:10px}
+.portal-nav>a,
+.portal-nav>.tool-nav-btn{
+ display:inline-flex!important;align-items:center;justify-content:flex-start;gap:9px;
+ min-height:40px;padding:5px 10px!important;
+ border:1px solid #3b5673!important;border-radius:8px!important;
+ background:#17283c!important;color:#d9e3f0!important;
+ text-decoration:none!important;font:700 13px/1.2 Inter,ui-sans-serif,system-ui,sans-serif!important;
+ white-space:nowrap;box-shadow:none!important;cursor:pointer
+}
+.portal-nav>a:hover,
+.portal-nav>.tool-nav-btn:hover{background:#20354e!important;color:#fff!important}
+.portal-nav>.tool-nav-btn.active{background:#20354e!important;border-color:#c9a45c!important;color:#f5d995!important}
+.portal-nav .nav-fa-icon{width:29px;height:29px;flex:0 0 29px;display:inline-flex;align-items:center;justify-content:center;border-radius:8px;background:#20354e;border:1px solid #3b5673;color:#d8e7f8;font-size:14px}
+.portal-nav .language-picker{margin-left:auto;flex:0 0 auto}
+.portal-nav #logoutBtn{margin-left:0}
+.portal-nav #logoutBtn.hidden{display:none!important}
+@media(max-width:720px){.portal-nav{overflow-x:auto;white-space:nowrap}}
+
+/* Navigation tool buttons: preserve icons and match forum links */
+.portal-nav #translationMenu{
+ display:inline-flex!important;align-items:center!important;justify-content:flex-start!important;
+ gap:9px!important;min-height:40px!important;padding:5px 10px!important;
+ border:1px solid #3b5673!important;border-radius:8px!important;
+ background:#17283c!important;color:#d9e3f0!important;
+ font:700 13px/1.2 Inter,ui-sans-serif,system-ui,sans-serif!important;
+ cursor:pointer!important;white-space:nowrap!important
+}
+.portal-nav #translationMenu:hover{background:#20354e!important;color:#fff!important}
+.portal-nav #translationMenu.active{background:#20354e!important;border-color:#c9a45c!important;color:#f5d995!important}
+.portal-nav #translationMenu .nav-fa-icon{display:inline-flex!important;visibility:visible!important;opacity:1!important}
+
+/* Verfijning: status direct zichtbaar, zonder lege balk erboven */
+.portal-nav{
+  position:relative!important;top:auto!important;left:auto!important;right:auto!important;
+  height:auto!important;min-height:0!important;padding:8px 12px!important;
+  background:transparent!important;border:0!important;box-shadow:none!important;
+  justify-content:center!important;flex-wrap:wrap!important;
+}
+body{padding-top:0!important}
+#status{display:block!important}
+#status.translation-status{display:block!important}
+header.portal-nav{background:transparent!important;border:0!important;box-shadow:none!important;outline:0!important;}
+#translationMenu .nav-fa-icon,
+.portal-nav a .nav-fa-icon,.portal-nav #logoutBtn .nav-fa-icon{
+  display:inline-flex!important;visibility:visible!important;opacity:1!important;
+}
+#reloadBtn:before{font-family:"Font Awesome 6 Free";font-weight:900;content:"\f021";margin-right:8px}
+#syncGithubBtn:before{font-family:"Font Awesome 6 Free";font-weight:900;content:"\f0ee";margin-right:8px}
+
+
+/* Header en footer: nette, vaste portaalstijl */
+html,body{min-height:100%;margin:0}
+body{min-height:100vh;display:flex;flex-direction:column;padding-top:0!important}
+header.portal-nav{
+ position:relative!important;inset:auto!important;width:100%;min-height:58px!important;height:auto!important;
+ display:flex!important;align-items:center!important;justify-content:center!important;flex-wrap:wrap!important;
+ gap:10px!important;padding:9px 18px!important;margin:0!important;
+ background:rgba(9,18,31,.96)!important;border:0!important;border-bottom:1px solid #344a63!important;
+ border-radius:0!important;box-shadow:0 4px 14px #0006!important;
+}
+header.portal-nav>a,header.portal-nav>.tool-nav-btn{
+ min-height:40px!important;padding:5px 11px!important;border:1px solid #3b5673!important;
+ border-radius:8px!important;background:#17283c!important;color:#e5edf7!important;
+}
+header.portal-nav .language-picker{margin-left:8px!important}
+main{flex:1 0 auto!important;margin-top:28px!important;margin-bottom:32px!important}
+#status{max-width:100%}
+.tool-footer{
+ flex:0 0 auto;width:100%;margin-top:auto;padding:15px 18px;text-align:center;
+ color:#aebbd0;font-size:12px;background:rgba(9,18,31,.96);
+ border-top:1px solid #344a63;box-shadow:0 -4px 14px #0004;
+}
+@media(max-width:720px){
+ header.portal-nav{justify-content:flex-start!important;padding:8px!important;gap:6px!important}
+ header.portal-nav .language-picker{margin-left:0!important}
+ main{margin-top:18px!important;margin-bottom:22px!important}
+}
+
+
+/* Hpmagicworld premium layout */
+html{min-height:100%;background:#080e19}
+body{
+ min-height:100vh!important;display:flex!important;flex-direction:column!important;
+ position:relative;background:#080e19!important;isolation:isolate;
+}
+body:before{
+ content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+ background:linear-gradient(180deg,rgba(5,10,18,.18),rgba(5,10,18,.78)),
+ url("https://i28.servimg.com/u/f28/11/54/28/73/backgr10.png") center center/cover no-repeat;
+}
+header.portal-nav{
+ width:100%!important;min-height:66px!important;padding:11px clamp(12px,3vw,42px)!important;
+ display:flex!important;align-items:center!important;justify-content:center!important;gap:10px!important;
+ background:linear-gradient(180deg,rgba(8,17,30,.97),rgba(12,25,42,.91))!important;
+ border:0!important;border-bottom:1px solid rgba(201,164,92,.35)!important;
+ box-shadow:0 5px 22px rgba(0,0,0,.32)!important;backdrop-filter:blur(10px);
+}
+header.portal-nav>a,header.portal-nav>.tool-nav-btn{
+ min-height:42px!important;padding:6px 13px!important;border:1px solid #405a78!important;
+ border-radius:10px!important;background:rgba(29,49,73,.94)!important;
+ box-shadow:0 2px 8px #0003!important;transition:transform .18s,background .18s,border-color .18s;
+}
+header.portal-nav>a:hover,header.portal-nav>.tool-nav-btn:hover{
+ transform:translateY(-2px);background:#294665!important;border-color:#c9a45c!important;
+}
+header.portal-nav>.tool-nav-btn.active{background:#2b4665!important;border-color:#d4b36c!important;color:#ffe5a7!important}
+header.portal-nav .nav-fa-icon{box-shadow:inset 0 1px 3px #fff1}
+header.portal-nav .language-picker{margin-left:auto!important}
+main{
+ flex:1 0 auto!important;width:min(1100px,92%)!important;max-width:1100px!important;
+ margin:30px auto 44px!important;padding:0!important;
+}
+.tool-heading{
+ padding:24px 24px 22px!important;margin:0 0 22px!important;
+ background:linear-gradient(135deg,rgba(13,27,46,.96),rgba(20,39,62,.91))!important;
+ border:1px solid rgba(201,164,92,.55)!important;border-radius:18px!important;
+ box-shadow:0 14px 36px rgba(0,0,0,.38),inset 0 1px 0 rgba(255,255,255,.07)!important;
+ backdrop-filter:blur(8px);
+}
+.tool-heading-logo{width:54px!important;height:36px!important;max-width:54px!important;margin-bottom:9px!important}
+.tool-heading h1{font-size:clamp(23px,3vw,32px)!important;letter-spacing:.2px!important}
+.tool-heading p{color:#d1dced!important;font-size:15px!important}
+#app.panel{background:transparent!important;border:0!important;border-radius:0!important;padding:0!important;margin:0!important;box-shadow:none!important}
+#login.panel{max-width:620px;margin:0 auto!important;background:rgba(13,25,42,.96);border:1px solid #405a78;border-radius:16px;box-shadow:0 12px 32px #0005}
+#translationView{background:rgba(11,22,37,.96);border:1px solid #344d69;border-radius:16px;padding:22px;box-shadow:0 12px 32px #0005}
+#status{display:block!important;margin:12px auto;max-width:900px}
+#status.translation-status{display:block!important;margin:0 0 16px!important;padding:12px 16px!important;border-radius:10px!important;background:rgba(18,54,43,.96)!important;border:1px solid #397b61!important;color:#dcf7e9!important}
+.tool-footer{
+ width:100%;margin-top:auto!important;padding:17px 18px!important;text-align:center;
+ color:#aebbd0;font-size:12px;letter-spacing:.3px;
+ background:rgba(7,15,26,.94)!important;border-top:1px solid rgba(201,164,92,.3)!important;
+ box-shadow:0 -5px 20px #0004!important;backdrop-filter:blur(8px);
+}
+@media(max-width:720px){
+ header.portal-nav{justify-content:flex-start!important;gap:7px!important;padding:9px!important}
+ header.portal-nav .language-picker{margin-left:0!important}
+ main{width:94%!important;margin:18px auto 28px!important}
+ .tool-heading{padding:19px 14px!important}
+ #translationView{padding:14px!important}
+}
+
+
+/* Correcte navigatie-uitlijning en compacte statusmelding */
+header.portal-nav{
+ display:flex!important;justify-content:flex-start!important;align-items:center!important;
+ flex-wrap:nowrap!important;gap:9px!important;min-height:62px!important;
+ padding:9px 18px!important;background:rgba(8,17,30,.97)!important;
+ border-radius:0!important;border-bottom:1px solid rgba(201,164,92,.38)!important;
+}
+header.portal-nav>a,header.portal-nav>button.tool-nav-btn{
+ display:inline-flex!important;visibility:visible!important;opacity:1!important;
+ flex:0 0 auto!important;position:relative!important;
+}
+header.portal-nav .language-picker{margin-left:auto!important;flex:0 0 auto!important}
+header.portal-nav #logoutBtn{margin-left:0!important}
+#status{display:block!important}
+#status.translation-status{display:block!important}
+.tool-footer{display:block!important}
+.scroll-controls{
+ position:fixed;right:18px;bottom:20px;z-index:1200;display:flex;flex-direction:column;gap:8px;
+}
+.scroll-controls button{
+ width:42px;height:42px;padding:0;border-radius:50%;display:flex;align-items:center;justify-content:center;
+ background:rgba(24,43,65,.96);border:1px solid #c9a45c;color:#f5d995;
+ box-shadow:0 4px 14px #0007;font-size:16px;cursor:pointer;
+}
+.scroll-controls button:hover{background:#304c6c;transform:translateY(-2px)}
+@media(max-width:720px){
+ header.portal-nav{overflow-x:auto!important;flex-wrap:nowrap!important;justify-content:flex-start!important}
+ header.portal-nav .language-picker{margin-left:auto!important}
+ .scroll-controls{right:10px;bottom:12px}
+}
+
+
+/* Font Awesome iconen voor alle actieknoppen */
+button:not(#translationMenu):not(#logoutBtn):not(#scrollTopBtn):not(#scrollBottomBtn){
+ display:inline-flex;align-items:center;justify-content:center;gap:9px;
+}
+button:not(#translationMenu):not(#logoutBtn):not(#scrollTopBtn):not(#scrollBottomBtn)::before{
+ font-family:"Font Awesome 6 Free";font-weight:900;font-size:14px;line-height:1;
+ display:inline-block;flex:0 0 auto;
+}
+#loginBtn::before{content:"\f2f6"}
+#reloadBtn::before{content:"\f021"}
+#syncGithubBtn::before{content:"\f0ee"}
+#contentSave::before{content:"\f0c7"}
+#contentCancel::before{content:"\f00d"}
+button.save::before{content:"\f0c7"}
+button.content-edit::before{content:"\f044"}
+button.content-delete::before{content:"\f2ed"}
+#scrollTopBtn i,#scrollBottomBtn i{font-size:16px}
+#translationMenu .nav-fa-icon,#logoutBtn .nav-fa-icon{font-family:"Font Awesome 6 Free";font-weight:900}
+
+
+/* Home als interne startpagina en intro gecentreerd */
+#homeMenu{display:inline-flex!important}
+.tool-heading{
+ width:min(900px,100%)!important;margin:0 auto 24px!important;
+ text-align:center!important;align-items:center!important;justify-content:center!important;
+}
+.tool-heading .tool-heading-logo{margin-left:auto!important;margin-right:auto!important}
+.tool-heading h1,.tool-heading p{text-align:center!important;margin-left:auto!important;margin-right:auto!important}
+
+
+/* Statusmelding hoort bovenaan in de vertaaltool */
+#translationView #status{display:none!important}
+#translationView #status.translation-status{display:block!important;margin:0 0 14px!important}
+#reloadBtn{display:inline-flex!important;align-items:center!important;gap:9px!important}
+#reloadBtn:before{
+ content:"\f021"!important;font-family:"Font Awesome 6 Free"!important;font-weight:900!important;
+ display:inline-block!important;visibility:visible!important;opacity:1!important
+}
+#syncGithubBtn{display:inline-flex!important;align-items:center!important;gap:9px!important}
+#syncGithubBtn:before{
+ content:"\f0ee"!important;font-family:"Font Awesome 6 Free"!important;font-weight:900!important;
+ display:inline-block!important;visibility:visible!important;opacity:1!important
+}
+
+/* Alleen tekst in navigatieknopstijl: geen pseudo-iconen */
+#reloadBtn:before,#syncGithubBtn:before,#fmSave:before,#fmClear:before,#fmDownload:before,
+#contentSave:before,#contentCancel:before,#loginBtn:before,button.save:before,
+button.content-edit:before,button.content-delete:before{content:none!important;display:none!important}
+#reloadBtn,#syncGithubBtn,#fmSave,#fmClear,#fmDownload,#contentSave,#contentCancel,
+#loginBtn,button.save,button.content-edit,button.content-delete{
+ display:inline-flex!important;align-items:center!important;justify-content:center!important;
+ gap:0!important;min-height:40px!important;padding:8px 14px!important;
+ border:1px solid #405a78!important;border-radius:9px!important;
+ background:#1d3149!important;color:#e5edf7!important;
+ font:700 13px/1.2 Inter,ui-sans-serif,system-ui,sans-serif!important;
+ box-shadow:none!important;letter-spacing:.1px
+}
+#reloadBtn:hover,#syncGithubBtn:hover,#fmSave:hover,#fmClear:hover,#fmDownload:hover,
+#contentSave:hover,#contentCancel:hover,#loginBtn:hover,button.save:hover,
+button.content-edit:hover,button.content-delete:hover{
+ background:#294665!important;border-color:#c9a45c!important;color:#fff!important
+}
+#syncGithubBtn,#fmSave,#contentSave,button.save{background:#1d3149!important;color:#e5edf7!important;border-color:#405a78!important}
+#reloadBtn:disabled,#syncGithubBtn:disabled,#fmDownload:disabled{opacity:.55}
+
+
+/* Sync-knop dezelfde kleur als de overige navigatieknoppen */
+#syncGithubBtn{
+ background:#1d3149!important;
+ color:#e5edf7!important;
+ border:1px solid #405a78!important;
+}
+#syncGithubBtn:hover{
+ background:#294665!important;
+ border-color:#c9a45c!important;
+ color:#fff!important;
+}
+
+
+.simple-builder{
+ margin:18px 0;padding:18px;background:rgba(26,48,72,.78);
+ border:1px solid #c9a45c;border-radius:12px;
+}
+.simple-builder h3{margin:0 0 7px;color:#f5d995}
+.simple-builder p{margin:6px 0 14px}
+.simple-builder label{display:block;margin:10px 0;color:#dce6f2;font-size:13px;font-weight:650}
+.simple-builder input,.simple-builder select{display:block;width:100%;margin-top:6px}
+.builder-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+#builderAdd{margin-top:8px}
+.advanced-html{margin:14px 0;padding:12px;border:1px solid #354b64;border-radius:9px;background:#101d2e}
+.advanced-html summary{cursor:pointer;color:#d7e4f4;font-weight:700}
+.advanced-html label{display:block;margin-top:12px}
+@media(max-width:720px){.builder-fields{grid-template-columns:1fr}}
+
+
+/* Duidelijk zichtbaar en eenvoudig bouwmenu */
+#pageView{display:block}
+#simpleBuilder{
+ display:block!important;visibility:visible!important;opacity:1!important;
+ width:100%;margin:18px 0 22px!important;padding:22px!important;
+ background:#172b43!important;border:2px solid #c9a45c!important;border-radius:14px!important;
+ box-shadow:0 8px 22px #0005!important;
+}
+#simpleBuilder h3{display:block!important;color:#ffe2a0!important;font-size:20px!important;margin:0 0 10px!important}
+#simpleBuilder p{color:#e2eaf4!important;line-height:1.55}
+#simpleBuilder label{display:block!important;color:#fff!important;font-weight:700!important;margin:12px 0!important}
+#simpleBuilder select,#simpleBuilder input{display:block!important;width:100%!important;margin-top:7px!important;min-height:42px}
+#simpleBuilder .builder-fields{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+#builderAdd{display:inline-flex!important;min-height:44px!important;padding:10px 18px!important;background:#1d3149!important;color:#fff!important;border:1px solid #c9a45c!important}
+@media(max-width:720px){#simpleBuilder .builder-fields{grid-template-columns:1fr}}
+
+
+.existing-preview{margin:18px 0;padding:16px;background:#101e30;border:1px solid #405a78;border-radius:12px}
+.existing-preview h3{margin:0 0 5px;color:#f5d995}
+#fmPreview{display:block;width:100%;height:360px;border:1px solid #526984;border-radius:8px;background:#fff}
+
+
+/* Eenvoudige klik-en-klaar paginabouwer */
+#simpleBuilder{background:#f4f0e6!important;color:#172b43!important;border:1px solid #d8c18c!important;border-radius:18px!important;padding:24px!important;margin:20px 0!important;box-shadow:0 8px 24px #0002!important}
+#simpleBuilder h3{color:#172b43!important;font-size:23px!important;margin:0 0 8px!important}
+#simpleBuilder p{color:#40536a!important}
+.quick-actions{display:flex;flex-wrap:wrap;gap:12px;margin:18px 0}
+.quick-actions button{min-height:54px!important;padding:12px 22px!important;border-radius:12px!important;background:#1d3149!important;color:#fff!important;border:1px solid #c9a45c!important;font-size:16px!important;font-weight:700!important;cursor:pointer}
+.quick-actions button:hover{background:#294766!important;transform:translateY(-1px)}
+.existing-preview{background:#f4f0e6!important;border:1px solid #d8c18c!important;border-radius:16px!important;padding:18px!important}
+.existing-preview h3{color:#172b43!important}
+
+
+.row-actions{display:flex;gap:7px;flex-wrap:wrap;min-width:145px}
+.delete-translation{background:#542b35!important;border:1px solid #a75b68!important;color:#fff!important;padding:9px 11px!important}
+.delete-translation:hover{background:#713744!important}
+.delete-translation{display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:8px!important;min-width:40px!important;padding:9px 11px!important}
+ .delete-translation::before{content:none!important}
+.row-actions{display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:8px!important;flex-wrap:nowrap!important;min-width:118px!important}
+.row-actions button{min-height:36px!important;height:36px!important;border-radius:9px!important;box-shadow:0 2px 6px #0003!important;font-size:13px!important;transition:background .15s,border-color .15s,transform .15s!important}
+.row-actions .save{padding:7px 14px!important;background:linear-gradient(135deg,#294866,#172d46)!important;border:1px solid #547596!important;color:#f5f8fc!important}
+.row-actions .save:hover{background:#345879!important;transform:translateY(-1px)}
+.row-actions .delete-translation{width:38px!important;min-width:38px!important;padding:0!important;background:#38232d!important;border:1px solid #89505e!important;color:#f7dce1!important}
+.row-actions .delete-translation:hover{background:#653441!important;border-color:#c07886!important;transform:translateY(-1px)}
+.row-actions .delete-translation i{font-size:14px!important;line-height:1!important}
+.row-actions .delete-translation::before{display:none!important;content:none!important}
+@media(max-width:720px){.row-actions{min-width:0!important;gap:6px!important}.row-actions .save{padding:6px 10px!important}}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+<header class="portal-nav"><a class="portal-home-link" href="https://testforumjoost.forumactie.com/h3-portaal" target="_blank" rel="noopener"><i class="fa-solid fa-house nav-fa-icon" aria-hidden="true"></i><span>Portaal</span></a><a href="https://testforumjoost.forumactie.com/forum" target="_blank" rel="noopener"><i class="fa-solid fa-comments nav-fa-icon" aria-hidden="true"></i><span>Terug naar forum</span></a><button type="button" class="tool-nav-btn" id="homeMenu"><i class="fa-solid fa-house nav-fa-icon" aria-hidden="true"></i><span>Home</span></button><button type="button" class="tool-nav-btn" id="translationMenu"><i class="fa-solid fa-language nav-fa-icon" aria-hidden="true"></i><span>Vertalingen</span></button><div class="language-picker"><label for="toolLanguage">Taal</label><select id="toolLanguage" aria-label="Taal"><option value="nl">NL</option><option value="en">EN</option><option value="pt">PT</option></select></div><button type="button" class="tool-nav-btn nav-logout hidden" id="logoutBtn"><i class="fa-solid fa-right-from-bracket nav-fa-icon" aria-hidden="true"></i><span>Uitloggen</span></button></header>
+<main>
+  <div class="panel tool-heading">
+    <img class="tool-heading-logo" src="https://i28.servimg.com/u/f28/11/54/28/73/logo10.png" alt="Hpmagicworld logo">
+    <h1 id="toolMainTitle">Muggle Ministry – Vertalingen &amp; Beheer</h1>
+    <p id="toolTagline">Dit is onze interne tool voor het portaal!</p>
+  </div>
+  <div id="status" role="status" aria-live="polite" style="display:none"></div>
+  <section id="login" class="panel">
+    <h2>Inloggen</h2>
+    <div class="row"><input id="email" type="email" placeholder="E-mailadres" autocomplete="username"><input id="password" type="password" placeholder="Wachtwoord" autocomplete="current-password"></div>
+    <p><button id="loginBtn">Inloggen</button></p>
+  </section>
+  <section id="app" class="panel hidden">
+    
+    <div class="tool-view">
+        <section id="translationView" style="display:none">
+          <p id="count" class="small count-top"></p>
+          <h2>Vertalingen</h2>
+          <div class="toolbar">
+            <input id="search" placeholder="Zoek een vertaling…">
+            <button class="secondary" id="reloadBtn">Vernieuwen</button>
+            <button class="secondary" id="addFooterTranslationBtn" type="button">Footervertaling toevoegen</button>
+            <button id="syncGithubBtn">Alle vertalingen automatisch synchroniseren</button>
+          </div>
+          <div style="overflow-x:auto">
+            <table><thead><tr><th>Sleutel</th><th>Nederlands</th><th>English</th><th>Português</th><th></th></tr></thead><tbody id="rows"></tbody></table>
+          </div>
+        </section>
+    </div>
+  </section>
+  
+</main>
+<footer class="tool-footer"><span>Hpmagicworld · Beheeromgeving</span></footer>
+<div class="scroll-controls" aria-label="Pagina navigatie"><button type="button" id="scrollTopBtn" aria-label="Naar boven" title="Naar boven"><i class="fa-solid fa-arrow-up"></i></button><button type="button" id="scrollBottomBtn" aria-label="Naar beneden" title="Naar beneden"><i class="fa-solid fa-arrow-down"></i></button></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(() => {
+  const SUPABASE_URL = 'https://vuaajsjjluwgqmneinds.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_tto6sNxZPLv1VhUdMRlPHg_ptzg9odx';
+  const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  const $ = id => document.getElementById(id);
+  let allRows = [];
+  let activeTool = null;
+  const status = (message, kind='') => { const el=$('status'); el.textContent=message; el.className=kind+(activeTool==='translations'?' translation-status':''); el.style.setProperty('display',message?'block':'none','important'); };
+  const showApp = yes => { $('app').classList.toggle('hidden',!yes); $('login').classList.toggle('hidden',yes); $('logoutBtn').classList.toggle('hidden',!yes); };
+
+  async function checkAdmin() {
+    const {data:{user},error:userError}=await db.auth.getUser();
+    if(userError || !user) return false;
+    const {data,error}=await db.from('translation_admins').select('user_id').eq('user_id',user.id).maybeSingle();
+    if(error) throw error;
+    return !!data;
+  }
+  async function loadRows() {
+    status('Vertalingen laden…');
+    const allowed=await checkAdmin();
+    if(!allowed){showApp(false);status('Dit account staat niet in translation_admins. Log in met het juiste beheerdersaccount.','error');return;}
+    const {data,error}=await db.from('translations').select('translation_key,nl,en,pt').order('translation_key');
+    if(error) throw error;
+    allRows=data||[];
+    showApp(true); render(); showTool('translations');
+    status(allRows.length+' vertalingen geladen.','ok');
+  }
+  function render() {
+    const q=$('search').value.trim().toLowerCase();
+    const filtered=allRows.filter(r=>[r.translation_key,r.nl,r.en,r.pt].some(v=>(v||'').toLowerCase().includes(q)));
+    $('count').textContent=filtered.length+' van '+allRows.length+' vertalingen';
+    const body=$('rows'); body.replaceChildren();
+    filtered.forEach(r=>{
+      const tr=document.createElement('tr');
+      const key=document.createElement('td');key.className='key';key.textContent=r.translation_key;tr.append(key);
+      for(const lang of ['nl','en','pt']){
+        const td=document.createElement('td');td.className=lang;
+        const input=document.createElement('input');input.value=r[lang]||'';input.dataset.lang=lang;input.setAttribute('aria-label',lang+' '+r.translation_key);
+        td.append(input);tr.append(td);
+      }
+      const action=document.createElement('td');action.className='row-actions';
+      const btn=document.createElement('button');btn.className='save';btn.textContent='Opslaan';
+      btn.addEventListener('click',()=>saveRow(r,tr,btn));
+      const del=document.createElement('button');del.className='secondary delete-translation';del.innerHTML='<i class="fa-solid fa-trash" aria-hidden="true"></i>';del.setAttribute('aria-label','Vertaling verwijderen');del.title='Vertaling verwijderen';del.type='button';
+      del.addEventListener('click',()=>deleteRow(r,del));
+      action.append(btn,del);tr.append(action);body.append(tr);
+    });
+  }
+  async function addFooterTranslation() {
+    const key='footer_copyright';
+    if(allRows.some(row=>row.translation_key===key)){
+      status('De vertaling footer_copyright bestaat al. Zoek op die sleutel in de lijst.','error');
+      return;
+    }
+    const button=$('addFooterTranslationBtn');
+    button.disabled=true;
+    const values={translation_key:key,nl:'Onofficieel Harry Potter-fanforum, Alle rechten voorbehouden',en:'',pt:''};
+    const {error}=await db.from('translations').upsert(values,{onConflict:'translation_key'});
+    button.disabled=false;
+    if(error){status('Toevoegen mislukt: '+error.message,'error');return;}
+    allRows.push(values);
+    render();
+    $('search').value=key;
+    render();
+    status('Footervertaling toegevoegd. Vul eventueel English en Português in en klik daarna op synchroniseren.','ok');
+  }
+  $('addFooterTranslationBtn').addEventListener('click',addFooterTranslation);
+  async function saveRow(original,tr,btn) {
+    btn.disabled=true;btn.textContent='Opslaan…';status('Wijziging opslaan…');
+    const values={translation_key:original.translation_key};
+    tr.querySelectorAll('input[data-lang]').forEach(i=>values[i.dataset.lang]=i.value);
+    const {error}=await db.from('translations').upsert(values,{onConflict:'translation_key'});
+    btn.disabled=false;btn.textContent='Opslaan';
+    if(error){status('Opslaan mislukt: '+error.message,'error');return;}
+    const index=allRows.findIndex(x=>x.translation_key===original.translation_key);
+    if(index>=0)allRows[index]={...allRows[index],...values};
+    status('Opgeslagen: '+original.translation_key+'. Vernieuw daarna het forum met Ctrl + F5.','ok');
+  }
+  async function deleteRow(row,button){
+    if(!confirm('Deze vertaling definitief verwijderen?\\n\\n'+row.translation_key+'\\n'+(row.nl||''))) return;
+    button.disabled=true;
+    const {error}=await db.from('translations').delete().eq('translation_key',row.translation_key);
+    button.disabled=false;
+    if(error){status('Verwijderen mislukt: '+error.message,'error');return;}
+    allRows=allRows.filter(item=>item.translation_key!==row.translation_key);
+    render();
+    status('Vertaling verwijderd. Klik daarna op “Alle vertalingen automatisch synchroniseren” om de wijziging naar GitHub te sturen.','ok');
+  }
+
+  $('logoutBtn').addEventListener('click',async()=>{ const btn=$('logoutBtn'); btn.disabled=true; try { const {error}=await db.auth.signOut(); if(error) throw error; allRows=[]; $('password').value=''; showApp(false); showTool('home'); status('Je bent uitgelogd.','ok'); } catch(e) { status('Uitloggen mislukt: '+(e.message||String(e)),'error'); } finally { btn.disabled=false; } });
+
+  $('loginBtn').addEventListener('click',async()=>{
+    const email=$('email').value.trim(),password=$('password').value;
+    if(!email||!password){status('Vul je e-mailadres en wachtwoord in.','error');return;}
+    $('loginBtn').disabled=true;status('Inloggen…');
+    const {error}=await db.auth.signInWithPassword({email,password});
+    $('loginBtn').disabled=false;
+    if(error){status('Inloggen mislukt: '+error.message,'error');return;}
+    try{await loadRows();}catch(e){showApp(false);status('Fout bij laden: '+e.message,'error');}
+  });
+  $('reloadBtn').addEventListener('click',async()=>{try{await loadRows();}catch(e){status('Fout bij laden: '+e.message,'error');}});
+  $('syncGithubBtn').addEventListener('click',async()=>{
+    if(!confirm('Alle actuele vertalingen uit Supabase synchroniseren naar translations.js op GitHub?'))return;
+    const btn=$('syncGithubBtn');btn.disabled=true;btn.textContent='Synchroniseren…';status('Vertalingen naar GitHub synchroniseren…');
+    try{
+      const {data,error}=await db.functions.invoke('sync-translations',{body:{}});
+      if(error)throw error;
+      if(!data||!data.success)throw new Error(data?.error||'Synchronisatie is niet bevestigd.');
+      status(data.message+(data.commit?String.fromCharCode(10)+'GitHub commit: '+data.commit:''),'ok');
+    }catch(e){status('Synchroniseren mislukt: '+(e.message||String(e)),'error');}
+    finally{btn.disabled=false;btn.textContent='↥ Sync naar GitHub';}
+  });
+
+
+  function showTool(which){
+    activeTool=which;
+    const translations=which==='translations';
+    const home=which==='home';
+    $('status').classList.toggle('translation-status',translations);
+    $('translationView').style.display=translations?'block':'none';
+    $('homeMenu').classList.toggle('active',home);
+    $('translationMenu').classList.toggle('active',translations);
+  }
+  $('scrollTopBtn').addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+  $('scrollBottomBtn').addEventListener('click',()=>window.scrollTo({top:document.documentElement.scrollHeight,behavior:'smooth'}));
+  $('homeMenu').addEventListener('click',()=>showTool('home'));
+  $('translationMenu').addEventListener('click',()=>showTool('translations'));
+  $('search').addEventListener('input',render);
+  db.auth.getSession().then(async({data})=>{if(data.session){try{await loadRows();}catch(e){showApp(false);status('Fout bij laden: '+e.message,'error');}}});
+})();
+</script>
+
+<script>
+(() => {
+ const dictionaries = {
+  nl: {
+   language:"Taal", title:"Muggle Ministry – Vertalingen & Beheer", tagline:"Dit is onze interne tool voor het portaal!",
+   login:"Inloggen", email:"E-mailadres", password:"Wachtwoord", adminPortal:"Beheerportaal", logout:"Uitloggen",
+   menu:"MENU", translationTool:"Vertaal tool", forumPages:"Forumotion-pagina’s", search:"Zoek een vertaling…",
+   refresh:"Vernieuwen", sync:"↥ Sync naar GitHub", key:"Sleutel", dutch:"Nederlands", english:"English", portuguese:"Português",
+   page:"Pagina", allPages:"Alle pagina's", home:"Startpagina", forum:"Forum", profile:"Profiel", otherPage:"Andere pagina",
+   itemTitle:"Naam / titel", link:"Link (alleen voor navigatieknoppen)", text:"Tekst (alleen voor tekstblokken)",
+   placement:"Plek", top:"Bovenaan", bottom:"Onderaan", sidebar:"Zijbalk", customPage:"Andere pagina (optioneel)",
+   addItem:"Onderdeel toevoegen", cancel:"Annuleren", noPages:"Nog geen pagina’s opgeslagen.", openEdit:"Openen / bewerken",
+   save:"Opslaan", edit:"Bewerken", delete:"Verwijderen", noItems:"Nog geen onderdelen toegevoegd.",
+   loaded:"vertalingen geladen.", loginPrompt:"Vul je beheerdersgegevens in om te beginnen."
+  },
+  en: {
+   language:"Language", title:"Muggle Ministry – Translations & Management", tagline:"This is our internal portal tool!",
+   login:"Log in", email:"Email address", password:"Password", adminPortal:"Admin portal", logout:"Log out",
+   menu:"MENU", translationTool:"Translation tool", forumPages:"Forumotion pages", search:"Search translations…",
+   refresh:"Refresh", sync:"↥ Sync to GitHub", key:"Key", dutch:"Dutch", english:"English", portuguese:"Portuguese",
+   page:"Page", allPages:"All pages", home:"Home page", forum:"Forum", profile:"Profile", otherPage:"Other page",
+   itemTitle:"Name / title", link:"Link (navigation buttons only)", text:"Text (text blocks only)",
+   placement:"Placement", top:"Top", bottom:"Bottom", sidebar:"Sidebar", customPage:"Other page (optional)",
+   addItem:"Add item", cancel:"Cancel", noPages:"No pages saved yet.", openEdit:"Open / edit",
+   save:"Save", edit:"Edit", delete:"Delete", noItems:"No items added yet.",
+   loaded:"translations loaded.", loginPrompt:"Enter your administrator details to get started."
+  },
+  pt: {
+   language:"Idioma", title:"Muggle Ministry – Traduções e Gestão", tagline:"Esta é a nossa ferramenta interna do portal!",
+   login:"Iniciar sessão", email:"Endereço de e-mail", password:"Palavra-passe", adminPortal:"Portal de administração", logout:"Terminar sessão",
+   menu:"MENU", translationTool:"Ferramenta de tradução", forumPages:"Páginas do Forumotion", search:"Pesquisar traduções…",
+   refresh:"Atualizar", sync:"↥ Sincronizar com GitHub", key:"Chave", dutch:"Neerlandês", english:"Inglês", portuguese:"Português",
+   pageIntro:"Guarde e edite aqui cópias das suas páginas HTML existentes do Forumotion. Guardar nesta ferramenta não altera o próprio Forumotion.",
+   addEdit:"Adicionar ou editar página", name:"Nome", pageLink:"Ligação do Forumotion", htmlCode:"Código HTML",
+   savePage:"Guardar página", clear:"Limpar", download:"Transferir HTML", savedPages:"Páginas guardadas",
+   oldTools:"Gestão antiga de blocos de texto e botões", type:"Tipo de elemento", textBlock:"Bloco de texto", navButton:"Botão de navegação",
+   page:"Página", allPages:"Todas as páginas", home:"Página inicial", forum:"Fórum", profile:"Perfil", otherPage:"Outra página",
+   itemTitle:"Nome / título", link:"Ligação (apenas para botões de navegação)", text:"Texto (apenas para blocos de texto)",
+   placement:"Localização", top:"Topo", bottom:"Fundo", sidebar:"Barra lateral", customPage:"Outra página (opcional)",
+   addItem:"Adicionar elemento", cancel:"Cancelar", noPages:"Ainda não existem páginas guardadas.", openEdit:"Abrir / editar",
+   save:"Guardar", edit:"Editar", delete:"Eliminar", noItems:"Ainda não foram adicionados elementos.",
+   loaded:"traduções carregadas.", loginPrompt:"Introduza os seus dados de administrador para começar."
+  }
+ };
+ const ids={
+  toolMainTitle:"title",toolTagline:"tagline",login:"login",email:"email",password:"password",
+  logoutBtn:"logout",translationMenu:"translationTool",search:"search",
+  reloadBtn:"refresh",syncGithubBtn:"sync"
+ };
+ const textTargets={
+  "#login h2":"login","#translationView h2":"translationTool","#contentForm label:nth-child(1)":"type"
+ };
+ function applyLanguage(lang){
+  const d=dictionaries[lang]||dictionaries.nl;
+  document.documentElement.lang=lang;
+  const tagline=document.getElementById("toolTagline");if(tagline)tagline.textContent=d.tagline;
+  Object.entries(ids).forEach(([id,key])=>{const el=document.getElementById(id);if(el&&d[key]){if(el.tagName==="INPUT"||el.tagName==="TEXTAREA")el.placeholder=d[key];else if(el.tagName==="BUTTON"&&el.querySelector("span"))el.querySelector("span").textContent=d[key];else if(el.tagName==="BUTTON"||el.tagName==="H1"||el.tagName==="H2"||el.tagName==="STRONG")el.textContent=d[key];}});
+  Object.entries(textTargets).forEach(([selector,key])=>{const el=document.querySelector(selector);if(el&&d[key])el.textContent=d[key];});
+  const status=document.getElementById("status");if(status&&status.textContent==="Vul je beheerdersgegevens in om te beginnen.")status.textContent=d.loginPrompt;
+  const tableHeads=document.querySelectorAll("#translationView thead th");
+  [d.key,d.dutch,d.english,d.portuguese,""].forEach((v,i)=>{if(tableHeads[i])tableHeads[i].textContent=v;});
+  const langLabel=document.querySelector(".language-picker label");if(langLabel)langLabel.textContent=d.language;
+  const save=document.getElementById("contentSave");if(save&&!save.dataset.editing)save.textContent=d.addItem;
+  const cancel=document.getElementById("contentCancel");if(cancel)cancel.textContent=d.cancel;
+  const sync=document.getElementById("syncGithubBtn");if(sync&&!sync.disabled)sync.textContent=d.sync;
+  const reload=document.getElementById("reloadBtn");if(reload)reload.textContent=d.refresh;
+  const loginBtn=document.getElementById("loginBtn");if(loginBtn)loginBtn.textContent=d.login;
+  const logout=document.getElementById("logoutBtn");if(logout){const label=logout.querySelector("span");if(label)label.textContent=d.logout;}
+  const count=document.getElementById("count");if(count&&count.textContent.includes("vertalingen"))count.textContent=count.textContent.replace("vertalingen",d.loaded);
+ }
+ const picker=document.getElementById("toolLanguage");
+ if(picker){picker.value="nl";picker.addEventListener("change",()=>applyLanguage(picker.value));}
+ window.hpmwToolLanguage=dictionaries;
+ applyLanguage("nl");
+})();
+</script>
+</body>
+</html>
