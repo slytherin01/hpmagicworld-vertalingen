@@ -414,6 +414,13 @@ button.content-edit:hover,button.content-delete:hover{
 .effect-row{display:grid;grid-template-columns:minmax(130px,1fr) 110px minmax(180px,1.2fr) minmax(180px,1.2fr);gap:12px;align-items:center;padding:12px 4px;border-bottom:1px solid #293c52}
 .effect-row:last-child{border-bottom:0}.effect-row label{font-size:13px;color:#dce6f3}.effect-row input[type=checkbox]{width:18px;height:18px;justify-self:center;accent-color:#397b61}.effect-row input[type=datetime-local]{font-size:12px;padding:8px}
 @media(max-width:760px){.effect-row{grid-template-columns:1fr 70px}.effect-row input[type=datetime-local]{grid-column:1/-1;width:100%}}
+
+.effect-details{padding:0!important;overflow:hidden}
+.effect-details>summary{cursor:pointer;list-style:none;padding:14px 16px;font-weight:800;color:#f5d995;display:flex;align-items:center;justify-content:space-between}
+.effect-details>summary::-webkit-details-marker{display:none}
+.effect-details>summary:after{content:'＋';font-size:18px;color:#d9e3f0}
+.effect-details[open]>summary:after{content:'−'}
+.effect-details-content{padding:0 14px 12px}
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
@@ -610,8 +617,9 @@ button.content-edit:hover,button.content-delete:hover{
     const rows=data||[];
     $('portalEffectsList').innerHTML='';
     for(const group of ['Seizoenen','Decoraties']){
-      const section=document.createElement('div');section.className='effect-group';
-      const h=document.createElement('h3');h.textContent=(effectNames[$('toolLanguage').value]||effectNames.nl)[group];section.append(h);
+      const section=document.createElement('details');section.className='effect-group effect-details';
+      const summary=document.createElement('summary');summary.textContent=(effectNames[$('toolLanguage').value]||effectNames.nl)[group];section.append(summary);
+      const content=document.createElement('div');content.className='effect-details-content';
       EFFECTS.filter(x=>x.group===group).forEach(effect=>{
         const saved=rows.find(x=>x.effect_key===effect.key)||{};
         const row=document.createElement('div');row.className='effect-row';row.dataset.effect=effect.key;
@@ -619,9 +627,9 @@ button.content-edit:hover,button.content-delete:hover{
         const toggle=document.createElement('input');toggle.type='checkbox';toggle.className='effect-enabled';toggle.checked=!!saved.enabled;toggle.setAttribute('aria-label',effect.label+' aanzetten');
         const start=document.createElement('input');start.type='datetime-local';start.className='effect-start';start.value=portalLocalValue(saved.starts_at);start.setAttribute('aria-label','Begindatum en tijd '+effect.label);
         const end=document.createElement('input');end.type='datetime-local';end.className='effect-end';end.value=portalLocalValue(saved.ends_at);end.setAttribute('aria-label','Einddatum en tijd '+effect.label);
-        row.append(label,toggle,start,end);section.append(row);
+        row.append(label,toggle,start,end);content.append(row);
       });
-      $('portalEffectsList').append(section);
+      section.append(content);$('portalEffectsList').append(section);
     }
     const {data:widget,error:widgetError}=await db.from('portal_widgets').select('*').eq('id',1).maybeSingle();
     if(widgetError) throw widgetError;
@@ -657,7 +665,7 @@ button.content-edit:hover,button.content-delete:hover{
         countdown_target:target?new Date(target).toISOString():null,updated_at:new Date().toISOString()};
       const {error:widgetError}=await db.from('portal_widgets').upsert(widgetPayload,{onConflict:'id'});
       if(widgetError)throw widgetError;
-      $('portalEffectsStatus').textContent='Portaalinstellingen opgeslagen. Het portaal past actieve effecten automatisch toe.';
+      $('portalEffectsStatus').textContent=({nl:'✓ Gelukt! Alle portaalinstellingen zijn opgeslagen.',en:'✓ Success! All portal settings have been saved.',pt:'✓ Sucesso! Todas as definições do portal foram guardadas.'}[$('toolLanguage').value]||'✓ Gelukt! Alle portaalinstellingen zijn opgeslagen.');
       $('portalEffectsStatus').style.display='block';
     }catch(e){$('portalEffectsStatus').textContent='Opslaan mislukt: '+(e.message||String(e));$('portalEffectsStatus').style.display='block';}
     finally{btn.disabled=false;}
