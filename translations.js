@@ -225,7 +225,7 @@ Object.assign(translations.pt, {
   "Onofficiële fancommunity.": "Comunidade de fãs não oficial.",
   "Portaal": "Portal",
   "Versie: Beta 1.0": "Versão: Beta 1.0",
-  "Welkom op Het Ministerie van Dreuzels": "Bem-vindo ao Ministério dos Trouxas",
+  "Welkom op Het Ministerie van Dreuzels": "Bem-vindo ao Ministério dos Trouxas TTTTT",
   "Welkom terug": "Bem-vindo de volta",
   "Afdeling": "Casa",
   "De Sorteerhoed": "O Chapéu Seletor",
