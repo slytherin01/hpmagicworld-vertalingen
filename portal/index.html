@@ -1258,7 +1258,86 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
 </div>
 </div>
 </div>
-<div class="hpmw-modal-overlay" id="hpmwLoginOverlay" aria-hidden="true"><section class="hpmw-modal-card hpmw-codepen-modal" role="dialog" aria-modal="true" aria-labelledby="hpmwCodepenTitle"><button class="hpmw-modal-close" type="button" data-hpmw-close aria-label="Sluiten">×</button><img class="hpmw-codepen-avatar" src="https://i.servimg.com/u/f28/11/54/28/73/favico11.png" alt="Hpmagicworld"><h2 id="hpmwCodepenTitle">Inloggen bij Hpmagicworld</h2><form class="hpmw-codepen-form" id="hpmwCodepenLoginForm" name="form_login" action="https://testforumjoost.forumactie.com/login" method="post" autocomplete="on">
+
+<div id="hpmwIntranetDashboard" aria-label="Ministerie intranet dashboard">
+ <aside class="hpmw-side">
+  <a class="hpmw-side-brand" href="#" data-dash="home"><img src="https://i28.servimg.com/u/f28/11/54/28/73/logo10.png" alt="Muggle Ministry"><span>Intranet</span></a>
+  <nav class="hpmw-side-nav" aria-label="Intranet navigatie">
+   <button class="active" data-dash="home"><i class="fa-solid fa-house"></i>Home</button>
+   <button data-dash="news"><i class="fa-regular fa-newspaper"></i>Nieuws</button>
+   <button data-dash="admin"><i class="fa-solid fa-ticket"></i>Ticketbeheer</button>
+   <button data-dash="faq"><i class="fa-regular fa-map"></i>Kennisbank</button>
+   <button data-dash="teams"><i class="fa-solid fa-users"></i>Teams</button>
+   <button data-dash="documents"><i class="fa-regular fa-folder"></i>Documenten</button>
+   <button data-dash="calendar"><i class="fa-regular fa-calendar-days"></i>Kalender</button>
+   <button data-dash="org"><i class="fa-solid fa-landmark"></i>Organisatie</button>
+  </nav>
+  <div class="hpmw-side-sep"></div>
+  <div class="hpmw-side-caption"><i class="fa-solid fa-star"></i> Favorieten</div>
+  <a href="https://testforumjoost.forumactie.com/h6-beta-nieuws" target="_blank" rel="noopener"><i class="fa-regular fa-star"></i>Richtlijnen IT</a>
+  <a href="https://testforumjoost.forumactie.com/h6-beta-nieuws" target="_blank" rel="noopener"><i class="fa-regular fa-star"></i>Onboarding</a>
+  <a href="https://testforumjoost.forumactie.com/h6-beta-nieuws" target="_blank" rel="noopener"><i class="fa-regular fa-star"></i>Afdelingsnieuws</a>
+  <div class="hpmw-side-bottom"><span class="hpmw-status-dot"></span> Ministerie intranet <small>Veilige verbinding</small></div>
+ </aside>
+ <div class="hpmw-dash-main">
+  <header class="hpmw-dash-top">
+   <div class="hpmw-dash-search"><i class="fa-solid fa-magnifying-glass"></i><input id="hpmwDashSearch" type="search" placeholder="Zoeken in het intranet..."><kbd>Ctrl + K</kbd></div>
+   <div class="hpmw-dash-tools"><button aria-label="Meldingen"><i class="fa-regular fa-bell"></i><b></b></button><button aria-label="Help" data-dash="faq"><i class="fa-regular fa-circle-question"></i></button><div class="hpmw-dash-user"><span><i class="fa-regular fa-user"></i></span><strong id="hpmwDashUsername">Ministerie gebruiker</strong><i class="fa-solid fa-chevron-down"></i></div></div>
+  </header>
+  <div class="hpmw-dash-content">
+   <section class="hpmw-dash-hero">
+    <div class="hpmw-hero-copy"><span class="hpmw-hero-line"></span><div><h1>Welkom terug,<br><strong id="hpmwDashWelcomeName">Ministerie medewerker</strong></h1><p>Het intranet van Het Ministerie van Dreuzels.</p></div></div>
+    <div class="hpmw-hero-emblem"><img src="https://i28.servimg.com/u/f28/11/54/28/73/logo10.png" alt="Muggle Ministry"></div>
+   </section>
+   <section class="hpmw-dash-shortcuts">
+    <button class="primary" data-dash="newticket"><i class="fa-solid fa-ticket"></i>Ticket aanmaken <i class="fa-solid fa-arrow-right"></i></button>
+    <button data-dash="mine"><i class="fa-regular fa-rectangle-list"></i>Mijn tickets <i class="fa-solid fa-chevron-right"></i></button>
+    <button data-dash="faq"><i class="fa-regular fa-map"></i>Kennisbank <i class="fa-solid fa-chevron-right"></i></button>
+    <a href="https://testforumjoost.forumactie.com/h13-dev-sorting-hat" target="_blank" rel="noopener"><i class="fa-solid fa-hat-wizard"></i>Sorteerhoed <i class="fa-solid fa-chevron-right"></i></a>
+    <a href="https://testforumjoost.forumactie.com/forum" target="_blank" rel="noopener"><i class="fa-solid fa-users"></i>Medewerkers <i class="fa-solid fa-chevron-right"></i></a>
+   </section>
+   <section class="hpmw-dash-grid">
+    <article class="hpmw-dash-card hpmw-news-card" data-searchable="nieuws mededelingen richtlijnen onderhoud welkom">
+     <header><h2><i class="fa-solid fa-bullhorn"></i>Actuele mededelingen</h2><a href="https://testforumjoost.forumactie.com/h6-beta-nieuws" target="_blank" rel="noopener">Alle nieuwsberichten <i class="fa-solid fa-arrow-right"></i></a></header>
+     <div class="hpmw-news-row"><span class="hpmw-news-icon purple"><i class="fa-solid fa-scroll"></i></span><div><span class="hpmw-new-tag">Nieuw</span><strong>Welkom bij het Ministerie-intranet</strong><p>Bekijk de belangrijkste onderdelen en vraag eenvoudig ondersteuning aan.</p></div><time>Nieuw</time></div>
+     <div class="hpmw-news-row"><span class="hpmw-news-icon"><i class="fa-solid fa-wrench"></i></span><div><strong>Support en ticketbeheer</strong><p>Gebruik Ticket Support voor vragen, problemen en verzoeken.</p></div><time>Info</time></div>
+     <div class="hpmw-news-row"><span class="hpmw-news-icon"><i class="fa-solid fa-users"></i></span><div><strong>Welkom, collega!</strong><p>Ontdek de teams, afdelingen en informatie van het Ministerie.</p></div><time>Info</time></div>
+    </article>
+    <article class="hpmw-dash-card hpmw-stats-card" data-searchable="ticketbeheer overzicht open behandeling opgelost totaal">
+     <header><h2><i class="fa-solid fa-ticket"></i>Ticketbeheer – overzicht</h2><button data-dash="admin">Naar ticketbeheer <i class="fa-solid fa-arrow-right"></i></button></header>
+     <div class="hpmw-stat-grid">
+      <div><i class="fa-regular fa-calendar-xmark"></i><strong id="hpmwDashOpen">—</strong><small>Open</small></div>
+      <div><i class="fa-regular fa-clock"></i><strong id="hpmwDashProgress">—</strong><small>In behandeling</small></div>
+      <div><i class="fa-regular fa-circle-check"></i><strong id="hpmwDashClosed">—</strong><small>Opgelost</small></div>
+      <div><i class="fa-regular fa-calendar-days"></i><strong id="hpmwDashTotal">—</strong><small>Totaal</small></div>
+     </div>
+    </article>
+    <article class="hpmw-dash-card hpmw-links-card" data-searchable="snel naar ondersteuning beleid richtlijnen hr formulieren">
+     <header><h2><i class="fa-solid fa-link"></i>Snel naar</h2></header>
+     <div class="hpmw-quick-grid">
+      <button data-dash="newticket"><i class="fa-solid fa-desktop"></i>IT-ondersteuning <i class="fa-solid fa-arrow-up-right-from-square"></i></button>
+      <a href="https://testforumjoost.forumactie.com/forum" target="_blank" rel="noopener"><i class="fa-solid fa-users"></i>Beleid &amp; Richtlijnen <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="https://testforumjoost.forumactie.com/forum" target="_blank" rel="noopener"><i class="fa-solid fa-users"></i>HR &amp; Personeel <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <button data-dash="faq"><i class="fa-regular fa-file-lines"></i>Formulieren <i class="fa-solid fa-arrow-up-right-from-square"></i></button>
+     </div>
+    </article>
+    <article class="hpmw-dash-card hpmw-calendar-card" data-searchable="kalender komende activiteiten vergadering training update">
+     <header><h2><i class="fa-regular fa-calendar-days"></i>Kalender – komende activiteiten</h2><span>Agenda</span></header>
+     <div class="hpmw-event-row"><b><strong>29</strong><small>JAN</small></b><div><strong>Afdelingsbijeenkomst</strong><p>10:00 – 11:00 · Grote Zaal</p></div></div>
+     <div class="hpmw-event-row"><b><strong>03</strong><small>FEB</small></b><div><strong>Security Awareness Training</strong><p>13:00 – 14:00 · Online</p></div></div>
+     <div class="hpmw-event-row"><b><strong>07</strong><small>FEB</small></b><div><strong>Ministeriële Update</strong><p>15:00 – 16:00 · Hoofdzaal</p></div></div>
+    </article>
+    <article class="hpmw-dash-card hpmw-activity-card" data-searchable="recente activiteit tickets documenten kennisbank">
+     <header><h2><i class="fa-solid fa-wave-square"></i>Recente activiteit</h2></header>
+     <div class="hpmw-activity-row"><span><i class="fa-solid fa-ticket"></i></span><strong>Je ticketoverzicht staat klaar</strong><time>Nu</time></div>
+     <div class="hpmw-activity-row"><span><i class="fa-solid fa-users"></i></span><strong>Bekijk de teams en afdelingen</strong><time>Info</time></div>
+     <div class="hpmw-activity-row"><span><i class="fa-regular fa-map"></i></span><strong>Open de kennisbank voor hulp</strong><time>Info</time></div>
+    </article>
+   </section>
+   <div class="hpmw-dash-empty" id="hpmwDashNoResults" hidden>Geen onderdelen gevonden voor deze zoekopdracht.</div>
+  </div>
+ </div>
+</div><div class="hpmw-modal-overlay" id="hpmwLoginOverlay" aria-hidden="true"><section class="hpmw-modal-card hpmw-codepen-modal" role="dialog" aria-modal="true" aria-labelledby="hpmwCodepenTitle"><button class="hpmw-modal-close" type="button" data-hpmw-close aria-label="Sluiten">×</button><img class="hpmw-codepen-avatar" src="https://i.servimg.com/u/f28/11/54/28/73/favico11.png" alt="Hpmagicworld"><h2 id="hpmwCodepenTitle">Inloggen bij Hpmagicworld</h2><form class="hpmw-codepen-form" id="hpmwCodepenLoginForm" name="form_login" action="https://testforumjoost.forumactie.com/login" method="post" autocomplete="on">
 <label for="hpmw-codepen-user">Gebruikersnaam</label>
 <input id="hpmw-codepen-user" type="text" name="username" placeholder="Vul je gebruikersnaam in" autocomplete="username" maxlength="40" required>
 <label for="hpmw-codepen-pass">Wachtwoord</label>
@@ -3183,4 +3262,137 @@ footer.lux-footer .lux-footer-inner{display:flex!important;justify-content:cente
 footer.lux-footer .lux-footer-meta{display:flex!important;justify-content:center!important;align-items:center!important;flex-wrap:wrap!important;gap:8px 16px!important;font-size:12px!important}
 @media(max-width:900px){header.topbar.luxury-nav-v2{padding:6px 10px!important}header.topbar.luxury-nav-v2 nav.top-actions{gap:4px!important;overflow-x:auto!important;overflow-y:hidden!important}header.topbar.luxury-nav-v2 .lux-nav-item{padding:5px 7px!important;font-size:11px!important}main.shell{width:calc(100% - 28px)!important}}
 @media(max-width:620px){header.topbar.luxury-nav-v2 .lux-nav-label,header.topbar.luxury-nav-v2 .lux-nav-usertext{display:none!important}#introView .hpmw-portal-logo{min-height:150px!important;height:150px!important}#introView .hpmw-portal-logo img{max-width:90vw!important;max-height:145px!important}#introView .center-message.hpmw-welcome-box{padding:22px 16px 8px!important}#introView .center-message.hpmw-welcome-box p{font-size:13px!important}#introView .hpmw-entry-actions,#introView .hpmw-member-entry-actions{flex-wrap:wrap!important;gap:9px!important;padding:0 14px 17px!important}#introView .hpmw-entry-button,#introView .hpmw-home-action{flex:1 1 calc(50% - 9px)!important;min-width:calc(50% - 9px)!important;min-height:86px!important}}
-</style></body></html>
+</style>
+<style id="hpmw-intranet-dashboard-2026">
+/* Intranet dashboard in de aangeleverde Muggle Ministry-stijl. */
+#hpmwIntranetDashboard{display:none;position:relative;z-index:4;width:100%;min-height:calc(100vh - 66px);color:#f2f3fb;background:#080b14;font-family:inherit}
+html.member-login-ready #introView #hpmwIntranetDashboard{display:flex}
+html.member-login-ready #introView>.hpmw-portal-logo,html.member-login-ready #introView>.intro-login-layout{display:none!important}
+html.member-login-ready body:has(#introView.active) header.topbar{display:none!important}
+html.member-login-ready body:has(#introView.active) main.shell{width:100%!important;max-width:none!important;min-height:0!important;margin:0!important;padding:0!important}
+html.member-login-ready body:has(#introView.active){padding:0!important;background:#080b14!important}
+html.member-login-ready body:has(#introView.active) footer.lux-footer{display:none!important}
+#hpmwIntranetDashboard .hpmw-side{position:sticky;top:0;align-self:flex-start;display:flex;flex-direction:column;flex:0 0 252px;width:252px;height:100vh;min-height:700px;padding:16px 13px;background:linear-gradient(180deg,#101222,#111126 70%,#1a1234);border-right:1px solid #30264b}
+.hpmw-side-brand{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-height:112px;margin-bottom:20px;color:#fff;text-decoration:none}
+.hpmw-side-brand img{display:block!important;visibility:visible!important;width:205px!important;height:68px!important;max-width:100%!important;max-height:68px!important;object-fit:contain!important}
+.hpmw-side-brand span{font-size:14px;font-weight:650;letter-spacing:.02em}
+.hpmw-side-nav{display:grid;gap:4px}
+.hpmw-side-nav button,.hpmw-side>a:not(.hpmw-side-brand){display:flex;align-items:center;gap:13px;width:100%;min-height:43px;padding:9px 13px;border:1px solid transparent;border-radius:9px;background:transparent;color:#e4e5f1;text-align:left;font-size:13px;font-weight:550;text-decoration:none;cursor:pointer}
+.hpmw-side-nav button i,.hpmw-side>a i{width:18px;color:#c5c4df;font-size:16px}
+.hpmw-side-nav button:hover,.hpmw-side>a:hover{background:#211b39;border-color:#42316b}
+.hpmw-side-nav button.active{background:linear-gradient(110deg,#51299c,#34216b);border-color:#6844ad;color:#fff}
+.hpmw-side-nav button.active i{color:#d4b8ff}
+.hpmw-side-sep{height:1px;margin:18px 10px 15px;background:#373249}
+.hpmw-side-caption{padding:0 13px 8px;color:#f0c35a;font-size:13px;font-weight:750}
+.hpmw-side-caption i{margin-right:7px}
+.hpmw-side>a:not(.hpmw-side-brand){min-height:38px}
+.hpmw-side>a:not(.hpmw-side-brand) i{color:#aaa7c7}
+.hpmw-side-bottom{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:auto 8px 0;padding:13px 4px 2px;border-top:1px solid #373249;color:#c8c8d8;font-size:11px}
+.hpmw-side-bottom small{width:100%;padding-left:16px;color:#8d91a8;font-size:10px}
+.hpmw-status-dot{width:7px;height:7px;border-radius:50%;background:#2ed89b;box-shadow:0 0 10px #2ed89b}
+.hpmw-dash-main{min-width:0;flex:1;background:#090c16}
+.hpmw-dash-top{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:20px;height:71px;padding:0 24px;border-bottom:1px solid #24263a;background:rgba(8,10,19,.97);backdrop-filter:blur(15px)}
+.hpmw-dash-search{display:flex;align-items:center;gap:13px;width:min(620px,65%);height:42px;margin:0 auto;padding:0 14px;border:1px solid #40365c;border-radius:10px;background:#111321;box-shadow:inset 0 1px 5px #0005}
+.hpmw-dash-search>i{color:#d8d8e7;font-size:16px}
+.hpmw-dash-search input{flex:1;min-width:0;border:0;outline:0;background:transparent;color:#f7f6fc;font:inherit;font-size:13px}
+.hpmw-dash-search input::placeholder{color:#b8b6c9}
+.hpmw-dash-search kbd{padding:3px 6px;border:1px solid #7555a6;border-radius:5px;color:#e2d4ff;font-size:10px}
+.hpmw-dash-tools{display:flex;align-items:center;gap:15px}
+.hpmw-dash-tools>button{position:relative;display:grid;place-items:center;width:40px;height:40px;border:1px solid #282a3d;border-radius:50%;background:#171a2a;color:#e7e6f4;font-size:17px;cursor:pointer}
+.hpmw-dash-tools>button:first-child b{position:absolute;top:5px;right:5px;width:7px;height:7px;border-radius:50%;background:#a35aff}
+.hpmw-dash-user{display:flex;align-items:center;gap:10px;color:#f4f3fb;font-size:13px;white-space:nowrap}
+.hpmw-dash-user>span{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:#1b1e30;font-size:18px}
+.hpmw-dash-user>i{font-size:10px;color:#b7b5c9}
+.hpmw-dash-content{max-width:1600px;margin:0 auto;padding:0 24px 28px}
+.hpmw-dash-hero{position:relative;display:flex;align-items:center;justify-content:space-between;min-height:212px;margin:0 -24px 15px;padding:28px 36px;background:linear-gradient(90deg,rgba(7,9,18,.76),rgba(8,10,20,.18)),url("https://i28.servimg.com/u/f28/11/54/28/73/backgr10.png") center 38%/cover no-repeat;border-bottom:1px solid #41305f;overflow:hidden}
+.hpmw-dash-hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,10,20,.32),transparent 65%);pointer-events:none}
+.hpmw-hero-copy{position:relative;z-index:2;display:flex;align-items:center;gap:18px}
+.hpmw-hero-line{width:4px;height:88px;border-radius:4px;background:#f3bb37;box-shadow:0 0 16px #f3bb3770}
+.hpmw-hero-copy h1{margin:0 0 7px;color:#fff;font-size:25px;line-height:1.2;font-weight:600;text-shadow:0 2px 9px #000}
+.hpmw-hero-copy h1 strong{font-size:29px;font-weight:850}
+.hpmw-hero-copy p{margin:0;color:#d6d5e1;font-size:14px}
+.hpmw-hero-emblem{position:absolute;z-index:1;left:50%;top:50%;transform:translate(-50%,-50%);display:grid;place-items:center;width:360px;height:200px}
+.hpmw-hero-emblem img{display:block!important;visibility:visible!important;width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;object-fit:contain!important;filter:drop-shadow(0 8px 14px #000b)}
+.hpmw-dash-shortcuts{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:22px;margin:15px 0 29px}
+.hpmw-dash-shortcuts button,.hpmw-dash-shortcuts a{display:flex;align-items:center;justify-content:space-between;gap:12px;min-width:0;min-height:62px;padding:12px 17px;border:1px solid #292d43;border-radius:10px;background:linear-gradient(145deg,#141827,#10131f);color:#f0eff8;text-decoration:none;font-size:13px;font-weight:750;cursor:pointer}
+.hpmw-dash-shortcuts button>i:first-child,.hpmw-dash-shortcuts a>i:first-child{font-size:25px;color:#d3c6ff}
+.hpmw-dash-shortcuts button>i:last-child,.hpmw-dash-shortcuts a>i:last-child{font-size:12px;color:#5c5874}
+.hpmw-dash-shortcuts button.primary{border-color:#4c2b92;background:linear-gradient(110deg,#49218f,#2b1856)}
+.hpmw-dash-shortcuts button.primary>i:first-child{color:#b58aff}
+.hpmw-dash-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:19px 23px}
+.hpmw-dash-card{min-width:0;overflow:hidden;border:1px solid #272b40;border-radius:10px;background:linear-gradient(145deg,rgba(17,20,34,.98),rgba(12,15,26,.98));box-shadow:0 8px 24px #0003}
+.hpmw-dash-card>header{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:47px;padding:0 16px;border-bottom:1px solid #24283b;background:linear-gradient(90deg,#171a2c,#131625)}
+.hpmw-dash-card>header h2{display:flex;align-items:center;gap:10px;margin:0;color:#f3f2fa;font-size:15px;font-weight:750}
+.hpmw-dash-card>header h2>i{color:#a56aff;font-size:19px}
+.hpmw-news-card>header h2>i,.hpmw-calendar-card>header h2>i{color:#e8b22e}
+.hpmw-dash-card>header a,.hpmw-dash-card>header button,.hpmw-dash-card>header>span{border:0;background:transparent;color:#b57aff;font-size:11px;text-decoration:none;white-space:nowrap;cursor:pointer}
+.hpmw-news-row{display:flex;align-items:center;gap:13px;min-height:59px;margin:0 16px;border-bottom:1px solid #202438}
+.hpmw-news-row:last-child{border-bottom:0}
+.hpmw-news-icon{display:grid;place-items:center;flex:0 0 48px;width:48px;height:42px;border-radius:8px;background:#202238;color:#c6b6ff;font-size:19px}
+.hpmw-news-icon.purple{color:#b18aff}
+.hpmw-news-row>div{display:flex;align-items:flex-start;flex-wrap:wrap;gap:3px 10px;min-width:0;flex:1}
+.hpmw-news-row strong{color:#f4f3fa;font-size:13px}
+.hpmw-news-row p{width:100%;margin:0;color:#b6b6c8;font-size:11px}
+.hpmw-news-row time{align-self:flex-start;color:#a9a8bc;font-size:11px;white-space:nowrap}
+.hpmw-new-tag{padding:3px 8px;border-radius:12px;background:#8747e7;color:white;font-size:10px;font-weight:800}
+.hpmw-stat-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;padding:10px 13px}
+.hpmw-stat-grid>div{display:grid;grid-template-columns:30px 1fr;grid-template-rows:25px 18px;align-items:center;gap:0 7px;padding:8px 9px;border:1px solid #242a3c;border-radius:9px;background:#121827}
+.hpmw-stat-grid>div>i{grid-row:1/3;font-size:25px;color:#a36aff}
+.hpmw-stat-grid>div:nth-child(2)>i{color:#f0a500}
+.hpmw-stat-grid>div:nth-child(3)>i{color:#20d78e}
+.hpmw-stat-grid>div:nth-child(4)>i{color:#159de9}
+.hpmw-stat-grid strong{font-size:19px;color:#f5f5fa}
+.hpmw-stat-grid small{font-size:10px;color:#c2c1d0;white-space:nowrap}
+.hpmw-quick-grid{display:grid;grid-template-columns:1fr 1fr;padding:2px 12px 8px}
+.hpmw-quick-grid button,.hpmw-quick-grid a{display:flex;align-items:center;gap:12px;min-width:0;min-height:42px;padding:8px 10px;border:0;border-bottom:1px solid #24283a;background:transparent;color:#e7e6f2;text-align:left;text-decoration:none;font-size:12px;cursor:pointer}
+.hpmw-quick-grid button>i:first-child,.hpmw-quick-grid a>i:first-child{width:20px;color:#bcb9d4;font-size:16px}
+.hpmw-quick-grid button>i:last-child,.hpmw-quick-grid a>i:last-child{margin-left:auto;color:#b6b2c9;font-size:11px}
+.hpmw-event-row{display:flex;align-items:center;gap:13px;min-height:55px;margin:0 17px;border-bottom:1px solid #202438}
+.hpmw-event-row:last-child{border-bottom:0}
+.hpmw-event-row>b{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:0 0 49px;width:49px;height:43px;border-left:3px solid #9d61f4;border-radius:4px;background:#202338}
+.hpmw-event-row:first-of-type>b{border-color:#e5ba3c}
+.hpmw-event-row>b strong{font-size:17px;line-height:19px;color:#fff}
+.hpmw-event-row>b small{font-size:9px;color:#c2bfd4}
+.hpmw-event-row>div strong{font-size:12px;color:#f2f1f8}
+.hpmw-event-row p{margin:2px 0 0;color:#b6b5c8;font-size:10px}
+.hpmw-activity-row{display:flex;align-items:center;gap:12px;min-height:56px;margin:0 17px;border-bottom:1px solid #202438}
+.hpmw-activity-row:last-child{border-bottom:0}
+.hpmw-activity-row>span{display:grid;place-items:center;flex:0 0 46px;height:38px;border-radius:7px;background:#202238;color:#b18aff;font-size:18px}
+.hpmw-activity-row strong{flex:1;color:#e9e8f2;font-size:12px;font-weight:550}
+.hpmw-activity-row time{color:#b2b0c3;font-size:10px;white-space:nowrap}
+.hpmw-dash-empty{padding:25px;text-align:center;color:#c6c3d5}
+@media(max-width:1200px){#hpmwIntranetDashboard .hpmw-side{flex-basis:220px;width:220px}.hpmw-dash-content{padding:0 17px 25px}.hpmw-dash-shortcuts{gap:10px}.hpmw-dash-shortcuts button,.hpmw-dash-shortcuts a{padding:10px;font-size:11px}.hpmw-stat-grid{gap:6px;padding:8px}.hpmw-stat-grid>div{grid-template-columns:22px 1fr;padding:6px}.hpmw-stat-grid>div>i{font-size:19px}}
+@media(max-width:900px){#hpmwIntranetDashboard .hpmw-side{flex-basis:190px;width:190px;padding:12px 9px}.hpmw-dash-shortcuts{grid-template-columns:repeat(3,minmax(0,1fr))}.hpmw-dash-grid{grid-template-columns:1fr}.hpmw-dash-hero{min-height:180px}.hpmw-hero-emblem{width:260px;opacity:.8}}
+@media(max-width:620px){#hpmwIntranetDashboard{display:block!important}.html.member-login-ready #introView{padding:0!important}#hpmwIntranetDashboard .hpmw-side{position:relative;top:auto;display:block;width:100%;height:auto;min-height:0;padding:8px 10px;border-right:0;border-bottom:1px solid #30264b}.hpmw-side-brand{min-height:50px;margin:0 0 7px;flex-direction:row;justify-content:flex-start}.hpmw-side-brand img{width:135px!important;height:44px!important}.hpmw-side-brand span{margin-left:7px}.hpmw-side-nav{display:flex;gap:5px;overflow-x:auto}.hpmw-side-nav button{flex:0 0 auto;width:auto;min-height:39px;padding:8px 10px;font-size:11px}.hpmw-side-nav button i{width:auto}.hpmw-side-sep,.hpmw-side-caption,.hpmw-side>a:not(.hpmw-side-brand),.hpmw-side-bottom{display:none!important}.hpmw-dash-top{height:58px;padding:0 10px}.hpmw-dash-search{width:auto;flex:1;height:37px;margin:0}.hpmw-dash-search kbd{display:none}.hpmw-dash-tools{gap:6px}.hpmw-dash-tools>button{width:34px;height:34px;font-size:14px}.hpmw-dash-user{display:none}.hpmw-dash-content{padding:0 10px 20px}.hpmw-dash-hero{min-height:160px;margin:0 -10px 12px;padding:18px 13px}.hpmw-hero-copy h1{font-size:19px}.hpmw-hero-copy h1 strong{font-size:22px}.hpmw-hero-copy p{font-size:11px}.hpmw-hero-emblem{left:72%;width:170px;height:130px;opacity:.65}.hpmw-dash-shortcuts{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin:12px 0 16px}.hpmw-dash-shortcuts button,.hpmw-dash-shortcuts a{min-height:56px;padding:9px;font-size:10px}.hpmw-dash-shortcuts button>i:first-child,.hpmw-dash-shortcuts a>i:first-child{font-size:19px}.hpmw-dash-grid{gap:12px}.hpmw-dash-card>header{min-height:42px;padding:0 10px}.hpmw-dash-card>header h2{font-size:12px}.hpmw-dash-card>header a,.hpmw-dash-card>header button{font-size:9px}.hpmw-stat-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.hpmw-stat-grid>div{grid-template-columns:27px 1fr}.hpmw-stat-grid>div>i{font-size:21px}.hpmw-news-row{margin:0 10px;gap:8px}.hpmw-news-icon{flex-basis:38px;width:38px;height:36px}.hpmw-news-row strong{font-size:11px}.hpmw-news-row p{font-size:10px}.hpmw-quick-grid{grid-template-columns:1fr}.hpmw-quick-grid button,.hpmw-quick-grid a{min-height:37px}.hpmw-event-row,.hpmw-activity-row{margin:0 10px}}
+</style>
+<script id="hpmw-intranet-dashboard-actions">
+(function(){
+ function byId(id){return document.getElementById(id)}
+ function click(id){var el=byId(id);if(el)el.click()}
+ function route(action){
+  var admin=byId('adminLaunch'),tickets=byId('ticketSupportLaunch');
+  if(action==='home'){document.querySelectorAll('.hpmw-side-nav button').forEach(function(b){b.classList.toggle('active',b.dataset.dash==='home')});return}
+  if(action==='admin'){if(admin&&admin.style.display!=='none')click('adminLaunch');else click('ticketSupportLaunch');return}
+  if(action==='mine'){click('myTicketsLaunch');return}
+  if(action==='newticket'){click('ticketSupportLaunch');setTimeout(function(){var first=document.querySelector('#categories .cat');if(first)first.click()},180);return}
+  if(action==='faq'){click('faqLaunch');return}
+  if(action==='news'){click('hpNieuwsNav');return}
+  if(action==='teams'){click('forumHomeLink');return}
+  if(action==='documents'||action==='calendar'||action==='org'){var msg=action==='documents'?'Documenten worden binnenkort aan het intranet toegevoegd.':action==='calendar'?'De kalender wordt binnenkort beschikbaar.':'Organisatie-informatie wordt binnenkort beschikbaar.';window.alert(msg);return}
+ }
+ function init(){
+  var root=byId('hpmwIntranetDashboard');if(!root||root.dataset.ready)return;root.dataset.ready='1';
+  root.querySelectorAll('[data-dash]').forEach(function(el){el.addEventListener('click',function(e){if(el.tagName==='A')e.preventDefault();var action=el.dataset.dash;root.querySelectorAll('.hpmw-side-nav button').forEach(function(b){b.classList.toggle('active',b.dataset.dash===action)});route(action)})});
+  var name=(byId('username')&&byId('username').textContent.trim())||'Ministerie medewerker';byId('hpmwDashUsername').textContent=name;byId('hpmwDashWelcomeName').textContent=name;
+  var search=byId('hpmwDashSearch');function filter(){var q=search.value.trim().toLowerCase(),shown=0;root.querySelectorAll('.hpmw-dash-card').forEach(function(card){var match=!q||(card.textContent+' '+(card.dataset.searchable||'')).toLowerCase().includes(q);card.style.display=match?'':'none';if(match)shown++});byId('hpmwDashNoResults').hidden=shown>0}
+  search.addEventListener('input',filter);
+  document.addEventListener('keydown',function(e){if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){if(root.offsetParent){e.preventDefault();search.focus()}}});
+  if(typeof isAdmin==='function'&&isAdmin()&&typeof loadTickets==='function'){
+   loadTickets();
+   var sync=function(){var v=id=>{var el=byId(id);return el?el.textContent:'—'};byId('hpmwDashOpen').textContent=v('statOpen');byId('hpmwDashProgress').textContent=v('countProgress');byId('hpmwDashClosed').textContent=v('statClosed');byId('hpmwDashTotal').textContent=v('statTotal')};
+   ['statOpen','countProgress','statClosed','statTotal'].forEach(function(id){var el=byId(id);if(el)new MutationObserver(sync).observe(el,{childList:true,characterData:true,subtree:true})});setTimeout(sync,1500);setTimeout(sync,4000);
+  }
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script></body></html>
