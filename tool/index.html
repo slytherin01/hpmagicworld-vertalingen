@@ -3445,7 +3445,7 @@ html.member-login-ready #introView #hpmwGuestEntry{display:none!important;visibi
       || /\/login(?:[/?#]|$)/i.test(finalUrl.pathname)
       || /name=["']password["']/i.test(html) && /login/i.test(finalUrl.pathname);
     if(!response.ok || failed){showError('De gebruikersnaam of het wachtwoord is onjuist. Controleer je gegevens en probeer het opnieuw.');return;}
-    window.location.assign('https://testforumjoost.forumactie.com/forum');
+    window.location.reload();
    }catch(err){
     showError('Inloggen kon niet worden gecontroleerd. Controleer je verbinding en probeer het opnieuw.');
    }
