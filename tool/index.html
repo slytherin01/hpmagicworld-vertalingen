@@ -425,7 +425,7 @@ button.content-edit:hover,button.content-delete:hover{
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
-<header class="portal-nav"><a class="portal-home-link" href="https://testforumjoost.forumactie.com/h3-portaal" target="_blank" rel="noopener"><i class="fa-solid fa-house nav-fa-icon" aria-hidden="true"></i><span>Portaal</span></a><a href="https://testforumjoost.forumactie.com/forum" target="_blank" rel="noopener"><i class="fa-solid fa-comments nav-fa-icon" aria-hidden="true"></i><span>Terug naar forum</span></a><button type="button" class="tool-nav-btn" id="homeMenu"><i class="fa-solid fa-house nav-fa-icon" aria-hidden="true"></i><span>Home</span></button><button type="button" class="tool-nav-btn" id="translationMenu"><i class="fa-solid fa-language nav-fa-icon" aria-hidden="true"></i><span>Vertalingen</span></button><button type="button" class="tool-nav-btn" id="portalMenu"><i class="fa-solid fa-wand-magic-sparkles nav-fa-icon" aria-hidden="true"></i><span>Portaal</span></button><div class="language-picker"><label for="toolLanguage">Taal</label><select id="toolLanguage" aria-label="Taal"><option value="nl">NL</option><option value="en">EN</option><option value="pt">PT</option></select></div><button type="button" class="tool-nav-btn nav-logout hidden" id="logoutBtn"><i class="fa-solid fa-right-from-bracket nav-fa-icon" aria-hidden="true"></i><span>Uitloggen</span></button></header>
+<header class="portal-nav"><a class="portal-home-link" href="https://testforumjoost.forumactie.com/h3-portaal" target="_blank" rel="noopener"><i class="fa-solid fa-house nav-fa-icon" aria-hidden="true"></i><span>Portaal</span></a><a href="https://testforumjoost.forumactie.com/forum" target="_blank" rel="noopener"><i class="fa-solid fa-comments nav-fa-icon" aria-hidden="true"></i><span>Terug naar forum</span></a><button type="button" class="tool-nav-btn" id="homeMenu"><i class="fa-solid fa-house nav-fa-icon" aria-hidden="true"></i><span>Home</span></button><button type="button" class="tool-nav-btn" id="translationMenu"><i class="fa-solid fa-language nav-fa-icon" aria-hidden="true"></i><span>Vertalingen</span></button><button type="button" class="tool-nav-btn" id="portalMenu"><i class="fa-solid fa-wand-magic-sparkles nav-fa-icon" aria-hidden="true"></i><span>Portaal</span></button><button type="button" class="tool-nav-btn" id="ticketsMenu"><i class="fa-solid fa-ticket nav-fa-icon" aria-hidden="true"></i><span>Ticketbeheer</span></button><div class="language-picker"><label for="toolLanguage">Taal</label><select id="toolLanguage" aria-label="Taal"><option value="nl">NL</option><option value="en">EN</option><option value="pt">PT</option></select></div><button type="button" class="tool-nav-btn nav-logout hidden" id="logoutBtn"><i class="fa-solid fa-right-from-bracket nav-fa-icon" aria-hidden="true"></i><span>Uitloggen</span></button></header>
 <main>
   <div class="panel tool-heading">
     <img class="tool-heading-logo" src="https://i28.servimg.com/u/f28/11/54/28/73/logo10.png" alt="Hpmagicworld logo">
@@ -452,6 +452,25 @@ button.content-edit:hover,button.content-delete:hover{
           <div style="overflow-x:auto">
             <table><thead><tr><th>Sleutel</th><th>Nederlands</th><th>English</th><th>Português</th><th></th></tr></thead><tbody id="rows"></tbody></table>
           </div>
+        </section>
+        <section id="ticketsView" style="display:none">
+          <h2>Ticketbeheer</h2>
+          <p class="small">Gedeelde moderatorgegevens uit Supabase. Forumotion blijft de bron voor ticketberichten en accounts.</p>
+          <div id="ticketsStatus" role="status" style="display:none"></div>
+          <div class="toolbar"><input id="ticketMetaSearch" placeholder="Zoek ticketnummer, onderwerp of moderator…"><button class="secondary" id="ticketsReload">Vernieuwen</button></div>
+          <div style="overflow-x:auto"><table><thead><tr><th>Ticket</th><th>Status</th><th>Prioriteit</th><th>Toegewezen aan</th><th>Laatst gewijzigd</th><th></th></tr></thead><tbody id="ticketMetaRows"><tr><td colspan="6">Ticketgegevens laden…</td></tr></tbody></table></div>
+          <div id="ticketMetaEditor" class="panel hidden" style="margin-top:18px">
+            <h3 id="ticketMetaTitle">Ticketgegevens</h3>
+            <div class="content-form">
+              <label>Status<select id="ticketMetaStatus"><option value="pending">Wachten</option><option value="progress">In behandeling</option><option value="done">Gesloten</option><option value="refused">Afgewezen</option></select></label>
+              <label>Prioriteit<select id="ticketMetaPriority"><option value="low">Laag</option><option value="normal">Normaal</option><option value="high">Hoog</option><option value="urgent">Urgent</option></select></label>
+              <label>Toegewezen moderator<select id="ticketMetaAssignee"><option value="">Niet toegewezen</option><option value="1">Joost (Forumotion #1)</option><option value="3">Test Account 2 (Forumotion #3)</option></select></label>
+              <label>Interne notitie<textarea id="ticketMetaNote" rows="4" placeholder="Alleen zichtbaar voor beheerders"></textarea></label>
+              <button id="ticketMetaSave" type="button">Wijzigingen opslaan</button>
+              <button id="ticketMetaCancel" type="button" class="secondary">Annuleren</button>
+            </div>
+          </div>
+          <h3>Wijzigingsgeschiedenis</h3><div id="ticketMetaEvents" class="small">Selecteer een ticket om de geschiedenis te bekijken.</div>
         </section>
         <section id="portalView" style="display:none">
           <h2>Portaal – seizoenen & decoraties</h2>
@@ -671,14 +690,57 @@ button.content-edit:hover,button.content-delete:hover{
     finally{btn.disabled=false;}
   });
 
+  let ticketMetaRows=[],selectedMeta=null;
+  const ticketStatusLabel={pending:'Wachten',progress:'In behandeling',done:'Gesloten',refused:'Afgewezen'};
+  const ticketPriorityLabel={low:'Laag',normal:'Normaal',high:'Hoog',urgent:'Urgent'};
+  const ticketStatus=(message,error=false)=>{const el=$('ticketsStatus');el.textContent=message;el.style.display=message?'block':'none';el.className=error?'error':'ok';};
+  async function loadTicketMetadata(){
+    ticketStatus('Gedeelde tickets laden…');
+    const {data,error}=await db.from('helpdesk_ticket_metadata').select('*').order('updated_at',{ascending:false});
+    if(error)throw error;
+    ticketMetaRows=data||[];renderTicketMetadata();ticketStatus(ticketMetaRows.length+' ticket(s) gevonden in de gedeelde administratie.');
+  }
+  function renderTicketMetadata(){
+    const q=$('ticketMetaSearch').value.trim().toLowerCase(),body=$('ticketMetaRows');body.replaceChildren();
+    const rows=ticketMetaRows.filter(r=>[r.ticket_number,r.subject,r.category,r.assignee_name,r.ticket_key].some(v=>String(v||'').toLowerCase().includes(q)));
+    if(!rows.length){const tr=document.createElement('tr'),td=document.createElement('td');td.colSpan=6;td.textContent='Geen gedeelde tickets gevonden. Zodra een ticketmetadata-record bestaat, verschijnt het hier.';tr.append(td);body.append(tr);return;}
+    rows.forEach(r=>{const tr=document.createElement('tr');const vals=[('#'+(r.ticket_number||r.forumotion_topic_id)+' — '+(r.subject||'Zonder onderwerp')),(ticketStatusLabel[r.status]||r.status),(ticketPriorityLabel[r.priority]||r.priority),(r.assignee_name||'Niet toegewezen'),r.updated_at?new Date(r.updated_at).toLocaleString('nl-NL'):''];vals.forEach(v=>{const td=document.createElement('td');td.textContent=v;tr.append(td)});const td=document.createElement('td'),b=document.createElement('button');b.textContent='Beheren';b.addEventListener('click',()=>editTicketMetadata(r));td.append(b);tr.append(td);body.append(tr);});
+  }
+  async function editTicketMetadata(r){
+    selectedMeta=r;$('ticketMetaEditor').classList.remove('hidden');$('ticketMetaTitle').textContent='Ticket #'+(r.ticket_number||r.forumotion_topic_id)+' — '+(r.subject||'');
+    $('ticketMetaStatus').value=r.status||'pending';$('ticketMetaPriority').value=r.priority||'normal';$('ticketMetaAssignee').value=r.assignee_forumotion_user_id?String(r.assignee_forumotion_user_id):'';$('ticketMetaNote').value=r.internal_note||'';
+    const {data,error}=await db.from('helpdesk_ticket_events').select('*').eq('ticket_key',r.ticket_key).order('created_at',{ascending:false}).limit(50);
+    const box=$('ticketMetaEvents');box.replaceChildren();if(error){box.textContent='Geschiedenis laden mislukt: '+error.message;return;}if(!data?.length){box.textContent='Nog geen wijzigingen geregistreerd.';return;}
+    data.forEach(ev=>{const p=document.createElement('p');p.textContent=new Date(ev.created_at).toLocaleString('nl-NL')+' — '+ev.event_type+' — '+JSON.stringify(ev.event_data||{});box.append(p);});
+  }
+  $('ticketsMenu').addEventListener('click',async()=>{showTool('tickets');try{await loadTicketMetadata();}catch(e){ticketStatus('Ticketbeheer laden mislukt: '+e.message,true);}});
+  $('ticketsReload').addEventListener('click',()=>loadTicketMetadata().catch(e=>ticketStatus(e.message,true)));
+  $('ticketMetaSearch').addEventListener('input',renderTicketMetadata);
+  $('ticketMetaCancel').addEventListener('click',()=>{$('ticketMetaEditor').classList.add('hidden');selectedMeta=null;});
+  $('ticketMetaSave').addEventListener('click',async()=>{
+    if(!selectedMeta)return;const btn=$('ticketMetaSave');btn.disabled=true;
+    try{
+      const patch={status:$('ticketMetaStatus').value,priority:$('ticketMetaPriority').value,assignee_forumotion_user_id:$('ticketMetaAssignee').value?Number($('ticketMetaAssignee').value):null,assignee_name:$('ticketMetaAssignee').selectedOptions[0].textContent==='Niet toegewezen'?'':$('ticketMetaAssignee').selectedOptions[0].textContent.replace(/ \(Forumotion #\d+\)$/,''),internal_note:$('ticketMetaNote').value.trim(),updated_at:new Date().toISOString()};
+      const {error}=await db.from('helpdesk_ticket_metadata').update(patch).eq('ticket_key',selectedMeta.ticket_key);
+      if(error)throw error;
+      const fields=Object.keys(patch).filter(k=>k!=='updated_at');
+      const eventType=fields.includes('status')?'status_changed':fields.includes('priority')?'priority_changed':fields.includes('assignee_forumotion_user_id')?'assigned':'note_added';
+      const {error:eventError}=await db.from('helpdesk_ticket_events').insert({ticket_key:selectedMeta.ticket_key,event_type:eventType,event_data:{fields}});
+      if(eventError)throw eventError;
+      ticketStatus('Ticketmetadata opgeslagen.');await loadTicketMetadata();const updated=ticketMetaRows.find(x=>x.ticket_key===selectedMeta.ticket_key);if(updated)await editTicketMetadata(updated);
+    }catch(e){ticketStatus('Opslaan mislukt: '+e.message,true);}finally{btn.disabled=false;}
+  });
   function showTool(which){
     activeTool=which;
     const translations=which==='translations';
     const portal=which==='portal';
+    const tickets=which==='tickets';
     const home=which==='home';
     $('status').classList.toggle('translation-status',translations);
     $('translationView').style.display=translations?'block':'none';
     $('portalView').style.display=portal?'block':'none';
+    $('ticketsView').style.display=tickets?'block':'none';
+    $('ticketsMenu').classList.toggle('active',tickets);
     $('portalMenu').classList.toggle('active',portal);
     $('homeMenu').classList.toggle('active',home);
     $('translationMenu').classList.toggle('active',translations);
