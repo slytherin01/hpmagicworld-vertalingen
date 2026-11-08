@@ -1,50 +1,24 @@
-/* Forumotion bridge: load the GitHub-hosted portal into the current Forumotion page.
-   The portal scripts execute on the Forumotion origin, preserving Forumotion cookies and _userdata. */
+/* Forumotion loader: render the hosted portal as the document on the Forumotion URL.
+   No iframe: the page keeps the Forumotion origin, cookies and _userdata session. */
 (async function () {
   if (window.__muggleMinistryPortalLoading) return;
   window.__muggleMinistryPortalLoading = true;
-  const SOURCE = "https://slytherin01.github.io/muggle-ministry/portal/index.html?v=20261108-2";
-  const fail = (error) => {
-    console.error("Muggle Ministry portal could not be loaded:", error);
-    document.body.innerHTML = '<div style="margin:20px;padding:18px;background:#101827;color:#fff;border:1px solid #9b8cff;border-radius:12px;font:14px Arial">Het portaal kon niet worden geladen. Vernieuw de pagina of probeer het later opnieuw.</div>';
-  };
+  const source = "https://slytherin01.github.io/muggle-ministry/portal/index.html?v=20261108-3";
   try {
-    const response = await fetch(SOURCE, { cache: "no-store", credentials: "omit" });
-    if (!response.ok) throw new Error("HTTP " + response.status);
-    const markup = await response.text();
-    const parsed = new DOMParser().parseFromString(markup, "text/html");
-    if (!parsed.body || !parsed.body.children.length) throw new Error("Portal HTML is leeg");
-
-    document.documentElement.lang = parsed.documentElement.lang || "nl";
-    document.title = parsed.title || "Muggle Ministry — Portaal & Ticket Support";
-
-    // Copy portal styles and stylesheets, but keep this page on the Forumotion origin.
-    for (const node of parsed.head.querySelectorAll('link[rel="stylesheet"], style, link[rel="icon"], meta[name="theme-color"]')) {
-      document.head.appendChild(node.cloneNode(true));
-    }
-
-    // Keep Forumotion's window globals/cookies (_userdata) intact; only replace visible page markup.
-    const bodyNodes = Array.from(parsed.body.childNodes).map(node => node.cloneNode(true));
-    document.body.replaceChildren(...bodyNodes);
-
-    // Recreate scripts in document order so the ticket app initializes normally.
-    const scripts = Array.from(document.body.querySelectorAll("script"));
-    for (const oldScript of scripts) {
-      const script = document.createElement("script");
-      for (const attr of oldScript.attributes) script.setAttribute(attr.name, attr.value);
-      script.textContent = oldScript.textContent;
-      oldScript.replaceWith(script);
-      if (script.src) {
-        await new Promise((resolve, reject) => {
-          script.onload = resolve;
-          script.onerror = () => reject(new Error("Script kon niet laden: " + script.src));
-        });
-      }
-    }
-    window.__muggleMinistryPortalLoaded = true;
+    const response = await fetch(source, { cache: "no-store", credentials: "omit" });
+    if (!response.ok) throw new Error("Portalbestand niet bereikbaar (HTTP " + response.status + ")");
+    const html = await response.text();
+    if (!/<body[\\s>]/i.test(html) || !/<html[\\s>]/i.test(html)) throw new Error("Ongeldig portaalbestand");
+    // document.write parses markup and scripts in their normal order; the visible URL
+    // remains the Forumotion URL, so Forumotion cookies and window._userdata remain available.
+    document.open();
+    document.write(html);
+    document.close();
   } catch (error) {
-    fail(error);
-  } finally {
-    window.__muggleMinistryPortalLoading = false;
+    console.error("Muggle Ministry portal load failed:", error);
+    document.open();
+    document.write('<!doctype html><html lang="nl"><meta charset="utf-8"><title>Portaal laden mislukt</title><body style="margin:0;padding:28px;background:#090d16;color:#fff;font:16px Arial"><h2>Het portaal kon niet worden geladen</h2><p>Ververs de pagina. Als dit blijft gebeuren, controleer dan of GitHub Pages bereikbaar is.</p><pre style="white-space:pre-wrap;color:#ffb7c2"></pre></body></html>');
+    document.close();
+    document.querySelector("pre").textContent = String(error);
   }
 })();
