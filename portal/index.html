@@ -3647,4 +3647,44 @@ input:focus,select:focus,textarea:focus{outline:none!important;border-color:var(
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",bindIntranetActions,{once:true});
   else bindIntranetActions();
 })();
-</script></body></html>
+</script>
+<style id="hpmw-dark-intranet-global-final">
+/* Global dark Ministry intranet shell, including the pre-login intro screen. */
+:root{color-scheme:dark!important}
+html,body,body#page-body{
+ background:#080f1a!important;background-color:#080f1a!important;background-image:none!important;
+ color:#eaf1f8!important;font-family:Inter,"Segoe UI",Arial,sans-serif!important
+}
+body:before,body:after,#page-body:before,#page-body:after{background:none!important;box-shadow:none!important}
+header.topbar,header.topbar.luxury-nav-v2,.topbar{
+ background:#0b1523!important;background-color:#0b1523!important;background-image:none!important;
+ border-bottom:1px solid #293d54!important;box-shadow:0 5px 22px #0006!important
+}
+header.topbar .lux-nav-item{color:#d5e0ec!important}
+header.topbar .lux-nav-item:hover{background:#1a2b40!important;color:#fff!important}
+header.topbar .lux-nav-icon{background:#1c3046!important;border:1px solid #35516a!important;color:#a7d9e5!important}
+.shell,main.shell{background:transparent!important;background-color:transparent!important;background-image:none!important}
+#introView,#homeView,#formView,#myTicketsView,#adminView{background:transparent!important;color:#eaf1f8!important}
+#introView .intro-login-layout{background:transparent!important}
+#introView .intro-static-card{background:transparent!important;border:0!important;box-shadow:none!important}
+#introView .hpmw-portal-logo{margin:12px auto 22px!important}
+#introView .center-message,#introView .hpmw-welcome-box{
+ background:linear-gradient(145deg,#14263b,#0e1a2a)!important;background-image:none!important;
+ border:1px solid #2c435d!important;border-radius:16px!important;
+ box-shadow:0 18px 46px #0006!important;color:#edf4fa!important
+}
+#introView .hpmw-welcome-box h1{color:#f4f7fb!important}
+#introView .hpmw-welcome-box p{color:#c1cfdd!important}
+#introView .hpmw-entry-button{filter:brightness(.92)}
+#introView .hpmw-modal-overlay .hpmw-modal-card{background:#111e2e!important;color:#edf4fa!important;border:1px solid #2c435d!important}
+#introView .hpmw-modal-card h2,#introView .hpmw-modal-card label{color:#edf4fa!important}
+#introView .hpmw-modal-card input{background:#091421!important;color:#edf4fa!important;border:1px solid #344c65!important}
+footer,.footer,#footer,.page-footer{
+ background:#0b1523!important;background-color:#0b1523!important;background-image:none!important;
+ color:#aab9ca!important;border-top:1px solid #b69a5a!important;box-shadow:0 -5px 20px #0004!important
+}
+footer a,.footer a,#footer a,.page-footer a{color:#91cbd8!important}
+#hpmwPortalNotices{color:#edf4fa!important}
+@media(max-width:650px){.shell{width:calc(100% - 22px)!important}}
+</style>
+</body></html>
