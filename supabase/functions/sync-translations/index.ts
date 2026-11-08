@@ -111,7 +111,7 @@ Deno.serve(async (req) => {
     const existingEnd = source.indexOf(endMarker);
     if (existingStart >= 0 && existingEnd > existingStart) {
       const previousBlock = source.slice(existingStart, existingEnd);
-      const keysComment = previousBlock.match(/\\/\\/ SUPABASE_MANAGED_KEYS: (\\{[^\\n]+\\})/);
+      const keysComment = previousBlock.match(/\/\/ SUPABASE_MANAGED_KEYS: (\{[^\n]+\})/);
       if (keysComment) {
         try {
           const parsed = JSON.parse(keysComment[1]);
@@ -121,7 +121,7 @@ Deno.serve(async (req) => {
         } catch { /* Fall back to parsing the previous generated assignments. */ }
       } else {
         // Compatibility with the older generated block that had no key manifest.
-        const assignmentPattern = /Object\\.assign\\(translations\\.(nl|en|pt), (\\{[\\s\\S]*?\\})\\);/g;
+        const assignmentPattern = /Object\.assign\(translations\.(nl|en|pt), (\{[\s\S]*?\})\);/g;
         for (const match of previousBlock.matchAll(assignmentPattern)) {
           try {
             const parsed = JSON.parse(match[2]);
