@@ -693,7 +693,7 @@ button.content-edit:hover,button.content-delete:hover{
    placement:"Plek", top:"Bovenaan", bottom:"Onderaan", sidebar:"Zijbalk", customPage:"Andere pagina (optioneel)",
    addItem:"Onderdeel toevoegen", cancel:"Annuleren", noPages:"Nog geen pagina’s opgeslagen.", openEdit:"Openen / bewerken",
    save:"Opslaan", edit:"Bewerken", delete:"Verwijderen", noItems:"Nog geen onderdelen toegevoegd.",
-   loaded:"vertalingen geladen.", loginPrompt:"Vul je beheerdersgegevens in om te beginnen."
+   portalMenu:"Portaal", maintenanceHeading:"Onderhoudsblok", maintenanceOn:"Onderhoudsblok tonen", maintenanceTextNL:"Onderhoudstekst (NL)", maintenanceTextEN:"Onderhoudstekst (EN)", maintenanceTextPT:"Onderhoudstekst (PT)", countdownHeading:"Countdown", countdownOn:"Countdown tonen", countdownTitleNL:"Titel (NL)", countdownTitleEN:"Titel (EN)", countdownTitlePT:"Titel (PT)", countdownTarget:"Doeldatum en tijd", loaded:"vertalingen geladen.", loginPrompt:"Vul je beheerdersgegevens in om te beginnen."
   },
   en: {
    language:"Language", title:"Muggle Ministry | Admin Tool", tagline:"This is our internal portal tool!",
@@ -705,7 +705,7 @@ button.content-edit:hover,button.content-delete:hover{
    placement:"Placement", top:"Top", bottom:"Bottom", sidebar:"Sidebar", customPage:"Other page (optional)",
    addItem:"Add item", cancel:"Cancel", noPages:"No pages saved yet.", openEdit:"Open / edit",
    save:"Save", edit:"Edit", delete:"Delete", noItems:"No items added yet.",
-   loaded:"translations loaded.", loginPrompt:"Enter your administrator details to get started."
+   portalMenu:"Portal", maintenanceHeading:"Maintenance notice", maintenanceOn:"Show maintenance notice", maintenanceTextNL:"Maintenance text (NL)", maintenanceTextEN:"Maintenance text (EN)", maintenanceTextPT:"Maintenance text (PT)", countdownHeading:"Countdown", countdownOn:"Show countdown", countdownTitleNL:"Title (NL)", countdownTitleEN:"Title (EN)", countdownTitlePT:"Title (PT)", countdownTarget:"Target date and time", loaded:"translations loaded.", loginPrompt:"Enter your administrator details to get started."
   },
   pt: {
    language:"Idioma", title:"Muggle Ministry | Admin Tool", tagline:"Esta é a nossa ferramenta interna do portal!",
@@ -721,12 +721,12 @@ button.content-edit:hover,button.content-delete:hover{
    placement:"Localização", top:"Topo", bottom:"Fundo", sidebar:"Barra lateral", customPage:"Outra página (opcional)",
    addItem:"Adicionar elemento", cancel:"Cancelar", noPages:"Ainda não existem páginas guardadas.", openEdit:"Abrir / editar",
    save:"Guardar", edit:"Editar", delete:"Eliminar", noItems:"Ainda não foram adicionados elementos.",
-   loaded:"traduções carregadas.", loginPrompt:"Introduza os seus dados de administrador para começar."
+   portalMenu:"Portal", maintenanceHeading:"Aviso de manutenção", maintenanceOn:"Mostrar aviso de manutenção", maintenanceTextNL:"Texto de manutenção (NL)", maintenanceTextEN:"Texto de manutenção (EN)", maintenanceTextPT:"Texto de manutenção (PT)", countdownHeading:"Contagem decrescente", countdownOn:"Mostrar contagem decrescente", countdownTitleNL:"Título (NL)", countdownTitleEN:"Título (EN)", countdownTitlePT:"Título (PT)", countdownTarget:"Data e hora de destino", loaded:"traduções carregadas.", loginPrompt:"Introduza os seus dados de administrador para começar."
   }
  };
  const ids={
   toolMainTitle:"title",toolTagline:"tagline",login:"login",email:"email",password:"password",
-  logoutBtn:"logout",translationMenu:"translationTool",search:"search",
+  logoutBtn:"logout",translationMenu:"translationTool",portalMenu:"portalMenu",search:"search",
   reloadBtn:"refresh",syncGithubBtn:"sync"
  };
  const textTargets={
@@ -735,6 +735,13 @@ button.content-edit:hover,button.content-delete:hover{
  function applyLanguage(lang){
   const d=dictionaries[lang]||dictionaries.nl;
   document.documentElement.lang=lang;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key=el.getAttribute('data-i18n');
+    if(d[key]){
+      if(el.tagName==='LABEL' && el.firstChild && el.firstChild.nodeType===3) el.firstChild.nodeValue=d[key];
+      else el.textContent=d[key];
+    }
+  });
   const tagline=document.getElementById("toolTagline");if(tagline)tagline.textContent=d.tagline;
   Object.entries(ids).forEach(([id,key])=>{const el=document.getElementById(id);if(el&&d[key]){if(el.tagName==="INPUT"||el.tagName==="TEXTAREA")el.placeholder=d[key];else if(el.tagName==="BUTTON"&&el.querySelector("span"))el.querySelector("span").textContent=d[key];else if(el.tagName==="BUTTON"||el.tagName==="H1"||el.tagName==="H2"||el.tagName==="STRONG")el.textContent=d[key];}});
   Object.entries(textTargets).forEach(([selector,key])=>{const el=document.querySelector(selector);if(el&&d[key])el.textContent=d[key];});
