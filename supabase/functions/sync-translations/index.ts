@@ -144,7 +144,7 @@ Deno.serve(async (req) => {
         `Object.assign(translations.${lang}, ${JSON.stringify(dictionaries[lang], null, 2)});`
       ),
       endMarker,
-    ].join("\\n");
+    ].join("\n");
 
     const start = source.indexOf(startMarker);
     const end = source.indexOf(endMarker);
