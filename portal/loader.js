@@ -3,7 +3,7 @@
 (async function () {
   if (window.__muggleMinistryPortalLoading) return;
   window.__muggleMinistryPortalLoading = true;
-  const source = "https://raw.githubusercontent.com/slytherin01/muggle-ministry/main/portal/index.html?cachebust=20261108-9";
+  const source = "https://raw.githubusercontent.com/slytherin01/muggle-ministry/main/portal/index.html?cachebust=20261108-10";
   try {
     const response = await fetch(source, { cache: "no-store", credentials: "omit" });
     if (!response.ok) throw new Error("Portalbestand niet bereikbaar (HTTP " + response.status + ")");
