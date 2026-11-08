@@ -2752,4 +2752,137 @@ main.shell>.view#homeView::before{content:none!important;display:none!important;
 #adminView .hpmw-priority-tag.high{background:#573b20;border-color:#80552a;color:#ffd29a}
 #adminView .hpmw-priority-tag.urgent{background:#5a2933;border-color:#87414e;color:#ffc0c7}
 #adminView .hpmw-priority-tag.low{background:#1b3440;border-color:#315666;color:#a7d9e7}
+</style><style id="hpmw-ticket-centre-redesign-2026">
+#myTicketsView,#adminView{--hd-panel:#111b2b;--hd-panel2:#152238;--hd-line:rgba(158,178,211,.16);--hd-muted:#9eacc2;--hd-text:#f3f6fc;--hd-violet:#a99aff}
+#myTicketsView .page-head,#adminView .page-head{position:relative;align-items:center;margin:0 0 24px;padding:28px 30px;border:1px solid var(--hd-line);border-radius:22px;background:radial-gradient(ellipse at 82% 0%,rgba(139,119,255,.2),transparent 38%),linear-gradient(125deg,#17263c,#101a2a 65%,#1b2040);box-shadow:0 18px 50px #0003;overflow:hidden}
+#myTicketsView .page-head:before,#adminView .page-head:before{content:"";position:absolute;right:-48px;top:-95px;width:240px;height:240px;border:1px solid #a99aff25;border-radius:50%;box-shadow:0 0 0 28px #a99aff0b,0 0 0 58px #a99aff08;pointer-events:none}
+#myTicketsView .page-head .eyebrow,#adminView .page-head .eyebrow{font-size:10px;letter-spacing:.2em;font-weight:900;color:#b9aaff;text-transform:uppercase}
+#myTicketsView .page-head h1,#adminView .page-head h1{margin:5px 0 4px;font-size:clamp(27px,3.4vw,38px);letter-spacing:-.04em;color:#fff}
+#myTicketsView .page-head .subtitle,#adminView .page-head .subtitle{margin:0;color:#aebbd0;font-size:13px}
+#myTicketsView .page-head>.btn,#adminView .page-head>.btn{position:relative;z-index:1;border:1px solid #71809a;background:#1d2c43;color:#eaf0fb;border-radius:12px;padding:11px 16px}
+#myTicketsView .panel,#adminView .panel{padding:0;border:0;background:transparent;box-shadow:none;overflow:visible}
+#myTicketsView .member-tabs{display:flex;gap:9px;margin:0 0 15px;padding:8px;border:1px solid var(--hd-line);border-radius:15px;background:#0d1726;width:max-content;max-width:100%}
+#myTicketsView .member-tab{display:inline-flex;align-items:center;gap:9px;padding:11px 17px;border:1px solid transparent;border-radius:10px;background:transparent;color:#aebbd0;font-weight:750;transition:.18s}
+#myTicketsView .member-tab.active{border-color:#7668c9;background:linear-gradient(135deg,#51458e,#342d64);color:#fff;box-shadow:0 7px 20px #0003}
+#myTicketsView .tab-count{display:inline-grid;place-items:center;min-width:22px;height:22px;padding:0 6px;border-radius:20px;background:#ffffff19;color:inherit;font-size:11px}
+#myTicketsView .member-table-wrap,#adminView .ticket-table-wrap{padding:10px;border:1px solid var(--hd-line);border-radius:18px;background:linear-gradient(145deg,#121e30,#0d1726);box-shadow:0 16px 45px #0002;overflow:auto}
+#myTicketsView .member-table,#adminView .ticket-table{width:100%;border-collapse:separate;border-spacing:0 7px;color:var(--hd-text)}
+#myTicketsView .member-table thead,#adminView .ticket-table thead{display:none}
+#myTicketsView .member-table tbody,#adminView .ticket-table tbody{display:grid;gap:7px}
+#myTicketsView .member-table tbody tr,#adminView .ticket-table tbody tr{display:grid;align-items:center;gap:12px;padding:15px 17px;border:1px solid transparent;border-radius:13px;background:#19263a;cursor:pointer;transition:background .18s,border-color .18s,transform .18s}
+#myTicketsView .member-table tbody tr{grid-template-columns:minmax(68px,.55fr) minmax(180px,2.1fr) minmax(130px,1.35fr) minmax(120px,1.2fr) minmax(145px,1.25fr)}
+#adminView .ticket-table tbody tr{grid-template-columns:minmax(75px,.65fr) minmax(200px,2.1fr) minmax(140px,1.25fr) minmax(145px,1.25fr) minmax(145px,1.35fr) minmax(145px,1.35fr)}
+#myTicketsView .member-table tbody tr:hover,#adminView .ticket-table tbody tr:hover{background:#202f48;border-color:#8173dc;transform:translateY(-1px)}
+#myTicketsView .member-table td,#adminView .ticket-table td{min-width:0;padding:0;border:0;color:#c8d3e4;font-size:12px;overflow-wrap:anywhere}
+#myTicketsView .member-table .member-id,#adminView .ticket-table .ticket-id{font-weight:850;color:#b6a8ff;font-variant-numeric:tabular-nums}
+#myTicketsView .member-table .member-subject,#adminView .ticket-table .ticket-subject{font-size:13px;font-weight:800;color:#f4f6fc;line-height:1.45}
+#adminView .ticket-table .ticket-subject{display:flex;align-items:center;flex-wrap:wrap;gap:5px}
+#myTicketsView .member-status,#adminView .ticket-state{display:inline-flex;align-items:center;gap:6px;width:max-content;max-width:100%;padding:6px 10px;border:1px solid #ffffff18;border-radius:999px;background:#29364a;color:#dce5f2;font-size:10px;font-weight:850;white-space:normal}
+#myTicketsView .member-status.pending,#adminView .ticket-state.pending{background:#46381f;border-color:#79602d;color:#ffdc98}
+#myTicketsView .member-status.progress,#adminView .ticket-state.progress{background:#233c5b;border-color:#3d6390;color:#a9d2ff}
+#myTicketsView .member-status.done,#adminView .ticket-state.done{background:#1e443b;border-color:#397762;color:#9be2c3}
+#myTicketsView .member-status.refused,#adminView .ticket-state.refused{background:#4a2935;border-color:#7c4353;color:#ffc0ca}
+#myTicketsView .empty,#adminView .empty{padding:45px 20px;border:1px dashed #53617a;border-radius:16px;background:#111d2e;color:#dce4f2;text-align:center}
+#myTicketsView .member-detail{margin-top:16px;padding:22px;border:1px solid var(--hd-line);border-radius:19px;background:linear-gradient(145deg,#142238,#0d1726);box-shadow:0 18px 50px #0003}
+#myTicketsView .member-detail .detail-head,#adminView #adminDetail>.detail-head{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;padding:0 0 18px;border-bottom:1px solid var(--hd-line)}
+#myTicketsView .detail-title,#adminView .detail-title{font-size:clamp(21px,2.6vw,29px);font-weight:850;letter-spacing:-.025em;color:#fff}
+#myTicketsView .detail-kicker,#adminView .detail-kicker{color:#b8aaff;font-size:10px;font-weight:900;letter-spacing:.18em}
+#myTicketsView .detail-facts,#adminView .detail-facts{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px;margin:18px 0}
+#myTicketsView .detail-facts>div,#adminView .detail-facts>div{padding:11px 12px;border:1px solid var(--hd-line);border-radius:11px;background:#0d1828;min-width:0}
+#myTicketsView .detail-facts small,#adminView .detail-facts small{display:block;margin-bottom:4px;color:#8f9fb7;font-size:9px;text-transform:uppercase;letter-spacing:.1em}
+#myTicketsView .detail-facts strong,#adminView .detail-facts strong{display:block;color:#e8eef8;font-size:11px;overflow-wrap:anywhere}
+#myTicketsView .member-posts,#adminView .helpdesk-chat{margin:18px 0;padding:18px;border:1px solid var(--hd-line);border-radius:16px;background:#0d1726}
+#myTicketsView .reply-box,#adminView .reply-box{margin-top:15px;padding:18px;border:1px solid var(--hd-line);border-radius:15px;background:#142238}
+#myTicketsView .reply-box h3,#adminView .reply-box h3{margin:0 0 12px;color:#fff;font-size:16px}
+#myTicketsView textarea,#adminView textarea{width:100%;min-height:125px;padding:14px;border:1px solid #43536c;border-radius:12px;background:#0b1524;color:#edf2fa;outline:none}
+#myTicketsView textarea:focus,#adminView textarea:focus{border-color:#9a8aff;box-shadow:0 0 0 3px #9a8aff20}
+#myTicketsView .reply-actions,#adminView .reply-actions{display:flex;justify-content:flex-end;margin-top:12px}
+#myTicketsView .reply-actions .btn.primary,#adminView .reply-actions .btn.primary{border:0;border-radius:11px;background:linear-gradient(120deg,#7665d8,#a18bff);color:white;font-weight:800;padding:12px 18px}
+#adminView .admin-layout{display:grid;grid-template-columns:190px minmax(0,1fr);gap:16px;align-items:start}
+#adminView .admin-nav{position:sticky;top:92px;display:grid;gap:8px;padding:12px;border:1px solid var(--hd-line);border-radius:16px;background:#101b2b}
+#adminView .admin-nav .nav-btn{display:flex;align-items:center;gap:10px;min-height:43px;padding:10px 12px;border:1px solid transparent;border-radius:10px;background:#19273b;color:#c8d4e6;font-weight:750;text-decoration:none}
+#adminView .admin-nav .nav-btn:hover{border-color:#796bd0;background:#242d4b;color:white}
+#adminView .admin-main{min-width:0}
+#adminView .admin-toolbar{margin:0 0 14px;padding:16px;border:1px solid var(--hd-line);border-radius:17px;background:linear-gradient(145deg,#15243a,#101a2b)}
+#adminView .admin-search-box{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:11px;align-items:center}
+#adminView .admin-search-title{grid-column:1/-1;display:flex;align-items:center;gap:10px;color:#fff;font-size:15px}
+#adminView .admin-search-title .search-icon-luxe{display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:#51458e;color:#dcd4ff}
+#adminView .search-input-row{display:flex;align-items:center;gap:10px;min-width:0;padding:0 13px;border:1px solid #43536c;border-radius:11px;background:#0b1524}
+#adminView .search-input-row input{width:100%;min-width:0;height:43px;border:0;outline:0;background:transparent;color:#f1f5fc}
+#adminView .status-filter{height:43px;min-width:185px;padding:0 12px;border:1px solid #43536c;border-radius:11px;background:#0b1524;color:#e8eef8}
+#adminView .search-main-btn{min-height:43px;border:0;border-radius:11px;background:#51458e;color:white;font-weight:800}
+#adminView .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:0 0 14px}
+#adminView .stats .stat{position:relative;display:grid;grid-template-columns:40px 1fr;grid-template-rows:auto auto;align-items:center;gap:2px 11px;min-width:0;padding:15px;border:1px solid var(--hd-line);border-radius:15px;background:linear-gradient(145deg,#17263b,#111b2c);text-align:left}
+#adminView .stats button.stat{width:100%;cursor:pointer}
+#adminView .stats .stat.active,#adminView .stats button.stat:hover{border-color:#8f80ed;background:linear-gradient(145deg,#29294e,#17243a)}
+#adminView .stat-icon{grid-row:1/3;display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:#51458e;color:#ded7ff;font-size:16px}
+#adminView .stats .stat small{color:#a7b5c9;font-size:10px;font-weight:750}
+#adminView .stats .stat strong{color:#fff;font-size:25px;line-height:1.1;font-variant-numeric:tabular-nums}
+#adminView .status-index{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px;padding:12px;border:1px solid var(--hd-line);border-radius:14px;background:#101b2b}
+#adminView .status-index .status-pill{display:inline-flex;align-items:center;gap:7px;padding:8px 11px;border:1px solid #ffffff17;border-radius:999px;background:#19283d;color:#bdc9dc;font-size:10px;font-weight:800}
+#adminView .status-index .status-pill.active,#adminView .status-index .status-pill:hover{border-color:#8577df;background:#37345f;color:#fff}
+#adminView .status-index .status-pill b{display:inline-grid;place-items:center;min-width:20px;height:20px;padding:0 5px;border-radius:20px;background:#ffffff17;color:#fff}
+#adminView .ticket-table-wrap{padding:9px}
+#adminView .ticket-table tbody tr{cursor:pointer}
+#adminView .ticket-table .ticket-last-poster,#adminView .ticket-table .ticket-assignee{color:#aebbd0;font-size:11px}
+#adminView .ticket-table .ticket-last-poster i,#adminView .ticket-table .ticket-assignee i{margin-right:5px;color:#9f91f5}
+#adminView #adminDetail{padding:20px;border:1px solid var(--hd-line);border-radius:19px;background:linear-gradient(145deg,#142238,#0d1726);box-shadow:0 18px 50px #0003}
+#adminView #adminDetail>.detail-head{align-items:center}
+#adminView #adminDetail>.detail-head>.btn{flex:0 0 auto;border:1px solid #53627a;border-radius:11px;background:#1d2b40;color:#edf2fa}
+#adminView .detail-workspace{display:grid;grid-template-columns:minmax(235px,.75fr) minmax(0,1.7fr);gap:16px;margin-top:18px}
+#adminView .detail-sidebar{min-width:0}
+#adminView .moderation-nav{position:sticky;top:92px;padding:15px;border:1px solid var(--hd-line);border-radius:15px;background:#0e1929}
+#adminView .moderation-heading{margin-bottom:12px;color:#c8bcff;font-size:13px;font-weight:900}
+#adminView .internal-tools{padding:0;border:0;background:transparent}
+#adminView .internal-title,#adminView .moderation-actions-title{margin:12px 0 8px;color:#9eacc2;font-size:10px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+#adminView .internal-row{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+#adminView .internal-row .status-pill{justify-content:center;min-width:0;padding:8px 5px;border:1px solid #ffffff17;border-radius:9px;background:#1a293e;color:#d5dfef;font-size:10px}
+#adminView .internal-row .status-pill.active{border-color:#9a8aff;background:#3a3564;color:white}
+#adminView .assign-select-wrap{display:flex;align-items:center;gap:8px;padding:0 10px;border:1px solid #455670;border-radius:10px;background:#0a1524}
+#adminView .assign-select-wrap select{width:100%;height:42px;border:0;background:transparent;color:#edf2fa;outline:0}
+#adminView .hpmw-priority-box{margin:12px 0;padding:12px;border:1px solid #45516e;border-radius:12px;background:#17243a}
+#adminView .hpmw-priority-box select{width:100%;height:40px;padding:0 10px;border:1px solid #455670;border-radius:9px;background:#0b1524;color:#edf2fa}
+#adminView .moderation-actions{display:grid;gap:7px}
+#adminView .moderation-actions .btn{justify-content:flex-start;width:100%;min-height:39px;border:1px solid #ffffff18;border-radius:9px;background:#1a293e;color:#dbe4f2}
+#adminView .moderation-actions .btn.danger{background:#482a36;color:#ffc2cc}
+#adminView .moderation-actions .btn.success{background:#1e443b;color:#a5e6c7}
+#adminView .detail-conversation-column{min-width:0}
+#adminView .chat-title{margin-bottom:12px;color:#fff;font-size:16px;font-weight:850}
+#adminView .chat-thread{display:grid;gap:14px}
+#adminView .chat-msg{display:grid;grid-template-columns:38px minmax(0,1fr);gap:10px;align-items:start}
+#adminView .chat-avatar{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:#51458e;color:white;font-weight:900;overflow:hidden}
+#adminView .chat-avatar img{width:100%;height:100%;object-fit:cover}
+#adminView .chat-bubble{padding:12px 14px;border:1px solid var(--hd-line);border-radius:4px 14px 14px 14px;background:#18263a;color:#dce5f2;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere}
+#adminView .chat-msg.mine .chat-bubble{border-color:#6d61bd;background:#28284a}
+#adminView .chat-meta{margin-bottom:5px;color:#fff;font-size:11px;font-weight:850}
+#adminView .chat-role,#adminView .chat-time{color:#91a1b8;font-size:10px}
+#myTicketsView .close-request{margin-top:14px;padding:16px;border:1px solid #7d6036;border-radius:13px;background:#342b20}
+@media(max-width:1050px){#adminView .admin-layout{grid-template-columns:1fr}#adminView .admin-nav{position:static;grid-template-columns:repeat(2,minmax(0,1fr))}#adminView .detail-workspace{grid-template-columns:1fr}#adminView .moderation-nav{position:static}#myTicketsView .detail-facts,#adminView .detail-facts{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:760px){
+#myTicketsView .page-head,#adminView .page-head{padding:22px 18px;align-items:flex-start}
+#myTicketsView .page-head>.btn,#adminView .page-head>.btn{padding:9px 11px;font-size:11px}
+#myTicketsView .member-table-wrap,#adminView .ticket-table-wrap{padding:7px;overflow:visible}
+#myTicketsView .member-table tbody tr,#adminView .ticket-table tbody tr{grid-template-columns:1fr 1fr;gap:9px 12px;padding:14px}
+#myTicketsView .member-table td:nth-child(2),#adminView .ticket-table td:nth-child(2){grid-column:1/-1}
+#myTicketsView .member-table td:nth-child(2){grid-row:1}
+#myTicketsView .member-table td:nth-child(1){grid-column:1;grid-row:2}
+#myTicketsView .member-table td:nth-child(3){grid-column:2;grid-row:2}
+#myTicketsView .member-table td:nth-child(4){grid-column:1;grid-row:3}
+#myTicketsView .member-table td:nth-child(5){grid-column:2;grid-row:3}
+#adminView .ticket-table td:nth-child(1){grid-column:1;grid-row:2}
+#adminView .ticket-table td:nth-child(2){grid-column:1/-1;grid-row:1}
+#adminView .ticket-table td:nth-child(3){grid-column:2;grid-row:2}
+#adminView .ticket-table td:nth-child(4){grid-column:1;grid-row:3}
+#adminView .ticket-table td:nth-child(5){grid-column:2;grid-row:3}
+#adminView .ticket-table td:nth-child(6){grid-column:1/-1;grid-row:4}
+#adminView .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+#adminView .admin-search-box{grid-template-columns:1fr}
+#adminView .admin-search-title{grid-column:auto}
+#adminView .status-filter{width:100%;min-width:0}
+#adminView .admin-nav{grid-template-columns:1fr 1fr}
+#myTicketsView .detail-facts,#adminView .detail-facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+#myTicketsView .member-detail,#adminView #adminDetail{padding:14px}
+#myTicketsView .member-detail .detail-head,#adminView #adminDetail>.detail-head{flex-direction:column}
+}
+@media(max-width:430px){#myTicketsView .page-head,#adminView .page-head{display:block}#myTicketsView .page-head>.btn,#adminView .page-head>.btn{margin-top:14px}#adminView .stats .stat{padding:11px;grid-template-columns:32px 1fr;gap:2px 8px}#adminView .stat-icon{width:32px;height:32px}#adminView .stats .stat strong{font-size:21px}#adminView .admin-nav{grid-template-columns:1fr}#myTicketsView .detail-facts,#adminView .detail-facts{grid-template-columns:1fr 1fr}}
 </style></body></html>
