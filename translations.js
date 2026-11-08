@@ -261,7 +261,7 @@ Object.assign(translations.en, {
   "Eigen tickets worden direct ingelezen...": "Your tickets are being loaded...",
   "FAQ": "FAQ",
   "Onofficieel Harry Potter-fanforum": "Unofficial Harry Potter Fan Forum",
-  "footer_copyright": "Unofficial Harry Potter Fan Forum,",
+  "footer_copyright": "Unofficial Harry Potter Fan Forum",
   "Forum": "Forum",
   "Forumfouten & Bugs": "Forum errors & bugs",
   "Forumtopic": "Forum topic",
