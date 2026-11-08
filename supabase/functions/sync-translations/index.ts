@@ -72,8 +72,9 @@ Deno.serve(async (req) => {
 
     const dictionaries: Record<string, Record<string, string>> = { nl: {}, en: {}, pt: {} };
     for (const row of rows ?? []) {
-      const key = typeof row.nl === "string" ? row.nl.trim() : "";
+      const key = typeof row.source_key === "string" && row.source_key.trim() ? row.source_key.trim() : (typeof row.nl === "string" ? row.nl.trim() : "");
       if (!key) continue;
+      dictionaries.nl[key] = row.nl;
       for (const lang of ["en", "pt"]) {
         const value = row[lang];
         if (typeof value === "string" && value.length > 0) dictionaries[lang][key] = value;
