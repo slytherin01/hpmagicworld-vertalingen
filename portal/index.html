@@ -1437,10 +1437,42 @@ main.shell{width:100%!important;max-width:none!important;margin:0 auto!important
 </form><div class="hpmw-codepen-links"><a href="/profile?mode=sendpassword">Wachtwoord vergeten?</a><a href="/register">Nog geen account? Registreren</a></div></section></div>
 <div id="hpmwPortalNotices" aria-live="polite"></div>
 </section><section class="view" id="homeView">
-<!-- EIGEN AFBEELDING VOOR DEZE PAGINA: vervang IMAGE_URL_HIER en LINK_URL_HIER.
-<a href="LINK_URL_HIER"><img src="IMAGE_URL_HIER" alt="Beschrijving afbeelding" style="max-width:100%;height:auto;display:block;margin:0 auto;"></a>
--->
-<section class="support-hero"><h1>Ticket Support : Waar kunnen we mee helpen?</h1></section><div class="panel support-categories-panel"><div class="panel-head"><div></div></div><div class="categories" id="categories"></div></div>
+  <div class="intranet-welcome">
+    <div class="intranet-welcome-copy">
+      <div class="intranet-kicker"><span class="intranet-live-dot"></span> MINISTERIE-INTRANET</div>
+      <h1>Goedendag, <span id="intranetWelcomeName">collega</span></h1>
+      <p>Welkom in het interne portaal van het Ministerie van Dreuzels. Vind snel de juiste afdeling, bekijk updates en regel je supportzaken op één plek.</p>
+      <div class="intranet-welcome-actions">
+        <button class="intranet-primary-action" id="intranetNewTicket" type="button"><i class="fa-solid fa-plus"></i> Nieuwe supportaanvraag</button>
+        <button class="intranet-secondary-action" id="intranetMyTickets" type="button"><i class="fa-solid fa-inbox"></i> Mijn tickets</button>
+      </div>
+    </div>
+    <div class="intranet-welcome-mark"><i class="fa-solid fa-landmark"></i><span>MINISTRY<br>INTERNAL NETWORK</span></div>
+  </div>
+  <div class="intranet-section-heading"><div><span>WERKOMGEVING</span><h2>Snelle toegang</h2><p>De belangrijkste onderdelen van het Ministerie binnen handbereik.</p></div></div>
+  <div class="intranet-app-grid">
+    <a class="intranet-app-card" href="https://testforumjoost.forumactie.com/forum" target="_blank" rel="noopener noreferrer"><span class="intranet-app-icon"><i class="fa-solid fa-comments"></i></span><span class="intranet-app-copy"><strong>Ministerieforum</strong><small>Berichten, gesprekken en community</small></span><i class="fa-solid fa-arrow-up-right-from-square intranet-app-arrow"></i></a>
+    <a class="intranet-app-card" href="https://testforumjoost.forumactie.com/h13-dev-sorting-hat" target="_blank" rel="noopener noreferrer"><span class="intranet-app-icon"><i class="fa-solid fa-hat-wizard"></i></span><span class="intranet-app-copy"><strong>De Sorteerhoed</strong><small>Ontdek of wijzig je afdeling</small></span><i class="fa-solid fa-arrow-up-right-from-square intranet-app-arrow"></i></a>
+    <a class="intranet-app-card" href="https://testforumjoost.forumactie.com/h6-beta-nieuws" target="_blank" rel="noopener noreferrer"><span class="intranet-app-icon"><i class="fa-solid fa-newspaper"></i></span><span class="intranet-app-copy"><strong>Ministerienieuws</strong><small>Nieuws en mededelingen</small></span><i class="fa-solid fa-arrow-up-right-from-square intranet-app-arrow"></i></a>
+    <a class="intranet-app-card" href="https://testforumjoost.forumactie.com/h4-beta-premium-member" target="_blank" rel="noopener noreferrer"><span class="intranet-app-icon"><i class="fa-solid fa-crown"></i></span><span class="intranet-app-copy"><strong>Premium</strong><small>Extra voordelen en mogelijkheden</small></span><i class="fa-solid fa-arrow-up-right-from-square intranet-app-arrow"></i></a>
+    <button class="intranet-app-card" id="intranetFaq" type="button"><span class="intranet-app-icon"><i class="fa-solid fa-circle-question"></i></span><span class="intranet-app-copy"><strong>Veelgestelde vragen</strong><small>Hulp en praktische informatie</small></span><i class="fa-solid fa-arrow-right intranet-app-arrow"></i></button>
+    <button class="intranet-app-card" id="intranetSupport" type="button"><span class="intranet-app-icon"><i class="fa-solid fa-headset"></i></span><span class="intranet-app-copy"><strong>Supportcentrum</strong><small>Bekijk alle supportcategorieën</small></span><i class="fa-solid fa-arrow-right intranet-app-arrow"></i></button>
+  </div>
+  <div class="intranet-lower-grid">
+    <section class="intranet-service-panel">
+      <div class="intranet-section-heading compact"><div><span>HULP & ONDERSTEUNING</span><h2>Waarmee kunnen we helpen?</h2><p>Kies een categorie om een supportaanvraag te starten.</p></div></div>
+      <div class="categories" id="categories"></div>
+    </section>
+    <aside class="intranet-info-panel">
+      <div class="intranet-info-title"><span class="intranet-info-icon"><i class="fa-solid fa-circle-info"></i></span><div><span>INFORMATIE</span><h3>Zo werkt het portaal</h3></div></div>
+      <ol class="intranet-steps">
+        <li><b>01</b><span><strong>Kies een onderdeel</strong><small>Open de dienst of supportcategorie die je nodig hebt.</small></span></li>
+        <li><b>02</b><span><strong>Verstuur je aanvraag</strong><small>Geef je vraag een duidelijk onderwerp en beschrijving.</small></span></li>
+        <li><b>03</b><span><strong>Volg de voortgang</strong><small>Bekijk reacties en updates bij Mijn tickets.</small></span></li>
+      </ol>
+      <div class="intranet-info-foot"><i class="fa-solid fa-shield-halved"></i> Interne omgeving van het Ministerie van Dreuzels</div>
+    </aside>
+  </div>
 </section><section class="view" id="formView">
 <!-- EIGEN AFBEELDING VOOR DEZE PAGINA: vervang IMAGE_URL_HIER en LINK_URL_HIER.
 <a href="LINK_URL_HIER"><img src="IMAGE_URL_HIER" alt="Beschrijving afbeelding" style="max-width:100%;height:auto;display:block;margin:0 auto;"></a>
@@ -3484,6 +3516,108 @@ html body #formView .subtitle,html body #myTicketsView .subtitle,html body #admi
  html body #adminView .stats{grid-template-columns:repeat(2,minmax(0,1fr))!important}
  html body #adminView .search-input-row{flex-direction:column!important}
  html body #adminView .status-filter{max-width:none!important}
+}
+</style>
+
+<style id="hpmw-ministry-intranet-dark-2026">
+:root{color-scheme:dark;--mi-bg:#080f1a;--mi-top:#0d1725;--mi-panel:#111e2e;--mi-panel2:#16263a;--mi-line:#293c53;--mi-text:#eaf1f8;--mi-muted:#93a6bb;--mi-cyan:#69bfd0;--mi-gold:#c9a96a;--mi-blue:#6e91c8}
+html,body{background:var(--mi-bg)!important;background-image:none!important;color:var(--mi-text)!important;font-family:Inter,"Segoe UI",Arial,sans-serif!important}
+body:before,body:after,main:before,main:after,.shell:before,.shell:after{background-image:none!important}
+header.topbar,header.topbar.luxury-nav-v2,.topbar{background:#0b1523!important;background-image:none!important;border-bottom:1px solid #26384d!important;box-shadow:0 5px 20px #0005!important}
+header.topbar nav.top-actions{max-width:1440px!important;gap:7px!important}
+header.topbar .lux-nav-item{color:#c6d3e1!important;border-radius:9px!important}
+header.topbar .lux-nav-item:hover{background:#1a2a3d!important;color:#fff!important}
+header.topbar .lux-nav-icon{background:#1b3046!important;color:#9fd5e2!important;border:1px solid #34516a!important}
+header.topbar .lux-nav-usertext strong{color:#f1f5fa!important}
+.shell{width:min(1440px,calc(100% - 44px))!important;margin:28px auto 56px!important}
+.view{color:var(--mi-text)!important}
+.view .panel{background:var(--mi-panel)!important;border:1px solid var(--mi-line)!important;border-radius:15px!important;color:var(--mi-text)!important;box-shadow:0 14px 35px #0003!important}
+.view h1,.view h2,.view h3,.view strong{color:var(--mi-text)}
+.view p,.view .subtitle{color:var(--mi-muted)}
+button,input,select,textarea{font-family:inherit!important}
+input,select,textarea{background:#0b1522!important;color:var(--mi-text)!important;border:1px solid #344b64!important;border-radius:9px!important}
+input:focus,select:focus,textarea:focus{outline:none!important;border-color:var(--mi-cyan)!important;box-shadow:0 0 0 3px #69bfd022!important}
+#homeView{display:none}
+#homeView.active{display:block}
+#homeView .intranet-welcome{position:relative;display:flex;align-items:center;justify-content:space-between;gap:30px;min-height:260px;
+ padding:42px 48px;margin-bottom:25px;overflow:hidden;border:1px solid #31506b;border-radius:18px;
+ background:linear-gradient(112deg,#142b40 0%,#122236 55%,#1a2b42 100%);box-shadow:0 20px 45px #0004}
+#homeView .intranet-welcome:after{content:"";position:absolute;width:430px;height:430px;right:-135px;top:-225px;border-radius:50%;
+ border:1px solid #8ac6d51f;box-shadow:0 0 0 35px #8ac6d50a,0 0 0 75px #8ac6d506;pointer-events:none}
+#homeView .intranet-welcome-copy{position:relative;z-index:1;max-width:760px}
+#homeView .intranet-kicker{display:flex;align-items:center;gap:9px;color:#8ed0dd;font-size:10px;font-weight:850;letter-spacing:.2em;margin-bottom:16px}
+#homeView .intranet-live-dot{width:7px;height:7px;border-radius:50%;background:#6ed0ae;box-shadow:0 0 0 4px #6ed0ae20}
+#homeView .intranet-welcome h1{margin:0;color:#f5f8fc;font-size:clamp(30px,4vw,43px);font-weight:780;letter-spacing:-.045em;line-height:1.12}
+#homeView .intranet-welcome h1 span{color:#83c8d6}
+#homeView .intranet-welcome p{max-width:650px;margin:14px 0 22px;color:#b4c5d6;font-size:14px;line-height:1.75}
+#homeView .intranet-welcome-actions{display:flex;flex-wrap:wrap;gap:10px}
+#homeView .intranet-welcome-actions button{min-height:43px;padding:10px 16px;border-radius:9px;font-size:12px;font-weight:750;cursor:pointer}
+#homeView .intranet-primary-action{background:#398ba2;border:1px solid #57a9bd;color:#fff}
+#homeView .intranet-primary-action:hover{background:#4a9db4}
+#homeView .intranet-secondary-action{background:#1b3046;border:1px solid #3b566f;color:#dce8f3}
+#homeView .intranet-welcome-mark{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:12px;min-width:180px;color:#7fb8c7;opacity:.85}
+#homeView .intranet-welcome-mark i{font-size:76px}
+#homeView .intranet-welcome-mark span{font-size:9px;letter-spacing:.22em;line-height:1.7;text-align:center;font-weight:800}
+#homeView .intranet-section-heading{display:flex;justify-content:space-between;align-items:end;margin:28px 0 14px}
+#homeView .intranet-section-heading>div>span{color:#77bdcc;font-size:9px;letter-spacing:.18em;font-weight:850}
+#homeView .intranet-section-heading h2{margin:5px 0 4px;font-size:21px;font-weight:760;letter-spacing:-.025em}
+#homeView .intranet-section-heading p{margin:0;font-size:12px;color:#8fa2b8}
+#homeView .intranet-app-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+#homeView .intranet-app-card{display:flex;align-items:center;gap:13px;min-width:0;min-height:88px;padding:15px;
+ border:1px solid #2a3d54;border-radius:12px;background:linear-gradient(145deg,#142236,#101b2a);
+ text-align:left;text-decoration:none;color:#eaf1f8;cursor:pointer;transition:transform .16s,border-color .16s,background .16s}
+#homeView .intranet-app-card:hover{transform:translateY(-2px);border-color:#5b9eb1;background:#192b40}
+#homeView .intranet-app-icon{display:grid;place-items:center;flex:0 0 42px;width:42px;height:42px;border-radius:10px;
+ background:#203b50;border:1px solid #35566e;color:#8ed0df;font-size:17px}
+#homeView .intranet-app-copy{display:flex;flex-direction:column;gap:4px;min-width:0}
+#homeView .intranet-app-copy strong{font-size:12px;color:#edf4fa}
+#homeView .intranet-app-copy small{font-size:10px;color:#91a5bb;line-height:1.4}
+#homeView .intranet-app-arrow{margin-left:auto;color:#718aa3;font-size:11px}
+#homeView .intranet-lower-grid{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(280px,.8fr);gap:14px;margin-top:25px}
+#homeView .intranet-service-panel,#homeView .intranet-info-panel{min-width:0;padding:21px;border:1px solid #2a3d54;border-radius:14px;background:#101b2a}
+#homeView .intranet-section-heading.compact{margin:0 0 16px}
+#homeView .categories{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}
+#homeView .categories>*{min-width:0!important;padding:14px!important;border:1px solid #2d425b!important;border-radius:10px!important;
+ background:#17273a!important;color:#eaf1f8!important;box-shadow:none!important}
+#homeView .categories>*:hover{border-color:#5b9eb1!important;background:#1b3045!important}
+#homeView .categories h2,#homeView .categories h3,#homeView .categories strong{color:#edf4fa!important}
+#homeView .categories p,#homeView .categories small{color:#91a5bb!important}
+#homeView .intranet-info-title{display:flex;align-items:center;gap:12px;padding-bottom:17px;border-bottom:1px solid #293c53}
+#homeView .intranet-info-icon{display:grid;place-items:center;width:40px;height:40px;border-radius:10px;background:#1c3549;color:#83c9d8}
+#homeView .intranet-info-title>div>span{color:#77bdcc;font-size:9px;font-weight:850;letter-spacing:.15em}
+#homeView .intranet-info-title h3{margin:3px 0 0;font-size:15px}
+#homeView .intranet-steps{list-style:none;padding:4px 0 0;margin:0}
+#homeView .intranet-steps li{display:flex;gap:13px;padding:14px 0;border-bottom:1px solid #26394e}
+#homeView .intranet-steps li>b{color:#77bdcc;font-size:11px;letter-spacing:.08em;padding-top:2px}
+#homeView .intranet-steps li span{display:flex;flex-direction:column;gap:4px}
+#homeView .intranet-steps strong{font-size:11px;color:#e6eef7}
+#homeView .intranet-steps small{font-size:10px;line-height:1.5;color:#91a5bb}
+#homeView .intranet-info-foot{display:flex;gap:8px;align-items:center;margin-top:17px;color:#8298af;font-size:10px}
+#homeView .intranet-info-foot i{color:#79c1ce}
+#introView .intro-static-card,#introView .center-message,#introView .hpmw-welcome-box{background:#111e2e!important;border:1px solid #2a3d54!important;color:#edf3fa!important;border-radius:16px!important;box-shadow:0 18px 42px #0005!important}
+#introView h1,#introView h2,#introView p{color:#edf3fa!important}
+#introView .hpmw-portal-logo{margin:10px auto 22px!important}
+#formView .new-ticket-head,#myTicketsView>.page-head,#adminView>.page-head{background:#14243a!important;border:1px solid #2c4059!important;border-radius:14px!important;padding:22px!important}
+#formView .new-ticket-head h1,#myTicketsView .page-head h1,#adminView .page-head h1{color:#edf3fa!important}
+#formView>.panel,#myTicketsView>.panel,#adminView>.panel{background:#101b2a!important;border:1px solid #2a3d54!important}
+#formView .field label{color:#cbd8e6!important}
+#formView .btn,#myTicketsView .btn,#adminView .btn{background:#1b2e43!important;border:1px solid #3a536c!important;color:#e4edf6!important;border-radius:8px!important}
+#formView .btn.primary,#myTicketsView .btn.primary,#adminView .btn.primary{background:#287f98!important;border-color:#4c9eb4!important;color:#fff!important}
+#myTicketsView .ticket-list>*,#adminView .ticket-list>*{background:#16263a!important;border:1px solid #2c4059!important}
+#myTicketsView .detail-head,#adminView .detail-head{background:#192a40!important;border-bottom:1px solid #30455f!important}
+#myTicketsView .detail-facts>div,#adminView .detail-facts>div{background:#101b2a!important;border:1px solid #30445e!important}
+#adminView .admin-nav,#adminView .admin-toolbar,#adminView .detail-sidebar{background:#0d1827!important;border-color:#2a3d54!important}
+#adminView .stat{background:#17283c!important;border:1px solid #2b4059!important}
+#adminView .stat strong,#adminView .stat small{color:#eaf1f8!important}
+@media(max-width:900px){#homeView .intranet-app-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#homeView .intranet-lower-grid{grid-template-columns:1fr}}
+@media(max-width:620px){
+ .shell{width:calc(100% - 22px)!important;margin:18px auto 38px!important}
+ #homeView .intranet-welcome{padding:25px 21px;min-height:0}
+ #homeView .intranet-welcome-mark{display:none}
+ #homeView .intranet-app-grid{grid-template-columns:1fr}
+ #homeView .intranet-lower-grid{grid-template-columns:1fr}
+ #homeView .categories{grid-template-columns:1fr!important}
+ #homeView .intranet-service-panel,#homeView .intranet-info-panel{padding:15px}
 }
 </style>
 </body></html>
