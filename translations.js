@@ -405,7 +405,6 @@ if(row[lang] !== null && row[lang] !== undefined && row[lang] !== ''){
  }
 }
 async function init(){
- await loadSupabaseTranslations();
  const nav=document.querySelector('.top-actions'),account=document.getElementById('accountLink'),select=document.getElementById('hpmwLanguage');
  if(!nav||!select||document.getElementById('hpmwGlobeButton'))return;
  const old=document.querySelector('.hpmw-language-wrap');if(old)old.style.display='none';
