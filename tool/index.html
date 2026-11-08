@@ -3483,5 +3483,23 @@ body.supabase-authenticated #adminTopbar{position:relative!important;top:auto!im
 #adminTopbar .top-actions{max-width:1180px!important}
 </style>
 
+
+<style id="hpmw-fix-admin-logo-overlap">
+/* De beheeromgeving gebruikt de achtergrondafbeelding, niet het oude zwevende portaal-logo. */
+body.supabase-authenticated main.shell>.view::before,
+body.supabase-authenticated main.shell>.view::after,
+body.supabase-authenticated #newAdminDashboard::before,
+body.supabase-authenticated #newTranslationsView::before,
+body.supabase-authenticated #adminView::before{
+ content:none!important;display:none!important;background-image:none!important;
+ position:static!important;transform:none!important;
+}
+body.supabase-authenticated main.shell{width:min(1180px,calc(100% - 40px))!important;margin:24px auto 40px!important}
+body.supabase-authenticated #newAdminDashboard .dash-head{position:relative!important;display:block!important;margin:18px 0 24px!important;padding:0!important}
+body.supabase-authenticated #newAdminDashboard .dash-head h1{margin:8px 0 10px!important;line-height:1.15!important}
+body.supabase-authenticated .hpmw-admin-intro{position:relative!important;clear:both!important;margin:0 0 28px!important}
+body.supabase-authenticated #adminTopbar{position:relative!important;top:auto!important;transform:none!important}
+@media(max-width:650px){body.supabase-authenticated main.shell{width:calc(100% - 24px)!important;margin:16px auto 28px!important}}
+</style>
 </body>
 </html>
