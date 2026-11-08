@@ -667,17 +667,7 @@ header.topbar.luxury-nav-v2 nav.top-actions #registerLaunch{margin-left:0!import
 #myTicketsView img[alt*="logo" i],#adminView img[alt*="logo" i]{display:none!important}
 /* Ticket Support opent rechtstreeks het overzicht met supportformulieren/categorieën. */
 </style>
-<style id="hpmw-final-navigation-and-no-images">
-/* Verwijder alle afbeeldingsbestanden en beeldachtergronden uit de volledige pagina. */
-img,picture,video,canvas,svg image{display:none!important;visibility:hidden!important}
-[style*="background-image"], [style*="background: url"]{background-image:none!important}
-body,body::before,body::after,main,main::before,main::after,.shell,.view{background-image:none!important}
-/* Iedere navigatiekeuze toont uitsluitend de bijbehorende view. */
-.view{display:none!important}
-.view.active{display:block!important}
-#introView:not(.active),#homeView:not(.active),#formView:not(.active),#myTicketsView:not(.active),#adminView:not(.active),#faqView:not(.active){display:none!important}
-#loginLaunch,#registerLaunch{display:none!important}
-</style>
+
 <style id="hpmw-stable-intro">
 /* Houd de intro verborgen tot Forumotion de accountstatus heeft vastgesteld. */
 html:not(.hpmw-user-ready) #introView{visibility:hidden!important}
@@ -2644,22 +2634,7 @@ html.member-login-ready #introView #hpmwGuestEntry{display:none!important;visibi
 }
 </style>
 
-<style id="hpmw-hide-ticket-support-logo-for-guests">
-/* Verberg het grote Ticket Support-logo ook in de gastweergave. */
-#introView .support-logo-wrap,
-#introView .support-logo,
-#introView .intro-support-logo,
-#introView img[alt*="logo" i],
-#introView [class*="brand-logo"],
-#introView [id*="brand-logo"]{
-  display:none!important;
-  visibility:hidden!important;
-}
-#introView::before,
-#introView::after{
-  background-image:none!important;
-}
-</style>
+
 
 <style id="hpmw-login-avatar-golden-m-refined">
 /* Gouden M iets teruggeschaald, met voldoende ruimte binnen de witte cirkel. */
@@ -3151,4 +3126,61 @@ footer.lux-footer{position:relative!important;inset:auto!important;width:100%!im
  #introView .hpmw-portal-logo{min-height:130px!important}
  #introView .hpmw-portal-logo img{max-width:90vw!important;max-height:160px!important}
 }
+</style>
+<style id="hpmw-exact-ministry-screen-rebuild">
+/* Definitieve visuele laag: nav, achtergrond, logo en welkomstkaart zoals in de referentie. */
+html,body{min-height:100%!important;background:#070a13!important}
+body{min-height:100vh!important;margin:0!important;padding:0 0 66px!important;overflow-x:hidden!important;background:#080b14 url("https://i28.servimg.com/u/f28/11/54/28/73/backgr10.png") center top/cover fixed no-repeat!important;color:#f5f4fb!important}
+body:before{content:""!important;display:block!important;position:fixed!important;inset:0!important;z-index:0!important;pointer-events:none!important;background:linear-gradient(180deg,rgba(3,5,13,.08),rgba(3,5,13,.14) 55%,rgba(3,5,13,.52))!important}
+header.topbar.luxury-nav-v2{display:flex!important;visibility:visible!important;opacity:1!important;position:relative!important;inset:auto!important;z-index:10000!important;width:100%!important;height:65px!important;min-height:65px!important;margin:0!important;padding:7px 22px!important;border:0!important;border-bottom:1px solid rgba(155,119,255,.3)!important;border-radius:0!important;background:rgba(5,7,16,.95)!important;backdrop-filter:blur(16px)!important;box-shadow:0 5px 20px #0005!important}
+header.topbar.luxury-nav-v2 nav.top-actions{display:flex!important;visibility:visible!important;opacity:1!important;position:relative!important;inset:auto!important;width:100%!important;max-width:1800px!important;height:49px!important;min-height:49px!important;margin:0 auto!important;padding:0!important;flex-direction:row!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:flex-start!important;gap:8px!important;overflow:visible!important}
+header.topbar.luxury-nav-v2 nav.top-actions:before,header.topbar.luxury-nav-v2 nav.top-actions:after{display:none!important;content:none!important}
+header.topbar.luxury-nav-v2 nav.top-actions>.lux-nav-item,header.topbar.luxury-nav-v2 nav.top-actions>.hpmw-language-wrap{display:inline-flex!important;visibility:visible!important;opacity:1!important;position:relative!important;flex:0 0 auto!important;align-items:center!important;justify-content:center!important;width:auto!important;height:auto!important;min-height:42px!important;padding:5px 11px!important;border:1px solid transparent!important;border-radius:11px!important;background:transparent!important;color:#f1eff8!important;font-size:13px!important;font-weight:750!important;white-space:nowrap!important}
+header.topbar.luxury-nav-v2 nav.top-actions>.lux-nav-item:hover{background:#211a39!important;border-color:#59418c!important}
+header.topbar.luxury-nav-v2 nav.top-actions>.lux-nav-item.active,header.topbar.luxury-nav-v2 nav.top-actions>.lux-nav-item[aria-current="page"]{background:linear-gradient(130deg,#6840c4,#34216c)!important;border-color:#8760df!important;box-shadow:0 5px 20px #7147ca40!important}
+header.topbar.luxury-nav-v2 .lux-nav-icon{display:grid!important;place-items:center!important;flex:0 0 34px!important;width:34px!important;height:34px!important;min-width:34px!important;border-radius:10px!important;background:#202337!important;color:#f1efff!important}
+header.topbar.luxury-nav-v2 .lux-nav-label{display:inline!important;visibility:visible!important;color:#f4f2fb!important}
+header.topbar.luxury-nav-v2 .lux-user{display:inline-flex!important;visibility:visible!important;margin:0 0 0 0!important;padding:4px 9px!important;border-left:1px solid #292b3b!important;border-radius:0 10px 10px 0!important}
+header.topbar.luxury-nav-v2 .lux-nav-usertext{display:flex!important;flex-direction:column!important}
+header.topbar.luxury-nav-v2 .lux-nav-usertext small{font-size:9px!important;color:#aaa9bc!important}
+header.topbar.luxury-nav-v2 .lux-nav-usertext strong{font-size:13px!important;color:#fff!important}
+header.topbar.luxury-nav-v2 nav.top-actions #myTicketsLaunch{display:inline-flex!important;margin-left:auto!important;order:90!important}
+header.topbar.luxury-nav-v2 nav.top-actions #adminLaunch{display:inline-flex!important;order:91!important}
+header.topbar.luxury-nav-v2 nav.top-actions #accountLink{display:inline-flex!important;order:93!important;margin-left:0!important}
+header.topbar.luxury-nav-v2 nav.top-actions .hpmw-language-wrap{order:92!important}
+main.shell{position:relative!important;z-index:2!important;display:block!important;width:min(1500px,calc(100% - 48px))!important;max-width:1500px!important;min-height:calc(100vh - 130px)!important;height:auto!important;margin:0 auto!important;padding:20px 0 30px!important;background:transparent!important;overflow:visible!important}
+main.shell>.view{display:none}
+main.shell>.view.active{display:block!important;visibility:visible!important;opacity:1!important}
+main.shell>.view:before{content:none!important;display:none!important;background:none!important}
+#introView{display:flex!important;visibility:visible!important;opacity:1!important;position:relative!important;min-height:calc(100vh - 160px)!important;height:auto!important;padding:0 0 20px!important;flex-direction:column!important;align-items:center!important;justify-content:flex-start!important}
+#introView .hpmw-portal-logo{display:flex!important;visibility:visible!important;opacity:1!important;position:relative!important;inset:auto!important;z-index:5!important;width:100%!important;min-height:275px!important;height:275px!important;margin:0 auto 12px!important;padding:0!important;align-items:center!important;justify-content:center!important;transform:none!important;background:transparent!important;border:0!important;box-shadow:none!important;overflow:visible!important}
+#introView .hpmw-portal-logo img{display:block!important;visibility:visible!important;opacity:1!important;position:relative!important;width:auto!important;height:auto!important;max-width:min(500px,75vw)!important;max-height:265px!important;object-fit:contain!important;margin:0 auto!important}
+#introView .intro-login-layout{display:block!important;visibility:visible!important;opacity:1!important;position:relative!important;inset:auto!important;transform:none!important;width:min(960px,calc(100% - 24px))!important;max-width:960px!important;margin:0 auto!important;padding:0!important}
+#introView .intro-static-card{display:flex!important;visibility:visible!important;opacity:1!important;flex-direction:column!important;align-items:stretch!important;width:100%!important;max-width:none!important;max-height:none!important;overflow:visible!important;margin:0!important;padding:0!important;border:1px solid rgba(145,92,255,.58)!important;border-radius:22px!important;background:linear-gradient(145deg,rgba(10,11,25,.94),rgba(8,10,23,.91))!important;box-shadow:0 18px 65px rgba(0,0,0,.62),0 0 30px rgba(115,69,220,.18)!important}
+#introView .center-message.hpmw-welcome-box{display:block!important;visibility:visible!important;opacity:1!important;width:100%!important;max-width:none!important;margin:0!important;padding:28px 34px 12px!important;text-align:center!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;color:#f5f4fb!important}
+#introView .center-message.hpmw-welcome-box:before{content:"✦";display:block!important;width:105px;height:18px;margin:0 auto 12px;color:#d8b5ff;font-size:18px;line-height:18px;border-top:2px solid #a16cff}
+#introView .center-message.hpmw-welcome-box h1{display:block!important;margin:0 0 14px!important;color:#fff!important;font-size:clamp(26px,2.5vw,36px)!important;line-height:1.2!important;font-weight:850!important;letter-spacing:-.025em!important;text-shadow:0 2px 12px #000!important}
+#introView .center-message.hpmw-welcome-box p{display:block!important;max-width:760px!important;margin:0 auto 10px!important;color:#d0cede!important;font-size:15px!important;line-height:1.7!important}
+#introView .hpmw-entry-actions,#introView .hpmw-member-entry-actions{display:flex!important;visibility:visible!important;opacity:1!important;position:relative!important;flex-direction:row!important;flex-wrap:nowrap!important;justify-content:center!important;align-items:stretch!important;gap:20px!important;width:100%!important;min-height:0!important;max-height:none!important;margin:14px auto 0!important;padding:0 28px 24px!important;overflow:visible!important}
+#introView .hpmw-entry-button,#introView .hpmw-home-action{display:flex!important;visibility:visible!important;opacity:1!important;flex:1 1 0!important;min-width:0!important;max-width:190px!important;min-height:103px!important;align-items:center!important;justify-content:center!important;flex-direction:column!important;gap:9px!important;padding:13px!important;border:1px solid #34334c!important;border-radius:16px!important;background:linear-gradient(145deg,rgba(34,31,58,.94),rgba(14,18,33,.98))!important;color:#fff!important;text-decoration:none!important;box-shadow:inset 0 1px 0 #ffffff0b,0 6px 20px #0004!important;cursor:pointer!important}
+#introView .hpmw-entry-button img{display:none!important}
+#introView .hpmw-entry-login:before{content:"\f0e7";font-family:"Font Awesome 6 Free";font-weight:900;font-size:29px;color:#9a69ff}
+#introView .hpmw-entry-register:before{content:"\f234";font-family:"Font Awesome 6 Free";font-weight:900;font-size:29px;color:#9a69ff}
+#introView .hpmw-entry-login:after{content:"Inloggen";font-size:14px;font-weight:750}
+#introView .hpmw-entry-register:after{content:"Registreren";font-size:14px;font-weight:750}
+#introView .hpmw-home-action i{display:block!important;font-size:30px!important;color:#9867ff!important}
+#introView .hpmw-home-action span{display:block!important;color:#fff!important;font-size:14px!important;font-weight:750!important}
+#introView .hpmw-member-entry-actions{display:none!important}
+html.member-login-ready #introView .hpmw-member-entry-actions{display:flex!important}
+html.member-login-ready #introView #hpmwGuestEntry{display:none!important}
+html.guest-login-ready #introView .hpmw-member-entry-actions{display:none!important}
+html.guest-login-ready #introView #hpmwGuestEntry{display:flex!important}
+#homeView .support-hero{margin:10px auto 22px!important;padding:20px!important;border:1px solid rgba(151,105,255,.45)!important;border-radius:18px!important;background:rgba(8,10,22,.88)!important;text-align:center!important}
+#homeView .support-hero h1{color:#fff!important}
+#homeView .support-categories-panel{border:1px solid rgba(151,105,255,.45)!important;border-radius:18px!important;background:rgba(8,10,22,.88)!important}
+footer.lux-footer{display:flex!important;position:relative!important;inset:auto!important;z-index:3!important;width:100%!important;min-height:66px!important;margin:0!important;padding:10px 18px!important;border-top:1px solid rgba(155,119,255,.3)!important;background:rgba(5,7,16,.96)!important}
+footer.lux-footer .lux-footer-inner{display:flex!important;justify-content:center!important;align-items:center!important;width:100%!important;min-height:44px!important;margin:0 auto!important;text-align:center!important;color:#d8d7e3!important}
+footer.lux-footer .lux-footer-meta{display:flex!important;justify-content:center!important;align-items:center!important;flex-wrap:wrap!important;gap:8px 16px!important;font-size:12px!important}
+@media(max-width:900px){header.topbar.luxury-nav-v2{padding:6px 10px!important}header.topbar.luxury-nav-v2 nav.top-actions{gap:4px!important;overflow-x:auto!important;overflow-y:hidden!important}header.topbar.luxury-nav-v2 .lux-nav-item{padding:5px 7px!important;font-size:11px!important}main.shell{width:calc(100% - 28px)!important}}
+@media(max-width:620px){header.topbar.luxury-nav-v2 .lux-nav-label,header.topbar.luxury-nav-v2 .lux-nav-usertext{display:none!important}#introView .hpmw-portal-logo{min-height:150px!important;height:150px!important}#introView .hpmw-portal-logo img{max-width:90vw!important;max-height:145px!important}#introView .center-message.hpmw-welcome-box{padding:22px 16px 8px!important}#introView .center-message.hpmw-welcome-box p{font-size:13px!important}#introView .hpmw-entry-actions,#introView .hpmw-member-entry-actions{flex-wrap:wrap!important;gap:9px!important;padding:0 14px 17px!important}#introView .hpmw-entry-button,#introView .hpmw-home-action{flex:1 1 calc(50% - 9px)!important;min-width:calc(50% - 9px)!important;min-height:86px!important}}
 </style></body></html>
