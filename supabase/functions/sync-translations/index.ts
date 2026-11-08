@@ -22,7 +22,7 @@ function encodeBase64Utf8(value: string): string {
 }
 
 function decodeBase64Utf8(value: string): string {
-  const binary = atob(value.replace(/\\s/g, ""));
+  const binary = atob(value.replace(/\s/g, ""));
   const bytes = Uint8Array.from(binary, (c) => c.charCodeAt(0));
   return new TextDecoder().decode(bytes);
 }
@@ -32,7 +32,7 @@ Deno.serve(async (req) => {
   if (req.method !== "POST") return json({ error: "Gebruik POST." }, 405);
 
   try {
-    const accessToken = (req.headers.get("Authorization") ?? "").replace(/^Bearer\\s+/i, "");
+    const accessToken = (req.headers.get("Authorization") ?? "").replace(/^Bearer\s+/i, "");
     if (!accessToken) return json({ error: "Niet ingelogd." }, 401);
 
     const supabaseUrl = Deno.env.get("SUPABASE_URL");
@@ -103,7 +103,7 @@ Deno.serve(async (req) => {
         `Object.assign(translations.${lang}, ${JSON.stringify(dictionaries[lang], null, 2)});`
       ),
       endMarker,
-    ].join("\\n");
+    ].join("\n");
 
     const start = source.indexOf(startMarker);
     const end = source.indexOf(endMarker);
@@ -114,7 +114,7 @@ Deno.serve(async (req) => {
       if (insertionPoint < 0) {
         return json({ error: "De vertaalcode heeft niet de verwachte invoegplek. Er is niets gepubliceerd." }, 500);
       }
-      source = source.slice(0, insertionPoint) + generated + "\\n" + source.slice(insertionPoint);
+      source = source.slice(0, insertionPoint) + generated + "\n" + source.slice(insertionPoint);
     }
 
     const putResponse = await fetch(apiBase, {
