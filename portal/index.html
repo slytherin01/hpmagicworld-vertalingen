@@ -1406,6 +1406,37 @@ main.shell{width:100%!important;max-width:none!important;margin:0 auto!important
  #adminView .status-filter{max-width:none!important}
 }
 </style>
+
+<style id="hpmw-professional-support-home-v4">
+/* Ook de eerste Ticket Support-keuzepagina krijgt de nieuwe Service Desk-interface. */
+#homeView .support-hero{position:relative!important;text-align:left!important;margin:0 0 22px!important;padding:30px 32px!important;
+ border:1px solid #293650!important;border-radius:22px!important;overflow:hidden!important;
+ background:linear-gradient(112deg,#1a2740 0%,#171f34 62%,#24213d 100%)!important;box-shadow:0 18px 46px #0003!important}
+#homeView .support-hero:before{content:"SERVICE DESK  /  MUGGLE MINISTRY";display:block;margin:0 0 10px!important;
+ color:#d9b76e!important;font-size:10px!important;font-weight:850!important;letter-spacing:.2em!important}
+#homeView .support-hero:after{content:"";position:absolute;width:230px;height:230px;right:-90px;top:-130px;border:1px solid #d9b76e25;
+ border-radius:50%;box-shadow:0 0 0 24px #d9b76e09,0 0 0 48px #d9b76e06;pointer-events:none}
+#homeView .support-hero h1{position:relative;z-index:1;margin:0!important;color:#fff!important;
+ font-size:clamp(24px,3.5vw,34px)!important;font-weight:780!important;letter-spacing:-.045em!important;line-height:1.2!important}
+#homeView .support-categories-panel{padding:24px!important;border:1px solid #293650!important;border-radius:20px!important;
+ background:linear-gradient(145deg,#141e31,#101827)!important;box-shadow:0 18px 48px #0003!important}
+#homeView .support-categories-panel .panel-head{margin:0 0 14px!important}
+#homeView .support-categories-panel .panel-head:before{content:"KIES JE ONDERWERP";display:block;color:#9aa8bf;
+ font-size:10px;font-weight:850;letter-spacing:.18em}
+#homeView .categories{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:13px!important}
+#homeView .categories>*{min-width:0!important;min-height:112px!important;padding:19px!important;border:1px solid #2c3a54!important;
+ border-radius:15px!important;background:linear-gradient(145deg,#1a2740,#141e30)!important;
+ box-shadow:0 7px 22px #0002!important;transition:transform .18s,border-color .18s,background .18s!important}
+#homeView .categories>*:hover{transform:translateY(-3px)!important;border-color:#8b7cf6!important;background:#202b47!important}
+#homeView .categories h2,#homeView .categories h3,#homeView .categories strong{color:#f3f5fb!important;font-weight:760!important}
+#homeView .categories p,#homeView .categories small{color:#9eacc1!important;line-height:1.55!important}
+@media(max-width:620px){
+ #homeView .support-hero{padding:22px!important}
+ #homeView .support-categories-panel{padding:15px!important}
+ #homeView .categories{grid-template-columns:1fr!important}
+ #homeView .categories>*{min-height:90px!important}
+}
+</style>
 </head><body><header class="topbar luxury-nav-v2"><nav aria-label="Support navigatie" class="top-actions"><a class="lux-nav-item" href="https://testforumjoost.forumactie.com/forum" rel="noopener noreferrer" target="_blank"><span class="lux-nav-icon"><i class="fa-solid fa-comments"></i></span><span class="lux-nav-label">Forum</span></a><a class="lux-nav-item" href="/h3-ticket-support" target="_self"><span class="lux-nav-icon"><i class="fa-solid fa-house"></i></span><span class="lux-nav-label">Portaal</span></a><button aria-expanded="false" aria-haspopup="dialog" class="lux-nav-item" id="faqLaunch" type="button"><span class="lux-nav-icon"><i class="fa-solid fa-circle-question"></i></span><span class="lux-nav-label">FAQ</span></button><button aria-expanded="false" class="lux-nav-item" id="ticketSupportLaunch" type="button"><span class="lux-nav-icon"><i class="fa-solid fa-ticket"></i></span><span class="lux-nav-label">Ticket Support</span></button>
 <a class="lux-nav-item" href="https://testforumjoost.forumactie.com/h13-dev-sorting-hat" id="sortingHatNav" rel="noopener noreferrer" target="_blank"><span class="lux-nav-icon"><i class="fa-solid fa-hat-wizard"></i></span><span class="lux-nav-label">De Sorteerhoed</span></a>
 <a class="lux-nav-item" href="https://testforumjoost.forumactie.com/h6-beta-nieuws" id="hpNieuwsNav" rel="noopener noreferrer" target="_blank"><span class="lux-nav-icon"><i class="fa-solid fa-newspaper"></i></span><span class="lux-nav-label">HP Nieuws</span></a><a class="lux-nav-item" href="https://testforumjoost.forumactie.com/h4-beta-premium-member" id="premiumNav" rel="noopener noreferrer" target="_blank"><span class="lux-nav-icon"><i class="fa-solid fa-crown"></i></span><span class="lux-nav-label">Premium</span></a><label aria-label="Taal kiezen" class="hpmw-language-wrap" for="hpmwLanguage"><i aria-hidden="true" class="fa-solid fa-language"></i><select id="hpmwLanguage"><option selected="" value="nl">Nederlands</option><option value="en">English</option><option value="pt">Português</option></select></label><button class="lux-nav-item" data-extracted-style="2" id="myTicketsLaunch" style="display:none"><span class="lux-nav-icon"><i class="fa-solid fa-envelope"></i></span><span class="lux-nav-label">Mijn tickets</span><b class="count-badge" id="myTicketsCount">0</b></button><button class="lux-nav-item" data-extracted-style="1" id="adminLaunch" style="display:none"><span class="lux-nav-icon"><i class="fa-solid fa-wrench"></i></span><span class="lux-nav-label">Ticketbeheer</span><b class="count-badge" id="adminTicketsCount" style="display:none">0</b></button><a class="lux-nav-item lux-user" href="/login" id="accountLink"><span class="lux-nav-icon"><span aria-hidden="true">👤</span></span><span class="lux-nav-usertext"><small>INGELOGD ALS</small><strong id="username">Gast</strong></span></a></nav></header><main class="shell"><section class="view active" id="introView">
