@@ -75,9 +75,16 @@ Deno.serve(async (req) => {
       const key = typeof row.source_key === "string" && row.source_key.trim() ? row.source_key.trim() : (typeof row.nl === "string" ? row.nl.trim() : "");
       if (!key) continue;
       dictionaries.nl[key] = row.nl;
+      // The portal translates visible Dutch source text, while source_key remains
+      // the stable database identity. Publish both keys so edits keep resolving.
+      const visibleNl = typeof row.nl === "string" ? row.nl.trim() : "";
+      if (visibleNl) dictionaries.nl[visibleNl] = visibleNl;
       for (const lang of ["en", "pt"]) {
         const value = row[lang];
-        if (typeof value === "string" && value.length > 0) dictionaries[lang][key] = value;
+        if (typeof value === "string" && value.length > 0) {
+          dictionaries[lang][key] = value;
+          if (visibleNl) dictionaries[lang][visibleNl] = value;
+        }
       }
     }
 
