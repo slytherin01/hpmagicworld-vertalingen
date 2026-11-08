@@ -1239,7 +1239,8 @@ body:not(.supabase-authenticated)>:not(#supabaseAuthGate){display:none!important
 </nav></header>
 <main class="shell">
 <section class="view active" id="newAdminDashboard">
-<div class="dash-head"><div><div class="eyebrow">HPMAGICWORLD · BEHEERTOOL</div><h1>Beheeromgeving</h1><p class="subtitle">Beheer vertalingen en supporttickets op één plek.</p></div><div class="dash-user" id="dashUser"></div></div>
+<div class="dash-head"><div><div class="eyebrow">HPMAGICWORLD · BEHEERTOOL</div><h1>Welkom in de beheeromgeving</h1><p class="subtitle">Vanuit deze omgeving beheer je de vertalingen van Hpmagicworld en behandel je binnenkomende supporttickets.</p></div><div class="dash-user" id="dashUser"></div></div>
+<div class="hpmw-admin-intro"><h2>Introductie</h2><p>Gebruik de navigatiebalk bovenaan om direct naar <strong>Vertalingen</strong> of <strong>Ticketbeheer</strong> te gaan. Bij Vertalingen kun je tekstsleutels en de Nederlandse, Engelse en Portugese teksten beheren. Bij Ticketbeheer kun je supporttickets bekijken en modereren. Deze beheeromgeving is alleen toegankelijk na het inloggen.</p></div>
 <div class="dash-grid">
 <article class="dash-card"><div class="dash-icon"><i class="fa-solid fa-language"></i></div><h2>Vertalingen</h2><p>Pas teksten aan in Nederlands, Engels en Portugees en publiceer ze naar de portal.</p><button class="btn primary" id="dashTranslations">Vertalingen beheren</button></article>
 <article class="dash-card"><div class="dash-icon"><i class="fa-solid fa-ticket"></i></div><h2>Ticketbeheer</h2><p>Behandel supporttickets en beheer reacties en statussen.</p><button class="btn primary" id="dashTickets">Ticketmoderatie openen</button></article>
@@ -3479,6 +3480,20 @@ body:not(.supabase-authenticated) #adminTopbar{display:none!important}
 <script id="hpmw-admin-navbar-actions">
 (()=>{const $=id=>document.getElementById(id);function go(id){document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));$(id)?.classList.add("active");window.scrollTo(0,0)}$("navTranslations")?.addEventListener("click",()=>{go("newTranslationsView");$("trSearch")?.dispatchEvent(new Event("input"))});$("navTickets")?.addEventListener("click",()=>{if(!["admin","moderator"].includes(window.hpmwSupabaseRole||"member")){alert("Geen moderatorrechten.");return}go("adminView");$("adminRefresh")?.click()});$("adminBack")?.addEventListener("click",()=>go("newAdminDashboard"));})();
 </script>
+
+
+<style id="hpmw-admin-intro-and-nav-visible">
+/* Duidelijke knoppen in de vaste beheer-navigatie. */
+body.supabase-authenticated #adminTopbar{display:flex!important;min-height:68px!important;visibility:visible!important;opacity:1!important}
+body.supabase-authenticated #adminTopbar .top-actions{display:flex!important;visibility:visible!important;align-items:center!important;gap:10px!important}
+body.supabase-authenticated #adminTopbar .hpmw-nav-link{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-height:44px!important;padding:8px 15px!important;border:1px solid #52627b!important;border-radius:10px!important;background:#1a2b42!important;color:#fff!important;font-weight:750!important}
+body.supabase-authenticated #adminTopbar .hpmw-nav-link span:last-child{display:inline!important}
+body.supabase-authenticated #adminTopbar .hpmw-nav-link:hover{background:#304765!important;border-color:#c3a96a!important}
+.hpmw-admin-intro{margin:8px 0 28px;padding:24px 26px;border:1px solid #465674;border-left:4px solid #b7aaff;border-radius:14px;background:linear-gradient(125deg,#17263b,#101a2a);box-shadow:0 12px 30px #0003}
+.hpmw-admin-intro h2{margin:0 0 10px;color:#fff;font-size:20px}
+.hpmw-admin-intro p{margin:0;color:#d0d9e8;font-size:14px;line-height:1.8}
+@media(max-width:650px){body.supabase-authenticated #adminTopbar .top-actions{flex-wrap:wrap!important}body.supabase-authenticated #adminTopbar .hpmw-nav-link{padding:7px 9px!important;font-size:12px!important}.hpmw-admin-intro{padding:18px}}
+</style>
 
 </body>
 </html>
