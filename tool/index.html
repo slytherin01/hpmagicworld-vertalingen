@@ -3571,5 +3571,36 @@ body:not(.supabase-authenticated) #adminTopbar .hpmw-logout-link{display:none!im
 <script id="hpmw-admin-logout-nav-action">
 (()=>{const b=document.getElementById("navLogout"),logout=document.getElementById("supabaseLogout");if(b&&logout)b.addEventListener("click",()=>logout.click());})();
 </script>
+
+<style id="hpmw-navbar-canonical-fixed-rule">
+/*
+ * CANONIEKE BEHEER-NAVBARREGEL — MOET ALS LAATSTE NAVBAR-CSS BLIJVEN STAAN.
+ * De navbar is altijd aan de bovenkant van het scherm vastgezet, ook tijdens scrollen.
+ * Bij toekomstige wijzigingen deze regel niet vervangen door static/relative/sticky.
+ */
+html body.supabase-authenticated header#adminTopbar#adminTopbar.topbar.luxury-nav-v2{
+ position:fixed!important;
+ top:0!important;right:0!important;bottom:auto!important;left:0!important;
+ inset-block-start:0!important;inset-inline:0!important;
+ width:100%!important;min-height:68px!important;
+ margin:0!important;padding:10px 24px!important;
+ transform:none!important;translate:none!important;float:none!important;
+ z-index:2147483000!important;
+ display:flex!important;visibility:visible!important;opacity:1!important;
+ background:rgba(10,17,29,.98)!important;
+ backdrop-filter:blur(14px)!important;
+}
+html body.supabase-authenticated{padding-top:70px!important}
+html body.supabase-authenticated main.shell{
+ padding-top:0!important;
+ margin-top:22px!important;
+}
+@media(max-width:700px){
+ html body.supabase-authenticated header#adminTopbar#adminTopbar.topbar.luxury-nav-v2{
+  padding:8px 10px!important;
+ }
+ html body.supabase-authenticated{padding-top:94px!important}
+}
+</style>
 </body>
 </html>
