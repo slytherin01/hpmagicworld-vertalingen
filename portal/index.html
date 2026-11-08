@@ -1154,6 +1154,123 @@ html[lang="nl"] .hpmw-translations-tool-link .hpmw-tool-nl,
 html:not([lang]),html[lang=""] .hpmw-translations-tool-link .hpmw-tool-nl{display:inline}
 html[lang="en"] .hpmw-translations-tool-link .hpmw-tool-en{display:inline}
 html[lang="pt"] .hpmw-translations-tool-link .hpmw-tool-pt{display:inline}
+</style>
+<style id="hpmw-dashboard-reference-style">
+:root{--ref-bg:#0b0d14;--ref-panel:#151821;--ref-line:#242936;--ref-purple:#854cff;--ref-text:#f5f5fa;--ref-muted:#aeb2c0}
+html,body{background:var(--ref-bg)!important;color:var(--ref-text)}
+body{background:radial-gradient(ellipse at 65% -25%,#24203c 0,transparent 48%),var(--ref-bg)!important}
+.topbar{position:fixed!important;inset:0 auto 0 0;width:280px;min-height:100vh;height:100vh;padding:26px 17px!important;align-items:flex-start;border-right:1px solid #242632;border-bottom:0;background:linear-gradient(180deg,#11131c,#0c0e15)!important;z-index:80}
+.top-actions{width:100%;height:100%;margin:0;display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:10px}
+.top-actions:before{content:"Ticket Support";display:block;margin:8px 10px 30px;padding:0 0 24px;border-bottom:1px solid #252936;color:#fff;font-size:22px;font-weight:850;letter-spacing:-.04em}
+.lux-nav-item{width:100%;min-height:51px;padding:10px 13px;border-radius:12px;color:#c4c7d2;font-size:14px}
+.lux-nav-item:hover{background:#1b1d2b;border-color:#292b3d}
+.lux-nav-item.active,.lux-nav-item[aria-current="page"]{background:linear-gradient(110deg,#30265d,#252044);border-color:#40366d;color:#fff}
+.lux-nav-icon{width:34px;height:34px;background:#242044;color:#a78aff}
+.lux-user{margin: auto 0 0!important;padding-top:18px;border-top:1px solid #252936}
+.lux-nav-usertext strong{font-size:14px}
+.shell{width:min(1280px,calc(100% - 330px))!important;max-width:none!important;margin:28px 28px 48px 308px!important}
+.lux-footer{margin-left:280px}
+.lux-footer-inner{width:calc(100% - 48px)}
+.page-head{position:relative;min-height:92px;margin:0 0 24px!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
+.page-head:before{display:none!important}
+.page-head h1{font-size:clamp(30px,3vw,40px)!important;letter-spacing:-.045em!important;color:#fff}
+.page-head .subtitle{font-size:15px!important;color:#b7bbc8!important}
+.page-head .eyebrow{color:#a78aff!important}
+.page-head>.btn{border:1px solid #35394a!important;border-radius:11px!important;background:#191c27!important;color:#e8e9f1!important}
+#adminView .panel,#myTicketsView .panel{padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important}
+#adminView .admin-layout{display:block!important;min-height:0}
+#adminView .admin-nav{display:none!important}
+#adminView .admin-main{padding:0!important}
+#adminView #adminListView{display:flex;flex-direction:column}
+#adminView .stats{order:1;gap:14px;margin:0 0 28px}
+#adminView .stats .stat{min-height:112px;padding:20px 18px 18px 82px;border:1px solid #242936;border-radius:17px;background:linear-gradient(145deg,#191c26,#13161e);box-shadow:none}
+#adminView .stat-icon{left:19px;top:24px;width:46px;height:46px;border-radius:13px;background:transparent;color:#9365ff;font-size:27px}
+#adminView .stats .stat:nth-child(2) .stat-icon{color:#f5a623}
+#adminView .stats .stat:nth-child(3) .stat-icon{color:#22d68b}
+#adminView .stats .stat:nth-child(4) .stat-icon{color:#329bff}
+#adminView .stats .stat small{font-size:13px;text-transform:none;letter-spacing:0;color:#c5c7d0;font-weight:550}
+#adminView .stats .stat strong{margin-top:3px;font-size:36px;font-weight:800}
+#adminView .status-index{order:2;display:flex;gap:0;margin:0 0 18px;padding:0 0 0 10px;border:0;border-bottom:1px solid #242936;border-radius:0;background:transparent;overflow-x:auto}
+#adminView .status-index .status-pill{position:relative;min-height:48px;padding:10px 18px;border:0;border-radius:0;background:transparent;color:#c2c4cf;font-size:14px;font-weight:600;white-space:nowrap}
+#adminView .status-index .status-pill.active{background:transparent;color:white}
+#adminView .status-index .status-pill.active:after{content:"";position:absolute;bottom:-1px;left:10px;right:10px;height:3px;border-radius:4px;background:#8953ff}
+#adminView .status-index .status-pill b{background:#292d3a;color:#dfe1eb}
+#adminView .admin-toolbar{order:3;margin:0 0 18px;padding:0;border:0;border-radius:0;background:transparent}
+#adminView .admin-search-box{grid-template-columns:minmax(0,1fr) auto auto;padding:0;border:0;background:transparent}
+#adminView .admin-search-title{display:none}
+#adminView .search-input-row{min-height:49px;padding:0 15px;border:1px solid #303544;border-radius:12px;background:#151821}
+#adminView .search-input-row input{height:46px;font-size:14px}
+#adminView .search-main-btn{min-height:49px;padding:0 18px;border:0;border-radius:11px;background:linear-gradient(120deg,#8a4cff,#7137e9);font-size:13px}
+#adminView .status-filter{height:49px;min-width:170px;border-color:#303544;border-radius:12px;background:#151821;font-size:13px}
+#adminView .ticket-list{order:4}
+#adminView .ticket-table-wrap{padding:0;border:1px solid #242936;border-radius:16px;background:#12151d;box-shadow:none}
+#adminView .ticket-table{border-spacing:0;min-width:760px}
+#adminView .ticket-table thead{display:table-header-group}
+#adminView .ticket-table th{padding:17px 15px;background:#191c25;border-bottom:1px solid #282d39;color:#c3c6d1;font-size:12px;letter-spacing:0;text-transform:none}
+#adminView .ticket-table tbody{display:table-row-group}
+#adminView .ticket-table tbody tr{display:table-row;background:transparent;border:0;border-radius:0;transform:none!important}
+#adminView .ticket-table tbody tr:hover{background:#1b1e29;border-color:transparent}
+#adminView .ticket-table td{padding:15px;border-bottom:1px solid #252a35;font-size:14px;vertical-align:middle}
+#adminView .ticket-table tbody tr:last-child td{border-bottom:0}
+#adminView .ticket-table .ticket-id{color:#c5c8d2!important;font-weight:550}
+#adminView .ticket-table .ticket-subject{color:#f6f6fa!important;font-size:14px;font-weight:650}
+#adminView .ticket-state{padding:7px 12px;border:0;border-radius:10px;background:#30204d;color:#b98aff;font-size:12px}
+#adminView .ticket-state.progress{background:#493019;color:#ffb84d}
+#adminView .ticket-state.closed{background:#123c30;color:#26d995}
+#adminView .ticket-state.pending{background:#443a12;color:#ffd44f}
+#adminView .ticket-table .hpmw-priority-pill{border-radius:9px}
+#adminView #adminDetail{border:1px solid #292d3a;border-radius:18px;background:#141720;box-shadow:none}
+#adminView .detail-workspace{gap:18px}
+#adminView .moderation-nav,#adminView .helpdesk-chat,#adminView .reply-box{border-color:#2a2f3d;background:#171b25}
+#myTicketsView .page-head{margin-bottom:24px!important}
+#myTicketsView .member-tabs{width:100%;display:flex;gap:0;margin:0 0 18px;padding:0;border:0;border-bottom:1px solid #262a36;border-radius:0;background:transparent}
+#myTicketsView .member-tab{position:relative;min-height:49px;padding:11px 20px;border:0;border-radius:0;background:transparent;color:#bfc2cd;font-size:14px}
+#myTicketsView .member-tab.active{background:transparent;color:#fff;box-shadow:none}
+#myTicketsView .member-tab.active:after{content:"";position:absolute;bottom:-1px;left:10px;right:10px;height:3px;border-radius:4px;background:#8953ff}
+#myTicketsView .member-table-wrap{padding:0;border:1px solid #252a36;border-radius:16px;background:#12151d;box-shadow:none}
+#myTicketsView .member-table{border-spacing:0;min-width:650px}
+#myTicketsView .member-table thead{display:table-header-group}
+#myTicketsView .member-table th{padding:16px 14px;background:#191c25;border-bottom:1px solid #282d39;color:#c3c6d1;font-size:12px;letter-spacing:0;text-transform:none}
+#myTicketsView .member-table tbody{display:table-row-group}
+#myTicketsView .member-table tbody tr{display:table-row;background:transparent;border:0;border-radius:0;transform:none!important}
+#myTicketsView .member-table tbody tr:hover{background:#1b1e29;border-color:transparent}
+#myTicketsView .member-table td{padding:15px 14px;border-bottom:1px solid #252a35;font-size:13px}
+#myTicketsView .member-table tbody tr:last-child td{border-bottom:0}
+#myTicketsView .member-table .member-id{color:#c3c7d1!important}
+#myTicketsView .member-table .member-subject{color:#f5f5fa!important;font-size:14px}
+#myTicketsView .member-status{padding:7px 11px;border:0;border-radius:9px;background:#30204d;color:#b98aff;font-size:11px}
+#myTicketsView .member-status.progress{background:#493019;color:#ffb84d}
+#myTicketsView .member-status.done{background:#123c30;color:#26d995}
+#myTicketsView .member-detail{border-color:#2a2f3d;background:#141923;box-shadow:none}
+#myTicketsView .member-posts,#myTicketsView .reply-box{border-color:#2a2f3d;background:#171b25}
+@media(max-width:900px){
+ .topbar{position:sticky!important;inset:auto!important;width:100%;height:auto;min-height:64px;padding:8px 12px!important;border-right:0;border-bottom:1px solid #242632}
+ .top-actions{height:auto;flex-direction:row;align-items:center;gap:4px}
+ .top-actions:before{display:none}
+ .lux-nav-item{width:auto;min-height:42px;padding:7px 9px}
+ .lux-user{margin-left:auto!important;margin-top:0!important;padding-top:0;border-top:0}
+ .shell{width:calc(100% - 28px)!important;margin:22px 14px 38px!important}
+ .lux-footer{margin-left:0}
+ #adminView .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:650px){
+ .top-actions{justify-content:space-between}
+ .lux-nav-item{font-size:0;gap:0}
+ .lux-nav-icon{width:34px;height:34px}
+ #adminView .admin-search-box{grid-template-columns:1fr 1fr}
+ #adminView .search-input-row{grid-column:1/-1;grid-row:1}
+ #adminView .search-main-btn{grid-column:1;grid-row:2}
+ #adminView .status-filter{grid-column:2;grid-row:2;min-width:0}
+ #adminView .stats .stat{min-height:95px;padding:14px 10px 12px 58px}
+ #adminView .stat-icon{left:10px;top:21px;width:38px;height:38px;font-size:22px}
+ #adminView .stats .stat strong{font-size:29px}
+ #adminView .ticket-table-wrap,#myTicketsView .member-table-wrap{overflow:auto}
+ #adminView .ticket-table thead,#myTicketsView .member-table thead{display:table-header-group}
+ #adminView .ticket-table tbody,#myTicketsView .member-table tbody{display:table-row-group}
+ #adminView .ticket-table tbody tr,#myTicketsView .member-table tbody tr{display:table-row}
+ #adminView .ticket-table td,#myTicketsView .member-table td{padding:12px 10px}
+ .page-head{align-items:flex-start}
+}
 </style></head><body><header class="topbar luxury-nav-v2"><nav aria-label="Support navigatie" class="top-actions"><a class="lux-nav-item" href="https://testforumjoost.forumactie.com/forum" rel="noopener noreferrer" target="_blank"><span class="lux-nav-icon"><i class="fa-solid fa-comments"></i></span><span class="lux-nav-label">Forum</span></a><a class="lux-nav-item" href="https://testforumjoost.forumactie.com/h3-portaal" target="_self"><span class="lux-nav-icon"><i class="fa-solid fa-house"></i></span><span class="lux-nav-label">Portaal</span></a><button aria-expanded="false" aria-haspopup="dialog" class="lux-nav-item" id="faqLaunch" type="button"><span class="lux-nav-icon"><i class="fa-solid fa-circle-question"></i></span><span class="lux-nav-label">FAQ</span></button><button aria-expanded="false" class="lux-nav-item" id="ticketSupportLaunch" type="button"><span class="lux-nav-icon"><i class="fa-solid fa-ticket"></i></span><span class="lux-nav-label">Ticket Support</span></button>
 <a class="lux-nav-item" href="https://testforumjoost.forumactie.com/h13-dev-sorting-hat" id="sortingHatNav" rel="noopener noreferrer" target="_blank"><span class="lux-nav-icon"><i class="fa-solid fa-hat-wizard"></i></span><span class="lux-nav-label">De Sorteerhoed</span></a>
 <a class="lux-nav-item" href="https://testforumjoost.forumactie.com/h6-beta-nieuws" id="hpNieuwsNav" rel="noopener noreferrer" target="_blank"><span class="lux-nav-icon"><i class="fa-solid fa-newspaper"></i></span><span class="lux-nav-label">HP Nieuws</span></a><label aria-label="Taal kiezen" class="hpmw-language-wrap" for="hpmwLanguage"><i aria-hidden="true" class="fa-solid fa-language"></i><select id="hpmwLanguage"><option selected="" value="nl">Nederlands</option><option value="en">English</option><option value="pt">Português</option></select></label><button class="lux-nav-item" data-extracted-style="2" id="myTicketsLaunch" style="display:none"><span class="lux-nav-icon"><i class="fa-solid fa-envelope"></i></span><span class="lux-nav-label">Mijn tickets</span><b class="count-badge" id="myTicketsCount">0</b></button><button class="lux-nav-item" data-extracted-style="1" id="adminLaunch" style="display:none"><span class="lux-nav-icon"><i class="fa-solid fa-wrench"></i></span><span class="lux-nav-label">Ticketbeheer</span><b class="count-badge" id="adminTicketsCount" style="display:none">0</b></button><a class="lux-nav-item lux-user" href="/login" id="accountLink"><span class="lux-nav-icon"><i class="fa-solid fa-user"></i></span><span class="lux-nav-usertext"><small>INGELOGD ALS</small><strong id="username">Gast</strong></span></a></nav></header><main class="shell"><section class="view active" id="introView">
