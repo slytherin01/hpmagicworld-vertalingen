@@ -592,12 +592,7 @@ async function init(){
  refreshPortalTranslations();
  setInterval(refreshPortalTranslations,5000);
  select.addEventListener('change',()=>{const chosen=(select.value||'nl').toLowerCase();try{localStorage.setItem('hpmwSelectedLanguage',chosen)}catch(_){};location.reload()});
- // Alleen nieuw toegevoegde elementen opnieuw vertalen. Observeer geen tekstwijzigingen:
- // apply() wijzigt zelf tekst en zou anders onnodige herhaalrondes veroorzaken.
- const observer=new MutationObserver(records=>{
-  if(records.some(record=>record.addedNodes&&record.addedNodes.length))apply(current);
- });
- observer.observe(document.body,{subtree:true,childList:true});
+ // Geen MutationObserver: dynamische tekst wordt via de normale paginaflow bijgewerkt.
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
