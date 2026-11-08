@@ -455,22 +455,10 @@ button.content-edit:hover,button.content-delete:hover{
         </section>
         <section id="ticketsView" style="display:none">
           <h2>Ticketbeheer</h2>
-          <p class="small">Gedeelde moderatorgegevens uit Supabase. Forumotion blijft de bron voor ticketberichten en accounts.</p>
-          <div id="ticketsStatus" role="status" style="display:none"></div>
-          <div class="toolbar"><input id="ticketMetaSearch" placeholder="Zoek ticketnummer, onderwerp of moderator…"><button class="secondary" id="ticketsReload">Vernieuwen</button></div>
-          <div style="overflow-x:auto"><table><thead><tr><th>Ticket</th><th>Status</th><th>Prioriteit</th><th>Toegewezen aan</th><th>Laatst gewijzigd</th><th></th></tr></thead><tbody id="ticketMetaRows"><tr><td colspan="6">Ticketgegevens laden…</td></tr></tbody></table></div>
-          <div id="ticketMetaEditor" class="panel hidden" style="margin-top:18px">
-            <h3 id="ticketMetaTitle">Ticketgegevens</h3>
-            <div class="content-form">
-              <label>Status<select id="ticketMetaStatus"><option value="pending">Wachten</option><option value="progress">In behandeling</option><option value="done">Gesloten</option><option value="refused">Afgewezen</option></select></label>
-              <label>Prioriteit<select id="ticketMetaPriority"><option value="low">Laag</option><option value="normal">Normaal</option><option value="high">Hoog</option><option value="urgent">Urgent</option></select></label>
-              <label>Toegewezen moderator<select id="ticketMetaAssignee"><option value="">Niet toegewezen</option><option value="1">Joost (Forumotion #1)</option><option value="3">Test Account 2 (Forumotion #3)</option></select></label>
-              <label>Interne notitie<textarea id="ticketMetaNote" rows="4" placeholder="Alleen zichtbaar voor beheerders"></textarea></label>
-              <button id="ticketMetaSave" type="button">Wijzigingen opslaan</button>
-              <button id="ticketMetaCancel" type="button" class="secondary">Annuleren</button>
-            </div>
+          <p class="small">Live ticketbeheer vanuit Forumotion. De gesprekken en reacties blijven op Forumotion; moderatorgegevens worden gedeeld via Supabase.</p>
+          <div class="panel" style="overflow:hidden">
+            <iframe id="ticketManagementFrame" title="Ticketbeheer Forumotion" src="https://testforumjoost.forumactie.com/h3-portaal?adminEmbed=1" style="display:block;width:100%;height:calc(100vh - 190px);min-height:760px;border:0;background:#090d16" loading="lazy" allow="clipboard-read; clipboard-write"></iframe>
           </div>
-          <h3>Wijzigingsgeschiedenis</h3><div id="ticketMetaEvents" class="small">Selecteer een ticket om de geschiedenis te bekijken.</div>
         </section>
         <section id="portalView" style="display:none">
           <h2>Portaal – seizoenen & decoraties</h2>
