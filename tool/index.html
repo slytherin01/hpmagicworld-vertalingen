@@ -455,9 +455,14 @@ button.content-edit:hover,button.content-delete:hover{
         </section>
         <section id="ticketsView" style="display:none">
           <h2>Ticketbeheer</h2>
-          <p class="small">Live ticketbeheer vanuit Forumotion. De gesprekken en reacties blijven op Forumotion; moderatorgegevens worden gedeeld via Supabase.</p>
-          <div class="panel" style="overflow:hidden">
-            <iframe id="ticketManagementFrame" title="Ticketbeheer Forumotion" src="https://testforumjoost.forumactie.com/h3-portaal?adminEmbed=1" style="display:block;width:100%;height:calc(100vh - 190px);min-height:760px;border:0;background:#090d16" loading="lazy" allow="clipboard-read; clipboard-write"></iframe>
+          <p class="small">Open het live ticketbeheer op Forumotion. Zo kan de bestaande moderatorsessie veilig worden gebruikt voor het ophalen, beantwoorden en modereren van tickets.</p>
+          <div class="panel" style="padding:24px;max-width:760px">
+            <h3>Open de ticketadministratie</h3>
+            <p class="small">Forumotion blokkeert in veel browsers de gedeelde inlogsessie in een ingesloten venster. Open Ticketbeheer daarom rechtstreeks. De tickets en gesprekken blijven op Forumotion; gedeelde moderatorgegevens worden in Supabase bewaard.</p>
+            <a href="https://testforumjoost.forumactie.com/h3-portaal?adminEmbed=1" target="_blank" rel="noopener noreferrer" class="primary" style="display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:10px;text-decoration:none;font-weight:700;background:#b48a3c;color:#101827">
+              <i class="fa-solid fa-ticket"></i> Open live Ticketbeheer
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
           </div>
         </section>
         <section id="portalView" style="display:none">
