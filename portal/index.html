@@ -3501,4 +3501,147 @@ body:has(#adminView.active) #adminView,body:has(#myTicketsView.active) #myTicket
  #adminView .ticket-table,#myTicketsView .member-table{min-width:690px!important}
  #myTicketsView #memberDetail .detail-head,#adminView #adminDetail .detail-head{flex-direction:column!important}
 }
-</style></body></html>
+</style>
+<style id="hpmw-ticket-workspace-v2-css">
+/* New compact helpdesk workspace: viewport-fit, paged cards, no document scrolling. */
+body:has(#adminView.active),body:has(#myTicketsView.active){height:100dvh!important;min-height:0!important;overflow:hidden!important;padding:0!important;background:#090c16!important}
+body:has(#adminView.active) header.topbar,body:has(#myTicketsView.active) header.topbar,
+body:has(#adminView.active) #hpmwIntranetDashboard,body:has(#myTicketsView.active) #hpmwIntranetDashboard,
+body:has(#adminView.active) footer,body:has(#myTicketsView.active) footer{display:none!important}
+body:has(#adminView.active) main.shell,body:has(#myTicketsView.active) main.shell{display:block!important;box-sizing:border-box!important;width:100%!important;max-width:none!important;height:100dvh!important;min-height:0!important;margin:0!important;padding:16px 22px!important;overflow:hidden!important;background:radial-gradient(ellipse at 50% 0%,#1c1a31,#0c101c 54%,#080b14)!important}
+body:has(#adminView.active) #adminView,body:has(#myTicketsView.active) #myTicketsView{box-sizing:border-box!important;display:flex!important;flex-direction:column!important;width:100%!important;height:calc(100dvh - 32px)!important;min-height:0!important;max-height:calc(100dvh - 32px)!important;margin:0!important;padding:0!important;overflow:hidden!important}
+#adminView>.page-head,#myTicketsView>.page-head{flex:0 0 auto!important;display:flex!important;align-items:center!important;justify-content:space-between!important;gap:14px!important;margin:0 0 12px!important;padding:0 0 12px!important;border:0!important;border-bottom:1px solid #292d43!important;background:transparent!important}
+#adminView>.page-head h1,#myTicketsView>.page-head h1{margin:0!important;color:#fff!important;font-size:clamp(23px,2vw,31px)!important;line-height:1.1!important;font-weight:850!important}
+#adminView>.page-head .subtitle,#myTicketsView>.page-head .subtitle{margin:4px 0 0!important;color:#aeb3c7!important;font-size:12px!important}
+#adminView>.page-head .eyebrow,#myTicketsView>.page-head .eyebrow{color:#a77aff!important;font-size:10px!important;letter-spacing:.12em!important}
+#adminView>.page-head>.btn,#myTicketsView>.page-head>.btn{min-height:36px!important;padding:7px 13px!important;border:1px solid #363b54!important;border-radius:9px!important;background:#171b2b!important;color:#eee!important}
+#adminView>.panel,#myTicketsView>.panel{box-sizing:border-box!important;display:flex!important;flex:1 1 auto!important;flex-direction:column!important;width:100%!important;min-width:0!important;min-height:0!important;max-height:none!important;margin:0!important;padding:14px!important;overflow:hidden!important;border:1px solid #292e44!important;border-radius:14px!important;background:linear-gradient(145deg,rgba(19,22,36,.98),rgba(12,15,26,.98))!important;box-shadow:0 12px 34px #0005!important}
+#adminView .admin-layout{display:flex!important;flex:1 1 auto!important;flex-direction:column!important;width:100%!important;min-width:0!important;min-height:0!important}
+#adminView .admin-nav{display:none!important}
+#adminView .admin-main{display:flex!important;flex:1 1 auto!important;flex-direction:column!important;width:100%!important;min-width:0!important;min-height:0!important}
+#adminView #adminListView,#myTicketsView #myTicketsList{display:flex!important;flex:1 1 auto!important;flex-direction:column!important;min-width:0!important;min-height:0!important;overflow:hidden!important}
+#adminView .admin-toolbar{flex:0 0 auto!important;margin:0 0 10px!important}
+#adminView .admin-search-box{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(160px,220px)!important;gap:8px!important;align-items:center!important}
+#adminView .admin-search-title,#adminView .search-main-btn{display:none!important}
+#adminView .search-input-row{grid-column:1!important;grid-row:1!important;display:flex!important;align-items:center!important;min-height:38px!important;padding:0 11px!important;border:1px solid #34394f!important;border-radius:9px!important;background:#111522!important}
+#adminView .search-input-row input{width:100%!important;min-width:0!important;height:36px!important;border:0!important;outline:0!important;background:transparent!important;color:#fff!important;font-size:12px!important}
+#adminView .status-filter{grid-column:2!important;grid-row:1!important;width:100%!important;height:38px!important;min-width:0!important;border:1px solid #34394f!important;border-radius:9px!important;background:#111522!important;color:#eee!important;font-size:12px!important}
+#adminView .stats{flex:0 0 auto!important;display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:9px!important;margin:0 0 10px!important}
+#adminView .stats .stat{display:grid!important;grid-template-columns:36px 1fr!important;grid-template-rows:auto auto!important;align-items:center!important;min-width:0!important;min-height:62px!important;padding:8px 11px!important;border:1px solid #292e43!important;border-radius:10px!important;background:#171b29!important;text-align:left!important}
+#adminView .stats .stat-icon{position:static!important;grid-row:1/3!important;width:30px!important;height:30px!important;font-size:19px!important;color:#a77aff!important}
+#adminView .stats .stat small{font-size:10px!important;color:#bfc1d0!important}
+#adminView .stats .stat strong{font-size:21px!important;line-height:1.05!important;color:#fff!important}
+#adminView .status-index{flex:0 0 auto!important;display:flex!important;flex-wrap:wrap!important;gap:7px!important;margin:0 0 10px!important;padding:0!important;border:0!important;background:transparent!important}
+#adminView .status-index .status-pill{display:flex!important;align-items:center!important;gap:7px!important;min-height:31px!important;padding:6px 10px!important;border:1px solid #33384d!important;border-radius:8px!important;background:#171b29!important;color:#e8e7f1!important;font-size:10px!important}
+#adminView .ticket-list,#myTicketsView .ticket-list{display:flex!important;flex:1 1 auto!important;flex-direction:column!important;min-width:0!important;min-height:0!important;overflow:hidden!important}
+.hpmw-ticket-cards{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;align-content:start!important;gap:8px!important;width:100%!important;min-height:0!important;overflow:hidden!important}
+.hpmw-ticket-card{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;gap:5px 12px!important;min-width:0!important;min-height:75px!important;padding:11px 13px!important;border:1px solid #2b3046!important;border-radius:10px!important;background:linear-gradient(140deg,#191d2d,#121725)!important;color:#f4f3fb!important;text-align:left!important;cursor:pointer!important;transition:border-color .15s,background .15s!important}
+.hpmw-ticket-card:hover{border-color:#8054d2!important;background:#202139!important}
+.hpmw-ticket-card .hpmw-card-title{overflow:hidden;color:#fff!important;font-size:13px!important;font-weight:750!important;text-overflow:ellipsis;white-space:nowrap}
+.hpmw-ticket-card .hpmw-card-id{color:#bda0ff!important;font-size:10px!important;font-weight:800!important}
+.hpmw-ticket-card .hpmw-card-meta{display:flex!important;flex-wrap:wrap!important;gap:6px 12px!important;min-width:0!important;color:#aeb2c5!important;font-size:10px!important}
+.hpmw-ticket-card .hpmw-card-status{align-self:start!important;padding:4px 8px!important;border-radius:20px!important;background:#33264c!important;color:#d4b5ff!important;font-size:9px!important;font-weight:800!important;white-space:nowrap!important}
+.hpmw-ticket-card .hpmw-card-status.progress{background:#44351c!important;color:#ffd17b!important}
+.hpmw-ticket-card .hpmw-card-status.done{background:#153d32!important;color:#7ce2b7!important}
+.hpmw-ticket-card .hpmw-card-status.refused{background:#48252e!important;color:#ff9cac!important}
+.hpmw-ticket-card .hpmw-card-priority{color:#d7c7ff!important;font-size:9px!important}
+.hpmw-ticket-pagination{flex:0 0 auto!important;display:flex!important;align-items:center!important;justify-content:space-between!important;gap:12px!important;min-height:37px!important;margin-top:auto!important;padding-top:7px!important;border-top:1px solid #292e42!important;color:#b8b9ca!important;font-size:10px!important}
+.hpmw-ticket-pagination button{min-height:28px!important;padding:5px 12px!important;border:1px solid #393e56!important;border-radius:7px!important;background:#1a1e2d!important;color:#f2f1f8!important;font-size:10px!important;cursor:pointer!important}
+.hpmw-ticket-pagination button:disabled{opacity:.35!important;cursor:default!important}
+#myTicketsView .member-tabs{flex:0 0 auto!important;display:flex!important;gap:7px!important;margin:0 0 10px!important;padding:0 0 8px!important;border-bottom:1px solid #292e43!important}
+#myTicketsView .member-tab{min-height:32px!important;padding:6px 13px!important;border:1px solid #363b53!important;border-radius:8px!important;background:#171b29!important;color:#d8d8e7!important;font-size:11px!important}
+#myTicketsView .member-tab.active{border-color:#7850c8!important;background:#332052!important;color:#fff!important}
+#myTicketsView .member-table-wrap,#adminView .ticket-table-wrap{display:none!important}
+#adminView #adminDetail,#myTicketsView #memberDetail{display:none!important;flex:1 1 auto!important;min-height:0!important;max-height:100%!important;margin:0!important;padding:0!important;overflow:hidden!important;border:1px solid #30354a!important;border-radius:12px!important;background:#111522!important}
+#adminView #adminDetail.active,#myTicketsView #memberDetail.active{display:flex!important;flex-direction:column!important}
+#adminView #adminDetail>.detail-head,#myTicketsView #memberDetail>.detail-head{flex:0 0 auto!important;display:flex!important;align-items:flex-start!important;justify-content:space-between!important;gap:12px!important;padding:12px 15px!important;border-bottom:1px solid #2a2f43!important}
+#adminView .detail-facts,#myTicketsView .detail-facts{display:flex!important;flex-wrap:wrap!important;gap:6px!important;margin-top:8px!important}
+#adminView .detail-facts>div,#myTicketsView .detail-facts>div{min-width:110px!important;padding:6px 8px!important}
+#adminView .detail-title,#myTicketsView .detail-title{font-size:16px!important}
+#adminView .detail-workspace{display:grid!important;grid-template-columns:minmax(230px,290px) minmax(0,1fr)!important;flex:1 1 auto!important;min-height:0!important;gap:10px!important;padding:10px!important;overflow:hidden!important}
+#adminView .detail-sidebar,#adminView .detail-content{min-width:0!important;min-height:0!important;overflow:auto!important}
+#adminView .detail-content{max-height:100%!important}
+#adminView .admin-posts,#myTicketsView .member-posts{min-height:0!important;max-height:none!important;overflow:auto!important;padding:10px 14px!important}
+#myTicketsView .member-posts{flex:1 1 auto!important}
+#myTicketsView .reply-box,#adminView .reply-box{flex:0 0 auto!important;padding:9px 14px!important;margin:0!important}
+#myTicketsView .reply-box textarea,#adminView .reply-box textarea{min-height:54px!important;max-height:90px!important}
+#myTicketsView .close-request{flex:0 0 auto!important;padding:8px 14px!important;margin:0!important}
+#adminView #adminListView[style*="display: none"],#myTicketsView #myTicketsList[style*="display: none"]{display:none!important}
+#adminView .empty,#myTicketsView .empty{padding:20px!important}
+@media(max-width:900px){.hpmw-ticket-cards{grid-template-columns:1fr!important}#adminView .detail-workspace{grid-template-columns:1fr!important;overflow:auto!important}#adminView .detail-sidebar,#adminView .detail-content{overflow:visible!important}}
+@media(max-width:600px){body:has(#adminView.active) main.shell,body:has(#myTicketsView.active) main.shell{padding:9px!important}#adminView>.page-head,#myTicketsView>.page-head{margin-bottom:8px!important}#adminView>.panel,#myTicketsView>.panel{padding:9px!important}#adminView .stats{grid-template-columns:repeat(2,minmax(0,1fr))!important}#adminView .admin-search-box{grid-template-columns:1fr!important}#adminView .search-input-row,#adminView .status-filter{grid-column:1!important;grid-row:auto!important}#adminView .status-index{display:none!important}#adminView #adminDetail>.detail-head,#myTicketsView #memberDetail>.detail-head{flex-direction:column!important}#adminView .detail-workspace{display:block!important}#myTicketsView .reply-box textarea{min-height:45px!important}}
+</style>
+<script id="hpmw-ticket-workspace-v2-js">
+(function(){
+ let adminPage=0,memberPage=0;
+ const PAGE_SIZE=6;
+ const $id=id=>document.getElementById(id);
+ const safe=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+ function priority(t){return getInternal(t).priority||"normal"}
+ function priorityText(v){return ({low:"Laag",normal:"Normaal",high:"Hoog",urgent:"Urgent"})[v]||"Normaal"}
+ function status(t){return t.closed?"done":getInternal(t).status||"pending"}
+ function card(t,admin){
+  const st=status(t),meta=getInternal(t),id=admin?"data-ticket":"data-my";
+  const category=t.cat||"Algemeen";
+  const secondary=admin?("Aanvrager: "+(t.user||"Onbekend")+" · "+(assignedModerator(t)||"Niet toegewezen")):("Categorie: "+category+" · "+(meta.department||"Algemeen"));
+  return '<div class="hpmw-ticket-card" role="button" tabindex="0" '+id+'="'+safe(t.id)+'"><div><div class="hpmw-card-id">#'+safe(t.num)+' · '+safe(category)+'</div><div class="hpmw-card-title">'+safe(t.title)+'</div></div><span class="hpmw-card-status '+safe(st)+'">'+safe(t.closed?"Gesloten":statusLabel(st))+'</span><div class="hpmw-card-meta"><span>'+safe(secondary)+'</span><span class="hpmw-card-priority">Prioriteit: '+safe(priorityText(priority(t)))+'</span></div><span class="hpmw-card-meta">'+(admin?safe((latestPosterCache.get(t.id)||{}).author||"Laatste reactie wordt geladen"):"Bekijk gesprek en reageer")+'</span></div>';
+ }
+ function pagination(kind,page,total){
+  const pages=Math.max(1,Math.ceil(total/PAGE_SIZE)),start=total?page*PAGE_SIZE+1:0,end=Math.min(total,(page+1)*PAGE_SIZE);
+  return '<div class="hpmw-ticket-pagination"><span>'+start+'–'+end+' van '+total+' tickets · Pagina '+(page+1)+'/'+pages+'</span><div><button type="button" data-page="'+kind+'" data-step="-1" '+(page<=0?"disabled":"")+'>Vorige</button> <button type="button" data-page="'+kind+'" data-step="1" '+(page>=pages-1?"disabled":"")+'>Volgende</button></div></div>';
+ }
+ window.addEventListener("click",e=>{
+  const b=e.target.closest("[data-page]");if(!b)return;
+  const step=Number(b.dataset.step);
+  if(b.dataset.page==="admin"){adminPage=Math.max(0,adminPage+step);renderList()}
+  if(b.dataset.page==="member"){memberPage=Math.max(0,memberPage+step);renderMyTickets()}
+ });
+ window.addEventListener("keydown",e=>{
+  if(e.key!=="Enter"&&e.key!==" ")return;
+  const b=e.target.closest(".hpmw-ticket-card");if(b){e.preventDefault();b.click()}
+ });
+ renderList=function(){
+  if(!$id("ticketList"))return;
+  updateAdminTicketCount();
+  const q=($id("ticketSearch")?.value||"").trim().toLowerCase();
+  let list=currentTab==="open"?all.filter(t=>!t.closed):all.filter(t=>t.closed);
+  const sf=$id("statusFilter")?.value||"all";
+  if(sf!=="all")list=list.filter(t=>status(t)===sf);
+  if(q)list=list.filter(t=>(t.num+" "+t.id+" "+t.title+" "+t.user+" "+t.cat).toLowerCase().includes(q));
+  const counts={pending:0,progress:0,done:0,refused:0};
+  all.forEach(t=>{const st=status(t);counts[st]=(counts[st]||0)+1});
+  $id("statOpen").textContent=all.filter(t=>!t.closed).length;
+  $id("statClosed").textContent=all.filter(t=>t.closed).length;
+  $id("statTotal").textContent=all.length;
+  $id("statResult").textContent=list.length;
+  ["pending","progress","done","refused"].forEach(st=>{const el=$id("count"+st[0].toUpperCase()+st.slice(1));if(el)el.textContent=counts[st]||0});
+  list.forEach(queueLatestPoster);
+  const pages=Math.max(1,Math.ceil(list.length/PAGE_SIZE));adminPage=Math.min(adminPage,pages-1);
+  const visible=list.slice(adminPage*PAGE_SIZE,(adminPage+1)*PAGE_SIZE);
+  $id("ticketList").innerHTML='<div class="hpmw-ticket-cards">'+(visible.length?visible.map(t=>card(t,true)).join(""):'<div class="empty">Geen tickets gevonden voor deze selectie.</div>')+'</div>'+pagination("admin",adminPage,list.length);
+ };
+ renderMyTickets=function(){
+  if(!$id("myTicketsList"))return;
+  const mine=all.filter(t=>memberTab==="open"?!t.closed&&["pending","progress"].includes(getInternal(t).status):t.closed);
+  document.querySelectorAll(".member-tab").forEach(b=>{const count=all.filter(t=>b.dataset.memberTab==="open"?!t.closed&&["pending","progress"].includes(getInternal(t).status):t.closed).length;b.innerHTML=(b.dataset.memberTab==="open"?"Open":"Gesloten")+' <b class="tab-count">'+count+'</b>'});
+  const pages=Math.max(1,Math.ceil(mine.length/PAGE_SIZE));memberPage=Math.min(memberPage,pages-1);
+  const visible=mine.slice(memberPage*PAGE_SIZE,(memberPage+1)*PAGE_SIZE);
+  $id("myTicketsList").innerHTML='<div class="hpmw-ticket-cards">'+(visible.length?visible.map(t=>card(t,false)).join(""):'<div class="empty">Geen '+(memberTab==="open"?"open":"gesloten")+' tickets gevonden.</div>')+'</div>'+pagination("member",memberPage,mine.length);
+ };
+ const originalAdminBack=$id("adminBack");
+ if(originalAdminBack)originalAdminBack.addEventListener("click",()=>{adminPage=0});
+ const originalMemberBack=$id("memberDetailBack");
+ if(originalMemberBack)originalMemberBack.addEventListener("click",()=>{memberPage=0});
+ const tabs=document.querySelectorAll("[data-member-tab]");
+ tabs.forEach(b=>b.addEventListener("click",()=>{memberPage=0}));
+ const search=$id("ticketSearch");if(search)search.addEventListener("input",()=>{adminPage=0;renderList()});
+ const filter=$id("statusFilter");if(filter)filter.addEventListener("change",()=>{adminPage=0;renderList()});
+ document.querySelectorAll(".nav-btn[data-tab]").forEach(b=>b.addEventListener("click",()=>{adminPage=0}));
+ const observer=new MutationObserver(()=>{
+  if($id("adminView")?.classList.contains("active"))document.body.classList.add("hpmw-ticket-screen");
+  else if($id("myTicketsView")?.classList.contains("active"))document.body.classList.add("hpmw-ticket-screen");
+  else document.body.classList.remove("hpmw-ticket-screen");
+ });
+ observer.observe(document.body,{attributes:true,subtree:true,attributeFilter:["class"]});
+})();
+</script></body></html>
