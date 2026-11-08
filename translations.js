@@ -537,6 +537,33 @@ if(row[lang] !== null && row[lang] !== undefined && row[lang] !== ''){
   console.warn('Hpmagicworld: Supabase-vertalingen niet geladen; lokale vertalingen worden gebruikt.',error);
  }
 }
+// Houd reeds geopende portaalpagina's automatisch synchroon met de beheertool.
+const portalManagedKeys=new Set();
+async function refreshPortalTranslations(){
+ try{
+  const response=await fetch('https://vuaajsjjluwgqmneinds.supabase.co/rest/v1/portal_translations?select=source_key,nl,en,pt',{
+   headers:{'apikey':'sb_publishable_tto6sNxZPLv1VhUdMRlPHg_ptzg9odx','Authorization':'Bearer sb_publishable_tto6sNxZPLv1VhUdMRlPHg_ptzg9odx'},
+   cache:'no-store'
+  });
+  if(!response.ok)throw new Error('Supabase HTTP '+response.status);
+  const rows=await response.json();
+  const nextKeys=new Set();
+  rows.forEach(row=>{
+   const keys=[row.nl,row.source_key].filter(v=>typeof v==='string'&&v.trim()).map(v=>v.trim());
+   keys.forEach(key=>{
+    nextKeys.add(key);
+    ['nl','en','pt'].forEach(lang=>{
+     if(row[lang]!==null&&row[lang]!==undefined&&row[lang]!=='')translations[lang][key]=row[lang];
+    });
+   });
+  });
+  portalManagedKeys.forEach(key=>{
+   if(!nextKeys.has(key))['nl','en','pt'].forEach(lang=>{delete translations[lang][key]});
+  });
+  portalManagedKeys.clear();nextKeys.forEach(key=>portalManagedKeys.add(key));
+  apply(current);
+ }catch(error){console.warn('Hpmagicworld: live vertalingen konden niet worden bijgewerkt.',error);}
+}
 async function init(){
  const nav=document.querySelector('.top-actions'),account=document.getElementById('accountLink'),select=document.getElementById('hpmwLanguage');
  if(!nav||!select||document.getElementById('hpmwGlobeButton'))return;
@@ -552,6 +579,8 @@ async function init(){
  const initialLang=['nl','en','pt'].includes(savedLang)?savedLang:'nl';
  select.value=initialLang;
  apply(initialLang);
+ refreshPortalTranslations();
+ setInterval(refreshPortalTranslations,5000);
  select.addEventListener('change',()=>{const chosen=(select.value||'nl').toLowerCase();try{localStorage.setItem('hpmwSelectedLanguage',chosen)}catch(_){};location.reload()});
  const observer=new MutationObserver(records=>{observer.disconnect();apply(current);observer.observe(document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['placeholder','title','aria-label']})});
  observer.observe(document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['placeholder','title','aria-label']});
