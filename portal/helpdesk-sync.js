@@ -48,7 +48,7 @@
   }
 
   function ticketKey(ticket) {
-    const forumId = Number(ticket && (ticket.forumId || ticket.openForumId));
+    const forumId = Number(ticket && (ticket.openForumId || ticket.forumId));
     const topicId = String(ticket && ticket.id || "").trim();
     if (!Number.isInteger(forumId) || forumId <= 0 || !/^\d+$/.test(topicId)) {
       throw new Error("Ongeldige Forumotion-forum- of topic-ID.");
@@ -87,7 +87,7 @@
     const record = Object.assign({}, existing || {}, {
       ticket_key: key,
       forumotion_topic_id: String(ticket.id),
-      forumotion_forum_id: Number(ticket.forumId || ticket.openForumId),
+      forumotion_forum_id: Number(ticket.openForumId || ticket.forumId),
       ticket_number: String(ticket.num || ""),
       subject: String(ticket.title || ""),
       category: String(ticket.cat || ""),
