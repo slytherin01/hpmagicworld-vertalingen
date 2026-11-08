@@ -3701,5 +3701,25 @@ html body.supabase-authenticated main.shell{
 #newTranslationsView #translationEditor[hidden]{display:none!important}
 #newTranslationsView #translationEditor:not([hidden]){display:block!important}
 </style>
+
+<style id="hpmw-translation-table-finish">
+#newTranslationsView #trList{border:1px solid #40536a;border-radius:13px;overflow:auto;background:#0c1520;box-shadow:0 10px 28px #0004}
+#newTranslationsView #trList table{width:100%;min-width:980px;table-layout:fixed;border-collapse:separate;border-spacing:0}
+#newTranslationsView #trList thead th{position:sticky;top:0;z-index:2;padding:15px 16px;background:#1a2a3d;color:#dceaff;font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;text-align:left;border-bottom:1px solid #40536a}
+#newTranslationsView #trList thead th:nth-child(1){width:25%}
+#newTranslationsView #trList thead th:nth-child(2){width:11%}
+#newTranslationsView #trList thead th:nth-child(3),#newTranslationsView #trList thead th:nth-child(4),#newTranslationsView #trList thead th:nth-child(5){width:18%}
+#newTranslationsView #trList thead th:nth-child(6){width:10%;text-align:center}
+#newTranslationsView #trList tbody td{padding:14px 16px;color:#d7e1ee;font-size:12px;line-height:1.55;vertical-align:middle;border-bottom:1px solid #25364a;overflow-wrap:anywhere;word-break:normal;white-space:normal}
+#newTranslationsView #trList tbody tr:last-child td{border-bottom:0}
+#newTranslationsView #trList tbody tr:nth-child(even) td{background:#111d2a}
+#newTranslationsView #trList tbody tr:hover td{background:#1b2d42}
+#newTranslationsView #trList td.translation-alias{color:#e4edfb;font-weight:750;font-size:11px;overflow-wrap:anywhere}
+#newTranslationsView #trList tbody td:nth-child(2){color:#aebfd2}
+#newTranslationsView #trList tbody td:nth-child(3),#newTranslationsView #trList tbody td:nth-child(4),#newTranslationsView #trList tbody td:nth-child(5){max-width:0}
+#newTranslationsView #trList tbody td:last-child{text-align:center}
+#newTranslationsView #trList .translation-edit-btn{min-width:82px;padding:9px 12px;border-radius:9px;font-size:11px}
+@media(max-width:700px){#newTranslationsView #trList table{min-width:900px}#newTranslationsView #trList thead th,#newTranslationsView #trList tbody td{padding:11px 12px}}
+</style>
 </body>
 </html>
