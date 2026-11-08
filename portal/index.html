@@ -1165,6 +1165,51 @@ main.shell{width:100%!important;max-width:none!important;margin:0 auto!important
 @media(min-width:1200px){.shell{max-width:980px!important}}
 </style>
 
+<style id="hpmw-ticket-pages-refresh">
+/* Mijn tickets + Ticketbeheer: polished helpdesk-inspired interface */
+#myTicketsView .page-head,#adminView .page-head{align-items:center;margin-bottom:22px;padding:22px 24px;border:1px solid #35435a;border-radius:18px;background:radial-gradient(ellipse at 90% 0%,#39305d66,transparent 48%),linear-gradient(135deg,#17243a,#101827);box-shadow:0 16px 38px #0003}
+#myTicketsView .eyebrow,#adminView .eyebrow{color:#c7ad72;letter-spacing:.16em;font-weight:850}
+#myTicketsView .page-head h1,#adminView .page-head h1{font-size:clamp(27px,3vw,36px);letter-spacing:-.045em}
+#myTicketsView>.panel,#adminView>.panel{border:1px solid #34445b;border-radius:18px;background:linear-gradient(160deg,#121e2e,#0d1624);box-shadow:0 20px 55px #0004;overflow:hidden}
+#myTicketsView .member-tabs{padding:18px 20px 14px;gap:10px;border-bottom:1px solid #26364c;background:#101a29}
+#myTicketsView .member-tab{min-height:42px;padding:10px 17px;border-radius:11px;font-size:12px;letter-spacing:.02em}
+#myTicketsView .member-tab.active{background:linear-gradient(135deg,#39345f,#262947)!important;border-color:#8175bc!important;box-shadow:0 5px 16px #0003}
+#myTicketsView #myTicketsList,#adminView #ticketList{padding:18px 20px 22px;display:grid;gap:11px}
+#myTicketsView .ticket-card,#adminView .ticket-card{position:relative;padding:17px 19px!important;border:1px solid #2b3c53!important;border-radius:14px!important;background:linear-gradient(135deg,#18263a,#111b2a)!important;box-shadow:0 7px 20px #0002!important;transition:transform .18s,border-color .18s,box-shadow .18s}
+#myTicketsView .ticket-card:hover,#adminView .ticket-card:hover{transform:translateY(-2px);border-color:#8d7bc0!important;box-shadow:0 13px 28px #0004!important;background:linear-gradient(135deg,#202e47,#141f30)!important}
+#myTicketsView .ticket-card .ticket-subject,#adminView .ticket-card .ticket-subject{font-size:15px!important;font-weight:800!important;letter-spacing:-.015em;color:#f1f3fb!important}
+#myTicketsView .ticket-card .ticket-meta,#adminView .ticket-card .ticket-meta{color:#aab8cb!important;font-size:11px!important;line-height:1.7}
+#myTicketsView .ticket-card .ticket-id,#adminView .ticket-card .ticket-id{color:#c7b8ff!important;font-weight:850}
+#myTicketsView .member-detail,#adminView .detail{margin:0 18px 20px;border:1px solid #34445b!important;border-radius:16px!important;background:#0e1928!important;overflow:hidden}
+#myTicketsView .detail-head,#adminView .detail-head{padding:22px!important;background:linear-gradient(135deg,#1a2940,#111b2a)!important;border-bottom:1px solid #34445b!important}
+#myTicketsView .detail-kicker,#adminView .detail-kicker{color:#c7ad72!important;letter-spacing:.16em;font-weight:900}
+#myTicketsView .detail-title,#adminView .detail-title{font-size:22px!important}
+#myTicketsView .detail-facts>div,#adminView .detail-facts>div{background:#111f30!important;border:1px solid #30445d!important;border-radius:11px!important;padding:12px!important}
+#myTicketsView .reply-box,#myTicketsView .close-request,#adminView .reply-box,#adminView .internal-tools{margin:16px 18px!important;padding:18px!important;border:1px solid #30445d!important;border-radius:14px!important;background:#121f30!important}
+#adminView .admin-layout{grid-template-columns:190px minmax(0,1fr);background:#0e1826}
+#adminView .admin-nav{padding:18px 12px;background:#0b1523!important;border-right:1px solid #2b3b50!important}
+#adminView .nav-btn{min-height:46px;margin-bottom:8px;border-radius:11px;padding:10px 12px;font-size:12px}
+#adminView .nav-btn.active{background:#2b2a4c!important;border-color:#7770a8!important;color:#fff!important}
+#adminView .admin-main{padding:20px;min-width:0}
+#adminView .admin-search-box{padding:17px;border-radius:14px;border-color:#34465f;background:linear-gradient(135deg,#17263a,#111b2b)}
+#adminView .admin-search-title{font-size:14px;color:#f0e9d7}
+#adminView .stats{gap:11px;margin:0 0 17px}
+#adminView .stat{min-height:92px;padding:16px 14px 13px 59px;border-radius:14px;border:1px solid #34465f!important;background:linear-gradient(145deg,#1c2c43,#121e2e)!important;transition:transform .16s,border-color .16s}
+#adminView button.stat{cursor:pointer;text-align:left}
+#adminView .stat:hover{transform:translateY(-2px);border-color:#8878ba!important}
+#adminView .stat-icon{top:18px;background:#302d51!important;color:#d2c7ff!important}
+#adminView .stat small{color:#aebbd0;font-size:9px;letter-spacing:.1em}
+#adminView .stat strong{font-size:27px;color:#fff}
+#adminView .status-index{gap:9px;margin:0 0 17px}
+#adminView .status-pill{padding:9px 12px;border-radius:10px;font-size:11px}
+#adminView .ticket-table-wrap,#adminView .member-table-wrap{border-radius:14px;border-color:#34465f!important;background:#111c2b}
+#adminView .ticket-table th,#adminView .member-table th{padding:14px;background:#1a2940!important;color:#c8baf6!important;font-size:10px;letter-spacing:.1em}
+#adminView .ticket-table td,#adminView .member-table td{padding:14px;border-color:#293b51!important;font-size:12px}
+#adminView .ticket-table tbody tr:hover td{background:#202e45!important}
+#myTicketsView .empty,#adminView .empty,#myTicketsView .loading,#adminView .loading{padding:28px;border:1px dashed #3a4b64;border-radius:13px;background:#111d2c;color:#aebbd0;text-align:center}
+@media(max-width:850px){#adminView .admin-layout{grid-template-columns:1fr}#adminView .admin-nav{display:flex;gap:8px;flex-wrap:wrap;border-right:0;border-bottom:1px solid #2b3b50}#adminView .nav-btn{width:auto;flex:1 1 150px}#adminView .stats{grid-template-columns:repeat(2,minmax(0,1fr))}#myTicketsView .detail-head,#adminView .detail-head{flex-direction:column}}
+@media(max-width:560px){#myTicketsView .page-head,#adminView .page-head{padding:17px;align-items:flex-start;gap:12px}#adminView .admin-main{padding:12px}#myTicketsView #myTicketsList,#adminView #ticketList{padding:12px}#adminView .stats{gap:7px}#adminView .stat{padding-left:52px}}
+</style>
 </head><body><header class="topbar luxury-nav-v2"><nav aria-label="Support navigatie" class="top-actions"><a class="lux-nav-item" href="https://testforumjoost.forumactie.com/forum" rel="noopener noreferrer" target="_blank"><span class="lux-nav-icon"><i class="fa-solid fa-comments"></i></span><span class="lux-nav-label">Forum</span></a><a class="lux-nav-item" href="/h3-ticket-support" target="_self"><span class="lux-nav-icon"><i class="fa-solid fa-house"></i></span><span class="lux-nav-label">Portaal</span></a><button aria-expanded="false" aria-haspopup="dialog" class="lux-nav-item" id="faqLaunch" type="button"><span class="lux-nav-icon"><i class="fa-solid fa-circle-question"></i></span><span class="lux-nav-label">FAQ</span></button><button aria-expanded="false" class="lux-nav-item" id="ticketSupportLaunch" type="button"><span class="lux-nav-icon"><i class="fa-solid fa-ticket"></i></span><span class="lux-nav-label">Ticket Support</span></button>
 <a class="lux-nav-item" href="https://testforumjoost.forumactie.com/h13-dev-sorting-hat" id="sortingHatNav" rel="noopener noreferrer" target="_blank"><span class="lux-nav-icon"><i class="fa-solid fa-hat-wizard"></i></span><span class="lux-nav-label">De Sorteerhoed</span></a>
 <a class="lux-nav-item" href="https://testforumjoost.forumactie.com/h6-beta-nieuws" id="hpNieuwsNav" rel="noopener noreferrer" target="_blank"><span class="lux-nav-icon"><i class="fa-solid fa-newspaper"></i></span><span class="lux-nav-label">HP Nieuws</span></a><a class="lux-nav-item" href="https://testforumjoost.forumactie.com/h4-beta-premium-member" id="premiumNav" rel="noopener noreferrer" target="_blank"><span class="lux-nav-icon"><i class="fa-solid fa-crown"></i></span><span class="lux-nav-label">Premium</span></a><label aria-label="Taal kiezen" class="hpmw-language-wrap" for="hpmwLanguage"><i aria-hidden="true" class="fa-solid fa-language"></i><select id="hpmwLanguage"><option selected="" value="nl">Nederlands</option><option value="en">English</option><option value="pt">Português</option></select></label><button class="lux-nav-item" data-extracted-style="2" id="myTicketsLaunch" style="display:none"><span class="lux-nav-icon"><i class="fa-solid fa-envelope"></i></span><span class="lux-nav-label">Mijn tickets</span><b class="count-badge" id="myTicketsCount">0</b></button><button class="lux-nav-item" data-extracted-style="1" id="adminLaunch" style="display:none"><span class="lux-nav-icon"><i class="fa-solid fa-wrench"></i></span><span class="lux-nav-label">Ticketbeheer</span><b class="count-badge" id="adminTicketsCount" style="display:none">0</b></button><a class="lux-nav-item lux-user" href="/login" id="accountLink"><span class="lux-nav-icon"><span aria-hidden="true">👤</span></span><span class="lux-nav-usertext"><small>INGELOGD ALS</small><strong id="username">Gast</strong></span></a></nav></header><main class="shell"><section class="view active" id="introView">
