@@ -467,7 +467,7 @@ button.content-edit:hover,button.content-delete:hover{
     const {data,error}=await db.from('translations').select('translation_key,nl,en,pt').order('translation_key');
     if(error) throw error;
     allRows=data||[];
-    showApp(true); render(); showTool('translations');
+    showApp(true); render(); showTool('home');
     status(allRows.length+' vertalingen geladen.','ok');
   }
   function render() {
