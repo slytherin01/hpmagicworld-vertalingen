@@ -451,6 +451,19 @@ button.content-edit:hover,button.content-delete:hover{
           <p class="small">Stel per seizoen of decoratie in of deze actief is. Laat begin- en einddatum leeg voor handmatige activering zonder tijdsbeperking.</p>
           <div id="portalEffectsStatus" role="status" style="display:none"></div>
           <div id="portalEffectsList"></div>
+          <div class="effect-group" id="portalWidgetsEditor">
+            <h3 data-i18n="maintenanceHeading">Onderhoudsblok</h3>
+            <label><input id="maintenanceEnabled" type="checkbox" style="width:auto"> <span data-i18n="maintenanceOn">Onderhoudsblok tonen</span></label>
+            <label data-i18n="maintenanceTextNL">Onderhoudstekst (NL)<textarea id="maintenanceTextNL" rows="2">Het portaal is tijdelijk in onderhoud. Probeer het later opnieuw.</textarea></label>
+            <label data-i18n="maintenanceTextEN">Onderhoudstekst (EN)<textarea id="maintenanceTextEN" rows="2">The portal is temporarily under maintenance. Please try again later.</textarea></label>
+            <label data-i18n="maintenanceTextPT">Onderhoudstekst (PT)<textarea id="maintenanceTextPT" rows="2">O portal está temporariamente em manutenção. Tente novamente mais tarde.</textarea></label>
+            <h3 data-i18n="countdownHeading">Countdown</h3>
+            <label><input id="countdownEnabled" type="checkbox" style="width:auto"> <span data-i18n="countdownOn">Countdown tonen</span></label>
+            <label data-i18n="countdownTitleNL">Titel (NL)<input id="countdownTitleNL"></label>
+            <label data-i18n="countdownTitleEN">Title (EN)<input id="countdownTitleEN"></label>
+            <label data-i18n="countdownTitlePT">Título (PT)<input id="countdownTitlePT"></label>
+            <label data-i18n="countdownTarget">Doeldatum en tijd<input id="countdownTarget" type="datetime-local"></label>
+          </div>
           <button id="savePortalEffects" type="button">Instellingen opslaan</button>
         </section>
     </div>
@@ -605,6 +618,19 @@ button.content-edit:hover,button.content-delete:hover{
       });
       $('portalEffectsList').append(section);
     }
+    const {data:widget,error:widgetError}=await db.from('portal_widgets').select('*').eq('id',1).maybeSingle();
+    if(widgetError) throw widgetError;
+    if(widget){
+      $('maintenanceEnabled').checked=!!widget.maintenance_enabled;
+      $('maintenanceTextNL').value=widget.maintenance_text_nl||'';
+      $('maintenanceTextEN').value=widget.maintenance_text_en||'';
+      $('maintenanceTextPT').value=widget.maintenance_text_pt||'';
+      $('countdownEnabled').checked=!!widget.countdown_enabled;
+      $('countdownTitleNL').value=widget.countdown_title_nl||'';
+      $('countdownTitleEN').value=widget.countdown_title_en||'';
+      $('countdownTitlePT').value=widget.countdown_title_pt||'';
+      $('countdownTarget').value=portalLocalValue(widget.countdown_target);
+    }
     $('portalEffectsStatus').textContent='Instellingen geladen. Tijdzone: Europe/Amsterdam.';
     $('portalEffectsStatus').style.display='block';
   }
@@ -619,6 +645,13 @@ button.content-edit:hover,button.content-delete:hover{
       });
       const {error}=await db.from('portal_effects').upsert(payload,{onConflict:'effect_key'});
       if(error)throw error;
+      const target=$('countdownTarget').value;
+      const widgetPayload={id:1,maintenance_enabled:$('maintenanceEnabled').checked,
+        maintenance_text_nl:$('maintenanceTextNL').value,maintenance_text_en:$('maintenanceTextEN').value,maintenance_text_pt:$('maintenanceTextPT').value,
+        countdown_enabled:$('countdownEnabled').checked,countdown_title_nl:$('countdownTitleNL').value,countdown_title_en:$('countdownTitleEN').value,countdown_title_pt:$('countdownTitlePT').value,
+        countdown_target:target?new Date(target).toISOString():null,updated_at:new Date().toISOString()};
+      const {error:widgetError}=await db.from('portal_widgets').upsert(widgetPayload,{onConflict:'id'});
+      if(widgetError)throw widgetError;
       $('portalEffectsStatus').textContent='Portaalinstellingen opgeslagen. Het portaal past actieve effecten automatisch toe.';
       $('portalEffectsStatus').style.display='block';
     }catch(e){$('portalEffectsStatus').textContent='Opslaan mislukt: '+(e.message||String(e));$('portalEffectsStatus').style.display='block';}
