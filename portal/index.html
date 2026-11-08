@@ -1165,105 +1165,8 @@ main.shell{width:100%!important;max-width:none!important;margin:0 auto!important
 @media(min-width:1200px){.shell{max-width:980px!important}}
 </style>
 
-<style id="hpmw-ticket-pages-refresh">
-/* Mijn tickets + Ticketbeheer: polished helpdesk-inspired interface */
-#myTicketsView .page-head,#adminView .page-head{align-items:center;margin-bottom:22px;padding:22px 24px;border:1px solid #35435a;border-radius:18px;background:radial-gradient(ellipse at 90% 0%,#39305d66,transparent 48%),linear-gradient(135deg,#17243a,#101827);box-shadow:0 16px 38px #0003}
-#myTicketsView .eyebrow,#adminView .eyebrow{color:#c7ad72;letter-spacing:.16em;font-weight:850}
-#myTicketsView .page-head h1,#adminView .page-head h1{font-size:clamp(27px,3vw,36px);letter-spacing:-.045em}
-#myTicketsView>.panel,#adminView>.panel{border:1px solid #34445b;border-radius:18px;background:linear-gradient(160deg,#121e2e,#0d1624);box-shadow:0 20px 55px #0004;overflow:hidden}
-#myTicketsView .member-tabs{padding:18px 20px 14px;gap:10px;border-bottom:1px solid #26364c;background:#101a29}
-#myTicketsView .member-tab{min-height:42px;padding:10px 17px;border-radius:11px;font-size:12px;letter-spacing:.02em}
-#myTicketsView .member-tab.active{background:linear-gradient(135deg,#39345f,#262947)!important;border-color:#8175bc!important;box-shadow:0 5px 16px #0003}
-#myTicketsView #myTicketsList,#adminView #ticketList{padding:18px 20px 22px;display:grid;gap:11px}
-#myTicketsView .ticket-card,#adminView .ticket-card{position:relative;padding:17px 19px!important;border:1px solid #2b3c53!important;border-radius:14px!important;background:linear-gradient(135deg,#18263a,#111b2a)!important;box-shadow:0 7px 20px #0002!important;transition:transform .18s,border-color .18s,box-shadow .18s}
-#myTicketsView .ticket-card:hover,#adminView .ticket-card:hover{transform:translateY(-2px);border-color:#8d7bc0!important;box-shadow:0 13px 28px #0004!important;background:linear-gradient(135deg,#202e47,#141f30)!important}
-#myTicketsView .ticket-card .ticket-subject,#adminView .ticket-card .ticket-subject{font-size:15px!important;font-weight:800!important;letter-spacing:-.015em;color:#f1f3fb!important}
-#myTicketsView .ticket-card .ticket-meta,#adminView .ticket-card .ticket-meta{color:#aab8cb!important;font-size:11px!important;line-height:1.7}
-#myTicketsView .ticket-card .ticket-id,#adminView .ticket-card .ticket-id{color:#c7b8ff!important;font-weight:850}
-#myTicketsView .member-detail,#adminView .detail{margin:0 18px 20px;border:1px solid #34445b!important;border-radius:16px!important;background:#0e1928!important;overflow:hidden}
-#myTicketsView .detail-head,#adminView .detail-head{padding:22px!important;background:linear-gradient(135deg,#1a2940,#111b2a)!important;border-bottom:1px solid #34445b!important}
-#myTicketsView .detail-kicker,#adminView .detail-kicker{color:#c7ad72!important;letter-spacing:.16em;font-weight:900}
-#myTicketsView .detail-title,#adminView .detail-title{font-size:22px!important}
-#myTicketsView .detail-facts>div,#adminView .detail-facts>div{background:#111f30!important;border:1px solid #30445d!important;border-radius:11px!important;padding:12px!important}
-#myTicketsView .reply-box,#myTicketsView .close-request,#adminView .reply-box,#adminView .internal-tools{margin:16px 18px!important;padding:18px!important;border:1px solid #30445d!important;border-radius:14px!important;background:#121f30!important}
-#adminView .admin-layout{grid-template-columns:190px minmax(0,1fr);background:#0e1826}
-#adminView .admin-nav{padding:18px 12px;background:#0b1523!important;border-right:1px solid #2b3b50!important}
-#adminView .nav-btn{min-height:46px;margin-bottom:8px;border-radius:11px;padding:10px 12px;font-size:12px}
-#adminView .nav-btn.active{background:#2b2a4c!important;border-color:#7770a8!important;color:#fff!important}
-#adminView .admin-main{padding:20px;min-width:0}
-#adminView .admin-search-box{padding:17px;border-radius:14px;border-color:#34465f;background:linear-gradient(135deg,#17263a,#111b2b)}
-#adminView .admin-search-title{font-size:14px;color:#f0e9d7}
-#adminView .stats{gap:11px;margin:0 0 17px}
-#adminView .stat{min-height:92px;padding:16px 14px 13px 59px;border-radius:14px;border:1px solid #34465f!important;background:linear-gradient(145deg,#1c2c43,#121e2e)!important;transition:transform .16s,border-color .16s}
-#adminView button.stat{cursor:pointer;text-align:left}
-#adminView .stat:hover{transform:translateY(-2px);border-color:#8878ba!important}
-#adminView .stat-icon{top:18px;background:#302d51!important;color:#d2c7ff!important}
-#adminView .stat small{color:#aebbd0;font-size:9px;letter-spacing:.1em}
-#adminView .stat strong{font-size:27px;color:#fff}
-#adminView .status-index{gap:9px;margin:0 0 17px}
-#adminView .status-pill{padding:9px 12px;border-radius:10px;font-size:11px}
-#adminView .ticket-table-wrap,#adminView .member-table-wrap{border-radius:14px;border-color:#34465f!important;background:#111c2b}
-#adminView .ticket-table th,#adminView .member-table th{padding:14px;background:#1a2940!important;color:#c8baf6!important;font-size:10px;letter-spacing:.1em}
-#adminView .ticket-table td,#adminView .member-table td{padding:14px;border-color:#293b51!important;font-size:12px}
-#adminView .ticket-table tbody tr:hover td{background:#202e45!important}
-#myTicketsView .empty,#adminView .empty,#myTicketsView .loading,#adminView .loading{padding:28px;border:1px dashed #3a4b64;border-radius:13px;background:#111d2c;color:#aebbd0;text-align:center}
-@media(max-width:850px){#adminView .admin-layout{grid-template-columns:1fr}#adminView .admin-nav{display:flex;gap:8px;flex-wrap:wrap;border-right:0;border-bottom:1px solid #2b3b50}#adminView .nav-btn{width:auto;flex:1 1 150px}#adminView .stats{grid-template-columns:repeat(2,minmax(0,1fr))}#myTicketsView .detail-head,#adminView .detail-head{flex-direction:column}}
-@media(max-width:560px){#myTicketsView .page-head,#adminView .page-head{padding:17px;align-items:flex-start;gap:12px}#adminView .admin-main{padding:12px}#myTicketsView #myTicketsList,#adminView #ticketList{padding:12px}#adminView .stats{gap:7px}#adminView .stat{padding-left:52px}}
-</style>
-<style id="hpmw-facilitor-inspired-unique">
-/* Muggle Ministry Service Desk — inspired by modern facility/service management workspaces */
-:root{--mm-gold:#d7b76c;--mm-lilac:#b8a8ff;--mm-blue:#8fb9e7}
-#myTicketsView .page-head,#adminView .page-head{position:relative;overflow:hidden;align-items:center;margin:0 0 20px;padding:26px 28px;border:1px solid #554b70;border-radius:20px;background:radial-gradient(ellipse at 88% 8%,#7864ba55,transparent 38%),radial-gradient(ellipse at 10% 110%,#a8894930,transparent 45%),linear-gradient(120deg,#111b2d,#1a1b36 65%,#22203b);box-shadow:0 18px 44px #0005}
-#myTicketsView .page-head:after,#adminView .page-head:after{content:"";position:absolute;right:-28px;top:-60px;width:210px;height:210px;border:1px solid #d7b76c33;border-radius:50%;box-shadow:0 0 0 24px #d7b76c0b,0 0 0 50px #d7b76c08;pointer-events:none}
-#myTicketsView .page-head>div,#adminView .page-head>div{position:relative;z-index:1}
-#myTicketsView .page-head .btn,#adminView .page-head .btn{position:relative;z-index:2}
-#myTicketsView .eyebrow,#adminView .eyebrow{color:var(--mm-gold)!important;letter-spacing:.18em;font-weight:900}
-#myTicketsView .page-head h1,#adminView .page-head h1{margin:8px 0 5px;font-size:clamp(28px,3vw,38px);letter-spacing:-.05em;color:#fff!important}
-#myTicketsView .page-head .subtitle,#adminView .page-head .subtitle{color:#b8c2d4!important}
-#myTicketsView>.panel,#adminView>.panel{border:1px solid #35445e;border-radius:19px;background:linear-gradient(160deg,#131f31,#0d1725);box-shadow:0 20px 55px #0005;overflow:hidden}
-#myTicketsView .member-tabs{padding:17px 20px 14px;gap:9px;border-bottom:1px solid #2c3b52;background:linear-gradient(90deg,#111d2d,#171c31)}
-#myTicketsView .member-tab{min-height:42px;padding:10px 17px;border-radius:11px;font-size:12px;font-weight:800}
-#myTicketsView .member-tab.active{background:linear-gradient(135deg,#39315f,#282746)!important;border-color:#8d7fc1!important;box-shadow:0 6px 18px #0004;color:#fff!important}
-#myTicketsView #myTicketsList,#adminView #ticketList{padding:18px 20px 22px}
-#myTicketsView .member-table-wrap,#adminView .ticket-table-wrap{border:0!important;border-radius:0!important;background:transparent!important;overflow:visible}
-#myTicketsView .member-table,#adminView .ticket-table{width:100%;min-width:0;border-collapse:separate;border-spacing:0 9px}
-#myTicketsView .member-table thead th,#adminView .ticket-table thead th{padding:7px 13px 9px;background:transparent!important;border:0!important;color:#a99bdc!important;font-size:9px;letter-spacing:.14em}
-#myTicketsView .member-table tbody tr,#adminView .ticket-table tbody tr{background:linear-gradient(110deg,#1a2940,#131e2e)!important;cursor:pointer;transition:transform .16s,box-shadow .16s}
-#myTicketsView .member-table tbody tr:hover,#adminView .ticket-table tbody tr:hover{transform:translateY(-2px);box-shadow:0 9px 22px #0004}
-#myTicketsView .member-table td,#adminView .ticket-table td{padding:15px 13px!important;background:transparent!important;border-top:1px solid #30435d!important;border-bottom:1px solid #30435d!important;color:#dbe4f2!important;font-size:11px}
-#myTicketsView .member-table td:first-child,#adminView .ticket-table td:first-child{border-left:1px solid #30435d!important;border-radius:12px 0 0 12px}
-#myTicketsView .member-table td:last-child,#adminView .ticket-table td:last-child{border-right:1px solid #30435d!important;border-radius:0 12px 12px 0}
-#myTicketsView .member-id,#adminView .ticket-id{color:#d5c7ff!important;font-weight:900;white-space:nowrap}
-#myTicketsView .member-subject,#adminView .ticket-subject{font-size:12px!important;font-weight:850!important;color:#fff!important}
-#adminView .ticket-last-poster,#adminView .ticket-assignee{color:#b5c1d2!important}
-#myTicketsView .member-status,#adminView .ticket-state{display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border-radius:20px;font-size:10px;font-weight:850;white-space:nowrap}
-#adminView .admin-layout{grid-template-columns:205px minmax(0,1fr);min-height:620px;background:#0d1725}
-#adminView .admin-nav{padding:18px 13px;background:linear-gradient(180deg,#0b1422,#111a2b)!important;border-right:1px solid #2d3d54!important}
-#adminView .nav-btn{min-height:45px;margin-bottom:8px;padding:10px 12px;border-radius:11px;font-size:12px}
-#adminView .nav-btn.active{background:linear-gradient(100deg,#37315d,#252943)!important;border-color:#7167a5!important;color:white!important}
-#adminView .admin-main{padding:20px;min-width:0}
-#adminView .admin-search-box{padding:16px;border:1px solid #394861;border-radius:15px;background:linear-gradient(130deg,#1a2940,#141d30)}
-#adminView .admin-search-title{color:#f1e9d8;font-size:13px}
-#adminView .search-input-row input,#adminView .status-filter{min-height:43px;border-radius:10px}
-#adminView .stats{gap:10px;margin:0 0 15px}
-#adminView .stat{min-height:94px;padding:16px 13px 13px 58px;border:1px solid #3b4962!important;border-radius:14px;background:radial-gradient(circle at 100% 0,#7864ba24,transparent 52%),linear-gradient(145deg,#1b2b43,#121e2f)!important}
-#adminView button.stat{cursor:pointer;text-align:left}
-#adminView .stat:hover{border-color:#b09be8!important;transform:translateY(-2px)}
-#adminView .stat-icon{top:17px;background:#302b50!important;color:#d3c5ff!important}
-#adminView .stat small{color:#aebbd0;font-size:9px;letter-spacing:.1em}
-#adminView .stat strong{font-size:27px;color:#fff}
-#adminView .status-index{gap:8px;margin:0 0 12px}
-#adminView .status-pill{padding:8px 11px;border-radius:10px;font-size:10px}
-#myTicketsView .member-detail,#adminView .detail{margin:0 18px 20px;border:1px solid #3a4961!important;border-radius:16px!important;background:#0e1928!important;overflow:hidden}
-#myTicketsView .detail-head,#adminView .detail-head{padding:22px!important;background:radial-gradient(ellipse at 90% 0,#51477a44,transparent 45%),linear-gradient(120deg,#1a2940,#111b2b)!important;border-bottom:1px solid #35445c!important}
-#myTicketsView .detail-kicker,#adminView .detail-kicker{color:var(--mm-gold)!important;letter-spacing:.15em;font-weight:900}
-#myTicketsView .detail-title,#adminView .detail-title{font-size:22px!important;color:#fff!important}
-#myTicketsView .detail-facts>div,#adminView .detail-facts>div{padding:12px!important;border:1px solid #34445c!important;border-radius:11px!important;background:#111f30!important}
-#myTicketsView .reply-box,#myTicketsView .close-request,#adminView .reply-box,#adminView .internal-tools{margin:16px 18px!important;padding:18px!important;border:1px solid #34445c!important;border-radius:14px!important;background:#121f30!important}
-#myTicketsView .empty,#adminView .empty,#myTicketsView .loading,#adminView .loading{padding:30px;border:1px dashed #4a496d;border-radius:14px;background:#121d2d;color:#c1c9d9;text-align:center}
-@media(max-width:900px){#adminView .admin-layout{grid-template-columns:1fr}#adminView .admin-nav{display:flex;gap:8px;flex-wrap:wrap;border-right:0;border-bottom:1px solid #2d3d54}#adminView .nav-btn{width:auto;flex:1 1 150px}#adminView .stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:680px){#myTicketsView .member-table,#adminView .ticket-table{border-spacing:0 7px}#myTicketsView .member-table thead,#adminView .ticket-table thead{display:none}#myTicketsView .member-table tbody tr,#adminView .ticket-table tbody tr{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;padding:8px;border:1px solid #30435d;border-radius:12px}#myTicketsView .member-table td,#adminView .ticket-table td{padding:7px 8px!important;border:0!important;border-radius:0!important;font-size:10px}#myTicketsView .member-table td:first-child,#adminView .ticket-table td:first-child{grid-column:1/-1;color:#d5c7ff!important}#adminView .ticket-table td:nth-child(2){grid-column:1/-1;font-size:12px}#adminView .ticket-table td:last-child{grid-column:1/-1}#myTicketsView .page-head,#adminView .page-head{padding:19px}#adminView .admin-main{padding:12px}}
-</style>
+
+
 
 <style id="hpmw-professional-service-desk-v3">
 /* Professionele Service Desk-herinrichting — uitsluitend presentatie; bestaande ticketfuncties en IDs blijven behouden. */
@@ -3686,5 +3589,31 @@ footer,.footer,#footer,.page-footer{
 footer a,.footer a,#footer a,.page-footer a{color:#91cbd8!important}
 #hpmwPortalNotices{color:#edf4fa!important}
 @media(max-width:650px){.shell{width:calc(100% - 22px)!important}}
+</style>
+<style id="hpmw-helpdesk-final-v13">
+/* Final Helpdesk skin based on the supplied complete Ticket Support source. */
+html body #formView,html body #myTicketsView,html body #adminView{color:#edf3fb!important}
+html body #formView>.panel,html body #myTicketsView>.panel,html body #adminView>.panel{background:linear-gradient(155deg,#121f31,#0d1725)!important;border:1px solid #2b4058!important;border-radius:16px!important;box-shadow:0 18px 45px #0005!important}
+html body #myTicketsView .member-table-wrap,html body #adminView .ticket-table-wrap{overflow:auto!important;border:1px solid #2c4058!important;border-radius:12px!important;background:#0d1827!important}
+html body #myTicketsView .member-table,html body #adminView .ticket-table{width:100%!important;min-width:680px!important;border-collapse:separate!important;border-spacing:0!important}
+html body #myTicketsView .member-table th,html body #adminView .ticket-table th{padding:14px!important;background:#192a40!important;color:#9fc8dc!important;border-bottom:1px solid #344a63!important;font-size:10px!important;letter-spacing:.1em!important}
+html body #myTicketsView .member-table td,html body #adminView .ticket-table td{padding:14px!important;background:#111e2e!important;color:#cbd8e7!important;border-bottom:1px solid #263b52!important;font-size:12px!important}
+html body #myTicketsView .member-table tbody tr:hover td,html body #adminView .ticket-table tbody tr:hover td{background:#1b3047!important}
+html body #myTicketsView .member-subject,html body #adminView .ticket-subject{color:#f2f6fb!important;font-weight:800!important}
+html body #myTicketsView .member-id,html body #adminView .ticket-id{color:#82c9dc!important;font-weight:850!important}
+html body #myTicketsView .member-detail,html body #adminView .detail{background:#101c2b!important;border:1px solid #30465f!important;border-radius:14px!important;overflow:hidden!important}
+html body #myTicketsView .detail-head,html body #adminView .detail-head{background:linear-gradient(120deg,#192c43,#111d2d)!important;border-bottom:1px solid #30465f!important}
+html body #myTicketsView .member-posts .chat-thread,html body #adminView .chat-thread{background:#0b1624!important;border-color:#2c4058!important}
+html body #myTicketsView .chat-msg,html body #adminView .chat-msg{border:1px solid #2e435b!important;border-radius:12px!important;background:#17283c!important;color:#eaf1f8!important}
+html body #myTicketsView .reply-box,html body #myTicketsView .close-request,html body #adminView .reply-box,html body #adminView .internal-tools{background:#142338!important;border:1px solid #30465f!important;border-radius:12px!important}
+html body #adminView .admin-layout{grid-template-columns:190px minmax(0,1fr)!important}
+html body #adminView .admin-nav{background:#0b1624!important;border-right:1px solid #2b4058!important}
+html body #adminView .admin-main{min-width:0!important}
+html body #adminView .stats{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+html body #adminView .stat{background:linear-gradient(145deg,#1b3047,#132238)!important;border:1px solid #30465f!important}
+html body #adminView .admin-search-box{background:#142338!important;border:1px solid #30465f!important}
+html body #formView .btn.primary,html body #myTicketsView .btn.primary,html body #adminView .btn.primary{background:linear-gradient(135deg,#287f9b,#23647f)!important;border-color:#4b9db4!important;color:#fff!important}
+@media(max-width:850px){html body #adminView .admin-layout{grid-template-columns:1fr!important}html body #adminView .stats{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:620px){html body #adminView .stats{grid-template-columns:repeat(2,minmax(0,1fr))!important}html body #myTicketsView .member-table-wrap,html body #adminView .ticket-table-wrap{overflow-x:auto!important}}
 </style>
 </body></html>
