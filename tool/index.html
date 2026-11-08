@@ -464,7 +464,7 @@ button.content-edit:hover,button.content-delete:hover{
     status('Vertalingen laden…');
     const allowed=await checkAdmin();
     if(!allowed){showApp(false);status('Dit account staat niet in translation_admins. Log in met het juiste beheerdersaccount.','error');return;}
-    await db.from('translations').upsert({translation_key:'Premium',nl:'Premium',en:'Premium',pt:'Premium'},{onConflict:'translation_key',ignoreDuplicates:true});
+    await db.from('translations').upsert({translation_key:'Premium',nl:'Premium',en:'Premium',pt:'Membro Premium'},{onConflict:'translation_key'});
     const {data,error}=await db.from('translations').select('translation_key,nl,en,pt').order('translation_key');
     if(error) throw error;
     allRows=data||[];
