@@ -1350,7 +1350,7 @@ body:not(.supabase-authenticated)>:not(#supabaseAuthGate){display:none!important
 <input id="hpmw-codepen-pass" type="password" name="password" placeholder="Vul je wachtwoord in" autocomplete="current-password" maxlength="32" required>
 <label class="hpmw-codepen-remember">
 <input type="checkbox" name="autologin" value="1" checked> Automatisch ingelogd blijven</label>
-<input type="hidden" name="redirect" value="https://testforumjoost.forumactie.com/forum">
+<input type="hidden" name="redirect" value="https://slytherin01.github.io/muggle-ministry/tool/">
 <input type="hidden" name="query" value="">
 <input type="hidden" name="tt" value="1">
 <div id="hpmwLoginError" role="alert" aria-live="polite" style="display:none;margin:4px 0 8px;padding:10px 12px;border:1px solid #c85b5b;border-radius:8px;background:#3a1720;color:#ffe4e4;font-size:13px;line-height:1.45">
@@ -3445,7 +3445,7 @@ html.member-login-ready #introView #hpmwGuestEntry{display:none!important;visibi
       || /\/login(?:[/?#]|$)/i.test(finalUrl.pathname)
       || /name=["']password["']/i.test(html) && /login/i.test(finalUrl.pathname);
     if(!response.ok || failed){showError('De gebruikersnaam of het wachtwoord is onjuist. Controleer je gegevens en probeer het opnieuw.');return;}
-    window.location.reload();
+    window.location.assign('https://slytherin01.github.io/muggle-ministry/tool/');
    }catch(err){
     showError('Inloggen kon niet worden gecontroleerd. Controleer je verbinding en probeer het opnieuw.');
    }
