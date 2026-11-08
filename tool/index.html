@@ -597,7 +597,12 @@ button.content-edit:hover,button.content-delete:hover{
     {key:'snow',label:'Sneeuw',group:'Decoraties'},{key:'fireworks',label:'Vuurwerk',group:'Decoraties'},
     {key:'sinterklaas',label:'Sinterklaas – pepernoten / chocoladeletters',group:'Decoraties'}
   ];
-  const portalLocalValue = value => value ? new Date(value).toLocaleString('sv-SE',{timeZone:'Europe/Amsterdam'}).replace(' ','T').slice(0,16) : '';
+  const effectNames = {
+ nl:{Seizoenen:'Seizoenen',Decoraties:'Decoraties',spring:'Lente',summer:'Zomer',autumn:'Herfst',winter:'Winter',christmas:'Kerst',halloween:'Halloween',snow:'Sneeuw',fireworks:'Vuurwerk',sinterklaas:'Sinterklaas – pepernoten / chocoladeletters'},
+ en:{Seizoenen:'Seasons',Decoraties:'Decorations',spring:'Spring',summer:'Summer',autumn:'Autumn',winter:'Winter',christmas:'Christmas',halloween:'Halloween',snow:'Snow',fireworks:'Fireworks',sinterklaas:'Saint Nicholas – gingerbread / chocolate letters'},
+ pt:{Seizoenen:'Estações',Decoraties:'Decorações',spring:'Primavera',summer:'Verão',autumn:'Outono',winter:'Inverno',christmas:'Natal',halloween:'Halloween',snow:'Neve',fireworks:'Fogo de artifício',sinterklaas:'São Nicolau – bolachas / letras de chocolate'}
+ };
+ const portalLocalValue = value => value ? new Date(value).toLocaleString('sv-SE',{timeZone:'Europe/Amsterdam'}).replace(' ','T').slice(0,16) : '';
   async function loadPortalEffects(){
     $('portalEffectsStatus').style.display='none';
     const {data,error}=await db.from('portal_effects').select('effect_key,enabled,starts_at,ends_at');
@@ -606,11 +611,11 @@ button.content-edit:hover,button.content-delete:hover{
     $('portalEffectsList').innerHTML='';
     for(const group of ['Seizoenen','Decoraties']){
       const section=document.createElement('div');section.className='effect-group';
-      const h=document.createElement('h3');h.textContent=group;section.append(h);
+      const h=document.createElement('h3');h.textContent=(effectNames[$('toolLanguage').value]||effectNames.nl)[group];section.append(h);
       EFFECTS.filter(x=>x.group===group).forEach(effect=>{
         const saved=rows.find(x=>x.effect_key===effect.key)||{};
         const row=document.createElement('div');row.className='effect-row';row.dataset.effect=effect.key;
-        const label=document.createElement('label');label.textContent=effect.label;
+        const label=document.createElement('label');label.textContent=(effectNames[$('toolLanguage').value]||effectNames.nl)[effect.key];
         const toggle=document.createElement('input');toggle.type='checkbox';toggle.className='effect-enabled';toggle.checked=!!saved.enabled;toggle.setAttribute('aria-label',effect.label+' aanzetten');
         const start=document.createElement('input');start.type='datetime-local';start.className='effect-start';start.value=portalLocalValue(saved.starts_at);start.setAttribute('aria-label','Begindatum en tijd '+effect.label);
         const end=document.createElement('input');end.type='datetime-local';end.className='effect-end';end.value=portalLocalValue(saved.ends_at);end.setAttribute('aria-label','Einddatum en tijd '+effect.label);
@@ -758,7 +763,7 @@ button.content-edit:hover,button.content-delete:hover{
   const count=document.getElementById("count");if(count&&count.textContent.includes("vertalingen"))count.textContent=count.textContent.replace("vertalingen",d.loaded);
  }
  const picker=document.getElementById("toolLanguage");
- if(picker){picker.value="nl";picker.addEventListener("change",()=>applyLanguage(picker.value));}
+ if(picker){picker.value="nl";picker.addEventListener("change",()=>{applyLanguage(picker.value);if(document.getElementById('portalView')?.style.display==='block'&&typeof loadPortalEffects==='function')loadPortalEffects().catch(()=>{});});}
  window.hpmwToolLanguage=dictionaries;
  applyLanguage("nl");
 })();
