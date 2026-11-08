@@ -1247,7 +1247,7 @@ body:not(.supabase-authenticated)>:not(#supabaseAuthGate){display:none!important
 <article class="dash-card"><div class="dash-icon"><i class="fa-solid fa-ticket"></i></div><h2>Ticketbeheer</h2><p>Behandel supporttickets en beheer reacties en statussen.</p><button class="btn primary" id="dashTickets">Ticketmoderatie openen</button></article>
 </div></section>
 <section class="view" id="newTranslationsView">
-<div class="page-head translation-bluebar"><div class="translation-bluebar-copy"><div class="eyebrow">VERTALINGEN</div><h1>Vertalingen beheren</h1><p class="subtitle">Eén sleutel met drie taalversies. Bewaar en synchroniseer naar de portal.</p></div><div class="translation-bluebar-actions"><button type="button" class="btn translation-scroll-btn" id="translationTop" title="Naar boven"><i class="fa-solid fa-arrow-up"></i> TOP</button><button type="button" class="btn translation-scroll-btn" id="translationDown" title="Naar beneden"><i class="fa-solid fa-arrow-down"></i> DOWN</button><button class="btn" id="translationBack">← Dashboard</button></div></div>
+<div class="page-head translation-bluebar"><div class="translation-bluebar-copy"><div class="eyebrow">VERTALINGEN</div><h1>Vertalingen beheren</h1><p class="subtitle">Eén sleutel met drie taalversies. Bewaar en synchroniseer naar de portal.</p></div><div class="translation-bluebar-actions"><button class="btn" id="translationBack">← Dashboard</button></div></div>
 <div class="panel"><div id="translationEditor" class="translation-editor" hidden><div class="translation-editor-head"><div><strong id="translationEditorTitle">Vertaling bewerken</strong><span>Pas de tekst aan en sla je wijzigingen op.</span></div><button type="button" class="btn" id="trEditorClose">Sluiten ✕</button></div><div class="form-grid">
 <div class="field"><label>Alias / sleutel</label><input id="trKey" placeholder="bijv. portal.welcome"></div><div class="field"><label>Folder</label><input id="trFolder" placeholder="bijv. navigation, tickets, profile"></div><div class="field"><label>Zoeken</label><input id="trSearch" placeholder="Zoek op alias, folder of tekst"></div>
 <div class="field full"><label>Nederlands (NL)</label><textarea id="trNl" placeholder="Nederlandse tekst"></textarea></div>
@@ -3780,5 +3780,36 @@ html body.supabase-authenticated main.shell{
 #newTranslationsView #translationListPanel .translation-list-heading #trSyncAll:hover{background:#21895a!important}
 @media(max-width:700px){#newTranslationsView #translationListPanel .translation-list-heading #trSyncAll{width:100%!important}}
 </style>
+
+<div id="translationScrollFloat" aria-label="Paginanavigatie">
+ <button type="button" id="translationTop" aria-label="Naar boven" title="Naar boven"><i class="fa-solid fa-arrow-up"></i></button>
+ <button type="button" id="translationDown" aria-label="Naar beneden" title="Naar beneden"><i class="fa-solid fa-arrow-down"></i></button>
+</div>
+<style id="hpmw-translation-floating-arrows">
+#translationScrollFloat{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:99999;display:flex;flex-direction:column;gap:10px;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .2s ease,visibility .2s ease}
+#translationScrollFloat.is-visible{opacity:1;visibility:visible;pointer-events:auto}
+#translationScrollFloat button{width:46px;height:46px;border:1px solid rgba(255,255,255,.28);border-radius:50%;background:#172b3d;color:#fff;box-shadow:0 4px 16px rgba(0,0,0,.35);display:grid;place-items:center;font-size:18px;cursor:pointer}
+#translationScrollFloat button:hover{background:#245b83;transform:scale(1.06)}
+@media(max-width:600px){#translationScrollFloat{right:10px}#translationScrollFloat button{width:42px;height:42px}}
+</style>
+<script id="hpmw-translation-floating-arrows-script">
+(()=> {
+ const wrap=document.getElementById("translationScrollFloat");
+ const top=document.getElementById("translationTop");
+ const down=document.getElementById("translationDown");
+ const view=document.getElementById("newTranslationsView");
+ if(!wrap||!top||!down||!view)return;
+ const refresh=()=>{
+  const active=view.classList.contains("active")||view.classList.contains("show")||getComputedStyle(view).display!=="none";
+  wrap.classList.toggle("is-visible",active&&window.scrollY>120);
+ };
+ top.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
+ down.addEventListener("click",()=>window.scrollTo({top:document.documentElement.scrollHeight,behavior:"smooth"}));
+ window.addEventListener("scroll",refresh,{passive:true});
+ window.addEventListener("resize",refresh);
+ new MutationObserver(refresh).observe(view,{attributes:true,attributeFilter:["class","style"]});
+ refresh();
+})();
+</script>
 </body>
 </html>
