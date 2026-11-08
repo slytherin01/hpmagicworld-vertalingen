@@ -3419,40 +3419,8 @@ html.member-login-ready #introView #hpmwGuestEntry{display:none!important;visibi
 }
 </style>
 
-<script id="hpmw-login-validate-before-redirect">
-(()=>{
- const init=()=>{
-  const form=document.getElementById('hpmwCodepenLoginForm');
-  if(!form || form.dataset.validationBound==='1') return;
-  form.dataset.validationBound='1';
-  const error=document.getElementById('hpmwLoginError');
-  const button=document.getElementById('hpmwCodepenLoginSubmit');
-  const showError=(message)=>{if(error){error.textContent=message;error.style.display='block';} if(button){button.disabled=false;button.textContent=button.dataset.originalText||'Inloggen';}};
-  form.addEventListener('submit',async (event)=>{
-   event.preventDefault();
-   if(error){error.textContent='';error.style.display='none';}
-   if(!form.reportValidity()) return;
-   if(button){button.dataset.originalText=button.textContent;button.disabled=true;button.textContent='Controleren…';}
-   try{
-    const data=new FormData(form);
-    data.set('login',button?.value||'Inloggen');
-    const body=new URLSearchParams();
-    for(const [key,value] of data.entries()) body.append(key,String(value));
-    const response=await fetch(form.action,{method:'POST',body,credentials:'include',redirect:'follow',headers:{'Accept':'text/html'}});
-    const finalUrl=new URL(response.url||form.action,location.href);
-    const html=await response.text();
-    const failed=/(?:incorrect|invalid|wrong|invalide|incorrecte|foutieve?)\s*(?:username|password|gebruikersnaam|wachtwoord)|(?:mot de passe|identifiants).{0,50}(?:incorrect|invalide)/i.test(html)
-      || /\/login(?:[/?#]|$)/i.test(finalUrl.pathname)
-      || /name=["']password["']/i.test(html) && /login/i.test(finalUrl.pathname);
-    if(!response.ok || failed){showError('De gebruikersnaam of het wachtwoord is onjuist. Controleer je gegevens en probeer het opnieuw.');return;}
-    window.location.assign('https://slytherin01.github.io/muggle-ministry/tool/');
-   }catch(err){
-    showError('Inloggen kon niet worden gecontroleerd. Controleer je verbinding en probeer het opnieuw.');
-   }
-  });
- };
- if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init();
-})();
+<script id="hpmw-disable-legacy-forumotion-login">
+(()=>{const init=()=>{const form=document.getElementById('hpmwCodepenLoginForm');if(!form||form.dataset.supabaseNoticeBound==='1')return;form.dataset.supabaseNoticeBound='1';form.addEventListener('submit',event=>{event.preventDefault();const error=document.getElementById('hpmwLoginError');if(error){error.textContent='Dit oude Forumotion-inlogformulier is uitgeschakeld. Gebruik het inlogscherm van Ticket Support om de tool te openen.';error.style.display='block';}const button=document.getElementById('hpmwCodepenLoginSubmit');if(button){button.disabled=false;button.textContent='Gebruik Ticket Support-login';}});};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();})();
 </script>
 
 
