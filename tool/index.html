@@ -1232,6 +1232,8 @@ body:not(.supabase-authenticated)>:not(#supabaseAuthGate){display:none!important
 <header class="topbar luxury-nav-v2" id="adminTopbar">
 <nav class="top-actions" aria-label="Beheerportaal">
 <div class="lux-nav-item" style="cursor:default"><span class="lux-nav-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></span><span class="lux-nav-label">Hpmagicworld · Beheer</span></div>
+<button type="button" class="lux-nav-item hpmw-nav-link" id="navTranslations"><span class="lux-nav-icon"><i class="fa-solid fa-language"></i></span><span>Vertalingen</span></button>
+<button type="button" class="lux-nav-item hpmw-nav-link" id="navTickets"><span class="lux-nav-icon"><i class="fa-solid fa-ticket"></i></span><span>Ticketbeheer</span></button>
 <label aria-label="Taal kiezen" class="hpmw-language-wrap" for="hpmwLanguage" style="margin-left:auto"><i aria-hidden="true" class="fa-solid fa-language"></i><select id="hpmwLanguage"><option value="nl">Nederlands</option><option value="en">English</option><option value="pt">Português</option></select></label>
 <div class="lux-nav-item lux-user" id="adminSignedIn" style="cursor:default"><span class="lux-nav-icon"><i class="fa-solid fa-user"></i></span><span class="lux-nav-usertext"><small>INGELOGD ALS</small><strong id="adminSignedInEmail">—</strong></span></div>
 </nav></header>
@@ -3461,5 +3463,22 @@ main.shell>.view#homeView::before{content:none!important;display:none!important;
 #introView,#newSettingsView,#homeView,#formView,#myTicketsView{display:none!important}#adminTopbar{display:flex!important}body:not(.supabase-authenticated) #adminTopbar{display:none!important}
 #newAdminDashboard.view.active,#newTranslationsView.view.active,#adminView.view.active{display:block!important}
 .dash-head{display:flex;justify-content:space-between;align-items:flex-end;margin:18px 0 25px;gap:15px}.dash-head h1{font-size:clamp(28px,4vw,38px);margin:5px 0}.dash-user{color:#b7aaff;font-size:12px}.dash-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.dash-card{min-height:205px;padding:25px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(145deg,#172438,#101827);display:flex;flex-direction:column;align-items:flex-start}.dash-icon{font-size:25px;color:#b7aaff;margin-bottom:15px}.dash-card h2{margin:0 0 7px;font-size:19px}.dash-card p{color:var(--muted);font-size:13px;line-height:1.6}.dash-card button{margin-top:auto}@media(max-width:700px){.dash-grid{grid-template-columns:1fr}.dash-head{align-items:flex-start;flex-direction:column}}
-</style></body>
+</style>
+<style id="hpmw-admin-navbar-final">
+/* Beheernavigatie: altijd zichtbaar na aanmelden, met de onderdelen als nav-knoppen. */
+body.supabase-authenticated #adminTopbar{display:flex!important;visibility:visible!important;opacity:1!important;position:sticky!important;top:0!important;z-index:9999!important;width:100%!important}
+body:not(.supabase-authenticated) #adminTopbar{display:none!important}
+#adminTopbar .top-actions{display:flex!important;flex-wrap:wrap!important;align-items:center!important;gap:8px!important}
+#adminTopbar .hpmw-nav-link{font:inherit!important;color:#dce5f4!important;cursor:pointer!important;border:1px solid #35445b!important;background:#152237!important}
+#adminTopbar .hpmw-nav-link:hover{background:#263955!important;border-color:#b7aaff!important;color:#fff!important}
+#adminTopbar .lux-user{margin-left:auto!important}
+#newAdminDashboard .dash-grid{display:none!important}
+#newAdminDashboard .dash-head{margin-top:24px!important}
+@media(max-width:650px){#adminTopbar{padding:8px!important}#adminTopbar .top-actions{gap:5px!important}#adminTopbar .lux-nav-item{padding:6px 8px!important;font-size:11px!important}#adminTopbar .lux-nav-label{display:none!important}#adminTopbar .lux-user{margin-left:0!important}#adminTopbar .lux-nav-usertext strong{max-width:105px;overflow:hidden;text-overflow:ellipsis}}
+</style>
+<script id="hpmw-admin-navbar-actions">
+(()=>{const $=id=>document.getElementById(id);function go(id){document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));$(id)?.classList.add("active");window.scrollTo(0,0)}$("navTranslations")?.addEventListener("click",()=>{go("newTranslationsView");$("trSearch")?.dispatchEvent(new Event("input"))});$("navTickets")?.addEventListener("click",()=>{if(!["admin","moderator"].includes(window.hpmwSupabaseRole||"member")){alert("Geen moderatorrechten.");return}go("adminView");$("adminRefresh")?.click()});$("adminBack")?.addEventListener("click",()=>go("newAdminDashboard"));})();
+</script>
+
+</body>
 </html>
