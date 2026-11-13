@@ -2,7 +2,7 @@
 (()=> {
  const $=(s,r=document)=>r.querySelector(s);
  const client=()=>window.hpmwSupabase;
- const kinds={news:"HP Nieuws"};
+ const kinds={news:"Nieuwspagina"};
  const perms=["view","edit","publish","delete"];
  const css=`
  #adminCmsView .cms-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0} #adminCmsView .cms-main-tabs{padding:8px;background:#0b1422;border:1px solid #26364c;border-radius:12px} #adminCmsView .cms-main-tabs button{flex:1;min-width:130px} #adminCmsView [data-main-panel][hidden]{display:none!important}
@@ -27,13 +27,13 @@
   const section=document.createElement("section");section.className="view";section.id="adminCmsView";
   section.innerHTML=`
    <div class="page-head translation-bluebar"><div class="translation-bluebar-copy"><div class="eyebrow">ROLLEN & TOEGANG</div><h1>Autorisaties</h1><p class="subtitle">Beheer portaalinhoud en toegangsrechten.</p></div><div class="translation-bluebar-actions"><button class="btn" id="cmsBack">← Dashboard</button></div></div>
-   <div class="cms-tabs cms-main-tabs" id="cmsMainTabs"><button type="button" class="active" data-main-tab="roles">Rollen & autorisaties</button><button type="button" data-main-tab="ticketRights">Ticketbeheerrechten</button><button type="button" data-main-tab="news">HP Nieuws</button></div><div data-main-panel="roles"><div class="cms-panel"><h2>Gebruikersrollen</h2><p>Koppel een Supabase-gebruiker aan één rol. Gebruik het UUID van het account.</p><label>Supabase gebruikers-ID (UUID)<input id="roleUserId" type="text" placeholder="00000000-0000-0000-0000-000000000000"></label><label>Rol<select id="roleValue"><option value="administrator">Administrator — alles</option><option value="support_moderator">Support Moderator — alleen ticketbeheer</option><option value="news_poster">Nieuwsposter — alleen HP Nieuws</option></select></label><button class="cms-btn primary" type="button" id="roleSave">Rol toewijzen</button><div id="roleList"></div><p class="cms-status" id="roleStatus" role="status"></p></div></div><div data-main-panel="news" hidden><div class="cms-tabs" id="cmsTabs"></div><div class="cms-grid">
+   <div class="cms-tabs cms-main-tabs" id="cmsMainTabs"><button type="button" class="active" data-main-tab="roles">Rollen & autorisaties</button><button type="button" data-main-tab="ticketRights">Ticketbeheerrechten</button><button type="button" data-main-tab="newsRights">Nieuwspaginarechten</button><button type="button" data-main-tab="news">Nieuwspagina</button></div><div data-main-panel="roles"><div class="cms-panel"><h2>Gebruikersrollen</h2><p>Koppel een Supabase-gebruiker aan één rol. Gebruik het UUID van het account.</p><label>Supabase gebruikers-ID (UUID)<input id="roleUserId" type="text" placeholder="00000000-0000-0000-0000-000000000000"></label><label>Rol<select id="roleValue"><option value="administrator">Administrator — alles</option><option value="support_moderator">Support Moderator — alleen ticketbeheer</option><option value="news_poster">Nieuwsposter — alleen HP Nieuws</option></select></label><button class="cms-btn primary" type="button" id="roleSave">Rol toewijzen</button><div id="roleList"></div><p class="cms-status" id="roleStatus" role="status"></p></div></div><div data-main-panel="news" hidden><div class="cms-tabs" id="cmsTabs"></div><div class="cms-grid">
     <div class="cms-panel"><h2 id="cmsListTitle">Inhoud</h2><div id="cmsList"></div></div>
     <div class="cms-panel"><h2 id="cmsFormTitle">Nieuw item</h2><form id="cmsForm"><label>Titel<input id="cmsTitle" required maxlength="180"></label><label>Tekst / antwoord / omschrijving<textarea id="cmsBody" rows="7"></textarea></label><label>Bron (voor nieuws)<input id="cmsSource"></label><label>Auteur (voor nieuws)<input id="cmsAuthor"></label><label>Volgorde<input id="cmsOrder" type="number" value="0"></label><label id="cmsPinWrap"><input id="cmsPinned" type="checkbox" style="width:auto"> Vastpinnen bovenaan HP Nieuws</label><label><input id="cmsPublished" type="checkbox" style="width:auto"> Direct publiceren</label><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="cms-btn primary" type="submit">Opslaan</button><button class="cms-btn" type="button" id="cmsNew">Nieuw / wissen</button></div><p class="cms-status" id="cmsStatus" role="status"></p></form></div>
-   </div></div><div data-main-panel="ticketRights" hidden><div class="cms-panel" id="ticketModeratorsPanel"><h2>Portaalrechten · Ticketbeheer</h2><p>Stel per Forumotion-gebruiker afzonderlijk in of die Ticketbeheer mag zien, tickets mag modereren of tickets mag verwijderen. Gebruik het Forumotion-gebruikersnummer.</p><div style="display:grid;grid-template-columns:minmax(120px,.5fr) minmax(160px,1fr) auto;gap:8px;align-items:end"><label>Forumotion gebruikersnummer<input id="ticketModId" type="number" min="1" step="1" placeholder="bijv. 3"></label><label>Naam / herkenning<input id="ticketModName" maxlength="80" placeholder="bijv. /u3"></label><button class="cms-btn primary" type="button" id="ticketModAdd">Gebruiker toevoegen</button></div><div id="ticketModList" style="margin-top:12px"></div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px"><button class="cms-btn primary" type="button" id="saveTicketRights">Rechten opslaan</button><button class="cms-btn" type="button" id="syncPortal">Sync naar portaal</button></div><p class="cms-status" id="ticketModStatus" role="status"></p></div></div>`;
+   </div></div><div data-main-panel="ticketRights" hidden><div class="cms-panel" id="ticketModeratorsPanel"><h2>Portaalrechten · Ticketbeheer</h2><p>Stel per Forumotion-gebruiker afzonderlijk in of die Ticketbeheer mag zien, tickets mag modereren of tickets mag verwijderen. Gebruik het Forumotion-gebruikersnummer.</p><div style="display:grid;grid-template-columns:minmax(120px,.5fr) minmax(160px,1fr) auto;gap:8px;align-items:end"><label>Forumotion gebruikersnummer<input id="ticketModId" type="number" min="1" step="1" placeholder="bijv. 3"></label><label>Naam / herkenning<input id="ticketModName" maxlength="80" placeholder="bijv. /u3"></label><button class="cms-btn primary" type="button" id="ticketModAdd">Gebruiker toevoegen</button></div><div id="ticketModList" style="margin-top:12px"></div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px"><button class="cms-btn primary" type="button" id="saveTicketRights">Rechten opslaan</button><button class="cms-btn" type="button" id="syncPortal">Sync naar portaal</button></div><p class="cms-status" id="ticketModStatus" role="status"></p></div></div><div data-main-panel="newsRights" hidden><div class="cms-panel" id="newsModeratorsPanel"><h2>Portaalrechten · Nieuwspagina</h2><p>Gebruik het Forumotion-gebruikersnummer, net als bij Ticketbeheer. Stel per gebruiker afzonderlijk de nieuwsrechten in.</p><div style="display:grid;grid-template-columns:minmax(120px,.5fr) minmax(160px,1fr) auto;gap:8px;align-items:end"><label>Forumotion gebruikersnummer<input id="newsModId" type="number" min="1" step="1" placeholder="bijv. 3"></label><label>Naam / herkenning<input id="newsModName" maxlength="80" placeholder="bijv. /u3"></label><button class="cms-btn primary" type="button" id="newsModAdd">Gebruiker toevoegen</button></div><div id="newsModList" style="margin-top:12px"></div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px"><button class="cms-btn primary" type="button" id="saveNewsRights">Rechten opslaan</button><button class="cms-btn" type="button" id="syncNewsRights">Sync naar portaal</button></div><p class="cms-status" id="newsModStatus" role="status"></p></div></div>`;
   $("main.shell")?.append(section);
   $("#cmsBack").onclick=()=>go("newAdminDashboard");$("#cmsNew").onclick=reset;
-  $("#ticketModAdd").onclick=addTicketModerator;$("#saveTicketRights").onclick=saveTicketModeratorRights;$("#syncPortal").onclick=syncTicketModerators;document.querySelectorAll("#cmsMainTabs [data-main-tab]").forEach(b=>b.onclick=()=>{document.querySelectorAll("#cmsMainTabs [data-main-tab]").forEach(x=>x.classList.toggle("active",x===b));document.querySelectorAll("#adminCmsView [data-main-panel]").forEach(p=>p.hidden=p.dataset.mainPanel!==b.dataset.mainTab);});
+  $("#ticketModAdd").onclick=addTicketModerator;$("#saveTicketRights").onclick=saveTicketModeratorRights;$("#syncPortal").onclick=syncTicketModerators;$("#newsModAdd").onclick=addNewsModerator;$("#saveNewsRights").onclick=saveNewsModeratorRights;$("#syncNewsRights").onclick=syncNewsModerators;document.querySelectorAll("#cmsMainTabs [data-main-tab]").forEach(b=>b.onclick=()=>{document.querySelectorAll("#cmsMainTabs [data-main-tab]").forEach(x=>x.classList.toggle("active",x===b));document.querySelectorAll("#adminCmsView [data-main-panel]").forEach(p=>p.hidden=p.dataset.mainPanel!==b.dataset.mainTab);});
   $("#roleSave").onclick=saveToolRole;
   $("#cmsForm").onsubmit=save;
   const tabs=$("#cmsTabs");Object.entries(kinds).forEach(([k,v])=>{const b=document.createElement("button");b.textContent=v;b.dataset.kind=k;b.onclick=()=>selectKind(k);tabs.append(b)});
@@ -41,12 +41,58 @@
   const tabButtons=[...document.querySelectorAll("#cmsMainTabs [data-main-tab]")];
   if(role==="support_moderator"){tabButtons.forEach(b=>b.hidden=b.dataset.mainTab!=="ticketRights");document.querySelector('#cmsMainTabs [data-main-tab="ticketRights"]')?.click();$("#roleList")?.closest(".cms-panel")?.setAttribute("hidden","");}
   else if(role==="news_poster"){tabButtons.forEach(b=>b.hidden=b.dataset.mainTab!=="news");document.querySelector('#cmsMainTabs [data-main-tab="news"]')?.click();$("#roleList")?.closest(".cms-panel")?.setAttribute("hidden","");}
-  else {selectKind("news");loadToolRoles();}
+  else {selectKind("news");loadToolRoles();loadNewsModerators();}
 
  }
  let kind="maintenance",editing=null;
  function reset(){editing=null;$("#cmsForm").reset();$("#cmsOrder").value=0;$("#cmsPinned").checked=false;$("#cmsPinWrap").style.display=kind==="news"?"block":"none";$("#cmsFormTitle").textContent="Nieuw item";}
  function selectKind(k){kind=k;editing=null;document.querySelectorAll("#cmsTabs button").forEach(b=>b.classList.toggle("active",b.dataset.kind===k));$("#cmsListTitle").textContent=kinds[k];reset();load();}
+
+ async function loadToolRoles(){
+  const db=client(),box=$("#roleList");if(!db||!box)return;
+  const {data,error}=await db.from("tool_access_roles").select("user_id,role,created_at").order("created_at",{ascending:false});
+  if(error){box.textContent="Gebruikersrollen laden mislukt: "+error.message;$("#roleStatus").textContent="Controleer de tabelrechten en SQL-migratie.";return}
+  box.innerHTML="";
+  (data||[]).forEach(row=>{const item=document.createElement("div");item.className="cms-item";const info=document.createElement("div"),who=document.createElement("strong"),meta=document.createElement("small");who.textContent=row.user_id;meta.textContent=row.role;info.append(who,meta);const del=document.createElement("button");del.className="cms-btn";del.textContent="Verwijderen";del.onclick=async()=>{if(!confirm("Deze gebruikersrol verwijderen?"))return;const {error}=await db.from("tool_access_roles").delete().eq("user_id",row.user_id);$("#roleStatus").textContent=error?.message||"Rol verwijderd.";if(!error)loadToolRoles()};item.append(info,del);box.append(item)});
+  if(!(data||[]).length)box.textContent="Nog geen gebruikersrollen ingesteld.";
+ }
+ async function saveToolRole(){
+  const db=client(),id=$("#roleUserId").value.trim(),role=$("#roleValue").value;
+  if(!/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(id)){ $("#roleStatus").textContent="Vul een geldige Supabase gebruikers-UUID in.";return}
+  const current=await db.auth.getUser();if(!current.data.user){$("#roleStatus").textContent="Log opnieuw in.";return}
+  const {error}=await db.from("tool_access_roles").upsert({user_id:id,role,created_at:new Date().toISOString()},{onConflict:"user_id"});
+  $("#roleStatus").textContent=error?"Toewijzen mislukt: "+error.message:"Gebruikersrol toegewezen.";
+  if(!error){$("#roleUserId").value="";loadToolRoles()}
+ }
+ async function loadNewsModerators(){
+  const db=client(),box=$("#newsModList");if(!db||!box)return;
+  const {data,error}=await db.from("news_moderators").select("*").order("forumotion_user_id");
+  if(error){box.textContent="Nieuwspaginarechten niet beschikbaar: "+error.message+" (voer de Nieuwspagina SQL-migratie uit).";return}
+  box.innerHTML="";
+  (data||[]).forEach(row=>{const line=document.createElement("div");line.className="cms-item";const info=document.createElement("div"),title=document.createElement("strong");title.textContent=(row.display_name||"Forumotion gebruiker")+" · /u"+row.forumotion_user_id;info.append(title);const actions=document.createElement("div");actions.style.cssText="display:flex;gap:7px;align-items:center;flex-wrap:wrap";
+   [["Nieuwspagina bekijken","can_view_news"],["Nieuws publiceren","can_publish_news"],["Nieuws bewerken","can_edit_news"],["Nieuws verwijderen","can_delete_news"]].forEach(([label,key])=>{const wrap=document.createElement("label");wrap.style.cssText="display:inline-flex;gap:5px;align-items:center;margin:4px 10px 4px 0";const cb=document.createElement("input");cb.type="checkbox";cb.checked=!!row[key];wrap.append(cb,document.createTextNode(label));actions.append(wrap)});
+   const del=document.createElement("button");del.className="cms-btn";del.textContent="Verwijderen";del.onclick=async()=>{if(!confirm("Deze gebruiker uit Nieuwspaginarechten verwijderen?"))return;const {error}=await db.from("news_moderators").delete().eq("forumotion_user_id",row.forumotion_user_id);$("#newsModStatus").textContent=error?.message||"Gebruiker verwijderd.";if(!error)loadNewsModerators()};actions.append(del);line.append(info,actions);box.append(line);
+  });
+  if(!(data||[]).length)box.textContent="Nog geen Nieuwspagina-gebruikers ingesteld.";
+ }
+ async function addNewsModerator(){
+  const id=Number($("#newsModId").value),name=$("#newsModName").value.trim(),db=client();
+  if(!Number.isInteger(id)||id<1){$("#newsModStatus").textContent="Vul een geldig Forumotion-gebruikersnummer in.";return}
+  const u=await db.auth.getUser();if(!u.data.user){$("#newsModStatus").textContent="Log opnieuw in.";return}
+  const {error}=await db.from("news_moderators").upsert({forumotion_user_id:id,display_name:name||("Forumotion gebruiker #"+id),enabled:false,can_view_news:false,can_publish_news:false,can_edit_news:false,can_delete_news:false,updated_by:u.data.user.id,updated_at:new Date().toISOString()},{onConflict:"forumotion_user_id"});
+  $("#newsModStatus").textContent=error?.message||"Gebruiker toegevoegd; alle nieuwsrechten staan uit.";
+  if(!error){$("#newsModId").value="";$("#newsModName").value="";loadNewsModerators()}
+ }
+ async function saveNewsModeratorRights(){
+  const db=client(),u=await db.auth.getUser();if(!u.data.user){$("#newsModStatus").textContent="Log opnieuw in.";return}
+  const rows=[...document.querySelectorAll("#newsModList .cms-item")],payload=[];
+  for(const line of rows){const title=line.querySelector("strong")?.textContent||"",id=Number(title.match(/\/u(\d+)/)?.[1]);if(!id)continue;const c=[...line.querySelectorAll("label input[type=checkbox]")];payload.push({forumotion_user_id:id,display_name:title.split(" · ")[0],enabled:c.some(x=>x.checked),can_view_news:!!c[0]?.checked,can_publish_news:!!c[1]?.checked,can_edit_news:!!c[2]?.checked,can_delete_news:!!c[3]?.checked,updated_by:u.data.user.id,updated_at:new Date().toISOString()})}
+  if(!payload.length){$("#newsModStatus").textContent="Voeg eerst een gebruiker toe.";return}
+  const {error}=await db.from("news_moderators").upsert(payload,{onConflict:"forumotion_user_id"});
+  $("#newsModStatus").textContent=error?"Opslaan mislukt: "+error.message:"Nieuwspaginarechten opgeslagen.";
+  if(!error)loadNewsModerators();
+ }
+ async function syncNewsModerators(){await saveNewsModeratorRights();if($("#newsModStatus").textContent==="Nieuwspaginarechten opgeslagen.")$("#newsModStatus").textContent="Nieuwspaginarechten opgeslagen. De publieke Nieuwspagina leest gepubliceerde berichten automatisch uit Supabase."}
  async function load(){
   const db=client();if(!db||!document.body.classList.contains("supabase-authenticated")||!["admin","administrator","news_poster"].includes(document.body.dataset.supabaseRole)){if($("#cmsStatus"))$("#cmsStatus").textContent="Je account heeft geen toegang tot HP Nieuws.";return;}
   $("#cmsStatus").textContent="Laden…";
