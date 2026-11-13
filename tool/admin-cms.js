@@ -37,9 +37,9 @@
   $("#permissionAdd").onclick=addPermissionProfile;
   $("#cmsForm").onsubmit=save;
   const tabs=$("#cmsTabs");Object.entries(kinds).forEach(([k,v])=>{const b=document.createElement("button");b.textContent=v;b.dataset.kind=k;b.onclick=()=>selectKind(k);tabs.append(b)});
-  selectKind("faq");
+  selectKind("maintenance");
  }
- let kind="faq",editing=null;
+ let kind="maintenance",editing=null;
  function reset(){editing=null;$("#cmsForm").reset();$("#cmsOrder").value=0;$("#cmsPinned").checked=false;$("#cmsPinWrap").style.display=kind==="news"?"block":"none";$("#cmsFormTitle").textContent="Nieuw item";}
  function selectKind(k){kind=k;editing=null;document.querySelectorAll("#cmsTabs button").forEach(b=>b.classList.toggle("active",b.dataset.kind===k));$("#cmsListTitle").textContent=kinds[k];reset();load();}
  async function load(){
