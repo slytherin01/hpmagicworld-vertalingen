@@ -151,6 +151,7 @@ async function addPermissionProfile(){
   $("#cmsTransferStatus").textContent=items.length+" items geëxporteerd.";
  }
 
+ window.hpmwInitAdminCms=init;
  document.addEventListener("DOMContentLoaded",()=>{init();setTimeout(addTransferPanel,0)});if(document.readyState!=="loading"){init();setTimeout(addTransferPanel,0)};
  document.addEventListener("hpmw:supabase-role",e=>{const ok=e.detail?.role==="admin";document.querySelectorAll(".hpmw-nav-link").forEach(n=>n.hidden=!ok);if($("#adminCmsView")&&ok){load();loadTicketModerators()}});
 })();
