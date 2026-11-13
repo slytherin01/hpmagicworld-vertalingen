@@ -2,7 +2,7 @@
 (()=> {
  const $=(s,r=document)=>r.querySelector(s);
  const client=()=>window.hpmwSupabase;
- const kinds={faq:"FAQ",news:"HP Nieuws",job:"Vacatures",maintenance:"Onderhoud"};
+ const kinds={page:"Portaalteksten",faq:"FAQ",news:"HP Nieuws",job:"Vacatures",maintenance:"Onderhoud"};
  const perms=["view","edit","publish","delete"];
  const css=`
  #adminCmsView .cms-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
@@ -53,6 +53,47 @@
  }
  async function save(e){e.preventDefault();const db=client(),user=(await db.auth.getUser()).data.user;if(!user)return;const payload={kind,title:$("#cmsTitle").value.trim(),body:$("#cmsBody").value,source:$("#cmsSource").value,author:$("#cmsAuthor").value,sort_order:Number($("#cmsOrder").value)||0,published:$("#cmsPublished").checked,updated_by:user.id};let result;if(editing)result=await db.from("admin_content").update(payload).eq("id",editing.id);else result=await db.from("admin_content").insert({...payload,created_by:user.id});$("#cmsStatus").textContent=result.error?result.error.message:"Opgeslagen.";if(!result.error){reset();load()}}
  async function loadPermissions(){const db=client();const box=$("#cmsPermissions");if(!box)return;const {data,error}=await db.from("admin_permissions").select("*").order("updated_at",{ascending:false});if(error){box.textContent="Rechten niet beschikbaar: "+error.message;return}box.innerHTML="";(data||[]).forEach(row=>{const line=document.createElement("div");line.className="cms-perm";const id=document.createElement("code");id.textContent=row.user_id;line.append(id);const labels={faq:"FAQ",news:"Nieuws",jobs:"Vacatures",maintenance:"Onderhoud"};Object.entries(labels).forEach(([slug,label])=>{const wrap=document.createElement("label");wrap.textContent=label;const cb=document.createElement("input");cb.type="checkbox";cb.checked=row["can_view_"+slug];cb.title="Mag bekijken: "+label;cb.onchange=async()=>{const {data:userData}=await db.auth.getUser();const patch={["can_view_"+slug]:cb.checked,updated_by:userData.user.id,updated_at:new Date().toISOString()};const {error}=await db.from("admin_permissions").update(patch).eq("user_id",row.user_id);$("#cmsPermStatus").textContent=error?.message||"Recht bijgewerkt."};wrap.append(cb);line.append(wrap)});box.append(line)});if(!(data||[]).length)box.textContent="Nog geen rechtenprofielen. Voeg eerst een profiel toe via Supabase SQL; daarna kun je de kijkrechten hier aanpassen."}
- document.addEventListener("DOMContentLoaded",init);if(document.readyState!=="loading")init();
+
+ // Import/export: the starter package contains the existing portal welcome copy and FAQ.
+ const starter=[
+  {kind:"page",title:"Welkomsttekst voor bezoekers",body:"Je hebt een account nodig. Deze kun je gratis aanmaken om door te gaan naar het Ministerie van Dreuzels, oftewel onze community. Registreer hier een account.\n\nGebruik ons portaal om onder andere support aan te vragen.",source:"Bestaand portaal: introView",author:""},
+  {kind:"page",title:"Welkomsttekst voor leden",body:"Gebruik ons portaal om onder andere support aan te vragen en je account te voorzien van een afdeling door onze Sorteerhoed op te zetten.\nWie weet zit je wel bij Griffoendor, Zwadderich, Huffelpuf of Ravenklauw!",source:"Bestaand portaal: introView",author:""},
+  {kind:"faq",title:"1. Hoe maak ik een nieuw ticket aan?",body:"Klik op Ticket Support, kies de categorie die het beste bij je vraag past en vul het formulier volledig in. Klik daarna op Ticket versturen."},
+  {kind:"faq",title:"2. Welke categorie moet ik kiezen?",body:"Kies het onderwerp dat het meest aansluit bij je vraag. Twijfel je? Kies dan Overige Support. Het supportteam kan je ticket indien nodig verder helpen."},
+  {kind:"faq",title:"3. Waar kan ik mijn tickets terugvinden?",body:"Klik op Mijn tickets in de navigatie. Daar kun je je eigen tickets en de reacties van het supportteam bekijken. Je moet hiervoor ingelogd zijn."},
+  {kind:"faq",title:"4. Hoe reageer ik op een ticket?",body:"Open je ticket via Mijn tickets, typ je reactie in het reactieveld en verstuur deze. Je reactie wordt aan het gesprek toegevoegd."},
+  {kind:"faq",title:"5. Hoe lang duurt het voordat ik antwoord krijg?",body:"Dat verschilt per vraag en drukte bij het supportteam. Houd je ticket in de gaten voor een reactie. Maak niet meerdere tickets aan voor hetzelfde probleem."},
+  {kind:"faq",title:"6. Kan ik een ticket sluiten?",body:"Je kunt via het ticket een verzoek indienen om het te sluiten. Het supportteam ontvangt hiervan een melding."},
+  {kind:"faq",title:"7. Ik kan geen ticket aanmaken of mijn tickets niet zien. Wat nu?",body:"Controleer of je bent ingelogd met het juiste Hpmagicworld-account. Werkt het nog steeds niet, kies dan de categorie Forumfouten & Bugs of vraag een moderator om hulp."},
+  {kind:"faq",title:"8. Waarvoor gebruik ik De Sorteerhoed?",body:"Gebruik De Sorteerhoed voor de sorteer- en afdelingsaanvraag. Deze opent in een apart tabblad."}
+ ];
+ function addTransferPanel(){
+  if($("#cmsTransfer"))return;
+  const panel=document.createElement("div");panel.className="cms-panel";panel.id="cmsTransfer";panel.style.marginTop="16px";
+  panel.innerHTML='<h2>Portaal importeren en exporteren</h2><p>Startpakket met de bestaande welkomstteksten en FAQ. Exporteer je inhoud als JSON-back-up of importeer een eerder opgeslagen JSON-bestand.</p><div style="display:flex;gap:8px;flex-wrap:wrap;margin:12px 0"><button class="cms-btn primary" type="button" id="cmsImportStarter">Bestaande portaalinhoud importeren</button><button class="cms-btn" type="button" id="cmsExportAll">Alles exporteren (JSON)</button><label class="cms-btn" for="cmsImportFile">JSON-bestand importeren<input id="cmsImportFile" type="file" accept=".json,application/json" style="display:none"></label></div><p class="cms-status" id="cmsTransferStatus" role="status">Importeren voegt items toe; bestaande inhoud wordt niet verwijderd.</p>';
+  $("#adminCmsView")?.append(panel);
+  $("#cmsImportStarter").onclick=()=>importItems(starter);
+  $("#cmsExportAll").onclick=exportAll;
+  $("#cmsImportFile").onchange=async e=>{const f=e.target.files?.[0];if(!f)return;try{const parsed=JSON.parse(await f.text());await importItems(Array.isArray(parsed)?parsed:parsed.items)}catch(err){$("#cmsTransferStatus").textContent="Import mislukt: "+err.message}e.target.value=""};
+ }
+ async function importItems(items){
+  const db=client(),u=await db.auth.getUser(),user=u.data.user;
+  if(!Array.isArray(items)||!items.length){$("#cmsTransferStatus").textContent="Geen geldige items gevonden.";return}
+  const rows=items.filter(x=>kinds[x.kind]&&x.title).map(x=>({kind:x.kind,title:String(x.title).slice(0,180),body:String(x.body||""),source:String(x.source||""),author:String(x.author||""),published:false,sort_order:Number(x.sort_order)||0,created_by:user.id,updated_by:user.id}));
+  if(!rows.length){$("#cmsTransferStatus").textContent="Geen herkenbare inhoud gevonden.";return}
+  const {error}=await db.from("admin_content").insert(rows);
+  $("#cmsTransferStatus").textContent=error?("Importfout: "+error.message):(rows.length+" items geïmporteerd als concept. Controleer ze en publiceer ze daarna afzonderlijk.");
+  if(!error)load();
+ }
+ async function exportAll(){
+  const db=client();const {data,error}=await db.from("admin_content").select("kind,title,body,source,author,published,sort_order").order("kind").order("sort_order");
+  if(error){$("#cmsTransferStatus").textContent=error.message;return}
+  const items=(data||[]).length?(data||[]):starter;
+  const blob=new Blob([JSON.stringify({exported_at:new Date().toISOString(),items},null,2)],{type:"application/json"});
+  const url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="hpmagicworld-portaal-export.json";a.click();URL.revokeObjectURL(url);
+  $("#cmsTransferStatus").textContent=items.length+" items geëxporteerd.";
+ }
+
+ document.addEventListener("DOMContentLoaded",()=>{init();setTimeout(addTransferPanel,0)});if(document.readyState!=="loading"){init();setTimeout(addTransferPanel,0)};
  document.addEventListener("hpmw:supabase-role",()=>{if($("#adminCmsView"))load()});
 })();
