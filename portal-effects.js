@@ -3,12 +3,14 @@
   "use strict";
   const SUPABASE_URL = "https://vuaajsjjluwgqmneinds.supabase.co";
   const SUPABASE_KEY = "sb_publishable_tto6sNxZPLv1VhUdMRlPHg_ptzg9odx";
-  const CONFIG_URL = SUPABASE_URL + "/rest/v1/portal_effects_settings?id=eq.1&select=snow,fireworks,pumpkins,updated_at";
+  const CONFIG_URL = SUPABASE_URL + "/rest/v1/portal_effects_settings?id=eq.1&select=snow,fireworks,pumpkins,greeting,year,updated_at";
   const STYLE_ID = "hpmw-portal-effects-style";
   const LAYER_ID = "hpmw-portal-effects-layer";
   let lastConfig = "";
   let refreshTimer = null;
   let pollTimer = null;
+  let fireworksInstance = null;
+  let fireworksLoadPromise = null;
   const reducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const random = (min, max) => min + Math.random() * (max - min);
 
@@ -16,6 +18,7 @@
     document.getElementById(LAYER_ID)?.remove();
     document.getElementById(STYLE_ID)?.remove();
     if (refreshTimer) { clearInterval(refreshTimer); refreshTimer = null; }
+    if (fireworksInstance) { try { fireworksInstance.stop(true); } catch (_) {} fireworksInstance = null; }
   };
 
   const addStyle = () => {
@@ -24,6 +27,9 @@
     style.id = STYLE_ID;
     style.textContent = `
       #${LAYER_ID}{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:99990;contain:strict}
+      #${LAYER_ID} .hpmw-newyear-message{position:fixed;top:clamp(18px,5vh,54px);left:50%;transform:translateX(-50%);width:max-content;max-width:92vw;padding:13px 22px;border:1px solid #f4d27a;border-radius:14px;background:linear-gradient(135deg,#17243beF,#33234beF);color:#fff8dc;text-align:center;font:800 clamp(16px,2.4vw,25px)/1.35 Georgia,serif;letter-spacing:.02em;text-shadow:0 2px 10px #000;box-shadow:0 8px 28px #0008,0 0 22px #f7d47744;backdrop-filter:blur(8px);z-index:2}
+      #${LAYER_ID} .hpmw-fireworks-host{position:absolute;inset:0;z-index:0}
+      #${LAYER_ID} .hpmw-fireworks-host canvas{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;opacity:.95}
       #${LAYER_ID} .hpmw-flake{position:absolute;top:-18px;border-radius:50%;background:#fff;box-shadow:0 0 4px 1px #ffffffaa;animation:hpmw-snow-fall linear infinite;will-change:transform}
       @keyframes hpmw-snow-fall{0%{transform:translate3d(0,-3vh,0)}50%{transform:translate3d(var(--sway),52vh,0)}100%{transform:translate3d(var(--drift),108vh,0)}}
       #${LAYER_ID} .hpmw-pumpkin{position:absolute;top:var(--top);left:var(--left);width:var(--size);height:calc(var(--size)*.82);border-radius:48% 48% 45% 45%;background:radial-gradient(ellipse at 32% 25%,#ffd27a 0 5%,#ffad35 18%,#ed7414 48%,#a83c08 88%,#632508 100%);box-shadow:inset 5px 0 8px #ffe0a088,inset -8px 0 12px #672506aa,0 8px 18px #0009;animation:hpmw-pumpkin-hover ease-in-out infinite alternate;will-change:transform}
@@ -40,7 +46,7 @@
 
   const buildEffects = cfg => {
     removeEffects();
-    if (reducedMotion || (!cfg.snow && !cfg.fireworks && !cfg.pumpkins)) return;
+    if (reducedMotion || (!cfg.snow && !cfg.fireworks && !cfg.pumpkins && !cfg.greeting)) return;
     addStyle();
     const layer = document.createElement("div");
     layer.id = LAYER_ID;
@@ -80,38 +86,42 @@
       }
     }
 
+    if (cfg.greeting && cfg.year) {
+      const message = document.createElement("div");
+      message.className = "hpmw-newyear-message";
+      message.textContent = "Namens het modteam een gelukkig en gezond " + cfg.year;
+      layer.appendChild(message);
+    }
+
     if (cfg.fireworks) {
-      const colors = [
-        ["#fff0a6", "#ffb52e"], ["#ffb5d2", "#ff438a"],
-        ["#a8f0ff", "#28a9ff"], ["#d8b7ff", "#9b59ff"],
-        ["#c8ffb0", "#65d94a"]
-      ];
-      const burst = () => {
-        if (document.hidden || !document.getElementById(LAYER_ID)) return;
-        const firework = document.createElement("span");
-        firework.className = "hpmw-firework";
-        firework.style.left = random(10, 90) + "%";
-        firework.style.top = random(12, 55) + "%";
-        const palette = colors[Math.floor(Math.random() * colors.length)];
-        const count = 52;
-        for (let i = 0; i < count; i++) {
-          const angle = (Math.PI * 2 * i / count) + random(-.07, .07);
-          const distance = random(55, 112);
-          const spark = document.createElement("i");
-          spark.className = "hpmw-spark";
-          spark.style.setProperty("--dx", Math.cos(angle) * distance + "px");
-          spark.style.setProperty("--dy", Math.sin(angle) * distance + "px");
-          spark.style.setProperty("--color", palette[0]);
-          spark.style.setProperty("--glow", palette[1]);
-          spark.style.setProperty("--duration", random(1250, 2100) + "ms");
-          spark.style.animationDelay = random(0, 90) + "ms";
-          firework.appendChild(spark);
-        }
-        layer.appendChild(firework);
-        setTimeout(() => firework.remove(), 2400);
-      };
-      burst();
-      refreshTimer = setInterval(burst, 1750);
+      const host = document.createElement("div");
+      host.className = "hpmw-fireworks-host";
+      layer.appendChild(host);
+      loadFireworks().then(FireworksCtor => {
+        if (!FireworksCtor || !document.getElementById(LAYER_ID) || !cfg.fireworks) return;
+        fireworksInstance = new FireworksCtor(host, {
+          autoresize: true,
+          opacity: 0.9,
+          acceleration: 1.04,
+          friction: 0.96,
+          gravity: 1.35,
+          particles: 90,
+          traceLength: 4,
+          traceSpeed: 10,
+          explosion: 7,
+          intensity: 35,
+          flickering: 55,
+          hue: { min: 0, max: 360 },
+          delay: { min: 18, max: 38 },
+          rocketsPoint: { min: 12, max: 88 },
+          brightness: { min: 65, max: 90 },
+          decay: { min: 0.012, max: 0.024 },
+          lineWidth: { explosion: { min: 1, max: 3 }, trace: { min: 1, max: 2 } },
+          mouse: { click: false, move: false, max: 1 },
+          sound: { enabled: false }
+        });
+        fireworksInstance.start();
+      }).catch(error => console.warn("[Hpmagicworld effects] Vuurwerkbibliotheek kon niet worden geladen.", error));
     }
   };
 
