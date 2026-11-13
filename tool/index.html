@@ -1249,7 +1249,7 @@ body:not(.supabase-authenticated)>:not(#supabaseAuthGate){display:none!important
 
 </div></section>
 <section class="view" id="newSettingsView">
-<div class="page-head translation-bluebar"><div class="translation-bluebar-copy"><div class="eyebrow">PORTAALINSTELLINGEN</div><h1>Instellingen</h1><p class="subtitle">Beheer hier sneeuw, fireworks.js.org-vuurwerk, zwevende pompoenen en de instelbare nieuwjaarswens.</p></div><div class="translation-bluebar-actions"><button class="btn" id="settingsBack">← Dashboard</button></div></div>
+<div class="page-head translation-bluebar"><div class="translation-bluebar-copy"><div class="eyebrow">PORTAALINSTELLINGEN</div><h1>Instellingen</h1><p class="subtitle">Beheer sneeuw, vuurwerk, pompoenen, de nieuwjaarswens en de onderhoudsmelding op de startpagina.</p></div><div class="translation-bluebar-actions"><button class="btn" id="settingsBack">← Dashboard</button></div></div>
 <div class="panel" style="padding:24px">
 <div class="portal-effect-setting"><div><h2>❄️ Sneeuwval</h2><p>Laat sneeuwvlokken over de portaalpagina vallen.</p></div><label class="effect-switch"><input type="checkbox" id="effectSnow"><span class="effect-slider"></span></label></div>
 <div class="portal-effect-setting"><div><h2>🎆 Vuurwerk</h2><p>Toon feestelijk vuurwerk op de portaalpagina.</p></div><label class="effect-switch"><input type="checkbox" id="effectFireworks"><span class="effect-slider"></span></label></div>
@@ -3851,7 +3851,7 @@ html body.supabase-authenticated main.shell{
 (function(){
  "use strict";
  const KEY="hpmw_portal_effects_v1";
- const BASE="https://slytherin01.github.io/muggle-ministry/portal-effects.js?v=30a5fb7";
+ const BASE="https://slytherin01.github.io/muggle-ministry/portal-effects.js?v=e92833e";
  const ids={snow:"effectSnow",fireworks:"effectFireworks",pumpkins:"effectPumpkins",greeting:"effectGreeting",maintenance_enabled:"effectMaintenance"};
  const defaults={snow:false,fireworks:false,pumpkins:false,greeting:false,year:"",maintenance_enabled:false,maintenance_message:""};
  const SQL=`create table if not exists public.portal_effects_settings (
