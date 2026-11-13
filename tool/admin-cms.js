@@ -2,7 +2,7 @@
 (()=> {
  const $=(s,r=document)=>r.querySelector(s);
  const client=()=>window.hpmwSupabase;
- const kinds={page:"Portaalteksten",faq:"FAQ",news:"HP Nieuws",job:"Vacatures",maintenance:"Onderhoud"};
+ const kinds={faq:"FAQ",news:"HP Nieuws",job:"Vacatures",maintenance:"Onderhoud"};
  const perms=["view","edit","publish","delete"];
  const css=`
  #adminCmsView .cms-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
@@ -37,7 +37,6 @@
   $("#permissionAdd").onclick=addPermissionProfile;
   $("#cmsForm").onsubmit=save;
   const tabs=$("#cmsTabs");Object.entries(kinds).forEach(([k,v])=>{const b=document.createElement("button");b.textContent=v;b.dataset.kind=k;b.onclick=()=>selectKind(k);tabs.append(b)});
-  const p=document.createElement("button");p.textContent="Rechten";p.onclick=()=>{document.querySelectorAll("#cmsTabs button").forEach(x=>x.classList.remove("active"));$("#cmsListTitle").textContent="Gebruikersrechten";$("#cmsList").innerHTML="Selecteer een gebruiker in de rechtenlijst hieronder.";};tabs.append(p);
   selectKind("faq");
  }
  let kind="faq",editing=null;
