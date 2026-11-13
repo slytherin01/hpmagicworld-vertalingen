@@ -32,10 +32,16 @@
       #${LAYER_ID} .hpmw-fireworks-host canvas{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;opacity:.95}
       #${LAYER_ID} .hpmw-flake{position:absolute;top:-18px;border-radius:50%;background:#fff;box-shadow:0 0 4px 1px #ffffffaa;animation:hpmw-snow-fall linear infinite;will-change:transform}
       @keyframes hpmw-snow-fall{0%{transform:translate3d(0,-3vh,0)}50%{transform:translate3d(var(--sway),52vh,0)}100%{transform:translate3d(var(--drift),108vh,0)}}
-      #${LAYER_ID} .hpmw-pumpkin{position:absolute;top:var(--top);left:var(--left);width:var(--size);height:calc(var(--size)*.82);border-radius:48% 48% 45% 45%;background:radial-gradient(ellipse at 32% 25%,#ffd27a 0 5%,#ffad35 18%,#ed7414 48%,#a83c08 88%,#632508 100%);box-shadow:inset 5px 0 8px #ffe0a088,inset -8px 0 12px #672506aa,0 8px 18px #0009;animation:hpmw-pumpkin-hover ease-in-out infinite alternate;will-change:transform}
-      #${LAYER_ID} .hpmw-pumpkin:before{content:"";position:absolute;inset:2% 22%;border-radius:48%;border-left:3px solid #ffca6a88;border-right:3px solid #7d310b99;box-shadow:-7px 0 0 -4px #ffce7488,7px 0 0 -4px #7d310b88}
-      #${LAYER_ID} .hpmw-pumpkin:after{content:"";position:absolute;width:12%;height:19%;left:44%;top:-13%;border-radius:45% 45% 20% 20%;background:linear-gradient(90deg,#3e5422,#8c9b42 45%,#35471b);transform:rotate(-9deg)}
-      @keyframes hpmw-pumpkin-hover{0%{transform:translate3d(-8px,-10px,0) rotate(-7deg)}50%{transform:translate3d(10px,8px,0) rotate(4deg)}100%{transform:translate3d(var(--drift),-14px,0) rotate(9deg)}}
+      #${LAYER_ID} .hpmw-pumpkin{position:absolute;top:var(--top);left:var(--left);width:var(--size);height:calc(var(--size)*.84);border-radius:47% 47% 44% 44%;background:radial-gradient(ellipse at 31% 22%,#ffd985 0 4%,#ffb33f 17%,#ed7918 47%,#b64a0c 78%,#682908 100%);box-shadow:inset 5px 0 9px #ffe5a099,inset -8px 0 12px #672506bb,0 0 22px 5px #ff9c3044,0 9px 20px #000a;animation:hpmw-pumpkin-hover ease-in-out infinite alternate;will-change:transform}
+      #${LAYER_ID} .hpmw-pumpkin:before{content:"";position:absolute;inset:2% 18%;border-radius:48%;border-left:4px solid #ffd17a99;border-right:4px solid #71300caa;box-shadow:-8px 0 0 -3px #ffcf7188,8px 0 0 -3px #78300b99}
+      #${LAYER_ID} .hpmw-pumpkin:after{content:"";position:absolute;width:13%;height:20%;left:44%;top:-14%;border-radius:45% 45% 20% 20%;background:linear-gradient(90deg,#30451c,#91a34b 45%,#34451b);transform:rotate(-9deg);box-shadow:0 0 3px #b2c46b88}
+      #${LAYER_ID} .hpmw-pumpkin-face{position:absolute;inset:22% 15% 18%;filter:drop-shadow(0 0 5px #ffdc55);background:radial-gradient(ellipse,#ffb52c66,transparent 68%)}
+      #${LAYER_ID} .hpmw-pumpkin-eye{position:absolute;top:23%;width:23%;height:25%;background:#351407;clip-path:polygon(50% 0,100% 100%,0 100%);box-shadow:0 0 8px #ffca4a}
+      #${LAYER_ID} .hpmw-pumpkin-eye.left{left:17%;transform:rotate(-8deg)}
+      #${LAYER_ID} .hpmw-pumpkin-eye.right{right:17%;transform:rotate(8deg)}
+      #${LAYER_ID} .hpmw-pumpkin-nose{position:absolute;left:43%;top:49%;width:14%;height:13%;background:#351407;clip-path:polygon(50% 0,100% 100%,0 100%)}
+      #${LAYER_ID} .hpmw-pumpkin-mouth{position:absolute;left:25%;top:65%;width:50%;height:20%;background:#351407;clip-path:polygon(0 0,18% 18%,30% 0,44% 20%,58% 0,72% 20%,86% 0,100% 0,94% 75%,78% 100%,20% 100%,5% 70%);box-shadow:0 0 8px #ffb52c}
+      @keyframes hpmw-pumpkin-hover{0%{transform:translate3d(-10px,-8px,0) rotate(-5deg)}50%{transform:translate3d(9px,9px,0) rotate(4deg)}100%{transform:translate3d(var(--drift),-12px,0) rotate(7deg)}}
       #${LAYER_ID} .hpmw-firework{position:absolute;width:2px;height:2px}
       #${LAYER_ID} .hpmw-spark{position:absolute;left:0;top:0;width:4px;height:4px;border-radius:50%;background:var(--color);box-shadow:0 0 7px 3px var(--glow),0 0 15px 5px var(--glow);animation:hpmw-spark-flight var(--duration) cubic-bezier(.12,.55,.3,1) forwards;opacity:0}
       @keyframes hpmw-spark-flight{0%{transform:translate(0,0) scale(.25);opacity:1}12%{opacity:1}78%{opacity:.9}100%{transform:translate(var(--dx),var(--dy)) scale(.05);opacity:0}}
@@ -73,15 +79,21 @@
 
     if (cfg.pumpkins) {
       for (let i = 0; i < 9; i++) {
-        const pumpkin = document.createElement("i");
+        const pumpkin = document.createElement("span");
         pumpkin.className = "hpmw-pumpkin";
-        pumpkin.style.setProperty("--left", random(3, 93) + "%");
-        pumpkin.style.setProperty("--top", random(12, 82) + "%");
-        pumpkin.style.setProperty("--size", random(30, 56) + "px");
-        pumpkin.style.opacity = random(.78, 1);
-        pumpkin.style.animationDuration = random(5, 10) + "s";
-        pumpkin.style.animationDelay = -random(0, 10) + "s";
-        pumpkin.style.setProperty("--drift", random(-14, 14) + "px");
+        pumpkin.style.setProperty("--left", random(4, 92) + "%");
+        pumpkin.style.setProperty("--top", random(12, 78) + "%");
+        pumpkin.style.setProperty("--size", random(42, 76) + "px");
+        pumpkin.style.opacity = random(.82, 1);
+        pumpkin.style.animationDuration = random(6, 11) + "s";
+        pumpkin.style.animationDelay = -random(0, 11) + "s";
+        pumpkin.style.setProperty("--drift", random(-18, 18) + "px");
+        const face = document.createElement("span");
+        face.className = "hpmw-pumpkin-face";
+        ["left","right"].forEach(side => { const eye=document.createElement("i"); eye.className="hpmw-pumpkin-eye "+side; face.appendChild(eye); });
+        const nose=document.createElement("i"); nose.className="hpmw-pumpkin-nose"; face.appendChild(nose);
+        const mouth=document.createElement("i"); mouth.className="hpmw-pumpkin-mouth"; face.appendChild(mouth);
+        pumpkin.appendChild(face);
         layer.appendChild(pumpkin);
       }
     }
