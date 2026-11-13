@@ -3034,4 +3034,37 @@ main.shell>.view#homeView::before{content:none!important;display:none!important;
   else start();
 })();
 </script>
+
+<style id="hpmw-home-notices-and-equal-page-logo-final">
+/* Onderhouds- en nieuwjaarsmeldingen horen uitsluitend bij de startpagina. */
+#homeView>.hpmw-home-notice{display:block}
+#formView .hpmw-home-notice,#myTicketsView .hpmw-home-notice,#adminView .hpmw-home-notice,
+#faqView .hpmw-home-notice,#introView .hpmw-home-notice{display:none!important}
+
+/* Hetzelfde bannerlogo op Home, Mijn tickets en Ticketbeheer; Home iets lager. */
+main.shell>.view#homeView::before,
+main.shell>.view#myTicketsView::before,
+main.shell>.view#adminView::before{
+  content:""!important;
+  display:block!important;
+  width:100%!important;
+  height:clamp(130px,16vw,180px)!important;
+  margin:0 0 18px!important;
+  background-image:url("https://i.servimg.com/u/f28/11/54/28/73/ticket11.png")!important;
+  background-repeat:no-repeat!important;
+  background-position:center center!important;
+  background-size:contain!important;
+}
+main.shell>.view#homeView::before{margin-top:16px!important}
+@media(max-width:600px){
+  main.shell>.view#homeView::before,
+  main.shell>.view#myTicketsView::before,
+  main.shell>.view#adminView::before{
+    height:clamp(105px,23vw,145px)!important;
+    margin-bottom:13px!important;
+  }
+  main.shell>.view#homeView::before{margin-top:12px!important}
+}
+</style>
+
 </body></html>
