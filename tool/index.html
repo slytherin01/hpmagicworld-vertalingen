@@ -3905,11 +3905,14 @@ html body.supabase-authenticated main.shell{
    const source=byId("portalHtmlInput")?.value||"",output=byId("portalEffectsSnippet");
    if(!source.trim()){showStatus("portalEffectsCopyStatus","Plak eerst de volledige bestaande portaal-HTML.");return;}
    if(!latestEffectsJs){showStatus("portalEffectsCopyStatus","Effecten-JavaScript is nog niet geladen. Ververs de tool.");return;}
-   if(!/<html[\\s>]/i.test(source)||!/<body[\\s>]/i.test(source)){showStatus("portalEffectsCopyStatus","Plak de volledige HTML inclusief <html> en <body>.");return;}
-   let html=source.replace(/<script\\b[^>]*src=["'][^"']*muggle-ministry\\/portal-effects\\.js[^"']*["'][^>]*>\\s*<\\/script>/gi,"").replace(/<!doctype html>\\s*<!doctype html>/i,"<!DOCTYPE html>");
-   const inline="<script id=\\"hpmw-portal-effects-inline\\">\\n"+latestEffectsJs+"\\n</script>";
-   html=/<\\/body>/i.test(html)?html.replace(/<\\/body>/i,inline+"\\n</body>"):html+inline;
-   output.value=html;showStatus("portalEffectsCopyStatus","Samengevoegd: één complete HTML-pagina met ingebouwde JavaScript.");
+   if(!source.toLowerCase().includes("<html")||!source.toLowerCase().includes("<body")){showStatus("portalEffectsCopyStatus","Plak de volledige HTML inclusief <html> en <body>.");return;}
+   let html=source.replace(/<script\b[^>]*src=["'][^"']*muggle-ministry\/portal-effects\.js[^"']*["'][^>]*>\s*<\/script>/gi,"");
+   html=html.replace(/<!doctype html>\s*<!doctype html>/i,"<!DOCTYPE html>");
+   const inline="<script id=\"hpmw-portal-effects-inline\">\n"+latestEffectsJs+"\n</script>";
+   if(/<\/body>/i.test(html))html=html.replace(/<\/body>/i,inline+"\n</body>");
+   else html+=inline;
+   output.value=html;
+   showStatus("portalEffectsCopyStatus","Samengevoegd! Kopieer deze complete HTML naar de HTML-broncode, niet naar een gewone tekst- of JavaScript-inhoudsbox.");
  }
  function showStatus(id,msg){const el=byId(id);if(el)el.textContent=msg;}
  async function loadSettings(){
