@@ -39,12 +39,12 @@
       #homeView .hpmw-home-maintenance .hpmw-maintenance-foot{padding:7px 14px;background:#f3f6f9;border-top:1px solid #d5e0e9;color:#718397;font-size:10px}
       @media(max-width:700px){#homeView .hpmw-home-notice{margin:10px 8px;padding:13px 14px}}
       .hpmw-home-notice{display:none!important}\n      #introView .hpmw-home-notice{display:block!important;display:block!important;position:relative;max-width:840px;margin:14px auto 18px;padding:16px 22px;border-radius:14px;text-align:center;box-shadow:0 12px 32px #0005}
-      #introView .hpmw-home-newyear{border:1px solid #d6b86d;background:linear-gradient(135deg,#17243bf2,#33234bf2);color:#fff4cf;font:700 clamp(16px,2vw,22px)/1.5 Georgia,serif}
-      #introView .hpmw-home-maintenance{max-width:840px;margin:16px auto 20px;padding:0;border:1px solid #b8c8d8;border-radius:4px;background:#fff;color:#333;text-align:left;box-shadow:0 2px 8px #0002;overflow:hidden;font:13px/1.5 Verdana,Arial,sans-serif}
-      #introView .hpmw-home-maintenance .hpmw-maintenance-head{display:flex;align-items:center;gap:9px;padding:10px 14px;background:linear-gradient(#e8f1f8,#d5e4f0);border-bottom:1px solid #b8c8d8;color:#24506f;font-size:14px;font-weight:700}
-      #introView .hpmw-home-maintenance .hpmw-maintenance-head:before{content:"!";display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#3b6d91;color:#fff;font:bold 14px Arial}
-      #introView .hpmw-home-maintenance p{margin:0;padding:14px 16px;white-space:pre-wrap;line-height:1.65;color:#333;background:#fff}
-      #introView .hpmw-home-maintenance .hpmw-maintenance-foot{padding:7px 14px;background:#f3f6f9;border-top:1px solid #d5e0e9;color:#718397;font-size:10px}
+      #introView .hpmw-home-newyear{border:1px solid #465674;background:linear-gradient(150deg,#101e32 0%,#142943 55%,#0b1728 100%);color:#fff;font:700 clamp(16px,2vw,22px)/1.5 Inter,Arial,sans-serif;box-shadow:0 12px 30px #0005}
+      #introView .hpmw-home-maintenance{max-width:840px;margin:16px auto 20px;padding:0;border:1px solid #465674;border-radius:14px;background:linear-gradient(150deg,#101e32 0%,#142943 55%,#0b1728 100%);color:#edf2fa;text-align:left;box-shadow:0 12px 30px #0005;overflow:hidden;font:14px/1.55 Inter,Arial,sans-serif}
+      #introView .hpmw-home-maintenance .hpmw-maintenance-head{display:flex;align-items:center;gap:9px;padding:12px 18px;background:rgba(255,255,255,.055);border-bottom:1px solid #465674;color:#fff;font-size:15px;font-weight:800}
+      #introView .hpmw-home-maintenance .hpmw-maintenance-head:before{content:"!";display:inline-grid;place-items:center;width:21px;height:21px;border-radius:50%;background:#b7aaff;color:#101e32;font:bold 14px Arial}
+      #introView .hpmw-home-maintenance p{margin:0;padding:16px 18px;white-space:pre-wrap;line-height:1.65;color:#edf2fa;background:transparent}
+      #introView .hpmw-home-maintenance .hpmw-maintenance-foot{padding:9px 18px;background:rgba(255,255,255,.04);border-top:1px solid #465674;color:#b8c7dc;font-size:11px}
       #${LAYER_ID} .hpmw-fireworks-host{position:absolute;inset:0;z-index:0}
       #${LAYER_ID} .hpmw-fireworks-host canvas{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;opacity:.95}
       #${LAYER_ID} .hpmw-flake{position:absolute;top:-18px;border-radius:50%;background:#fff;box-shadow:0 0 4px 1px #ffffffaa;animation:hpmw-snow-fall linear infinite;will-change:transform}
@@ -147,6 +147,17 @@
     window.addEventListener("resize",drawWeather,{passive:true});
   }
 
+  const noticeTranslations = {nl:{},en:{"Onderhoud en mededelingen":"Maintenance and announcements","Bericht van het beheerteam":"Message from the management team","Namens het modteam een gelukkig en gezond ":"Wishing you a happy and healthy "},pt:{"Onderhoud en mededelingen":"Manutenção e comunicados","Bericht van het beheerteam":"Mensagem da equipa de administração","Namens het modteam een gelukkig en gezond ":"Em nome da equipa de moderação, desejamos um feliz e saudável "}};
+  function selectedNoticeLanguage(){try{return (localStorage.getItem("hpmwSelectedLanguage")||"nl").toLowerCase()}catch(_){return "nl"}}
+  function translateNotice(nl){const lang=selectedNoticeLanguage();return noticeTranslations[lang]?.[nl]||nl}
+  async function loadNoticeTranslations(){
+    try{
+      const response=await fetch(SUPABASE_URL+"/rest/v1/portal_translations?select=nl,en,pt",{headers:{apikey:SUPABASE_KEY,Authorization:"Bearer "+SUPABASE_KEY},cache:"no-store"});
+      if(!response.ok)return;
+      const rows=await response.json();
+      rows.forEach(row=>{["en","pt"].forEach(lang=>{if(row.nl&&row[lang])noticeTranslations[lang][row.nl]=row[lang]})});
+    }catch(error){console.warn("[Hpmagicworld effects] Notice translations unavailable.",error)}
+  }
   function renderHomeNotices(cfg) {
     // Notices belong only on the landing page, directly below its welcome panel.
     // Remove any earlier copies that may have been inserted into other views.
@@ -158,7 +169,7 @@
     if (cfg.greeting && cfg.year) {
       const greeting = document.createElement("div");
       greeting.className = "hpmw-home-notice hpmw-home-newyear";
-      greeting.textContent = "Namens het modteam een gelukkig en gezond " + cfg.year;
+      greeting.textContent = translateNotice("Namens het modteam een gelukkig en gezond ") + cfg.year;
       anchor.insertAdjacentElement("afterend", greeting);
       anchor = greeting;
     }
@@ -167,12 +178,12 @@
       notice.className = "hpmw-home-notice hpmw-home-maintenance";
       const heading = document.createElement("div");
       heading.className = "hpmw-maintenance-head";
-      heading.textContent = "Onderhoud en mededelingen";
+      heading.textContent = translateNotice("Onderhoud en mededelingen");
       const body = document.createElement("p");
       body.textContent = cfg.maintenance_message;
       const foot = document.createElement("div");
       foot.className = "hpmw-maintenance-foot";
-      foot.textContent = "Bericht van het beheerteam";
+      foot.textContent = translateNotice("Bericht van het beheerteam");
       notice.append(heading, body, foot);
       anchor.insertAdjacentElement("afterend", notice);
     }
@@ -304,6 +315,7 @@
   }
 
   const start = () => {
+    loadNoticeTranslations().then(()=>refresh());
     refresh();
     if (pollTimer) clearInterval(pollTimer);
     pollTimer = setInterval(refresh, 60000);
