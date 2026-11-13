@@ -42,7 +42,7 @@
  function reset(){editing=null;$("#cmsForm").reset();$("#cmsOrder").value=0;$("#cmsPinned").checked=false;$("#cmsPinWrap").style.display=kind==="news"?"block":"none";$("#cmsFormTitle").textContent="Nieuw item";}
  function selectKind(k){kind=k;editing=null;document.querySelectorAll("#cmsTabs button").forEach(b=>b.classList.toggle("active",b.dataset.kind===k));$("#cmsListTitle").textContent=kinds[k];reset();load();}
  async function load(){
-  const db=client();if(!db||!document.body.classList.contains("supabase-authenticated"))return;
+  const db=client();if(!db||!document.body.classList.contains("supabase-authenticated")||document.body.dataset.supabaseRole!=="admin"){if($("#cmsStatus"))$("#cmsStatus").textContent="Log in met een beheerderaccount om CMS-inhoud te beheren.";return;}
   $("#cmsStatus").textContent="Laden…";
   const {data,error}=await db.from("admin_content").select("*").eq("kind",kind).order("sort_order").order("updated_at",{ascending:false});
   if(error){$("#cmsList").textContent=error.message;$("#cmsStatus").textContent="Controleer of de Admin SQL-migratie is uitgevoerd.";return}
@@ -96,5 +96,5 @@
  }
 
  document.addEventListener("DOMContentLoaded",()=>{init();setTimeout(addTransferPanel,0)});if(document.readyState!=="loading"){init();setTimeout(addTransferPanel,0)};
- document.addEventListener("hpmw:supabase-role",()=>{if($("#adminCmsView"))load()});
+ document.addEventListener("hpmw:supabase-role",e=>{const ok=e.detail?.role==="admin";document.querySelectorAll(".hpmw-nav-link").forEach(n=>n.hidden=!ok);if($("#adminCmsView")&&ok)load()});
 })();
