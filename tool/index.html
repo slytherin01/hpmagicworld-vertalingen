@@ -1262,10 +1262,14 @@ body:not(.supabase-authenticated)>:not(#supabaseAuthGate){display:none!important
 <p class="subtitle" style="margin:0 0 12px">Voer eerst de SQL hieronder één keer uit in Supabase → SQL Editor. Daarna plak je het vaste script op je portaal. Alle toekomstige wijzigingen sla je alleen nog hier in de tool op.</p>
 <textarea id="portalEffectsSql" readonly rows="10" spellcheck="false" style="width:100%;min-height:210px;resize:vertical;padding:12px;border-radius:10px;border:1px solid var(--line);background:#080e19;color:#dce7fa;font:11px/1.5 ui-monospace,monospace"></textarea>
 <div class="actions" style="padding:10px 0"><button class="btn" type="button" id="copyPortalEffectsSql">SQL kopiëren</button><span id="portalEffectsSqlStatus" role="status" style="color:var(--muted);align-self:center"></span></div>
-<h3 style="font-size:15px;margin:16px 0 6px">Volledige portal-effects.js-code</h3>
-<p class="subtitle" style="margin:0 0 12px">Hieronder staat de volledige JavaScript-code zelf (dus niet alleen een laadregel). De tool haalt steeds de nieuwste versie op uit GitHub. Kopieer deze volledige code naar het JavaScript-gedeelte van je portaal; laat je bestaande HTML en portaalonderdelen intact. Live weer uit Amsterdam is inbegrepen.</p>
-<textarea id="portalEffectsSnippet" readonly rows="18" spellcheck="false" style="width:100%;min-height:360px;resize:vertical;padding:12px;border-radius:10px;border:1px solid var(--line);background:#080e19;color:#dce7fa;font:11px/1.5 ui-monospace,monospace"></textarea>
-<div class="actions" style="padding:10px 0 0"><button class="btn primary" type="button" id="copyPortalEffectsSnippet">Volledige JS-code kopiëren</button><span id="portalEffectsCopyStatus" role="status" style="color:var(--muted);align-self:center"></span></div>
+<h3 style="font-size:15px;margin:16px 0 6px">HTML + JavaScript samenvoegen</h3>
+<p class="subtitle" style="margin:0 0 12px">Plak hieronder je volledige bestaande portaal-HTML. Klik daarna op Samenvoegen. De tool voegt de nieuwste effecten-JavaScript rechtstreeks in dezelfde HTML in. Je krijgt één compleet bestand met HTML, CSS en JavaScript. Je bestaande portaalonderdelen blijven behouden.</p>
+<label for="portalHtmlInput" class="subtitle" style="display:block;margin:10px 0 6px">1. Bestaande volledige HTML</label>
+<textarea id="portalHtmlInput" rows="8" spellcheck="false" placeholder="Plak hier de volledige HTML van je portaal…" style="width:100%;min-height:190px;resize:vertical;padding:12px;border-radius:10px;border:1px solid var(--line);background:#080e19;color:#dce7fa;font:11px/1.5 ui-monospace,monospace"></textarea>
+<div class="actions" style="padding:10px 0"><button class="btn primary" type="button" id="combinePortalHtml">HTML + JavaScript samenvoegen</button><span id="portalEffectsCopyStatus" role="status" style="color:var(--muted);align-self:center"></span></div>
+<label for="portalEffectsSnippet" class="subtitle" style="display:block;margin:10px 0 6px">2. Complete portaalcode (HTML + CSS + JavaScript)</label>
+<textarea id="portalEffectsSnippet" readonly rows="14" spellcheck="false" style="width:100%;min-height:320px;resize:vertical;padding:12px;border-radius:10px;border:1px solid var(--line);background:#080e19;color:#dce7fa;font:11px/1.5 ui-monospace,monospace"></textarea>
+<div class="actions" style="padding:10px 0 0"><button class="btn primary" type="button" id="copyPortalEffectsSnippet">Complete portaalcode kopiëren</button><span id="portalEffectsCopyStatus2" role="status" style="color:var(--muted);align-self:center"></span></div>
 </div>
 </div></section>
 <section class="view" id="newTranslationsView">
@@ -3890,20 +3894,22 @@ html body.supabase-authenticated main.shell{
    target.classList.add("active");target.style.setProperty("display","block","important");
    target.style.setProperty("visibility","visible","important");target.style.setProperty("opacity","1","important");window.scrollTo(0,0);
  }
+ let latestEffectsJs="";
  async function updateSnippet(){
    if(byId("portalEffectsSql"))byId("portalEffectsSql").value=SQL;
-   const field=byId("portalEffectsSnippet");
-   if(!field)return;
-   field.value="Volledige JavaScript-code laden…";
-   try{
-     const response=await fetch("https://raw.githubusercontent.com/slytherin01/muggle-ministry/main/portal-effects.js?"+Date.now(),{cache:"no-store"});
-     if(!response.ok)throw new Error("HTTP "+response.status);
-     field.value=await response.text();
-     showStatus("portalEffectsCopyStatus","Volledige JS-code geladen.");
-   }catch(error){
-     field.value="De JS-code kon niet automatisch worden geladen. Open https://github.com/slytherin01/muggle-ministry/blob/main/portal-effects.js en kopieer daar de volledige inhoud.";
-     showStatus("portalEffectsCopyStatus","Laden mislukt; probeer de tool opnieuw te verversen.");
-   }
+   const field=byId("portalEffectsSnippet");if(field)field.value="Plak eerst je bestaande HTML en klik op Samenvoegen.";
+   try{const response=await fetch("https://raw.githubusercontent.com/slytherin01/muggle-ministry/main/portal-effects.js?"+Date.now(),{cache:"no-store"});if(!response.ok)throw new Error("HTTP "+response.status);latestEffectsJs=await response.text();showStatus("portalEffectsCopyStatus","Effecten-JavaScript geladen.");}
+   catch(error){showStatus("portalEffectsCopyStatus","JavaScript laden mislukt. Ververs de tool en probeer opnieuw.");}
+ }
+ function combinePortalHtml(){
+   const source=byId("portalHtmlInput")?.value||"",output=byId("portalEffectsSnippet");
+   if(!source.trim()){showStatus("portalEffectsCopyStatus","Plak eerst de volledige bestaande portaal-HTML.");return;}
+   if(!latestEffectsJs){showStatus("portalEffectsCopyStatus","Effecten-JavaScript is nog niet geladen. Ververs de tool.");return;}
+   if(!/<html[\\s>]/i.test(source)||!/<body[\\s>]/i.test(source)){showStatus("portalEffectsCopyStatus","Plak de volledige HTML inclusief <html> en <body>.");return;}
+   let html=source.replace(/<script\\b[^>]*src=["'][^"']*muggle-ministry\\/portal-effects\\.js[^"']*["'][^>]*>\\s*<\\/script>/gi,"").replace(/<!doctype html>\\s*<!doctype html>/i,"<!DOCTYPE html>");
+   const inline="<script id=\\"hpmw-portal-effects-inline\\">\\n"+latestEffectsJs+"\\n</script>";
+   html=/<\\/body>/i.test(html)?html.replace(/<\\/body>/i,inline+"\\n</body>"):html+inline;
+   output.value=html;showStatus("portalEffectsCopyStatus","Samengevoegd: één complete HTML-pagina met ingebouwde JavaScript.");
  }
  function showStatus(id,msg){const el=byId(id);if(el)el.textContent=msg;}
  async function loadSettings(){
@@ -3936,7 +3942,7 @@ html body.supabase-authenticated main.shell{
    byId("navTranslations").onclick=e=>{e.preventDefault();activateView("newTranslationsView")};
    Object.values(ids).forEach(id=>byId(id).addEventListener("change",()=>{}));
    byId("savePortalEffects").onclick=save;
-   byId("copyPortalEffectsSnippet").onclick=()=>copy("portalEffectsSnippet","portalEffectsCopyStatus");
+   byId("combinePortalHtml").onclick=combinePortalHtml;\n   byId("copyPortalEffectsSnippet").onclick=()=>copy("portalEffectsSnippet","portalEffectsCopyStatus2");
    byId("copyPortalEffectsSql").onclick=()=>copy("portalEffectsSql","portalEffectsSqlStatus");
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
