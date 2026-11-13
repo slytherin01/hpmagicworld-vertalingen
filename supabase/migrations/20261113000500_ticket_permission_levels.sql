@@ -25,4 +25,5 @@ on conflict (forumotion_user_id) do update set
   can_view_tickets=true,
   can_moderate_tickets=true,
   can_delete_tickets=true;
+notify pgrst, 'reload schema';
 commit;
