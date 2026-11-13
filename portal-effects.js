@@ -125,6 +125,24 @@
     }
   };
 
+  function loadFireworks() {
+    if (fireworksLoadPromise) return fireworksLoadPromise;
+    fireworksLoadPromise = new Promise((resolve, reject) => {
+      if (window.Fireworks && window.Fireworks.default) { resolve(window.Fireworks.default); return; }
+      const script = document.createElement("script");
+      script.src = "https://cdn.jsdelivr.net/npm/fireworks-js@2.10.7/dist/index.umd.js";
+      script.async = true;
+      script.onload = () => {
+        const ctor = window.Fireworks && (window.Fireworks.default || window.Fireworks);
+        if (ctor) resolve(ctor);
+        else reject(new Error("Fireworks constructor ontbreekt"));
+      };
+      script.onerror = () => { fireworksLoadPromise = null; reject(new Error("CDN niet bereikbaar")); };
+      document.head.appendChild(script);
+    });
+    return fireworksLoadPromise;
+  }
+
   async function refresh() {
     try {
       const response = await fetch(CONFIG_URL, {
@@ -134,7 +152,7 @@
       if (!response.ok) throw new Error("HTTP " + response.status);
       const rows = await response.json();
       const row = rows && rows[0];
-      const cfg = { snow: !!row?.snow, fireworks: !!row?.fireworks, pumpkins: !!row?.pumpkins };
+      const cfg = { snow: !!row?.snow, fireworks: !!row?.fireworks, pumpkins: !!row?.pumpkins, greeting: !!row?.greeting, year: String(row?.year || "").trim() };
       const signature = JSON.stringify(cfg);
       if (signature !== lastConfig) {
         lastConfig = signature;
