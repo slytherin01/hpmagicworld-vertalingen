@@ -1213,8 +1213,9 @@ body:not(.supabase-authenticated)>:not(#supabaseAuthGate){display:none!important
  const refreshRole=async(session)=>{
   currentRole='member';
   if(session?.user){
-   const {data,error}=await client.from('user_roles').select('role').eq('user_id',session.user.id).maybeSingle();
-   if(!error&&data?.role)currentRole=data.role;
+   const {data:toolRole,error:toolRoleError}=await client.from('tool_access_roles').select('role').eq('user_id',session.user.id).maybeSingle();
+   if(!toolRoleError&&toolRole?.role)currentRole=toolRole.role;
+   else {const {data,error}=await client.from('user_roles').select('role').eq('user_id',session.user.id).maybeSingle();if(!error&&data?.role)currentRole=data.role==='admin'?'administrator':data.role;}
   }
   window.hpmwSupabaseRole=currentRole;
   document.body.dataset.supabaseRole=currentRole;
@@ -3952,7 +3953,7 @@ html body.supabase-authenticated main.shell{
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
 })();
 </script>
-<script src="./admin-cms.js?v=20261113-10" defer></script>
+<script src="./admin-cms.js?v=20261113-11" defer></script>
 
 <style id="hpmw-universal-quicknav-css">
 .hpmw-view-quicknav{position:sticky;top:78px;z-index:35;display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 18px;padding:12px 14px;border:1px solid #34465b;border-radius:13px;background:rgba(13,22,36,.96);box-shadow:0 8px 24px #0004;backdrop-filter:blur(12px)}
