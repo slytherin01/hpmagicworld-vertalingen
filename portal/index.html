@@ -3135,4 +3135,37 @@ main.shell>.view#homeView::before{margin-top:16px!important}
 })();
 </script>
 
+<div id="hpmwPortalAdminLogin" hidden style="position:fixed;inset:0;z-index:10000;background:#050914ef;place-items:center;padding:20px">
+ <form id="hpmwPortalAdminForm" style="width:min(420px,100%);padding:24px;border:1px solid #34445b;border-radius:16px;background:#101827;color:#edf2fa;box-shadow:0 20px 70px #000b">
+  <h2 style="margin:0 0 8px">Beheerder aanmelden</h2><p style="color:#91a0b5;font-size:13px">Log in met je bestaande Hpmagicworld-beheeraccount.</p>
+  <label style="display:block;margin:12px 0 5px">E-mailadres</label><input id="hpmwPortalAdminEmail" type="email" required autocomplete="username" style="width:100%;padding:11px;border:1px solid #35465b;border-radius:8px;background:#080e19;color:white">
+  <label style="display:block;margin:12px 0 5px">Wachtwoord</label><input id="hpmwPortalAdminPassword" type="password" required autocomplete="current-password" style="width:100%;padding:11px;border:1px solid #35465b;border-radius:8px;background:#080e19;color:white">
+  <p id="hpmwPortalAdminMessage" aria-live="polite" style="min-height:20px;color:#ffd88a;font-size:12px"></p>
+  <div style="display:flex;gap:8px;justify-content:flex-end"><button id="hpmwPortalAdminClose" type="button" class="btn">Sluiten</button><button type="submit" class="btn primary">Inloggen</button></div>
+ </form>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script id="hpmw-portal-admin-auth">
+(()=> {
+ const URL='https://vuaajsjjluwgqmneinds.supabase.co', KEY='sb_publishable_tto6sNxZPLv1VhUdMRlPHg_ptzg9odx';
+ const db=window.supabase.createClient(URL,KEY);window.hpmwSupabase=db;
+ const modal=document.getElementById('hpmwPortalAdminLogin'),form=document.getElementById('hpmwPortalAdminForm'),msg=document.getElementById('hpmwPortalAdminMessage');
+ window.hpmwOpenAdminLogin=()=>{modal.hidden=false;modal.style.display='grid';};
+ document.getElementById('hpmwPortalAdminClose').onclick=()=>{modal.hidden=true;modal.style.display='none';};
+ async function apply(session){
+  document.body.classList.toggle('supabase-authenticated',!!session);
+  if(!session){window.hpmwSupabaseRole='member';document.body.dataset.supabaseRole='member';return;}
+  const {data,error}=await db.from('user_roles').select('role').eq('user_id',session.user.id).maybeSingle();
+  const role=!error&&data?.role?data.role:'member';
+  window.hpmwSupabaseRole=role;document.body.dataset.supabaseRole=role;
+  document.dispatchEvent(new CustomEvent('hpmw:supabase-role',{detail:{role}}));
+  if(role!=='admin'){msg.textContent='Dit account heeft geen beheerderrechten.';await db.auth.signOut();document.body.classList.remove('supabase-authenticated');return;}
+  modal.hidden=true;modal.style.display='none';
+ }
+ form.addEventListener('submit',async e=>{e.preventDefault();msg.textContent='Bezig met inloggen…';const {data,error}=await db.auth.signInWithPassword({email:document.getElementById('hpmwPortalAdminEmail').value.trim(),password:document.getElementById('hpmwPortalAdminPassword').value});if(error){msg.textContent=error.message;return;}await apply(data.session);});
+ db.auth.onAuthStateChange((_event,session)=>{if(session)setTimeout(()=>apply(session),0);else apply(null);});
+ db.auth.getSession().then(({data})=>{if(data.session)apply(data.session);});
+})();
+</script>
+<script src="https://slytherin01.github.io/muggle-ministry/tool/admin-cms.js?v=20261113-4" defer></script>
 </body></html>
