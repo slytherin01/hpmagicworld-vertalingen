@@ -1254,6 +1254,8 @@ body:not(.supabase-authenticated)>:not(#supabaseAuthGate){display:none!important
 <div class="portal-effect-setting"><div><h2>❄️ Sneeuwval</h2><p>Laat sneeuwvlokken over de portaalpagina vallen.</p></div><label class="effect-switch"><input type="checkbox" id="effectSnow"><span class="effect-slider"></span></label></div>
 <div class="portal-effect-setting"><div><h2>🎆 Vuurwerk</h2><p>Toon feestelijk vuurwerk op de portaalpagina.</p></div><label class="effect-switch"><input type="checkbox" id="effectFireworks"><span class="effect-slider"></span></label></div>
 <div class="portal-effect-setting"><div><h2>🎃 Zwevende pompoenen</h2><p>Laat decoratieve pompoenen over de portaalpagina zweven.</p></div><label class="effect-switch"><input type="checkbox" id="effectPumpkins"><span class="effect-slider"></span></label></div>
+<div class="portal-effect-setting"><div><h2>🎉 Nieuwjaarswens</h2><p>Toon een feestelijke boodschap op het portaal. Vul het gewenste jaartal hieronder in.</p></div><label class="effect-switch"><input type="checkbox" id="effectGreeting"><span class="effect-slider"></span></label></div>
+<div class="portal-effect-setting" style="align-items:flex-start"><div style="flex:1"><h2>Jaartal voor nieuwjaarswens</h2><p>De tekst wordt: “Namens het modteam een gelukkig en gezond [jaartal]”.</p><input id="effectYear" type="number" min="2024" max="2100" placeholder="Bijv. 2027" style="margin-top:10px;width:min(220px,100%);padding:11px;border:1px solid var(--line);border-radius:9px;background:#080e19;color:var(--text)"></div></div>
 <div class="actions" style="padding:18px 0 0"><button class="btn primary" id="savePortalEffects">Instellingen opslaan</button><span id="portalEffectsStatus" role="status" style="color:var(--muted);align-self:center"></span></div>
 <div class="portal-effect-code" style="margin-top:24px;padding-top:20px;border-top:1px solid var(--line)">
 <h2 style="font-size:16px;margin:0 0 6px">Eenmalig instellen voor je Forumactie-portaal</h2>
@@ -3849,15 +3851,19 @@ html body.supabase-authenticated main.shell{
  "use strict";
  const KEY="hpmw_portal_effects_v1";
  const BASE="https://slytherin01.github.io/muggle-ministry/portal-effects.js";
- const ids={snow:"effectSnow",fireworks:"effectFireworks",pumpkins:"effectPumpkins"};
- const defaults={snow:false,fireworks:false,pumpkins:false};
+ const ids={snow:"effectSnow",fireworks:"effectFireworks",pumpkins:"effectPumpkins",greeting:"effectGreeting"};
+ const defaults={snow:false,fireworks:false,pumpkins:false,greeting:false,year:""};
  const SQL=`create table if not exists public.portal_effects_settings (
    id integer primary key check (id = 1),
    snow boolean not null default false,
    fireworks boolean not null default false,
    pumpkins boolean not null default false,
+   greeting boolean not null default false,
+   year text not null default '',
    updated_at timestamptz not null default now()
  );
+ alter table public.portal_effects_settings add column if not exists greeting boolean not null default false;
+ alter table public.portal_effects_settings add column if not exists year text not null default '';
  insert into public.portal_effects_settings (id) values (1) on conflict (id) do nothing;
  alter table public.portal_effects_settings enable row level security;
  grant select on public.portal_effects_settings to anon, authenticated;
@@ -3890,12 +3896,12 @@ html body.supabase-authenticated main.shell{
  async function loadSettings(){
    const c=client();
    if(!c)return localRead();
-   const {data,error}=await c.from("portal_effects_settings").select("snow,fireworks,pumpkins").eq("id",1).maybeSingle();
+   const {data,error}=await c.from("portal_effects_settings").select("snow,fireworks,pumpkins,greeting,year").eq("id",1).maybeSingle();
    if(error){showStatus("portalEffectsStatus","Database nog niet ingesteld? Voer eerst de SQL hieronder uit in Supabase.");return localRead();}
-   return data?{snow:!!data.snow,fireworks:!!data.fireworks,pumpkins:!!data.pumpkins}:localRead();
+   return data?{snow:!!data.snow,fireworks:!!data.fireworks,pumpkins:!!data.pumpkins,greeting:!!data.greeting,year:data.year||""}:localRead();
  }
  async function save(){
-   const v={};Object.keys(ids).forEach(k=>v[k]=byId(ids[k]).checked);
+   const v={};Object.keys(ids).forEach(k=>v[k]=byId(ids[k]).checked);v.year=(byId("effectYear")?.value||"").trim();
    localStorage.setItem(KEY,JSON.stringify(v));
    const c=client();
    if(!c){showStatus("portalEffectsStatus","Geen Supabase-verbinding. Log opnieuw in.");return;}
@@ -3910,7 +3916,7 @@ html body.supabase-authenticated main.shell{
  }
  async function init(){
    updateSnippet();
-   const v=await loadSettings();Object.keys(ids).forEach(k=>{if(byId(ids[k]))byId(ids[k]).checked=!!v[k]});
+   const v=await loadSettings();Object.keys(ids).forEach(k=>{if(byId(ids[k]))byId(ids[k]).checked=!!v[k]});if(byId("effectYear"))byId("effectYear").value=v.year||"";
    byId("navSettings").onclick=e=>{e.preventDefault();e.stopPropagation();activateView("newSettingsView")};
    byId("dashSettings").onclick=e=>{e.preventDefault();e.stopPropagation();activateView("newSettingsView")};
    byId("settingsBack").onclick=e=>{e.preventDefault();activateView("newAdminDashboard")};
