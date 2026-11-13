@@ -3889,26 +3889,7 @@ html body.supabase-authenticated main.shell{
    target.classList.add("active");target.style.setProperty("display","block","important");
    target.style.setProperty("visibility","visible","important");target.style.setProperty("opacity","1","important");window.scrollTo(0,0);
  }
- let latestEffectsJs="";
- async function updateSnippet(){
-   if(byId("portalEffectsSql"))byId("portalEffectsSql").value=SQL;
-   const field=byId("portalEffectsSnippet");if(field)field.value="Plak eerst je bestaande HTML en klik op Samenvoegen.";
-   try{const response=await fetch("https://raw.githubusercontent.com/slytherin01/muggle-ministry/main/portal-effects.js?"+Date.now(),{cache:"no-store"});if(!response.ok)throw new Error("HTTP "+response.status);latestEffectsJs=await response.text();showStatus("portalEffectsCopyStatus","Effecten-JavaScript geladen.");}
-   catch(error){showStatus("portalEffectsCopyStatus","JavaScript laden mislukt. Ververs de tool en probeer opnieuw.");}
- }
- function combinePortalHtml(){
-   const source=byId("portalHtmlInput")?.value||"",output=byId("portalEffectsSnippet");
-   if(!source.trim()){showStatus("portalEffectsCopyStatus","Plak eerst de volledige bestaande portaal-HTML.");return;}
-   if(!latestEffectsJs){showStatus("portalEffectsCopyStatus","Effecten-JavaScript is nog niet geladen. Ververs de tool.");return;}
-   if(!source.toLowerCase().includes("<html")||!source.toLowerCase().includes("<body")){showStatus("portalEffectsCopyStatus","Plak de volledige HTML inclusief <html> en <body>.");return;}
-   let html=source.replace(/<script\b[^>]*src=["'][^"']*muggle-ministry\/portal-effects\.js[^"']*["'][^>]*>\s*<\/script>/gi,"");
-   html=html.replace(/<!doctype html>\s*<!doctype html>/i,"<!DOCTYPE html>");
-   const inline="<script id=\"hpmw-portal-effects-inline\">\n"+latestEffectsJs+"\n</script>";
-   if(/<\/body>/i.test(html))html=html.replace(/<\/body>/i,inline+"\n</body>");
-   else html+=inline;
-   output.value=html;
-   showStatus("portalEffectsCopyStatus","Samengevoegd! Kopieer deze complete HTML naar de HTML-broncode, niet naar een gewone tekst- of JavaScript-inhoudsbox.");
- }
+ function updateSnippet(){if(byId("portalEffectsSql"))byId("portalEffectsSql").value=SQL;}
  function showStatus(id,msg){const el=byId(id);if(el)el.textContent=msg;}
  async function loadSettings(){
    const c=client();
