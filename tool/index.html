@@ -1262,14 +1262,9 @@ body:not(.supabase-authenticated)>:not(#supabaseAuthGate){display:none!important
 <p class="subtitle" style="margin:0 0 12px">Voer eerst de SQL hieronder één keer uit in Supabase → SQL Editor. Daarna plak je het vaste script op je portaal. Alle toekomstige wijzigingen sla je alleen nog hier in de tool op.</p>
 <textarea id="portalEffectsSql" readonly rows="10" spellcheck="false" style="width:100%;min-height:210px;resize:vertical;padding:12px;border-radius:10px;border:1px solid var(--line);background:#080e19;color:#dce7fa;font:11px/1.5 ui-monospace,monospace"></textarea>
 <div class="actions" style="padding:10px 0"><button class="btn" type="button" id="copyPortalEffectsSql">SQL kopiëren</button><span id="portalEffectsSqlStatus" role="status" style="color:var(--muted);align-self:center"></span></div>
-<h3 style="font-size:15px;margin:16px 0 6px">HTML + JavaScript samenvoegen</h3>
-<p class="subtitle" style="margin:0 0 12px">Plak hieronder je volledige bestaande portaal-HTML. Klik daarna op Samenvoegen. De tool voegt de nieuwste effecten-JavaScript rechtstreeks in dezelfde HTML in. Je krijgt één compleet bestand met HTML, CSS en JavaScript. Je bestaande portaalonderdelen blijven behouden.</p>
-<label for="portalHtmlInput" class="subtitle" style="display:block;margin:10px 0 6px">1. Bestaande volledige HTML</label>
-<textarea id="portalHtmlInput" rows="8" spellcheck="false" placeholder="Plak hier de volledige HTML van je portaal…" style="width:100%;min-height:190px;resize:vertical;padding:12px;border-radius:10px;border:1px solid var(--line);background:#080e19;color:#dce7fa;font:11px/1.5 ui-monospace,monospace"></textarea>
-<div class="actions" style="padding:10px 0"><button class="btn primary" type="button" id="combinePortalHtml">HTML + JavaScript samenvoegen</button><span id="portalEffectsCopyStatus" role="status" style="color:var(--muted);align-self:center"></span></div>
-<label for="portalEffectsSnippet" class="subtitle" style="display:block;margin:10px 0 6px">2. Complete portaalcode (HTML + CSS + JavaScript)</label>
-<textarea id="portalEffectsSnippet" readonly rows="14" spellcheck="false" style="width:100%;min-height:320px;resize:vertical;padding:12px;border-radius:10px;border:1px solid var(--line);background:#080e19;color:#dce7fa;font:11px/1.5 ui-monospace,monospace"></textarea>
-<div class="actions" style="padding:10px 0 0"><button class="btn primary" type="button" id="copyPortalEffectsSnippet">Complete portaalcode kopiëren</button><span id="portalEffectsCopyStatus2" role="status" style="color:var(--muted);align-self:center"></span></div>
+<h3 style="font-size:15px;margin:16px 0 6px">Compleet portaal</h3>
+<p class="subtitle" style="margin:0 0 12px">De volledige Forumactie-portalpagina staat automatisch klaar met HTML, CSS en de nieuwste effecten-JavaScript al geïntegreerd. Je hoeft niets te plakken of samen te voegen.</p>
+<div class="actions" style="padding:10px 0"><a class="btn primary" href="https://slytherin01.github.io/muggle-ministry/portal/" target="_blank" rel="noopener">Open complete portaalpagina ↗</a><a class="btn" href="https://github.com/slytherin01/muggle-ministry/blob/main/portal/index.html" target="_blank" rel="noopener">Bekijk volledige broncode ↗</a></div>
 </div>
 </div></section>
 <section class="view" id="newTranslationsView">
@@ -3945,7 +3940,7 @@ html body.supabase-authenticated main.shell{
    byId("navTranslations").onclick=e=>{e.preventDefault();activateView("newTranslationsView")};
    Object.values(ids).forEach(id=>byId(id).addEventListener("change",()=>{}));
    byId("savePortalEffects").onclick=save;
-   byId("combinePortalHtml").onclick=combinePortalHtml;\n   byId("copyPortalEffectsSnippet").onclick=()=>copy("portalEffectsSnippet","portalEffectsCopyStatus2");
+   byId("copyPortalEffectsSnippet").onclick=()=>copy("portalEffectsSnippet","portalEffectsCopyStatus2");
    byId("copyPortalEffectsSql").onclick=()=>copy("portalEffectsSql","portalEffectsSqlStatus");
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
