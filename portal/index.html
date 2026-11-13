@@ -1108,22 +1108,9 @@ main.shell>.view::before{
 }
 </style>
 
-<style id="hpmw-portal-hoger-geen-scroll">
-/* Portal compacter en hoger plaatsen; de portal zelf scrolt niet. */
-#introView{padding-top:18px!important;overflow:hidden!important;max-height:100vh!important;box-sizing:border-box!important}
-#introView .hpmw-portal-logo{position:static!important;top:auto!important;margin-top:0!important;margin-bottom:10px!important;padding:0!important;background:transparent!important}
-#introView .intro-static-card .center-message.hpmw-welcome-box{position:static!important;top:auto!important;margin-top:0!important}
-body:has(#introView.active){overflow:hidden!important;height:100vh!important}
-html:has(#introView.active){overflow:hidden!important;height:100%!important;scroll-behavior:auto!important}
-#introView.active{overflow:hidden!important}
-@media(max-height:760px){#introView{padding-top:8px!important}#introView .hpmw-portal-logo{margin-bottom:6px!important}#introView .hpmw-portal-logo img{max-height:150px!important;width:auto!important}}
-</style>
 
-<style id="hpmw-portal-logo-nog-hoger">
-/* Logo op de portal hoger plaatsen boven de welkomsttitel. */
-#introView .hpmw-portal-logo{transform:translateY(-24px)!important;margin-bottom:2px!important;}
-#introView .hpmw-portal-logo img{transform:translateY(0)!important;}
-</style>
+
+
 <style id="hpmw-translations-tool-language-labels">
 .hpmw-translations-tool-link{text-decoration:none!important;box-sizing:border-box}
 .hpmw-translations-tool-link .hpmw-tool-label{display:none}
@@ -1131,13 +1118,30 @@ html[lang="nl"] .hpmw-translations-tool-link .hpmw-tool-nl,
 html:not([lang]),html[lang=""] .hpmw-translations-tool-link .hpmw-tool-nl{display:inline}
 html[lang="en"] .hpmw-translations-tool-link .hpmw-tool-en{display:inline}
 html[lang="pt"] .hpmw-translations-tool-link .hpmw-tool-pt{display:inline}
+</style><style id="hpmw-banner-single-source">
+/* One compact shared banner; remove the former second logo panel. */
+html body .hpmw-global-brandbar{
+ display:block!important;position:relative!important;z-index:6!important;
+ width:100%!important;height:82px!important;min-height:82px!important;max-height:82px!important;
+ aspect-ratio:auto!important;flex:none!important;box-sizing:border-box!important;
+ margin:0 0 10px!important;padding:0!important;overflow:hidden!important;
+ background:#080f1b url("https://i44.servimg.com/u/f44/11/48/74/42/banner10.png") center 48%/cover no-repeat!important;
+ border:0!important;box-shadow:none!important;
+}
+html body .hpmw-global-brandbar:before,html body .hpmw-global-brandbar:after{display:none!important;content:none!important}
+html body .hpmw-global-brandbar-inner,html body .hpmw-global-brandbar img,html body .hpmw-brand-ornament{display:none!important}
+html body #introView{padding-top:0!important;margin-top:0!important;max-height:none!important;overflow:visible!important}
+html body #introView .hpmw-portal-logo{display:none!important}
+@media(max-width:650px){
+ html body .hpmw-global-brandbar{height:66px!important;min-height:66px!important;max-height:66px!important;margin-bottom:8px!important}
+}
 </style></head><body><header class="topbar luxury-nav-v2"><nav aria-label="Support navigatie" class="top-actions"><a class="lux-nav-item" href="https://testforumjoost.forumactie.com/forum" rel="noopener noreferrer" target="_blank"><span class="lux-nav-icon"><i class="fa-solid fa-comments"></i></span><span class="lux-nav-label">Forum</span></a><a class="lux-nav-item" href="https://testforumjoost.forumactie.com/h3-portaal" target="_self"><span class="lux-nav-icon"><i class="fa-solid fa-house"></i></span><span class="lux-nav-label">Portaal</span></a><button aria-expanded="false" aria-haspopup="dialog" class="lux-nav-item" id="faqLaunch" type="button"><span class="lux-nav-icon"><i class="fa-solid fa-circle-question"></i></span><span class="lux-nav-label">FAQ</span></button><button aria-expanded="false" class="lux-nav-item" id="ticketSupportLaunch" type="button"><span class="lux-nav-icon"><i class="fa-solid fa-ticket"></i></span><span class="lux-nav-label">Ticket Support</span></button>
 <a class="lux-nav-item" href="https://testforumjoost.forumactie.com/h13-dev-sorting-hat" id="sortingHatNav" rel="noopener noreferrer" target="_blank"><span class="lux-nav-icon"><i class="fa-solid fa-hat-wizard"></i></span><span class="lux-nav-label">De Sorteerhoed</span></a>
 <button class="lux-nav-item" id="adminLaunch" type="button" style="display:none"><span class="lux-nav-icon"><i class="fa-solid fa-shield-halved"></i></span><span class="lux-nav-label">Ticketbeheer</span></button><label aria-label="Taal kiezen" class="hpmw-language-wrap" for="hpmwLanguage"><i aria-hidden="true" class="fa-solid fa-language"></i><select id="hpmwLanguage"><option selected="" value="nl">Nederlands</option><option value="en">English</option><option value="pt">Português</option></select></label><button class="lux-nav-item" data-extracted-style="2" id="myTicketsLaunch" style="display:none"><span class="lux-nav-icon"><i class="fa-solid fa-envelope"></i></span><span class="lux-nav-label">Mijn tickets</span><b class="count-badge" id="myTicketsCount">0</b></button><a class="lux-nav-item lux-user" href="/login" id="accountLink"><span class="lux-nav-icon"><i class="fa-solid fa-user"></i></span><span class="lux-nav-usertext"><small>INGELOGD ALS</small><strong id="username">Gast</strong></span></a></nav></header><div class="hpmw-global-brandbar" role="banner" aria-label="Muggle Ministry"></div><main class="shell"><section class="view active" id="introView">
 <!-- EIGEN AFBEELDING VOOR DEZE PAGINA: vervang IMAGE_URL_HIER en LINK_URL_HIER.
 <a href="LINK_URL_HIER"><img src="IMAGE_URL_HIER" alt="Beschrijving afbeelding" style="max-width:100%;height:auto;display:block;margin:0 auto;"></a>
 -->
-<div class="hpmw-portal-logo"><img src="https://i28.servimg.com/u/f28/11/54/28/73/logo10.png" alt="Hpmagicworld logo"></div>
+
 <div class="intro-login-layout">
 <div class="intro-static-card">
 <div class="center-message hpmw-welcome-box"><h1>Welkom op Het Ministerie van Dreuzels</h1><p class="hpmw-guest-welcome">Je hebt een account nodig. Deze kun je gratis aanmaken om door te gaan naar het Ministerie van Dreuzels, oftewel onze community. Registreer hier een account.<br><br>Gebruik ons portaal om onder andere support aan te vragen.</p><p class="hpmw-member-welcome">Gebruik ons portaal om onder andere support aan te vragen en je account te voorzien van een afdeling door onze Sorteerhoed op te zetten.<br>Wie weet zit je wel bij Griffoendor, Zwadderich, Huffelpuf of Ravenklauw!</p></div>
@@ -2606,13 +2610,7 @@ main.shell>.view#homeView::before{content:none!important;display:none!important;
 #homeView img[alt*="logo" i]{display:none!important;visibility:hidden!important}
 </style>
 
-<style id="hpmw-portal-logo-above-welcome">
-/* Groot logo boven de welkomsttitel op het portal. */
-#introView .hpmw-portal-logo{display:flex!important;visibility:visible!important;opacity:1!important;justify-content:center!important;align-items:center!important;margin:12px auto 22px!important;width:100%!important}
-#introView .hpmw-portal-logo img{display:block!important;visibility:visible!important;opacity:1!important;width:auto!important;height:auto!important;max-width:min(440px,88vw)!important;max-height:220px!important;object-fit:contain!important}
-@media(max-width:600px){#introView .hpmw-portal-logo img{max-width:88vw!important;max-height:175px!important}}
-/* Andere logo's blijven verborgen waar dat eerder gevraagd was. */
-</style>
+
 
 <style id="hpmw-static-portal-and-page-headings">
 /* Portal: welkomsblok iets lager plaatsen en alle beweging uitschakelen. */
@@ -3265,151 +3263,12 @@ body #hpmwHomeNews .hpmw-cms-kicker{color:#d6b36c!important}body #hpmwHomeNews .
 #hpmwHomeLayout .hpmw-side-note p{line-height:1.8!important}
 @media(max-width:700px){#hpmwHomeLayout .hpmw-side-card{width:100%!important}#hpmwHomeLayout .hpmw-feature-mark{width:66px!important;height:66px!important}}
 </style>
-<style id="hpmw-global-brandbar-style">
-/* De aangeleverde brede Muggle Ministry-banner op iedere portalpagina */
-.hpmw-global-brandbar{position:relative;z-index:5;width:100%;height:clamp(150px,31vw,310px);min-height:0;margin:0 auto 22px;padding:0;display:flex;align-items:center;justify-content:center;box-sizing:border-box;overflow:hidden;border-bottom:1px solid rgba(214,179,108,.42);background:#080f1b;box-shadow:0 14px 34px #0006}
-.hpmw-global-brandbar-inner{position:relative;width:100%;height:100%;display:block;overflow:hidden}
-.hpmw-global-brandbar img{display:block;width:100%;height:100%;max-width:none;max-height:none;object-fit:cover;object-position:center center;filter:none}
-.hpmw-global-brandbar:before,.hpmw-global-brandbar:after{display:none}
-#introView .hpmw-portal-logo{display:none!important}
-main.shell{margin-top:0!important}
-@media(max-width:650px){.hpmw-global-brandbar{height:clamp(105px,32vw,190px);margin-bottom:16px}.hpmw-global-brandbar img{object-fit:cover;object-position:center center}}
-</style>
-<style id="hpmw-banner-and-widget-final-fix">
-/* Enige gedeelde banner boven alle views; oude pseudo-banners uitschakelen. */
-.hpmw-global-brandbar{display:block!important;width:100%!important;height:auto!important;min-height:0!important;margin:0 0 22px!important;padding:0!important;overflow:hidden!important;background:#080f1b!important;border:0!important;border-bottom:1px solid rgba(214,179,108,.55)!important;box-shadow:0 10px 28px #0006!important}
-.hpmw-global-brandbar-inner{display:block!important;width:100%!important;height:auto!important;max-width:none!important;margin:0!important;padding:0!important;overflow:hidden!important}
-.hpmw-global-brandbar img{display:block!important;width:100%!important;height:auto!important;max-width:none!important;max-height:none!important;object-fit:contain!important;object-position:center!important;margin:0!important;padding:0!important}
-main.shell>.view::before,#introView::before,#homeView::before,#formView::before,#myTicketsView::before,#adminView::before,#faqView::before{display:none!important;content:none!important;background:none!important;height:0!important;margin:0!important;padding:0!important;border:0!important}
-#introView .hpmw-portal-logo{display:none!important}
-#hpmwHomeLayout .hpmw-side-cta{display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:space-between!important;gap:10px!important;grid-template-columns:none!important;width:100%!important;box-sizing:border-box!important;white-space:normal!important}
-#hpmwHomeLayout .hpmw-side-cta>span{display:inline-flex!important;flex:1 1 auto!important;align-items:center!important;gap:8px!important;min-width:0!important}
-#hpmwHomeLayout .hpmw-side-cta>i{display:inline-block!important;flex:0 0 auto!important;margin-left:auto!important}
-#hpmwHomeLayout .hpmw-side-card>a:not(.hpmw-side-cta),#hpmwHomeLayout .hpmw-side-card>button{grid-template-columns:34px minmax(0,1fr)!important;min-height:54px!important;box-sizing:border-box!important}
-#hpmwHomeLayout .hpmw-side-card>a:not(.hpmw-side-cta):hover,#hpmwHomeLayout .hpmw-side-card>button:hover{background:rgba(220,184,111,.07)!important;border-radius:8px!important}
-#hpmwHomeLayout .hpmw-side-heading i,#hpmwHomeNews>h2:before{font-family:"Font Awesome 6 Free"!important;font-style:normal!important}
-#hpmwHomeLayout .hpmw-link-icon{font-family:"Font Awesome 6 Free"!important}
-@media(max-width:650px){.hpmw-global-brandbar{margin-bottom:14px!important}}
-</style>
-<style id="hpmw-banner-definitive-render">
-/* Definitieve banner: één achtergrondbeeld, geen losse logo's, sterren of pseudo-banners. */
-.hpmw-global-brandbar{
- display:block!important;position:relative!important;z-index:6!important;
- width:100%!important;height:auto!important;aspect-ratio:2048/640!important;
- min-height:0!important;margin:0 0 22px!important;padding:0!important;
- overflow:hidden!important;box-sizing:border-box!important;
- background-color:#080f1b!important;
- background-image:url("https://i44.servimg.com/u/f44/11/48/74/42/banner10.png")!important;
- background-repeat:no-repeat!important;background-position:center center!important;
- background-size:100% 100%!important;border:0!important;
- border-bottom:1px solid rgba(214,179,108,.6)!important;
- box-shadow:0 12px 30px rgba(0,0,0,.45)!important;
-}
-.hpmw-global-brandbar-inner,.hpmw-global-brandbar img,.hpmw-brand-ornament{display:none!important}
-#introView .hpmw-portal-logo,#introView .hpmw-portal-logo img{display:none!important}
-main.shell>.view::before,
-#introView::before,#homeView::before,#formView::before,
-#myTicketsView::before,#adminView::before,#faqView::before{
- content:none!important;display:none!important;visibility:hidden!important;
- width:0!important;height:0!important;margin:0!important;padding:0!important;
- background-image:none!important;box-shadow:none!important;border:0!important;
- position:static!important;transform:none!important;
-}
-#hpmwHomeLayout .hpmw-side-cta{
- display:flex!important;align-items:center!important;justify-content:space-between!important;
- flex-direction:row!important;flex-wrap:nowrap!important;gap:10px!important;
- width:100%!important;min-width:0!important;box-sizing:border-box!important;
-}
-#hpmwHomeLayout .hpmw-side-cta>span{display:inline-flex!important;align-items:center!important;gap:8px!important;min-width:0!important;flex:1 1 auto!important}
-#hpmwHomeLayout .hpmw-side-cta>i{display:inline-block!important;flex:0 0 auto!important;margin-left:auto!important}
-#hpmwHomeLayout .hpmw-side-heading>i,
-#hpmwHomeLayout .hpmw-link-icon i,
-#hpmwHomeLayout .hpmw-feature-mark i,
-#hpmwHomeLayout .hpmw-side-cta i,
-#hpmwHomeNews>h2:before{
- font-family:"Font Awesome 6 Free"!important;font-style:normal!important;
-}
-#hpmwHomeLayout .hpmw-side-heading>i,
-#hpmwHomeLayout .hpmw-link-icon i,
-#hpmwHomeLayout .hpmw-feature-mark i,
-#hpmwHomeLayout .hpmw-side-cta i{font-weight:900!important}
-@media(max-width:650px){
- .hpmw-global-brandbar{aspect-ratio:2048/640!important;margin-bottom:14px!important}
-}
-</style>
-<style id="hpmw-banner-compact-final">
-/* Compacte gedeelde banner: minder hoog, volledige breedte, bronafbeelding niet vervormen. */
-.hpmw-global-brandbar{
- display:block!important;position:relative!important;z-index:6!important;
- width:100%!important;height:clamp(125px,17vw,220px)!important;
- min-height:0!important;aspect-ratio:auto!important;
- margin:0 0 18px!important;padding:0!important;overflow:hidden!important;
- box-sizing:border-box!important;background-color:#080f1b!important;
- background-image:url("https://i44.servimg.com/u/f44/11/48/74/42/banner10.png")!important;
- background-repeat:no-repeat!important;background-position:center center!important;
- background-size:cover!important;border:0!important;
- border-bottom:1px solid rgba(214,179,108,.55)!important;
- box-shadow:0 10px 26px rgba(0,0,0,.4)!important;
-}
-.hpmw-global-brandbar-inner,.hpmw-global-brandbar img,.hpmw-brand-ornament{display:none!important}
-body #introView .hpmw-portal-logo,
-body #introView .hpmw-portal-logo img{display:none!important;visibility:hidden!important;height:0!important;max-height:0!important;min-height:0!important;margin:0!important;padding:0!important;opacity:0!important}
-body #introView{padding-top:0!important}
-@media(max-width:650px){
- .hpmw-global-brandbar{height:clamp(100px,22vw,155px)!important;margin-bottom:14px!important}
-}
-</style>
-<style id="hpmw-banner-smaller-no-bottom-block">
-/* Compacte banner en verwijder de losse onderste logo-/balksectie. */
-.hpmw-global-brandbar{
- display:block!important;position:relative!important;z-index:6!important;
- width:100%!important;height:clamp(88px,10vw,145px)!important;
- min-height:0!important;aspect-ratio:auto!important;
- margin:0 0 12px!important;padding:0!important;overflow:hidden!important;
- box-sizing:border-box!important;
- background:#080f1b url("https://i44.servimg.com/u/f44/11/48/74/42/banner10.png") center center/cover no-repeat!important;
- border:0!important;box-shadow:none!important;
-}
-.hpmw-global-brandbar:before,.hpmw-global-brandbar:after{display:none!important;content:none!important}
-.hpmw-global-brandbar-inner,.hpmw-global-brandbar img,.hpmw-brand-ornament{display:none!important}
-.hpmw-portal-logo,
-.hpmw-portal-logo img{display:none!important;visibility:hidden!important;opacity:0!important;width:0!important;height:0!important;max-height:0!important;min-height:0!important;margin:0!important;padding:0!important;border:0!important;box-shadow:none!important}
-#introView{padding-top:0!important}
-@media(max-width:650px){
- .hpmw-global-brandbar{height:clamp(76px,18vw,112px)!important;margin-bottom:10px!important}
-}
-</style>
-<style id="hpmw-banner-final-size-and-logo-removal">
-/* Definitief: lage brede headerbanner en geen tweede logoblok op Home. */
-html body .hpmw-global-brandbar{
- display:block!important;position:relative!important;
- width:100%!important;height:clamp(78px,9vw,125px)!important;
- min-height:0!important;max-height:125px!important;
- aspect-ratio:unset!important;flex:none!important;
- margin:0 0 10px!important;padding:0!important;
- overflow:hidden!important;box-sizing:border-box!important;
- background-image:url("https://i44.servimg.com/u/f44/11/48/74/42/banner10.png")!important;
- background-repeat:no-repeat!important;background-position:center 48%!important;
- background-size:cover!important;background-color:#080f1b!important;
- border:0!important;box-shadow:none!important;
-}
-html body .hpmw-global-brandbar:before,
-html body .hpmw-global-brandbar:after{display:none!important;content:none!important}
-html body .hpmw-global-brandbar-inner,
-html body .hpmw-global-brandbar img,
-html body .hpmw-brand-ornament{display:none!important}
-html body #introView .hpmw-portal-logo,
-html body #introView .hpmw-portal-logo img{
- display:none!important;visibility:hidden!important;opacity:0!important;
- width:0!important;height:0!important;max-width:0!important;max-height:0!important;
- min-height:0!important;margin:0!important;padding:0!important;border:0!important;
-}
-html body #introView{padding-top:0!important;margin-top:0!important}
-html body #introView .intro-login-layout{margin-top:0!important;padding-top:0!important}
-@media(max-width:650px){
- html body .hpmw-global-brandbar{height:clamp(70px,16vw,100px)!important;max-height:100px!important;margin-bottom:8px!important}
-}
-</style>
+
+
+
+
+
+
 <style id="hpmw-individual-ticket-page-banners">
 /* Eigen headerafbeeldingen voor Mijn Tickets en Ticketbeheer. */
 main.shell>.view#myTicketsView::before,
