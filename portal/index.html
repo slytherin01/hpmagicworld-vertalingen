@@ -2733,7 +2733,7 @@ main.shell>.view#homeView::before{content:none!important;display:none!important;
   "use strict";
   const SUPABASE_URL = "https://vuaajsjjluwgqmneinds.supabase.co";
   const SUPABASE_KEY = "sb_publishable_tto6sNxZPLv1VhUdMRlPHg_ptzg9odx";
-  const CONFIG_URL = SUPABASE_URL + "/rest/v1/portal_effects_settings?id=eq.1&select=snow,fireworks,pumpkins,greeting,year,updated_at";
+  const CONFIG_URL = SUPABASE_URL + "/rest/v1/portal_effects_settings?id=eq.1&select=snow,fireworks,pumpkins,greeting,year,maintenance_enabled,maintenance_message,updated_at";
   const STYLE_ID = "hpmw-portal-effects-style";
   const LAYER_ID = "hpmw-portal-effects-layer";
   let lastConfig = "";
@@ -2760,6 +2760,12 @@ main.shell>.view#homeView::before{content:none!important;display:none!important;
     style.textContent = `
       #${LAYER_ID}{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:99990;contain:strict}
       #${LAYER_ID} .hpmw-newyear-message{position:fixed;top:clamp(18px,5vh,54px);left:50%;transform:translateX(-50%);width:max-content;max-width:92vw;padding:13px 22px;border:1px solid #f4d27a;border-radius:14px;background:linear-gradient(135deg,#17243beF,#33234beF);color:#fff8dc;text-align:center;font:800 clamp(16px,2.4vw,25px)/1.35 Georgia,serif;letter-spacing:.02em;text-shadow:0 2px 10px #000;box-shadow:0 8px 28px #0008,0 0 22px #f7d47744;backdrop-filter:blur(8px);z-index:2}
+      #homeView .hpmw-home-notice{position:relative;max-width:1100px;margin:14px auto 18px;padding:16px 22px;border-radius:14px;text-align:center;box-shadow:0 12px 32px #0005}
+      #homeView .hpmw-home-newyear{border:1px solid #d6b86d;background:linear-gradient(135deg,#17243bf2,#33234bf2);color:#fff4cf;font:700 clamp(16px,2vw,22px)/1.5 Georgia,serif}
+      #homeView .hpmw-home-maintenance{border:1px solid #d9a441;background:linear-gradient(135deg,#382b16f5,#211b13f5);color:#ffedc4;text-align:left}
+      #homeView .hpmw-home-maintenance strong{display:block;margin-bottom:6px;color:#ffd477;font-size:16px}
+      #homeView .hpmw-home-maintenance p{margin:0;white-space:pre-wrap;line-height:1.6}
+      @media(max-width:700px){#homeView .hpmw-home-notice{margin:10px 8px;padding:13px 14px}}
       #${LAYER_ID} .hpmw-fireworks-host{position:absolute;inset:0;z-index:0}
       #${LAYER_ID} .hpmw-fireworks-host canvas{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;opacity:.95}
       #${LAYER_ID} .hpmw-flake{position:absolute;top:-18px;border-radius:50%;background:#fff;box-shadow:0 0 4px 1px #ffffffaa;animation:hpmw-snow-fall linear infinite;will-change:transform}
@@ -2862,6 +2868,32 @@ main.shell>.view#homeView::before{content:none!important;display:none!important;
     window.addEventListener("resize",drawWeather,{passive:true});
   }
 
+  function renderHomeNotices(cfg) {
+    const home = document.getElementById("homeView");
+    if (!home) return;
+    home.querySelectorAll(".hpmw-home-notice").forEach(node => node.remove());
+    const hero = home.querySelector(".support-hero");
+    if (!hero) return;
+    let anchor = hero;
+    if (cfg.greeting && cfg.year) {
+      const greeting = document.createElement("div");
+      greeting.className = "hpmw-home-notice hpmw-home-newyear";
+      greeting.textContent = "Namens het modteam een gelukkig en gezond " + cfg.year;
+      anchor.insertAdjacentElement("afterend", greeting);
+      anchor = greeting;
+    }
+    if (cfg.maintenance_enabled && cfg.maintenance_message) {
+      const notice = document.createElement("section");
+      notice.className = "hpmw-home-notice hpmw-home-maintenance";
+      const heading = document.createElement("strong");
+      heading.textContent = "⚠️ Onderhoudsmelding";
+      const body = document.createElement("p");
+      body.textContent = cfg.maintenance_message;
+      notice.append(heading, body);
+      anchor.insertAdjacentElement("afterend", notice);
+    }
+  }
+
   const buildEffects = cfg => {
     removeEffects();
     if (reducedMotion) return;
@@ -2871,6 +2903,7 @@ main.shell>.view#homeView::before{content:none!important;display:none!important;
     layer.setAttribute("aria-hidden", "true");
     document.body.appendChild(layer);
     startWeather(layer);
+    renderHomeNotices(cfg);
 
     if (cfg.snow) {
       for (let i = 0; i < 105; i++) {
@@ -2911,12 +2944,6 @@ main.shell>.view#homeView::before{content:none!important;display:none!important;
       }
     }
 
-    if (cfg.greeting && cfg.year) {
-      const message = document.createElement("div");
-      message.className = "hpmw-newyear-message";
-      message.textContent = "Namens het modteam een gelukkig en gezond " + cfg.year;
-      layer.appendChild(message);
-    }
 
     if (cfg.fireworks) {
       const host = document.createElement("div");
@@ -2977,7 +3004,7 @@ main.shell>.view#homeView::before{content:none!important;display:none!important;
       if (!response.ok) throw new Error("HTTP " + response.status);
       const rows = await response.json();
       const row = rows && rows[0];
-      const cfg = { snow: !!row?.snow, fireworks: !!row?.fireworks, pumpkins: !!row?.pumpkins, greeting: !!row?.greeting, year: String(row?.year || "").trim() };
+      const cfg = { snow: !!row?.snow, fireworks: !!row?.fireworks, pumpkins: !!row?.pumpkins, greeting: !!row?.greeting, year: String(row?.year || "").trim(), maintenance_enabled: !!row?.maintenance_enabled, maintenance_message: String(row?.maintenance_message || "").trim() };
       const signature = JSON.stringify(cfg);
       if (signature !== lastConfig) {
         lastConfig = signature;
