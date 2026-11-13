@@ -1262,10 +1262,10 @@ body:not(.supabase-authenticated)>:not(#supabaseAuthGate){display:none!important
 <p class="subtitle" style="margin:0 0 12px">Voer eerst de SQL hieronder één keer uit in Supabase → SQL Editor. Daarna plak je het vaste script op je portaal. Alle toekomstige wijzigingen sla je alleen nog hier in de tool op.</p>
 <textarea id="portalEffectsSql" readonly rows="10" spellcheck="false" style="width:100%;min-height:210px;resize:vertical;padding:12px;border-radius:10px;border:1px solid var(--line);background:#080e19;color:#dce7fa;font:11px/1.5 ui-monospace,monospace"></textarea>
 <div class="actions" style="padding:10px 0"><button class="btn" type="button" id="copyPortalEffectsSql">SQL kopiëren</button><span id="portalEffectsSqlStatus" role="status" style="color:var(--muted);align-self:center"></span></div>
-<h3 style="font-size:15px;margin:16px 0 6px">Vast portaal-script</h3>
-<p class="subtitle" style="margin:0 0 12px">Dit is het bijgewerkte script voor het portaal. Kopieer de regel hieronder en vervang de oude scriptregel in Forumactie. De instellingen worden daarna automatisch opgehaald.</p>
+<h3 style="font-size:15px;margin:16px 0 6px">Scriptregel voor je bestaande portaal</h3>
+<p class="subtitle" style="margin:0 0 12px">Dit is alleen de korte laadregel. VERWIJDER NIET je bestaande portaalcode en vervang niet de hele pagina. Laat alle bestaande HTML staan en plaats deze regel helemaal onderaan je bestaande portaalcode (of vervang alleen de oude scriptregel). Live weer uit Amsterdam wordt automatisch nagebootst.</p>
 <textarea id="portalEffectsSnippet" readonly rows="2" spellcheck="false" style="width:100%;min-height:66px;resize:vertical;padding:12px;border-radius:10px;border:1px solid var(--line);background:#080e19;color:#dce7fa;font:12px/1.5 ui-monospace,monospace"></textarea>
-<div class="actions" style="padding:10px 0 0"><button class="btn primary" type="button" id="copyPortalEffectsSnippet">Vast script kopiëren</button><span id="portalEffectsCopyStatus" role="status" style="color:var(--muted);align-self:center"></span></div>
+<div class="actions" style="padding:10px 0 0"><button class="btn primary" type="button" id="copyPortalEffectsSnippet">Scriptregel kopiëren</button><span id="portalEffectsCopyStatus" role="status" style="color:var(--muted);align-self:center"></span></div>
 </div>
 </div></section>
 <section class="view" id="newTranslationsView">
@@ -3850,7 +3850,7 @@ html body.supabase-authenticated main.shell{
 (function(){
  "use strict";
  const KEY="hpmw_portal_effects_v1";
- const BASE="https://slytherin01.github.io/muggle-ministry/portal-effects.js?v=8476e66";
+ const BASE="https://slytherin01.github.io/muggle-ministry/portal-effects.js?v=30a5fb7";
  const ids={snow:"effectSnow",fireworks:"effectFireworks",pumpkins:"effectPumpkins",greeting:"effectGreeting"};
  const defaults={snow:false,fireworks:false,pumpkins:false,greeting:false,year:""};
  const SQL=`create table if not exists public.portal_effects_settings (
