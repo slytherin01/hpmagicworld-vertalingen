@@ -23,17 +23,18 @@
   if($("#adminCmsView"))return;
   const style=document.createElement("style");style.textContent=css;document.head.append(style);
   const grid=$(".dash-grid");if(grid){const card=document.createElement("article");card.className="dash-card";card.innerHTML='<div class="dash-icon"><i class="fa-solid fa-screwdriver-wrench"></i></div><h2>Admin</h2><p>Beheer FAQ, nieuws, vacatures, onderhoud en toegangsrechten vanuit één omgeving.</p><button class="btn primary" id="openAdminCms">Admin openen</button>';grid.append(card);$("#openAdminCms").onclick=()=>{go("adminCmsView");load()};}
-  const nav=$(".top-actions");if(nav){const b=document.createElement("button");b.type="button";b.className="lux-nav-item hpmw-nav-link";b.innerHTML='<span class="lux-nav-icon"><i class="fa-solid fa-shield-halved"></i></span><span>Admin</span>';b.onclick=()=>{go("adminCmsView");load()};nav.insertBefore(b,nav.querySelector("#adminSignedIn"));const news=document.createElement("button");news.type="button";news.className="lux-nav-item hpmw-nav-link";news.innerHTML='<span class="lux-nav-icon"><i class="fa-solid fa-newspaper"></i></span><span>HP Nieuws</span>';news.onclick=()=>{go("adminCmsView");selectKind("news")};nav.insertBefore(news,b);}
+  /* CMS-onderdelen staan in het Admin-menu; geen extra hoofdnavigatieknoppen. */
   const section=document.createElement("section");section.className="view";section.id="adminCmsView";
   section.innerHTML=`
    <div class="page-head translation-bluebar"><div class="translation-bluebar-copy"><div class="eyebrow">CENTRAAL BEHEER</div><h1>Admin</h1><p class="subtitle">Beheer de inhoud van het portaal en de toegangsrechten.</p></div><div class="translation-bluebar-actions"><button class="btn" id="cmsBack">← Dashboard</button></div></div>
    <div class="cms-tabs" id="cmsTabs"></div><div class="cms-grid">
     <div class="cms-panel"><h2 id="cmsListTitle">Inhoud</h2><div id="cmsList"></div></div>
     <div class="cms-panel"><h2 id="cmsFormTitle">Nieuw item</h2><form id="cmsForm"><label>Titel<input id="cmsTitle" required maxlength="180"></label><label>Tekst / antwoord / omschrijving<textarea id="cmsBody" rows="7"></textarea></label><label>Bron (voor nieuws)<input id="cmsSource"></label><label>Auteur (voor nieuws)<input id="cmsAuthor"></label><label>Volgorde<input id="cmsOrder" type="number" value="0"></label><label id="cmsPinWrap"><input id="cmsPinned" type="checkbox" style="width:auto"> Vastpinnen bovenaan HP Nieuws</label><label><input id="cmsPublished" type="checkbox" style="width:auto"> Direct publiceren</label><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="cms-btn primary" type="submit">Opslaan</button><button class="cms-btn" type="button" id="cmsNew">Nieuw / wissen</button></div><p class="cms-status" id="cmsStatus" role="status"></p></form></div>
-   </div><div class="cms-panel" id="ticketModeratorsPanel" style="margin-top:16px"><h2>Ticketbeheerrechten</h2><p>Beheer welke Forumotion-gebruikers de interne ticketbeheerpagina in het portaal mogen openen. Gebruik het numerieke Forumotion-gebruikersnummer (bijvoorbeeld Test Account 2 = nummer 3).</p><div style="display:grid;grid-template-columns:minmax(120px,.5fr) minmax(160px,1fr) auto;gap:8px;align-items:end"><label>Forumotion gebruikersnummer<input id="ticketModId" type="number" min="1" step="1" placeholder="bijv. 3"></label><label>Naam / herkenning<input id="ticketModName" maxlength="80" placeholder="bijv. Test Account 2"></label><button class="cms-btn primary" type="button" id="ticketModAdd">Toegang toevoegen</button></div><div id="ticketModList" style="margin-top:12px"></div><p class="cms-status" id="ticketModStatus" role="status"></p></div><div class="cms-panel" style="margin-top:16px"><h2>Gebruikersrechten</h2><p>Beheer rechten per Supabase-gebruiker. Gebruikers-ID's worden getoond; de beheerder koppelt deze aan de juiste medewerker.</p><div id="cmsPermissions"></div><p class="cms-status" id="cmsPermStatus"></p></div>`;
+   </div><div class="cms-panel" id="ticketModeratorsPanel" style="margin-top:16px"><h2>Portaalrechten · Ticketbeheer</h2><p>Beheer welke Forumotion-gebruikers de interne ticketbeheerpagina in het portaal mogen openen. Gebruik het numerieke Forumotion-gebruikersnummer (bijvoorbeeld Test Account 2 = nummer 3).</p><div style="display:grid;grid-template-columns:minmax(120px,.5fr) minmax(160px,1fr) auto;gap:8px;align-items:end"><label>Forumotion gebruikersnummer<input id="ticketModId" type="number" min="1" step="1" placeholder="bijv. 3"></label><label>Naam / herkenning<input id="ticketModName" maxlength="80" placeholder="bijv. Test Account 2"></label><button class="cms-btn primary" type="button" id="ticketModAdd">Toegang toevoegen</button></div><div id="ticketModList" style="margin-top:12px"></div><p class="cms-status" id="ticketModStatus" role="status"></p></div><div class="cms-panel" style="margin-top:16px"><h2>Gebruikersrechten</h2><p>Beheer rechten per Supabase-gebruiker. Gebruikers-ID's worden getoond; de beheerder koppelt deze aan de juiste medewerker.</p><div id="cmsPermissions"></div><p class="cms-status" id="cmsPermStatus"></p></div>`;
   $("main.shell")?.append(section); const ticketPanel=section.querySelector("#ticketModeratorsPanel"); const rightsPanel=section.querySelector("#cmsPermissions")?.closest(".cms-panel"); if(ticketPanel&&rightsPanel)rightsPanel.append(ticketPanel);
   $("#cmsBack").onclick=()=>go("introView");$("#cmsNew").onclick=reset;
   $("#ticketModAdd").onclick=addTicketModerator;
+  $("#permissionAdd").onclick=addPermissionProfile;
   $("#cmsForm").onsubmit=save;
   const tabs=$("#cmsTabs");Object.entries(kinds).forEach(([k,v])=>{const b=document.createElement("button");b.textContent=v;b.dataset.kind=k;b.onclick=()=>selectKind(k);tabs.append(b)});
   const p=document.createElement("button");p.textContent="Rechten";p.onclick=()=>{document.querySelectorAll("#cmsTabs button").forEach(x=>x.classList.remove("active"));$("#cmsListTitle").textContent="Gebruikersrechten";$("#cmsList").innerHTML="Selecteer een gebruiker in de rechtenlijst hieronder.";};tabs.append(p);
@@ -78,8 +79,35 @@
   $("#ticketModStatus").textContent=error?.message||"Ticketbeheerrechten opgeslagen.";
   if(!error){$("#ticketModId").value="";$("#ticketModName").value="";loadTicketModerators()}
  }
- async function loadPermissions(){const db=client();const box=$("#cmsPermissions");if(!box)return;const {data,error}=await db.from("admin_permissions").select("*").order("updated_at",{ascending:false});if(error){box.textContent="Rechten niet beschikbaar: "+error.message;return}box.innerHTML="";(data||[]).forEach(row=>{const line=document.createElement("div");line.className="cms-perm";const id=document.createElement("code");id.textContent=row.user_id;line.append(id);const labels={faq:"FAQ",news:"Nieuws",jobs:"Vacatures",maintenance:"Onderhoud"};Object.entries(labels).forEach(([slug,label])=>{const wrap=document.createElement("label");wrap.textContent=label;const cb=document.createElement("input");cb.type="checkbox";cb.checked=row["can_view_"+slug];cb.title="Mag bekijken: "+label;cb.onchange=async()=>{const {data:userData}=await db.auth.getUser();const patch={["can_view_"+slug]:cb.checked,updated_by:userData.user.id,updated_at:new Date().toISOString()};const {error}=await db.from("admin_permissions").update(patch).eq("user_id",row.user_id);$("#cmsPermStatus").textContent=error?.message||"Recht bijgewerkt."};wrap.append(cb);line.append(wrap)});box.append(line)});if(!(data||[]).length)box.textContent="Nog geen rechtenprofielen. Voeg eerst een profiel toe via Supabase SQL; daarna kun je de kijkrechten hier aanpassen."}
-
+ async function loadPermissions(){
+ const db=client(),box=$("#cmsPermissions");if(!box)return;
+ const {data,error}=await db.from("admin_permissions").select("*").order("updated_at",{ascending:false});
+ if(error){box.textContent="Rechten niet beschikbaar: "+error.message;return}
+ box.innerHTML="";
+ (data||[]).forEach(row=>{
+  const card=document.createElement("section");card.className="cms-user-rights";
+  const head=document.createElement("div");head.className="cms-user-rights-head";
+  const who=document.createElement("code");who.textContent=row.user_id;head.append(who);
+  const del=document.createElement("button");del.className="cms-btn";del.textContent="Profiel verwijderen";del.onclick=async()=>{if(!confirm("CMS-rechten verwijderen?"))return;const {error}=await db.from("admin_permissions").delete().eq("user_id",row.user_id);$("#cmsPermStatus").textContent=error?.message||"Profiel verwijderd.";loadPermissions()};head.append(del);card.append(head);
+  [["FAQ","faq"],["Nieuws","news"],["Vacatures","jobs"],["Onderhoud","maintenance"]].forEach(([name,slug])=>{
+   const group=document.createElement("div");group.className="cms-right-group";const title=document.createElement("strong");title.textContent=name;group.append(title);
+   [["Bekijken","view"],["Bewerken","edit"],["Publiceren","publish"],["Verwijderen","delete"]].forEach(([label,action])=>{
+    const key="can_"+action+"_"+slug,wrap=document.createElement("label");wrap.className="cms-right-check";const cb=document.createElement("input");cb.type="checkbox";cb.checked=!!row[key];
+    cb.onchange=async()=>{cb.disabled=true;const u=await db.auth.getUser();const {error}=await db.from("admin_permissions").update({[key]:cb.checked,updated_by:u.data.user.id,updated_at:new Date().toISOString()}).eq("user_id",row.user_id);$("#cmsPermStatus").textContent=error?.message||"Rechten opgeslagen.";cb.disabled=false};
+    wrap.append(cb,document.createTextNode(label));group.append(wrap);
+   });card.append(group);
+  });box.append(card);
+ });
+ if(!(data||[]).length)box.textContent="Nog geen CMS-rechtenprofielen.";
+}
+async function addPermissionProfile(){
+ const id=$("#permissionUserId").value.trim(),db=client();
+ if(!/^[0-9a-f-]{36}$/i.test(id)){ $("#cmsPermStatus").textContent="Vul een geldige Supabase gebruikers-UUID in.";return; }
+ const u=await db.auth.getUser();if(!u.data.user)return;
+ const {error}=await db.from("admin_permissions").upsert({user_id:id,updated_by:u.data.user.id},{onConflict:"user_id"});
+ $("#cmsPermStatus").textContent=error?.message||"Leeg profiel toegevoegd; alle rechten staan uit.";
+ if(!error){$("#permissionUserId").value="";loadPermissions()}
+}
  // Import/export: the starter package contains the existing portal welcome copy and FAQ.
  const starter=[
   {kind:"page",title:"Welkomsttekst voor bezoekers",body:"Je hebt een account nodig. Deze kun je gratis aanmaken om door te gaan naar het Ministerie van Dreuzels, oftewel onze community. Registreer hier een account.\n\nGebruik ons portaal om onder andere support aan te vragen.",source:"Bestaand portaal: introView",author:""},
