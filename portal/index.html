@@ -3379,4 +3379,35 @@ body #introView{padding-top:0!important}
  .hpmw-global-brandbar{height:clamp(76px,18vw,112px)!important;margin-bottom:10px!important}
 }
 </style>
+<style id="hpmw-banner-final-size-and-logo-removal">
+/* Definitief: lage brede headerbanner en geen tweede logoblok op Home. */
+html body .hpmw-global-brandbar{
+ display:block!important;position:relative!important;
+ width:100%!important;height:clamp(78px,9vw,125px)!important;
+ min-height:0!important;max-height:125px!important;
+ aspect-ratio:unset!important;flex:none!important;
+ margin:0 0 10px!important;padding:0!important;
+ overflow:hidden!important;box-sizing:border-box!important;
+ background-image:url("https://i44.servimg.com/u/f44/11/48/74/42/banner10.png")!important;
+ background-repeat:no-repeat!important;background-position:center 48%!important;
+ background-size:cover!important;background-color:#080f1b!important;
+ border:0!important;box-shadow:none!important;
+}
+html body .hpmw-global-brandbar:before,
+html body .hpmw-global-brandbar:after{display:none!important;content:none!important}
+html body .hpmw-global-brandbar-inner,
+html body .hpmw-global-brandbar img,
+html body .hpmw-brand-ornament{display:none!important}
+html body #introView .hpmw-portal-logo,
+html body #introView .hpmw-portal-logo img{
+ display:none!important;visibility:hidden!important;opacity:0!important;
+ width:0!important;height:0!important;max-width:0!important;max-height:0!important;
+ min-height:0!important;margin:0!important;padding:0!important;border:0!important;
+}
+html body #introView{padding-top:0!important;margin-top:0!important}
+html body #introView .intro-login-layout{margin-top:0!important;padding-top:0!important}
+@media(max-width:650px){
+ html body .hpmw-global-brandbar{height:clamp(70px,16vw,100px)!important;max-height:100px!important;margin-bottom:8px!important}
+}
+</style>
 </body></html>
