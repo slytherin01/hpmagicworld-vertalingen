@@ -3,7 +3,7 @@
   if (window.__muggleMinistryPortalLoading) return;
   window.__muggleMinistryPortalLoading = true;
 
-  var version = "20261113-32";
+  var version = "20261113-33";
   var sources = [
     "https://raw.githubusercontent.com/slytherin01/muggle-ministry/main/portal/index.html?cachebust=" + version,
     "https://slytherin01.github.io/muggle-ministry/portal/index.html?v=" + version
