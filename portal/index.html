@@ -3086,4 +3086,48 @@ main.shell>.view#homeView::before{margin-top:16px!important}
 }
 </style>
 
+
+<script id="hpmw-admin-content-live">
+(()=> {
+ "use strict";
+ const URL="https://vuaajsjjluwgqmneinds.supabase.co/rest/v1/admin_content";
+ const KEY="sb_publishable_tto6sNxZPLv1VhUdMRlPHg_ptzg9odx";
+ const headers={apikey:KEY,Authorization:"Bearer "+KEY};
+ const el=(tag,cls,text)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n};
+ const card=(item)=>{const a=el("article","hpmw-cms-card");a.append(el("h3","",item.title));const p=el("p","",item.body);a.append(p);if(item.source||item.author){const meta=el("small","hpmw-cms-meta",[item.source,item.author].filter(Boolean).join(" · "));a.append(meta)}return a};
+ async function rows(kind){
+  const q=URL+"?select=kind,title,body,source,author,sort_order,updated_at&kind=eq."+encodeURIComponent(kind)+"&published=eq.true&order=sort_order.asc,updated_at.desc";
+  const r=await fetch(q,{headers,cache:"no-store"});if(!r.ok)throw new Error("Inhoud kon niet worden geladen");return await r.json();
+ }
+ function addStyles(){if(document.getElementById("hpmw-cms-live-css"))return;const s=document.createElement("style");s.id="hpmw-cms-live-css";s.textContent=".hpmw-cms-card{padding:16px 18px;margin:10px 0;border:1px solid #34435a;border-radius:13px;background:rgba(255,255,255,.035);color:#edf2fa}.hpmw-cms-card h3{margin:0 0 8px;color:#d8c6ff;font-size:16px}.hpmw-cms-card p{margin:0;white-space:pre-wrap;line-height:1.65}.hpmw-cms-meta{display:block;margin-top:10px;color:#9eabc0;font-size:11px}.hpmw-cms-section{margin:24px auto;max-width:1100px}.hpmw-cms-section>h2{color:#fff;font-size:22px}.hpmw-cms-actions{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.hpmw-cms-actions button{padding:9px 14px;border:1px solid #52627c;border-radius:9px;background:#17263a;color:#fff;font-weight:700;cursor:pointer}.hpmw-cms-actions button.active{background:#6654cf;border-color:#9587ff}.hpmw-cms-view{display:none}.hpmw-cms-view.active{display:block}";
+ document.head.append(s)}
+ function createPages(){
+  const shell=document.querySelector("main.shell");if(!shell||document.getElementById("hpmwNewsView"))return;
+  const view=el("section","view");view.id="hpmwNewsView";
+  const head=el("div","page-head");head.append(el("div","", " "));const title=el("h1","", "HP Nieuws");head.firstChild.append(title);view.append(head);
+  const actions=el("div","hpmw-cms-actions");const newsBtn=el("button","active","Nieuws");const jobsBtn=el("button","","Vacatures");actions.append(newsBtn,jobsBtn);view.append(actions);
+  const news=el("div","hpmw-cms-view active");news.id="hpmwNewsList";const jobs=el("div","hpmw-cms-view");jobs.id="hpmwJobsList";view.append(news,jobs);shell.append(view);
+  const switchTo=(which)=>{news.classList.toggle("active",which==="news");jobs.classList.toggle("active",which==="jobs");newsBtn.classList.toggle("active",which==="news");jobsBtn.classList.toggle("active",which==="jobs");title.textContent=which==="news"?"HP Nieuws":"Vacatures"};
+  newsBtn.onclick=()=>switchTo("news");jobsBtn.onclick=()=>switchTo("jobs");
+  const nav=document.getElementById("hpNieuwsNav");if(nav){nav.addEventListener("click",e=>{e.preventDefault();document.querySelectorAll("main.shell>.view").forEach(v=>{v.classList.remove("active");v.style.display="none"});view.classList.add("active");view.style.display="block";window.scrollTo(0,0);switchTo("news")});}
+  return {view,news,jobs};
+ }
+ async function render(){
+  addStyles();const faqBox=document.querySelector("#hpmwFaqOverlay .hpmw-faq-content");
+  try{
+   const faq=await rows("faq");if(faq.length&&faqBox){faqBox.replaceChildren(...faq.map(card));}
+   const pages=await rows("page");const welcome=document.querySelector(".hpmw-welcome-box");
+   if(welcome){const guest=pages.find(x=>x.title==="Welkomsttekst voor bezoekers"),member=pages.find(x=>x.title==="Welkomsttekst voor leden");if(guest){const p=welcome.querySelector(".hpmw-guest-welcome");if(p)p.textContent=guest.body}if(member){const p=welcome.querySelector(".hpmw-member-welcome");if(p)p.textContent=member.body}}
+   const news=await rows("news"),jobs=await rows("job"),maintenance=await rows("maintenance");
+   const home=document.getElementById("introView");
+   if(home){let section=document.getElementById("hpmwHomeNews");if(!section){section=el("section","hpmw-cms-section");section.id="hpmwHomeNews";home.append(section)}section.replaceChildren(el("h2","","HP Nieuws"));section.append(...news.slice(0,3).map(card));}
+   const pagesUI=createPages();if(pagesUI){pagesUI.news.replaceChildren(...(news.length?news.map(card):[el("p","","Er zijn nog geen nieuwsberichten gepubliceerd.") ]));pagesUI.jobs.replaceChildren(...(jobs.length?jobs.map(card):[el("p","","Er zijn momenteel geen vacatures gepubliceerd.") ]));}
+   const maintenanceHost=document.getElementById("introView");
+   if(maintenanceHost){document.getElementById("hpmwCmsMaintenance")?.remove();if(maintenance.length){const n=el("section","hpmw-home-notice hpmw-home-maintenance");n.id="hpmwCmsMaintenance";n.append(el("div","hpmw-maintenance-head",maintenance[0].title),el("p","",maintenance[0].body),el("div","hpmw-maintenance-foot","Bericht van het beheerteam"));maintenanceHost.append(n)}}
+  }catch(err){console.warn("[Hpmw CMS] Live content unavailable:",err)}
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>{render();setInterval(render,60000)},{once:true});else{render();setInterval(render,60000)}
+})();
+</script>
+
 </body></html>
