@@ -2,7 +2,7 @@
 (()=> {
  const $=(s,r=document)=>r.querySelector(s);
  const client=()=>window.hpmwSupabase;
- const kinds={faq:"FAQ",news:"HP Nieuws",job:"Vacatures",maintenance:"Onderhoud"};
+ const kinds={maintenance:"Onderhoud"};
  const perms=["view","edit","publish","delete"];
  const css=`
  #adminCmsView .cms-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
@@ -30,10 +30,10 @@
    <div class="cms-tabs" id="cmsTabs"></div><div class="cms-grid">
     <div class="cms-panel"><h2 id="cmsListTitle">Inhoud</h2><div id="cmsList"></div></div>
     <div class="cms-panel"><h2 id="cmsFormTitle">Nieuw item</h2><form id="cmsForm"><label>Titel<input id="cmsTitle" required maxlength="180"></label><label>Tekst / antwoord / omschrijving<textarea id="cmsBody" rows="7"></textarea></label><label>Bron (voor nieuws)<input id="cmsSource"></label><label>Auteur (voor nieuws)<input id="cmsAuthor"></label><label>Volgorde<input id="cmsOrder" type="number" value="0"></label><label id="cmsPinWrap"><input id="cmsPinned" type="checkbox" style="width:auto"> Vastpinnen bovenaan HP Nieuws</label><label><input id="cmsPublished" type="checkbox" style="width:auto"> Direct publiceren</label><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="cms-btn primary" type="submit">Opslaan</button><button class="cms-btn" type="button" id="cmsNew">Nieuw / wissen</button></div><p class="cms-status" id="cmsStatus" role="status"></p></form></div>
-   </div><div class="cms-panel" id="ticketModeratorsPanel" style="margin-top:16px"><h2>Portaalrechten · Ticketbeheer</h2><p>Beheer welke Forumotion-gebruikers de interne ticketbeheerpagina in het portaal mogen openen. Gebruik het numerieke Forumotion-gebruikersnummer (bijvoorbeeld Test Account 2 = nummer 3).</p><div style="display:grid;grid-template-columns:minmax(120px,.5fr) minmax(160px,1fr) auto;gap:8px;align-items:end"><label>Forumotion gebruikersnummer<input id="ticketModId" type="number" min="1" step="1" placeholder="bijv. 3"></label><label>Naam / herkenning<input id="ticketModName" maxlength="80" placeholder="bijv. Test Account 2"></label><button class="cms-btn primary" type="button" id="ticketModAdd">Toegang toevoegen</button></div><div id="ticketModList" style="margin-top:12px"></div><p class="cms-status" id="ticketModStatus" role="status"></p></div><div class="cms-panel" style="margin-top:16px"><h2>CMS-rechten</h2><p>Voeg een Supabase-gebruiker toe en vink per onderdeel de toegestane acties aan. Nieuwe profielen starten zonder rechten.</p><label>Supabase gebruikers-ID (UUID)<input id="permissionUserId" type="text" placeholder="00000000-0000-0000-0000-000000000000"></label><button class="cms-btn primary" type="button" id="permissionAdd">Gebruiker toevoegen</button><div id="cmsPermissions"></div><p class="cms-status" id="cmsPermStatus"></p></div>`;
+   </div><div class="cms-panel" id="ticketModeratorsPanel" style="margin-top:16px"><h2>Portaalrechten · Ticketbeheer</h2><p>Stel per Forumotion-gebruiker afzonderlijk in of die Ticketbeheer mag zien, tickets mag modereren of tickets mag verwijderen. Gebruik het Forumotion-gebruikersnummer.</p><div style="display:grid;grid-template-columns:minmax(120px,.5fr) minmax(160px,1fr) auto;gap:8px;align-items:end"><label>Forumotion gebruikersnummer<input id="ticketModId" type="number" min="1" step="1" placeholder="bijv. 3"></label><label>Naam / herkenning<input id="ticketModName" maxlength="80" placeholder="bijv. /u3"></label><button class="cms-btn primary" type="button" id="ticketModAdd">Gebruiker toevoegen</button></div><div id="ticketModList" style="margin-top:12px"></div><button class="cms-btn primary" type="button" id="syncPortal">Sync naar portaal</button><p class="cms-status" id="ticketModStatus" role="status"></p></div><div class="cms-panel" style="margin-top:16px"><h2>CMS-rechten</h2><p>Voeg een Supabase-gebruiker toe en vink per onderdeel de toegestane acties aan. Nieuwe profielen starten zonder rechten.</p><label>Supabase gebruikers-ID (UUID)<input id="permissionUserId" type="text" placeholder="00000000-0000-0000-0000-000000000000"></label><button class="cms-btn primary" type="button" id="permissionAdd">Gebruiker toevoegen</button><div id="cmsPermissions"></div><p class="cms-status" id="cmsPermStatus"></p></div>`;
   $("main.shell")?.append(section);
   $("#cmsBack").onclick=()=>go("newAdminDashboard");$("#cmsNew").onclick=reset;
-  $("#ticketModAdd").onclick=addTicketModerator;
+  $("#ticketModAdd").onclick=addTicketModerator;$("#syncPortal").onclick=syncTicketModerators;
   $("#permissionAdd").onclick=addPermissionProfile;
   $("#cmsForm").onsubmit=save;
   const tabs=$("#cmsTabs");Object.entries(kinds).forEach(([k,v])=>{const b=document.createElement("button");b.textContent=v;b.dataset.kind=k;b.onclick=()=>selectKind(k);tabs.append(b)});
@@ -62,19 +62,20 @@
   (data||[]).forEach(row=>{
    const line=document.createElement("div");line.className="cms-item";
    const info=document.createElement("div"),title=document.createElement("strong"),meta=document.createElement("small");
-   title.textContent=(row.display_name||"Forumotion gebruiker")+" · #"+row.forumotion_user_id;meta.textContent=row.enabled?"Toegang actief":"Toegang uitgeschakeld";info.append(title,meta);
+   title.textContent=(row.display_name||"Forumotion gebruiker")+" · /u"+row.forumotion_user_id;meta.textContent="";info.append(title,meta);
    const actions=document.createElement("div");actions.style.cssText="display:flex;gap:7px;align-items:center;flex-wrap:wrap";
-   const toggle=document.createElement("button");toggle.className="cms-btn";toggle.textContent=row.enabled?"Uitschakelen":"Inschakelen";toggle.onclick=async()=>{const u=await db.auth.getUser();const {error}=await db.from("ticket_moderators").update({enabled:!row.enabled,updated_by:u.data.user.id,updated_at:new Date().toISOString()}).eq("forumotion_user_id",row.forumotion_user_id);$("#ticketModStatus").textContent=error?.message||"Toegang bijgewerkt.";loadTicketModerators()};
+   const flags=[["Ticketbeheer zien","can_view_tickets"],["Tickets modereren","can_moderate_tickets"],["Tickets verwijderen","can_delete_tickets"]];flags.forEach(([label,key])=>{const wrap=document.createElement("label");wrap.style.cssText="display:inline-flex;gap:5px;align-items:center;margin:4px 10px 4px 0";const cb=document.createElement("input");cb.type="checkbox";cb.checked=!!row[key];cb.onchange=()=>{row[key]=cb.checked;row._dirty=true;$("#ticketModStatus").textContent="Niet-gesynchroniseerde wijzigingen.";};wrap.append(cb,document.createTextNode(label));actions.append(wrap)});
    const del=document.createElement("button");del.className="cms-btn";del.textContent="Verwijderen";del.onclick=async()=>{if(!confirm("Deze gebruiker uit Ticketbeheer verwijderen?"))return;const {error}=await db.from("ticket_moderators").delete().eq("forumotion_user_id",row.forumotion_user_id);$("#ticketModStatus").textContent=error?.message||"Gebruiker verwijderd.";loadTicketModerators()};
-   actions.append(toggle,del);line.append(info,actions);box.append(line);
+   actions.append(del);line.append(info,actions);box.append(line);
   });
   if(!(data||[]).length)box.textContent="Nog geen moderators ingesteld.";
  }
+ async function syncTicketModerators(){const db=client(),u=await db.auth.getUser();if(!u.data.user)return;const rows=[...document.querySelectorAll("#ticketModList .cms-item")];const payload=[];for(const line of rows){const title=line.querySelector("strong")?.textContent||"",id=Number(title.match(/\/u(\d+)/)?.[1]);if(!id)continue;const labels=[...line.querySelectorAll("label")];payload.push({forumotion_user_id:id,display_name:title.split(" · ")[0],enabled:labels[0]?.querySelector("input")?.checked||false,can_view_tickets:labels[0]?.querySelector("input")?.checked||false,can_moderate_tickets:labels[1]?.querySelector("input")?.checked||false,can_delete_tickets:labels[2]?.querySelector("input")?.checked||false,updated_by:u.data.user.id,updated_at:new Date().toISOString()});}const {error}=await db.from("ticket_moderators").upsert(payload,{onConflict:"forumotion_user_id"});$("#ticketModStatus").textContent=error?.message||"Portaalrechten gesynchroniseerd.";if(!error)loadTicketModerators();}
  async function addTicketModerator(){
   const id=Number($("#ticketModId").value),name=$("#ticketModName").value.trim(),db=client();
   if(!Number.isInteger(id)||id<1){$("#ticketModStatus").textContent="Vul een geldig Forumotion-gebruikersnummer in.";return}
   const u=await db.auth.getUser();if(!u.data.user){$("#ticketModStatus").textContent="Log opnieuw in.";return}
-  const {error}=await db.from("ticket_moderators").upsert({forumotion_user_id:id,display_name:name||("Forumotion gebruiker #"+id),enabled:true,updated_by:u.data.user.id,updated_at:new Date().toISOString()},{onConflict:"forumotion_user_id"});
+  const {error}=await db.from("ticket_moderators").upsert({forumotion_user_id:id,display_name:name||("Forumotion gebruiker #"+id),enabled:false,can_view_tickets:false,can_moderate_tickets:false,can_delete_tickets:false,updated_by:u.data.user.id,updated_at:new Date().toISOString()},{onConflict:"forumotion_user_id"});
   $("#ticketModStatus").textContent=error?.message||"Ticketbeheerrechten opgeslagen.";
   if(!error){$("#ticketModId").value="";$("#ticketModName").value="";loadTicketModerators()}
  }
@@ -91,7 +92,7 @@
   [["FAQ","faq"],["Nieuws","news"],["Vacatures","jobs"],["Onderhoud","maintenance"]].forEach(([name,slug])=>{
    const group=document.createElement("div");group.className="cms-right-group";const title=document.createElement("strong");title.textContent=name;group.append(title);
    [["Bekijken","view"],["Bewerken","edit"],["Publiceren","publish"],["Verwijderen","delete"]].forEach(([label,action])=>{
-    const key="can_"+action+"_"+slug,wrap=document.createElement("label");wrap.className="cms-right-check";const cb=document.createElement("input");cb.type="checkbox";cb.checked=!!row[key];
+    if(slug!=="maintenance")return;const key="can_"+action+"_"+slug,wrap=document.createElement("label");wrap.className="cms-right-check";const cb=document.createElement("input");cb.type="checkbox";cb.checked=!!row[key];
     cb.onchange=async()=>{cb.disabled=true;const u=await db.auth.getUser();const {error}=await db.from("admin_permissions").update({[key]:cb.checked,updated_by:u.data.user.id,updated_at:new Date().toISOString()}).eq("user_id",row.user_id);$("#cmsPermStatus").textContent=error?.message||"Rechten opgeslagen.";cb.disabled=false};
     wrap.append(cb,document.createTextNode(label));group.append(wrap);
    });card.append(group);
