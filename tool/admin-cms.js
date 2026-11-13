@@ -31,9 +31,9 @@
     <div class="cms-panel"><h2 id="cmsListTitle">Inhoud</h2><div id="cmsList"></div></div>
     <div class="cms-panel"><h2 id="cmsFormTitle">Nieuw item</h2><form id="cmsForm"><label>Titel<input id="cmsTitle" required maxlength="180"></label><label>Tekst / antwoord / omschrijving<textarea id="cmsBody" rows="7"></textarea></label><label>Bron (voor nieuws)<input id="cmsSource"></label><label>Auteur (voor nieuws)<input id="cmsAuthor"></label><label>Volgorde<input id="cmsOrder" type="number" value="0"></label><label id="cmsPinWrap"><input id="cmsPinned" type="checkbox" style="width:auto"> Vastpinnen bovenaan HP Nieuws</label><label><input id="cmsPublished" type="checkbox" style="width:auto"> Direct publiceren</label><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="cms-btn primary" type="submit">Opslaan</button><button class="cms-btn" type="button" id="cmsNew">Nieuw / wissen</button></div><p class="cms-status" id="cmsStatus" role="status"></p></form></div>
    </div><div class="cms-panel" id="ticketModeratorsPanel" style="margin-top:16px"><h2>Ticketbeheerrechten</h2><p>Beheer welke Forumotion-gebruikers de interne ticketbeheerpagina in het portaal mogen openen. Gebruik het numerieke Forumotion-gebruikersnummer (bijvoorbeeld Test Account 2 = nummer 3).</p><div style="display:grid;grid-template-columns:minmax(120px,.5fr) minmax(160px,1fr) auto;gap:8px;align-items:end"><label>Forumotion gebruikersnummer<input id="ticketModId" type="number" min="1" step="1" placeholder="bijv. 3"></label><label>Naam / herkenning<input id="ticketModName" maxlength="80" placeholder="bijv. Test Account 2"></label><button class="cms-btn primary" type="button" id="ticketModAdd">Toegang toevoegen</button></div><div id="ticketModList" style="margin-top:12px"></div><p class="cms-status" id="ticketModStatus" role="status"></p></div><div class="cms-panel" style="margin-top:16px"><h2>Gebruikersrechten</h2><p>Beheer rechten per Supabase-gebruiker. Gebruikers-ID's worden getoond; de beheerder koppelt deze aan de juiste medewerker.</p><div id="cmsPermissions"></div><p class="cms-status" id="cmsPermStatus"></p></div>`;
-  $("main.shell")?.append(section);
+  $("main.shell")?.append(section); const ticketPanel=section.querySelector("#ticketModeratorsPanel"); const rightsPanel=section.querySelector("#cmsPermissions")?.closest(".cms-panel"); if(ticketPanel&&rightsPanel)rightsPanel.append(ticketPanel);
   $("#cmsBack").onclick=()=>go("introView");$("#cmsNew").onclick=reset;
-  $("#ticketModAdd").onclick=addTicketModerator;loadTicketModerators();
+  $("#ticketModAdd").onclick=addTicketModerator;
   $("#cmsForm").onsubmit=save;
   const tabs=$("#cmsTabs");Object.entries(kinds).forEach(([k,v])=>{const b=document.createElement("button");b.textContent=v;b.dataset.kind=k;b.onclick=()=>selectKind(k);tabs.append(b)});
   const p=document.createElement("button");p.textContent="Rechten";p.onclick=()=>{document.querySelectorAll("#cmsTabs button").forEach(x=>x.classList.remove("active"));$("#cmsListTitle").textContent="Gebruikersrechten";$("#cmsList").innerHTML="Selecteer een gebruiker in de rechtenlijst hieronder.";};tabs.append(p);
@@ -122,5 +122,5 @@
  }
 
  document.addEventListener("DOMContentLoaded",()=>{init();setTimeout(addTransferPanel,0)});if(document.readyState!=="loading"){init();setTimeout(addTransferPanel,0)};
- document.addEventListener("hpmw:supabase-role",e=>{const ok=e.detail?.role==="admin";document.querySelectorAll(".hpmw-nav-link").forEach(n=>n.hidden=!ok);if($("#adminCmsView")&&ok)load()});
+ document.addEventListener("hpmw:supabase-role",e=>{const ok=e.detail?.role==="admin";document.querySelectorAll(".hpmw-nav-link").forEach(n=>n.hidden=!ok);if($("#adminCmsView")&&ok){load();loadTicketModerators()}});
 })();
