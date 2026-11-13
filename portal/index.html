@@ -3359,4 +3359,24 @@ body #introView{padding-top:0!important}
  .hpmw-global-brandbar{height:clamp(100px,22vw,155px)!important;margin-bottom:14px!important}
 }
 </style>
+<style id="hpmw-banner-smaller-no-bottom-block">
+/* Compacte banner en verwijder de losse onderste logo-/balksectie. */
+.hpmw-global-brandbar{
+ display:block!important;position:relative!important;z-index:6!important;
+ width:100%!important;height:clamp(88px,10vw,145px)!important;
+ min-height:0!important;aspect-ratio:auto!important;
+ margin:0 0 12px!important;padding:0!important;overflow:hidden!important;
+ box-sizing:border-box!important;
+ background:#080f1b url("https://i44.servimg.com/u/f44/11/48/74/42/banner10.png") center center/cover no-repeat!important;
+ border:0!important;box-shadow:none!important;
+}
+.hpmw-global-brandbar:before,.hpmw-global-brandbar:after{display:none!important;content:none!important}
+.hpmw-global-brandbar-inner,.hpmw-global-brandbar img,.hpmw-brand-ornament{display:none!important}
+.hpmw-portal-logo,
+.hpmw-portal-logo img{display:none!important;visibility:hidden!important;opacity:0!important;width:0!important;height:0!important;max-height:0!important;min-height:0!important;margin:0!important;padding:0!important;border:0!important;box-shadow:none!important}
+#introView{padding-top:0!important}
+@media(max-width:650px){
+ .hpmw-global-brandbar{height:clamp(76px,18vw,112px)!important;margin-bottom:10px!important}
+}
+</style>
 </body></html>
