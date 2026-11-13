@@ -3094,12 +3094,12 @@ main.shell>.view#homeView::before{margin-top:16px!important}
  const KEY="sb_publishable_tto6sNxZPLv1VhUdMRlPHg_ptzg9odx";
  const headers={apikey:KEY,Authorization:"Bearer "+KEY};
  const el=(tag,cls,text)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n};
- const card=(item)=>{const a=el("article","hpmw-cms-card");a.dataset.kind=item.kind||"news";if(item.is_pinned){a.classList.add("is-pinned");a.append(el("div","hpmw-cms-pin","📌 Vastgezet"));}a.append(el("h3","",item.title));const p=el("p","",item.body);a.append(p);if(item.source||item.author){const meta=el("small","hpmw-cms-meta",[item.author,item.source].filter(Boolean).join(" · "));a.append(meta)}return a};
+ const card=(item)=>{const a=el("article","hpmw-cms-card");a.dataset.kind=item.kind||"news";const top=el("div","hpmw-cms-card-top");top.append(el("span","hpmw-cms-kicker",item.kind==="job"?"VACATURE":item.kind==="faq"?"VEELGESTELDE VRAAG":"HP NIEUWS"));if(item.is_pinned)top.append(el("span","hpmw-cms-pin","★ Uitgelicht"));a.append(top);a.append(el("h3","hpmw-cms-title",item.title));const p=el("p","hpmw-cms-body",item.body);a.append(p);const details=[];if(item.author)details.push(item.author);if(item.source)details.push("Bron: "+item.source);if(item.updated_at){const d=new Date(item.updated_at);if(!Number.isNaN(d.getTime()))details.push(d.toLocaleDateString("nl-NL",{day:"numeric",month:"long",year:"numeric"}));}if(details.length)a.append(el("div","hpmw-cms-meta",details.join("  •  ")));return a};
  async function rows(kind){
   const q=URL+"?select=kind,title,body,source,author,sort_order,updated_at,is_pinned&kind=eq."+encodeURIComponent(kind)+"&published=eq.true&order=is_pinned.desc,sort_order.asc,updated_at.desc";
   const r=await fetch(q,{headers,cache:"no-store"});if(!r.ok)throw new Error("Inhoud kon niet worden geladen");return await r.json();
  }
- function addStyles(){if(document.getElementById("hpmw-cms-live-css"))return;const s=document.createElement("style");s.id="hpmw-cms-live-css";s.textContent=".hpmw-cms-card{padding:0;margin:12px 0 18px;border:0;border-radius:0;background:#050505;color:#f0dfb5;overflow:hidden}.hpmw-cms-card h3{margin:0 0 14px;padding:7px 10px;background:#414431;color:#f2dfae;font-size:15px;font-weight:800;line-height:1.35}.hpmw-cms-card p{margin:0;padding:0 2px 8px;white-space:pre-wrap;line-height:1.75;color:#f2dfc0;font-size:13px}.hpmw-cms-meta{display:block;margin:2px 2px 9px;color:#c5b58f;font-size:10px}.hpmw-cms-pin{padding:5px 10px;background:#514b30;color:#ffe6a7;font-size:10px;font-weight:800}.hpmw-cms-sync-status{margin:10px auto;padding:8px 12px;color:#ffd88a;font-size:11px;text-align:center}.hpmw-cms-section{margin:24px auto;max-width:1100px;padding:0 12px}.hpmw-cms-section>h2{margin:0 0 12px;padding:8px 10px;background:#414431;color:#f2dfae;font-size:15px;font-weight:800}.hpmw-cms-actions{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.hpmw-cms-actions button{padding:9px 14px;border:1px solid #52627c;border-radius:9px;background:#17263a;color:#fff;font-weight:700;cursor:pointer}.hpmw-cms-actions button.active{background:#6654cf;border-color:#9587ff}.hpmw-cms-view{display:none}.hpmw-cms-view.active{display:block}#introView{max-height:none!important;height:auto!important;min-height:100vh;overflow:visible!important}body:has(#introView.active),html:has(#introView.active){height:auto!important;min-height:100%!important;overflow:auto!important}#introView.active{overflow:visible!important}#hpmwHomeNews{display:block!important;position:relative;clear:both;padding:24px 0 40px;visibility:visible!important;max-height:none!important}";
+ function addStyles(){if(document.getElementById("hpmw-cms-live-css"))return;const s=document.createElement("style");s.id="hpmw-cms-live-css";s.textContent=".hpmw-cms-card{position:relative;margin:14px 0 18px;padding:18px 20px 15px;border:1px solid #293b53;border-radius:14px;background:linear-gradient(145deg,#142238 0%,#101a2a 58%,#0d1725 100%);color:#edf2fa;box-shadow:0 12px 28px #0004;overflow:hidden}.hpmw-cms-card:before{content:'';position:absolute;inset:0 auto 0 0;width:3px;background:linear-gradient(180deg,#a99bff,#5dc2d5)}.hpmw-cms-card-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 8px}.hpmw-cms-kicker{color:#a99dff;font-size:9px;font-weight:850;letter-spacing:.16em}.hpmw-cms-title{margin:0 0 10px;padding:0;background:none;color:#f5f7ff;font-size:17px;font-weight:800;line-height:1.35;letter-spacing:-.02em}.hpmw-cms-body{margin:0;color:#cbd6e6;font-size:13px;line-height:1.75;white-space:pre-wrap;overflow-wrap:anywhere}.hpmw-cms-meta{display:flex;margin:13px 0 0;padding-top:10px;border-top:1px solid #26364c;color:#91a4bd;font-size:10px;line-height:1.5}.hpmw-cms-pin{display:inline-flex;align-items:center;padding:4px 8px;border:1px solid #665b9a;border-radius:20px;background:#29264b;color:#e0d9ff;font-size:9px;font-weight:800;white-space:nowrap}.hpmw-cms-sync-status{margin:10px auto;padding:8px 12px;color:#ffd88a;font-size:11px;text-align:center}.hpmw-cms-section{margin:28px auto 10px;max-width:1100px;padding:0 12px}.hpmw-cms-section>h2{display:flex;align-items:center;gap:10px;margin:0 0 14px;padding:0 0 10px;border-bottom:1px solid #304158;background:none;color:#f1f5fc;font-size:19px;font-weight:850}.hpmw-cms-actions{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 16px}.hpmw-cms-actions button{padding:9px 14px;border:1px solid #34465d;border-radius:9px;background:#17263a;color:#dbe4f2;font-weight:700;cursor:pointer}.hpmw-cms-actions button.active{background:#29264b;border-color:#7865ee;color:#f4f0ff}.hpmw-cms-view{display:none}.hpmw-cms-view.active{display:block}#introView{max-height:none!important;height:auto!important;min-height:100vh;overflow:visible!important}body:has(#introView.active),html:has(#introView.active){height:auto!important;min-height:100%!important;overflow:auto!important}#introView.active{overflow:visible!important}#hpmwHomeNews{display:block!important;position:relative;clear:both;padding:24px 0 40px;visibility:visible!important;max-height:none!important}@media(max-width:600px){.hpmw-cms-card{padding:15px 15px 13px;margin:11px 0 14px}.hpmw-cms-title{font-size:15px}.hpmw-cms-body{font-size:12px}.hpmw-cms-section{padding:0 8px}}";
  document.head.append(s)}
  function createPages(){
   const shell=document.querySelector("main.shell");if(!shell)return null;
@@ -3135,37 +3135,4 @@ main.shell>.view#homeView::before{margin-top:16px!important}
 })();
 </script>
 
-<div id="hpmwPortalAdminLogin" hidden style="position:fixed;inset:0;z-index:10000;background:#050914ef;place-items:center;padding:20px">
- <form id="hpmwPortalAdminForm" style="width:min(420px,100%);padding:24px;border:1px solid #34445b;border-radius:16px;background:#101827;color:#edf2fa;box-shadow:0 20px 70px #000b">
-  <h2 style="margin:0 0 8px">Beheerder aanmelden</h2><p style="color:#91a0b5;font-size:13px">Log in met je bestaande Hpmagicworld-beheeraccount.</p>
-  <label style="display:block;margin:12px 0 5px">E-mailadres</label><input id="hpmwPortalAdminEmail" type="email" required autocomplete="username" style="width:100%;padding:11px;border:1px solid #35465b;border-radius:8px;background:#080e19;color:white">
-  <label style="display:block;margin:12px 0 5px">Wachtwoord</label><input id="hpmwPortalAdminPassword" type="password" required autocomplete="current-password" style="width:100%;padding:11px;border:1px solid #35465b;border-radius:8px;background:#080e19;color:white">
-  <p id="hpmwPortalAdminMessage" aria-live="polite" style="min-height:20px;color:#ffd88a;font-size:12px"></p>
-  <div style="display:flex;gap:8px;justify-content:flex-end"><button id="hpmwPortalAdminClose" type="button" class="btn">Sluiten</button><button type="submit" class="btn primary">Inloggen</button></div>
- </form>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script id="hpmw-portal-admin-auth">
-(()=> {
- const URL='https://vuaajsjjluwgqmneinds.supabase.co', KEY='sb_publishable_tto6sNxZPLv1VhUdMRlPHg_ptzg9odx';
- const db=window.supabase.createClient(URL,KEY);window.hpmwSupabase=db;
- const modal=document.getElementById('hpmwPortalAdminLogin'),form=document.getElementById('hpmwPortalAdminForm'),msg=document.getElementById('hpmwPortalAdminMessage');
- window.hpmwOpenAdminLogin=()=>{modal.hidden=false;modal.style.display='grid';};
- document.getElementById('hpmwPortalAdminClose').onclick=()=>{modal.hidden=true;modal.style.display='none';};
- async function apply(session){
-  document.body.classList.toggle('supabase-authenticated',!!session);
-  if(!session){window.hpmwSupabaseRole='member';document.body.dataset.supabaseRole='member';return;}
-  const {data,error}=await db.from('user_roles').select('role').eq('user_id',session.user.id).maybeSingle();
-  const role=!error&&data?.role?data.role:'member';
-  window.hpmwSupabaseRole=role;document.body.dataset.supabaseRole=role;
-  document.dispatchEvent(new CustomEvent('hpmw:supabase-role',{detail:{role}}));
-  if(role!=='admin'){msg.textContent='Dit account heeft geen beheerderrechten.';await db.auth.signOut();document.body.classList.remove('supabase-authenticated');return;}
-  modal.hidden=true;modal.style.display='none';
- }
- form.addEventListener('submit',async e=>{e.preventDefault();msg.textContent='Bezig met inloggen…';const {data,error}=await db.auth.signInWithPassword({email:document.getElementById('hpmwPortalAdminEmail').value.trim(),password:document.getElementById('hpmwPortalAdminPassword').value});if(error){msg.textContent=error.message;return;}await apply(data.session);});
- db.auth.onAuthStateChange((_event,session)=>{if(session)setTimeout(()=>apply(session),0);else apply(null);});
- db.auth.getSession().then(({data})=>{if(data.session)apply(data.session);});
-})();
-</script>
-<script src="https://slytherin01.github.io/muggle-ministry/tool/admin-cms.js?v=20261113-4" defer></script>
 </body></html>
