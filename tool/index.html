@@ -1207,6 +1207,7 @@ body:not(.supabase-authenticated)>:not(#supabaseAuthGate){display:none!important
  const SUPABASE_URL='https://vuaajsjjluwgqmneinds.supabase.co';
  const SUPABASE_KEY='sb_publishable_tto6sNxZPLv1VhUdMRlPHg_ptzg9odx';
  const client=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+ window.hpmwSupabase=client;
  const gate=document.getElementById('supabaseAuthGate'),form=document.getElementById('supabaseAuthForm'),email=document.getElementById('supabaseAuthEmail'),password=document.getElementById('supabaseAuthPassword'),submit=document.getElementById('supabaseAuthSubmit'),message=document.getElementById('supabaseAuthMessage'),logout=document.getElementById('supabaseLogout');
  let currentRole='member';
  const refreshRole=async(session)=>{
