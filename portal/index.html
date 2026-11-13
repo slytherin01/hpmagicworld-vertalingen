@@ -1119,24 +1119,25 @@ html:not([lang]),html[lang=""] .hpmw-translations-tool-link .hpmw-tool-nl{displa
 html[lang="en"] .hpmw-translations-tool-link .hpmw-tool-en{display:inline}
 html[lang="pt"] .hpmw-translations-tool-link .hpmw-tool-pt{display:inline}
 </style><style id="hpmw-banner-single-source">
-/* Banner passend binnen de portalbreedte; complete afbeelding zonder uitsnede. */
+/* Masthead exact gelijk aan de breedte van het hoofdblok; beeldverhouding behouden. */
 html body .hpmw-global-brandbar{
  display:block!important;position:relative!important;z-index:6!important;
- width:min(1180px,calc(100% - 36px))!important;
- height:clamp(150px,19vw,230px)!important;min-height:150px!important;max-height:230px!important;
- margin:14px auto 18px!important;padding:0!important;overflow:hidden!important;
+ width:100%!important;max-width:1180px!important;aspect-ratio:3.2/1!important;
+ height:auto!important;min-height:0!important;max-height:none!important;
+ margin:12px auto 18px!important;padding:0!important;overflow:hidden!important;
  box-sizing:border-box!important;background-color:#0c1727!important;
  background-image:url("https://i44.servimg.com/u/f44/11/48/74/42/banner10.png")!important;
- background-repeat:no-repeat!important;background-position:center center!important;background-size:contain!important;
- border:1px solid rgba(201,164,92,.34)!important;border-radius:12px!important;
+ background-repeat:no-repeat!important;background-position:center center!important;background-size:100% 100%!important;
+ border:1px solid rgba(125,157,190,.38)!important;border-radius:12px!important;
  box-shadow:0 8px 24px rgba(0,0,0,.28)!important
 }
 html body .hpmw-global-brandbar:before,html body .hpmw-global-brandbar:after{display:none!important;content:none!important}
 html body .hpmw-global-brandbar-inner,html body .hpmw-global-brandbar img,html body .hpmw-brand-ornament{display:none!important}
 html body #introView{padding-top:0!important;margin-top:0!important;max-height:none!important;overflow:visible!important}
 html body #introView .hpmw-portal-logo{display:none!important}
+#introView .hpmw-welcome-box h1{color:#fff!important;text-shadow:none!important}
 @media(max-width:650px){
- html body .hpmw-global-brandbar{width:calc(100% - 20px)!important;height:105px!important;min-height:105px!important;max-height:105px!important;margin:10px auto 12px!important;background-size:contain!important}
+ html body .hpmw-global-brandbar{width:100%!important;max-width:100%!important;aspect-ratio:3.2/1!important;margin:8px auto 12px!important;border-radius:0!important}
 }
 </style></head><body><header class="topbar luxury-nav-v2"><nav aria-label="Support navigatie" class="top-actions"><a class="lux-nav-item" href="https://testforumjoost.forumactie.com/forum" rel="noopener noreferrer" target="_blank"><span class="lux-nav-icon"><i class="fa-solid fa-comments"></i></span><span class="lux-nav-label">Forum</span></a><a class="lux-nav-item" href="https://testforumjoost.forumactie.com/h3-portaal" target="_self"><span class="lux-nav-icon"><i class="fa-solid fa-house"></i></span><span class="lux-nav-label">Portaal</span></a><button aria-expanded="false" aria-haspopup="dialog" class="lux-nav-item" id="faqLaunch" type="button"><span class="lux-nav-icon"><i class="fa-solid fa-circle-question"></i></span><span class="lux-nav-label">FAQ</span></button><button aria-expanded="false" class="lux-nav-item" id="ticketSupportLaunch" type="button"><span class="lux-nav-icon"><i class="fa-solid fa-ticket"></i></span><span class="lux-nav-label">Ticket Support</span></button>
 <a class="lux-nav-item" href="https://testforumjoost.forumactie.com/h13-dev-sorting-hat" id="sortingHatNav" rel="noopener noreferrer" target="_blank"><span class="lux-nav-icon"><i class="fa-solid fa-hat-wizard"></i></span><span class="lux-nav-label">De Sorteerhoed</span></a>
