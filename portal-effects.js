@@ -285,6 +285,10 @@
       if (signature !== lastConfig) {
         lastConfig = signature;
         buildEffects(cfg);
+      } else {
+        // The portal switches views dynamically; restore notices if the home view
+        // has been re-rendered since the last settings change.
+        renderHomeNotices(cfg);
       }
     } catch (error) {
       console.warn("[Hpmagicworld effects] Instellingen konden niet worden geladen.", error);
