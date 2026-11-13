@@ -3153,6 +3153,36 @@ s.textContent += "#introView{height:auto!important;min-height:0!important;max-he
   }
   /* Verwijder een eventueel door de Forumotion-header toegevoegde link naar de losse nieuwspagina. */
   document.querySelectorAll("a,button").forEach(item=>{if(item.textContent.replace(/\\s+/g," ").trim().toLowerCase()==="nieuwspagina" || /h6-beta-nieuws|beta-nieuws/i.test(item.getAttribute("href")||""))item.remove();});
+  /* Bouw de Home-pagina op als een Ministerie-overzicht met zijpanelen en centrale nieuwsfeed. */
+  if(home){
+   let grid=document.getElementById("hpmwHomeLayout");
+   if(!grid){
+    grid=el("div","hpmw-home-layout");grid.id="hpmwHomeLayout";
+    const left=el("aside","hpmw-home-side hpmw-home-left");
+    left.innerHTML='<section class="hpmw-side-card"><div class="hpmw-side-heading">Wegwijzer</div><a href="https://testforumjoost.forumactie.com/forum"><span>✦</span><b>Het Forum</b><small>Ontmoet andere dreuzels</small></a><button type="button" data-home-action="tickets"><span>✉</span><b>Ticket Support</b><small>Stel een vraag aan het team</small></button><button type="button" data-home-action="faq"><span>?</span><b>Veelgestelde vragen</b><small>Bekijk de hulp en uitleg</small></button></section><section class="hpmw-side-card hpmw-side-note"><div class="hpmw-side-heading">Het Ministerie</div><p>Een plek om elkaar te ontmoeten, hulp te vinden en je eigen plek binnen de magische gemeenschap te ontdekken.</p></section>';
+    const center=el("div","hpmw-home-main");center.id="hpmwHomeMain";
+    const right=el("aside","hpmw-home-side hpmw-home-right");
+    right.innerHTML='<section class="hpmw-side-card"><div class="hpmw-side-heading">Ontdek het Ministerie</div><div class="hpmw-feature-mark">✧</div><h3>Vind jouw afdeling</h3><p>Laat de Sorteerhoed ontdekken waar jij thuishoort.</p><a class="hpmw-side-cta" href="https://testforumjoost.forumactie.com/h13-dev-sorting-hat">Naar de Sorteerhoed <span>→</span></a></section><section class="hpmw-side-card hpmw-side-note"><div class="hpmw-side-heading">Samen houden we magie levend</div><p>Lees de berichten hieronder en blijf op de hoogte van wat er speelt in onze community.</p></section>';
+    grid.append(left,center,right);
+    const logo=home.querySelector(".hpmw-portal-logo");
+    if(logo)logo.insertAdjacentElement("afterend",grid);else home.prepend(grid);
+    const layout=home.querySelector(".intro-login-layout");
+    if(layout)center.append(layout);
+    const news=document.getElementById("hpmwHomeNews");
+    if(news)center.append(news);
+    grid.addEventListener("click",event=>{
+     const action=event.target.closest("[data-home-action]")?.dataset.homeAction;
+     if(action==="tickets")document.getElementById("ticketSupportLaunch")?.click();
+     if(action==="faq")document.getElementById("faqLaunch")?.click();
+    });
+   }else{
+    const center=grid.querySelector(".hpmw-home-main");
+    const layout=home.querySelector(".intro-login-layout");
+    const news=document.getElementById("hpmwHomeNews");
+    if(center&&layout&&layout.parentElement!==center)center.prepend(layout);
+    if(center&&news&&news.parentElement!==center)center.append(news);
+   }
+  }
   if(maintenance&&home){document.getElementById("hpmwCmsMaintenance")?.remove();if(maintenance.length){const n=el("section","hpmw-home-notice hpmw-home-maintenance");n.id="hpmwCmsMaintenance";n.append(el("div","hpmw-maintenance-head",maintenance[0].title),el("p","",maintenance[0].body),el("div","hpmw-maintenance-foot","Bericht van het beheerteam"));home.append(n)}}
   if(errors.length)status("Synchronisatieprobleem: "+errors.join(", ")+". Controleer de verbinding met Supabase.");else document.getElementById("hpmwCmsSyncStatus")?.remove();
  }
@@ -3174,4 +3204,41 @@ a[href*="h6-beta-nieuws"],a[href*="beta-nieuws"]{display:none!important}
 @media(max-width:700px){body #hpmwHomeNews{width:calc(100% - 16px)!important;margin:20px 8px 28px!important;padding:16px!important}body #introView .intro-static-card{width:calc(100% - 20px)!important;margin:14px auto 22px!important}}
 </style>
 
+<style id="hpmw-ministry-homepage-redesign">
+:root{--hm-gold:#d6b36c;--hm-gold-soft:#f0d99d;--hm-ink:#080f1b;--hm-panel:#111d2d;--hm-line:rgba(214,179,108,.35)}
+body{background:radial-gradient(ellipse at 50% 0%,#24354d 0,transparent 48%),linear-gradient(180deg,#080f1b,#0b1422 60%,#080f1b)!important}
+body #introView.active{display:block!important;height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;padding:0 0 56px!important}
+body #introView .hpmw-portal-logo{position:relative!important;top:auto!important;left:auto!important;transform:none!important;display:flex!important;align-items:center!important;justify-content:center!important;min-height:190px!important;margin:0 auto 22px!important;padding:22px 16px!important;background:radial-gradient(ellipse at center,rgba(190,143,63,.24),transparent 54%),linear-gradient(120deg,#111c2b,#182b40 48%,#101a29)!important;border-bottom:1px solid var(--hm-line)!important;border-top:1px solid rgba(255,255,255,.06)!important;box-shadow:0 14px 36px #0007!important}
+body #introView .hpmw-portal-logo:before,body #introView .hpmw-portal-logo:after{content:"✦　✧　✦"!important;position:absolute!important;top:50%!important;transform:translateY(-50%)!important;color:#d9b76d!important;opacity:.65!important;font-size:19px!important;letter-spacing:9px!important}
+body #introView .hpmw-portal-logo:before{left:clamp(12px,7vw,100px)!important}body #introView .hpmw-portal-logo:after{right:clamp(12px,7vw,100px)!important}
+body #introView .hpmw-portal-logo img{position:relative!important;z-index:1!important;display:block!important;width:auto!important;max-width:min(78vw,520px)!important;max-height:160px!important;object-fit:contain!important;filter:drop-shadow(0 8px 16px #0009)!important}
+body #introView .hpmw-home-layout{display:grid!important;grid-template-columns:minmax(190px,230px) minmax(0,1fr) minmax(190px,230px)!important;gap:20px!important;align-items:start!important;width:min(1480px,calc(100% - 40px))!important;margin:0 auto!important}
+body #introView .hpmw-home-main{min-width:0!important;display:flex!important;flex-direction:column!important;gap:22px!important}
+body #introView .hpmw-home-side{display:flex!important;flex-direction:column!important;gap:16px!important;min-width:0!important}
+body #introView .hpmw-side-card{position:relative!important;padding:17px 16px 18px!important;border:1px solid var(--hm-line)!important;border-radius:13px!important;background:linear-gradient(155deg,rgba(25,39,57,.98),rgba(12,21,34,.98))!important;box-shadow:0 12px 28px #0005!important;overflow:hidden!important}
+body #introView .hpmw-side-heading{margin:-17px -16px 14px!important;padding:11px 15px!important;background:linear-gradient(90deg,#29394b,#182638)!important;border-bottom:1px solid var(--hm-line)!important;color:var(--hm-gold-soft)!important;font-size:12px!important;font-weight:850!important;letter-spacing:.09em!important;text-transform:uppercase!important}
+body #introView .hpmw-side-card>a,body #introView .hpmw-side-card>button{display:grid!important;grid-template-columns:28px minmax(0,1fr)!important;column-gap:9px!important;align-items:center!important;width:100%!important;padding:10px 2px!important;border:0!important;border-bottom:1px solid rgba(255,255,255,.07)!important;background:transparent!important;color:#e9edf4!important;text-align:left!important;text-decoration:none!important;cursor:pointer!important}
+body #introView .hpmw-side-card>a:last-child,body #introView .hpmw-side-card>button:last-child{border-bottom:0!important}
+body #introView .hpmw-side-card>a>span:first-child,body #introView .hpmw-side-card>button>span:first-child{grid-row:span 2!important;display:grid!important;place-items:center!important;width:27px!important;height:27px!important;border:1px solid rgba(214,179,108,.35)!important;border-radius:8px!important;color:var(--hm-gold-soft)!important}
+body #introView .hpmw-side-card>a b,body #introView .hpmw-side-card>button b{font-size:12px!important}
+body #introView .hpmw-side-card>a small,body #introView .hpmw-side-card>button small{color:#9eacbd!important;font-size:10px!important}
+body #introView .hpmw-side-card p{margin:0!important;color:#b8c5d4!important;font-size:12px!important;line-height:1.7!important}
+body #introView .hpmw-feature-mark{text-align:center!important;color:var(--hm-gold-soft)!important;font-size:46px!important;line-height:1.3!important;text-shadow:0 0 24px #d6b36c55!important}
+body #introView .hpmw-side-card h3{margin:2px 0 8px!important;text-align:center!important;color:#f5e5bd!important;font-size:17px!important}
+body #introView .hpmw-side-cta{display:flex!important;justify-content:space-between!important;margin-top:14px!important;padding:10px 12px!important;border:1px solid rgba(214,179,108,.5)!important;border-radius:8px!important;background:#26354a!important;color:#f4d99c!important;font-size:11px!important;font-weight:800!important}
+body #introView .intro-login-layout{position:relative!important;top:auto!important;left:auto!important;right:auto!important;bottom:auto!important;transform:none!important;display:block!important;float:none!important;clear:both!important;width:100%!important;max-width:none!important;margin:0!important;padding:0!important}
+body #introView .intro-static-card{position:relative!important;top:auto!important;left:auto!important;right:auto!important;bottom:auto!important;transform:none!important;display:block!important;float:none!important;clear:both!important;width:100%!important;max-width:none!important;height:auto!important;max-height:none!important;overflow:visible!important;margin:0!important;border:1px solid var(--hm-line)!important;border-radius:15px!important;background:linear-gradient(145deg,#14253a,#0d1929)!important;box-shadow:0 16px 36px #0007!important}
+body #introView .intro-static-card .hpmw-welcome-box{padding:28px 28px 20px!important;text-align:left!important}
+body #introView .hpmw-welcome-box h1{margin:0 0 14px!important;color:#f4d99c!important;font-size:clamp(23px,2.5vw,31px)!important;line-height:1.2!important;text-align:left!important}
+body #introView .hpmw-welcome-box h1:after{content:""!important;display:block!important;width:54px!important;height:2px!important;margin-top:14px!important;background:linear-gradient(90deg,var(--hm-gold),transparent)!important}
+body #introView .hpmw-welcome-box p{max-width:65ch!important;margin:0!important;color:#d1d9e4!important;font-size:13px!important;line-height:1.8!important}
+body #introView .hpmw-entry-actions{margin:10px 26px 24px!important}
+body #hpmwHomeNews{width:100%!important;max-width:none!important;margin:0!important;padding:20px!important;border:1px solid var(--hm-line)!important;border-radius:15px!important;background:rgba(9,16,27,.94)!important;box-shadow:0 16px 36px #0007!important}
+body #hpmwHomeNews>h2{margin:0 0 17px!important;padding:0 0 13px!important;border-bottom:1px solid var(--hm-line)!important;color:#f4d99c!important;font-size:21px!important;letter-spacing:.02em!important}
+body #hpmwHomeNews .hpmw-cms-card{margin:0 0 13px!important;padding:19px 20px 16px!important;border:1px solid rgba(214,179,108,.25)!important;border-radius:10px!important;background:linear-gradient(135deg,#17263a,#101b2b)!important;box-shadow:0 8px 20px #0004!important}
+body #hpmwHomeNews .hpmw-cms-kicker{color:#d6b36c!important}body #hpmwHomeNews .hpmw-cms-title{color:#fff0ce!important;font-size:18px!important}body #hpmwHomeNews .hpmw-cms-body{color:#d0d9e5!important;font-size:13px!important;line-height:1.8!important}
+#hpNieuwsNav{display:none!important}
+@media(max-width:1050px){body #introView .hpmw-home-layout{grid-template-columns:190px minmax(0,1fr)!important;width:calc(100% - 28px)!important}body #introView .hpmw-home-right{grid-column:1/-1!important;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:700px){body #introView .hpmw-home-layout{display:flex!important;flex-direction:column!important;width:calc(100% - 20px)!important;gap:14px!important}body #introView .hpmw-home-main{order:0!important;width:100%!important}body #introView .hpmw-home-left{order:1!important;width:100%!important;display:grid!important;grid-template-columns:1fr!important}body #introView .hpmw-home-right{order:2!important;width:100%!important;display:grid!important;grid-template-columns:1fr!important}body #introView .hpmw-portal-logo{min-height:130px!important;margin-bottom:14px!important}body #introView .hpmw-portal-logo img{max-height:110px!important;max-width:72vw!important}body #introView .hpmw-portal-logo:before,body #introView .hpmw-portal-logo:after{display:none!important}body #introView .intro-static-card .hpmw-welcome-box{padding:22px 19px 16px!important}body #hpmwHomeNews{padding:15px!important}}
+</style>
 </body></html>
