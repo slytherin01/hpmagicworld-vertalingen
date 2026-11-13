@@ -159,5 +159,5 @@ async function addPermissionProfile(){
  window.hpmwInitAdminCms=init;
  window.hpmwOpenAdminCms=()=>{if(!$("#adminCmsView"))init();go("adminCmsView");load();loadTicketModerators();};
  document.addEventListener("DOMContentLoaded",()=>{init();setTimeout(addTransferPanel,0)});if(document.readyState!=="loading"){init();setTimeout(addTransferPanel,0)};
- document.addEventListener("hpmw:supabase-role",e=>{const role=e.detail?.role||"member";if($("#adminCmsView")){if(role==="support_moderator")document.querySelector('#cmsMainTabs [data-main-tab="ticketRights"]')?.click();else if(role==="news_poster")document.querySelector('#cmsMainTabs [data-main-tab="news"]')?.click();else{loadToolRoles();load()}}});
+ document.addEventListener("hpmw:supabase-role",e=>{const role=e.detail?.role||"member";if(!$("#adminCmsView"))init();if(["support_moderator","news_poster"].includes(role)){go("adminCmsView");if(role==="support_moderator")document.querySelector('#cmsMainTabs [data-main-tab="ticketRights"]')?.click();else document.querySelector('#cmsMainTabs [data-main-tab="news"]')?.click();}else if(role==="admin"||role==="administrator"){loadToolRoles();load()}});
 })();
