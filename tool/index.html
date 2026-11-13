@@ -3940,7 +3940,6 @@ html body.supabase-authenticated main.shell{
    byId("navTranslations").onclick=e=>{e.preventDefault();activateView("newTranslationsView")};
    Object.values(ids).forEach(id=>byId(id).addEventListener("change",()=>{}));
    byId("savePortalEffects").onclick=save;
-   byId("copyPortalEffectsSnippet").onclick=()=>copy("portalEffectsSnippet","portalEffectsCopyStatus2");
    byId("copyPortalEffectsSql").onclick=()=>copy("portalEffectsSql","portalEffectsSqlStatus");
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
