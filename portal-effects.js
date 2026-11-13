@@ -38,6 +38,13 @@
       #homeView .hpmw-home-maintenance p{margin:0;padding:14px 16px;white-space:pre-wrap;line-height:1.65;color:#333;background:#fff}
       #homeView .hpmw-home-maintenance .hpmw-maintenance-foot{padding:7px 14px;background:#f3f6f9;border-top:1px solid #d5e0e9;color:#718397;font-size:10px}
       @media(max-width:700px){#homeView .hpmw-home-notice{margin:10px 8px;padding:13px 14px}}
+      #introView .hpmw-home-notice{position:relative;max-width:840px;margin:14px auto 18px;padding:16px 22px;border-radius:14px;text-align:center;box-shadow:0 12px 32px #0005}
+      #introView .hpmw-home-newyear{border:1px solid #d6b86d;background:linear-gradient(135deg,#17243bf2,#33234bf2);color:#fff4cf;font:700 clamp(16px,2vw,22px)/1.5 Georgia,serif}
+      #introView .hpmw-home-maintenance{max-width:840px;margin:16px auto 20px;padding:0;border:1px solid #b8c8d8;border-radius:4px;background:#fff;color:#333;text-align:left;box-shadow:0 2px 8px #0002;overflow:hidden;font:13px/1.5 Verdana,Arial,sans-serif}
+      #introView .hpmw-home-maintenance .hpmw-maintenance-head{display:flex;align-items:center;gap:9px;padding:10px 14px;background:linear-gradient(#e8f1f8,#d5e4f0);border-bottom:1px solid #b8c8d8;color:#24506f;font-size:14px;font-weight:700}
+      #introView .hpmw-home-maintenance .hpmw-maintenance-head:before{content:"!";display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#3b6d91;color:#fff;font:bold 14px Arial}
+      #introView .hpmw-home-maintenance p{margin:0;padding:14px 16px;white-space:pre-wrap;line-height:1.65;color:#333;background:#fff}
+      #introView .hpmw-home-maintenance .hpmw-maintenance-foot{padding:7px 14px;background:#f3f6f9;border-top:1px solid #d5e0e9;color:#718397;font-size:10px}
       #${LAYER_ID} .hpmw-fireworks-host{position:absolute;inset:0;z-index:0}
       #${LAYER_ID} .hpmw-fireworks-host canvas{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;opacity:.95}
       #${LAYER_ID} .hpmw-flake{position:absolute;top:-18px;border-radius:50%;background:#fff;box-shadow:0 0 4px 1px #ffffffaa;animation:hpmw-snow-fall linear infinite;will-change:transform}
