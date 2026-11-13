@@ -37,7 +37,12 @@
   $("#roleSave").onclick=saveToolRole;
   $("#cmsForm").onsubmit=save;
   const tabs=$("#cmsTabs");Object.entries(kinds).forEach(([k,v])=>{const b=document.createElement("button");b.textContent=v;b.dataset.kind=k;b.onclick=()=>selectKind(k);tabs.append(b)});
-  selectKind("news");loadToolRoles();
+  const role=document.body.dataset.supabaseRole||"member";
+  const tabButtons=[...document.querySelectorAll("#cmsMainTabs [data-main-tab]")];
+  if(role==="support_moderator"){tabButtons.forEach(b=>b.hidden=b.dataset.mainTab!=="ticketRights");document.querySelector('#cmsMainTabs [data-main-tab="ticketRights"]')?.click();$("#roleList")?.closest(".cms-panel")?.setAttribute("hidden","");}
+  else if(role==="news_poster"){tabButtons.forEach(b=>b.hidden=b.dataset.mainTab!=="news");document.querySelector('#cmsMainTabs [data-main-tab="news"]')?.click();$("#roleList")?.closest(".cms-panel")?.setAttribute("hidden","");}
+  else {selectKind("news");loadToolRoles();}
+
  }
  let kind="maintenance",editing=null;
  function reset(){editing=null;$("#cmsForm").reset();$("#cmsOrder").value=0;$("#cmsPinned").checked=false;$("#cmsPinWrap").style.display=kind==="news"?"block":"none";$("#cmsFormTitle").textContent="Nieuw item";}
@@ -154,5 +159,5 @@ async function addPermissionProfile(){
  window.hpmwInitAdminCms=init;
  window.hpmwOpenAdminCms=()=>{if(!$("#adminCmsView"))init();go("adminCmsView");load();loadTicketModerators();};
  document.addEventListener("DOMContentLoaded",()=>{init();setTimeout(addTransferPanel,0)});if(document.readyState!=="loading"){init();setTimeout(addTransferPanel,0)};
- document.addEventListener("hpmw:supabase-role",e=>{const ok=e.detail?.role==="admin";document.querySelectorAll(".hpmw-nav-link").forEach(n=>n.hidden=!ok);if($("#adminCmsView")&&ok){load();loadTicketModerators()}});
+ document.addEventListener("hpmw:supabase-role",e=>{const role=e.detail?.role||"member";if($("#adminCmsView")){if(role==="support_moderator")document.querySelector('#cmsMainTabs [data-main-tab="ticketRights"]')?.click();else if(role==="news_poster")document.querySelector('#cmsMainTabs [data-main-tab="news"]')?.click();else{loadToolRoles();load()}}});
 })();
