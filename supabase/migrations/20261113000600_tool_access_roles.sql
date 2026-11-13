@@ -35,4 +35,22 @@ create policy "News posters manage news" on public.admin_content for all to auth
 insert into public.tool_access_roles(user_id,role)
 select user_id,'administrator' from public.user_roles where role='admin'
 on conflict(user_id) do update set role='administrator';
+
+-- Administrator-role grants all existing CMS permissions as well.
+create or replace function public.has_admin_permission(permission_name text)
+returns boolean language plpgsql stable security definer
+set search_path = public
+as $
+declare allowed boolean := false;
+begin
+  if public.is_tool_administrator() then return true; end if;
+  if exists (select 1 from public.user_roles r where r.user_id=auth.uid() and r.role='admin') then return true; end if;
+  execute format('select coalesce((select %I from public.admin_permissions where user_id=$1), false)', permission_name)
+    into allowed using auth.uid();
+  return coalesce(allowed,false);
+end;
+$;
+revoke all on function public.has_admin_permission(text) from public;
+grant execute on function public.has_admin_permission(text) to authenticated;
+
 commit;
