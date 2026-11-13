@@ -3992,6 +3992,62 @@ html body.supabase-authenticated main.shell{
  new MutationObserver(scan).observe(document.querySelector("main.shell")||document.body,{childList:true,subtree:true});
 })();
 </script>
+
+<style id="hpmw-compact-admin-ui">
+#adminTopbar .top-actions{gap:7px}
+#adminTopbar #navSettings{display:none!important}
+#adminTopbar #navTranslations{display:none!important}
+#newAdminDashboard .hpmw-admin-intro{padding:18px 20px!important;margin:0 0 14px!important}
+#newAdminDashboard .hpmw-admin-intro>p,#newAdminDashboard .hpmw-admin-intro>h2{display:none!important}
+#newAdminDashboard .hpmw-admin-intro h1{font-size:clamp(22px,3vw,29px)!important;margin:4px 0!important}
+#newAdminDashboard .hpmw-welcome-copy{display:none!important}
+#newAdminDashboard .dash-grid{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(210px,1fr))!important;gap:12px!important}
+#newAdminDashboard .dash-card{min-height:0!important;padding:17px!important}
+#newAdminDashboard .dash-card p{display:none!important}
+#newAdminDashboard .dash-card h2{font-size:15px!important;margin:8px 0 12px!important}
+#newAdminDashboard .dash-card .btn{width:100%;justify-content:center}
+.hpmw-admin-shortcuts{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin:0 0 16px}
+.hpmw-admin-shortcuts button{display:flex;align-items:center;gap:11px;min-height:58px;padding:12px 14px;border:1px solid #34465b;border-radius:12px;background:linear-gradient(145deg,#17263a,#111b2b);color:#e7eef9;text-align:left;font-weight:750}
+.hpmw-admin-shortcuts button:hover{border-color:#9587ff;background:#222345}
+.hpmw-admin-shortcuts i{width:30px;height:30px;display:grid;place-items:center;border-radius:9px;background:#29264b;color:#c3b9ff}
+#newSettingsView .portal-effect-setting{padding:12px 4px!important}
+#newSettingsView .portal-effect-setting p{display:none!important}
+#newSettingsView .panel{padding:18px!important}
+#newSettingsView .page-head .subtitle{display:none!important}
+@media(max-width:650px){#newAdminDashboard .dash-grid{grid-template-columns:1fr 1fr!important}.hpmw-admin-shortcuts{grid-template-columns:1fr 1fr}}
+</style>
+<script id="hpmw-compact-admin-navigation">
+(()=> {
+ const $=s=>document.querySelector(s);
+ function show(id){document.querySelectorAll(".view").forEach(v=>{v.classList.remove("active");v.style.setProperty("display","none","important")});const v=$("#"+id);if(v){v.classList.add("active");v.style.setProperty("display","block","important");v.style.setProperty("visibility","visible","important");window.scrollTo({top:0,behavior:"smooth"})}}
+ function setup(){
+  const nav=$(".top-actions");if(!nav||$("#navAdminHome"))return;
+  const admin=document.createElement("button");admin.type="button";admin.id="navAdminHome";admin.className="lux-nav-item hpmw-nav-link";admin.innerHTML='<span class="lux-nav-icon"><i class="fa-solid fa-grid-2"></i></span><span>Admin</span>';admin.onclick=()=>show("newAdminDashboard");
+  nav.insertBefore(admin,nav.querySelector("#adminSignedIn"));
+  const home=$("#newAdminDashboard");if(!home)return;
+  const intro=home.querySelector(".hpmw-admin-intro");
+  const shortcuts=document.createElement("div");shortcuts.className="hpmw-admin-shortcuts";
+  const items=[
+   ["fa-sliders","Instellingen","newSettingsView"],
+   ["fa-language","Vertalingen","newTranslationsView"],
+   ["fa-ticket","Ticketbeheer","adminView"],
+   ["fa-screwdriver-wrench","CMS & rechten","adminCmsView"]
+  ];
+  items.forEach(([ico,label,id])=>{
+   const b=document.createElement("button");b.type="button";b.innerHTML='<i class="fa-solid '+ico+'"></i><span>'+label+'</span>';
+   b.onclick=()=>{if(id==="adminCmsView"&&!$("#adminCmsView")){const launch=$("#openAdminCms");if(launch)launch.click();else return;}show(id);if(id==="adminCmsView"){const first=$("#cmsTabs button");if(first)first.click();} };
+   shortcuts.append(b);
+  });
+  if(intro)intro.insertAdjacentElement("afterend",shortcuts);else home.insertBefore(shortcuts,home.firstChild);
+  const settingsBack=$("#settingsBack");if(settingsBack){settingsBack.textContent="← Admin";settingsBack.onclick=()=>show("newAdminDashboard")}
+  const translationBack=$("#translationBack");if(translationBack){translationBack.textContent="← Admin";translationBack.onclick=()=>show("newAdminDashboard")}
+  const adminBack=$("#adminBack");if(adminBack){adminBack.textContent="← Admin";adminBack.onclick=()=>show("newAdminDashboard")}
+  document.addEventListener("hpmw:supabase-role",e=>{const ok=e.detail?.role==="admin";admin.hidden=!ok;});
+  const role=document.body.dataset.supabaseRole;admin.hidden=role!=="admin";
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",setup,{once:true});else setup();
+})();
+</script>
 </body>
 </html>
 <style id="hpmw-force-pt-editor-visible">
