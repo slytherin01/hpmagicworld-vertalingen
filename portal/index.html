@@ -3410,4 +3410,27 @@ html body #introView .intro-login-layout{margin-top:0!important;padding-top:0!im
  html body .hpmw-global-brandbar{height:clamp(70px,16vw,100px)!important;max-height:100px!important;margin-bottom:8px!important}
 }
 </style>
+<style id="hpmw-individual-ticket-page-banners">
+/* Eigen headerafbeeldingen voor Mijn Tickets en Ticketbeheer. */
+main.shell>.view#myTicketsView::before,
+main.shell>.view#adminView::before{
+ content:""!important;display:block!important;width:100%!important;
+ height:clamp(105px,13vw,155px)!important;min-height:0!important;
+ margin:0 0 14px!important;padding:0!important;
+ background-repeat:no-repeat!important;background-position:center center!important;
+ background-size:contain!important;border:0!important;box-shadow:none!important;
+}
+main.shell>.view#myTicketsView::before{
+ background-image:url("https://i44.servimg.com/u/f44/11/48/74/42/mijnti10.png")!important;
+}
+main.shell>.view#adminView::before{
+ background-image:url("https://i44.servimg.com/u/f44/11/48/74/42/ticket12.png")!important;
+}
+@media(max-width:600px){
+ main.shell>.view#myTicketsView::before,
+ main.shell>.view#adminView::before{
+  height:clamp(82px,20vw,118px)!important;margin-bottom:10px!important;
+ }
+}
+</style>
 </body></html>
