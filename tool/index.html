@@ -3997,12 +3997,12 @@ html body.supabase-authenticated main.shell{
 #adminTopbar .top-actions{gap:7px}
 #adminTopbar #navSettings{display:none!important}
 #adminTopbar #navTranslations{display:none!important}
-#newAdminDashboard .hpmw-admin-intro{padding:18px 20px!important;margin:0 0 14px!important}
+#newAdminDashboard .hpmw-admin-intro{padding:20px 24px!important;margin:8px 0 18px!important}
 #newAdminDashboard .hpmw-admin-intro>p,#newAdminDashboard .hpmw-admin-intro>h2{display:none!important}
-#newAdminDashboard .hpmw-admin-intro h1{font-size:clamp(22px,3vw,29px)!important;margin:4px 0!important}
+#newAdminDashboard .hpmw-admin-intro h1{font-size:clamp(24px,3vw,32px)!important;margin:4px 0!important}
 #newAdminDashboard .hpmw-welcome-copy{display:none!important}
-#newAdminDashboard .dash-grid{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(210px,1fr))!important;gap:12px!important}
-#newAdminDashboard .dash-card{min-height:0!important;padding:17px!important}
+#newAdminDashboard .dash-grid{display:none!important}
+#newAdminDashboard>.hpmw-view-quicknav{display:none!important}
 #newAdminDashboard .dash-card p{display:none!important}
 #newAdminDashboard .dash-card h2{font-size:15px!important;margin:8px 0 12px!important}
 #newAdminDashboard .dash-card .btn{width:100%;justify-content:center}
@@ -4021,10 +4021,11 @@ html body.supabase-authenticated main.shell{
  const $=s=>document.querySelector(s);
  function show(id){document.querySelectorAll(".view").forEach(v=>{v.classList.remove("active");v.style.setProperty("display","none","important")});const v=$("#"+id);if(v){v.classList.add("active");v.style.setProperty("display","block","important");v.style.setProperty("visibility","visible","important");window.scrollTo({top:0,behavior:"smooth"})}}
  function setup(){
-  const nav=$(".top-actions");if(!nav||$("#navAdminHome"))return;
-  const admin=document.createElement("button");admin.type="button";admin.id="navAdminHome";admin.className="lux-nav-item hpmw-nav-link";admin.innerHTML='<span class="lux-nav-icon"><i class="fa-solid fa-grid-2"></i></span><span>Admin</span>';admin.onclick=()=>show("newAdminDashboard");
-  nav.insertBefore(admin,nav.querySelector("#adminSignedIn"));
+  const nav=$(".top-actions");
   const home=$("#newAdminDashboard");if(!home)return;
+  /* Hergebruik de bestaande Admin-knop in plaats van een duplicaat toe te voegen. */
+  const admin=[...(nav?.querySelectorAll("button")||[])].find(b=>b.textContent.trim()==="Admin");
+  if(admin){admin.id="navAdminHome";admin.onclick=()=>show("newAdminDashboard");}
   const intro=home.querySelector(".hpmw-admin-intro");
   const shortcuts=document.createElement("div");shortcuts.className="hpmw-admin-shortcuts";
   const items=[
@@ -4042,8 +4043,8 @@ html body.supabase-authenticated main.shell{
   const settingsBack=$("#settingsBack");if(settingsBack){settingsBack.textContent="← Admin";settingsBack.onclick=()=>show("newAdminDashboard")}
   const translationBack=$("#translationBack");if(translationBack){translationBack.textContent="← Admin";translationBack.onclick=()=>show("newAdminDashboard")}
   const adminBack=$("#adminBack");if(adminBack){adminBack.textContent="← Admin";adminBack.onclick=()=>show("newAdminDashboard")}
-  document.addEventListener("hpmw:supabase-role",e=>{const ok=e.detail?.role==="admin";admin.hidden=!ok;});
-  const role=document.body.dataset.supabaseRole;admin.hidden=role!=="admin";
+  document.addEventListener("hpmw:supabase-role",e=>{const ok=e.detail?.role==="admin";if(admin)admin.hidden=!ok;});
+  const role=document.body.dataset.supabaseRole;if(admin)admin.hidden=role!=="admin";
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",setup,{once:true});else setup();
 })();
