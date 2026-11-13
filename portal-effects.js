@@ -32,9 +32,11 @@
       #${LAYER_ID} .hpmw-newyear-message{position:fixed;top:clamp(18px,5vh,54px);left:50%;transform:translateX(-50%);width:max-content;max-width:92vw;padding:13px 22px;border:1px solid #f4d27a;border-radius:14px;background:linear-gradient(135deg,#17243beF,#33234beF);color:#fff8dc;text-align:center;font:800 clamp(16px,2.4vw,25px)/1.35 Georgia,serif;letter-spacing:.02em;text-shadow:0 2px 10px #000;box-shadow:0 8px 28px #0008,0 0 22px #f7d47744;backdrop-filter:blur(8px);z-index:2}
       #homeView .hpmw-home-notice{position:relative;max-width:1100px;margin:14px auto 18px;padding:16px 22px;border-radius:14px;text-align:center;box-shadow:0 12px 32px #0005}
       #homeView .hpmw-home-newyear{border:1px solid #d6b86d;background:linear-gradient(135deg,#17243bf2,#33234bf2);color:#fff4cf;font:700 clamp(16px,2vw,22px)/1.5 Georgia,serif}
-      #homeView .hpmw-home-maintenance{border:1px solid #d9a441;background:linear-gradient(135deg,#382b16f5,#211b13f5);color:#ffedc4;text-align:left}
-      #homeView .hpmw-home-maintenance strong{display:block;margin-bottom:6px;color:#ffd477;font-size:16px}
-      #homeView .hpmw-home-maintenance p{margin:0;white-space:pre-wrap;line-height:1.6}
+      #homeView .hpmw-home-maintenance{max-width:1100px;margin:16px auto 20px;padding:0;border:1px solid #b8c8d8;border-radius:4px;background:#fff;color:#333;text-align:left;box-shadow:0 2px 8px #0002;overflow:hidden;font:13px/1.5 Verdana,Arial,sans-serif}
+      #homeView .hpmw-home-maintenance .hpmw-maintenance-head{display:flex;align-items:center;gap:9px;padding:10px 14px;background:linear-gradient(#e8f1f8,#d5e4f0);border-bottom:1px solid #b8c8d8;color:#24506f;font-size:14px;font-weight:700}
+      #homeView .hpmw-home-maintenance .hpmw-maintenance-head:before{content:"!";display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#3b6d91;color:#fff;font:bold 14px Arial}
+      #homeView .hpmw-home-maintenance p{margin:0;padding:14px 16px;white-space:pre-wrap;line-height:1.65;color:#333;background:#fff}
+      #homeView .hpmw-home-maintenance .hpmw-maintenance-foot{padding:7px 14px;background:#f3f6f9;border-top:1px solid #d5e0e9;color:#718397;font-size:10px}
       @media(max-width:700px){#homeView .hpmw-home-notice{margin:10px 8px;padding:13px 14px}}
       #${LAYER_ID} .hpmw-fireworks-host{position:absolute;inset:0;z-index:0}
       #${LAYER_ID} .hpmw-fireworks-host canvas{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;opacity:.95}
@@ -155,25 +157,29 @@
     if (cfg.maintenance_enabled && cfg.maintenance_message) {
       const notice = document.createElement("section");
       notice.className = "hpmw-home-notice hpmw-home-maintenance";
-      const heading = document.createElement("strong");
-      heading.textContent = "⚠️ Onderhoudsmelding";
+      const heading = document.createElement("div");
+      heading.className = "hpmw-maintenance-head";
+      heading.textContent = "Onderhoud en mededelingen";
       const body = document.createElement("p");
       body.textContent = cfg.maintenance_message;
-      notice.append(heading, body);
+      const foot = document.createElement("div");
+      foot.className = "hpmw-maintenance-foot";
+      foot.textContent = "Bericht van het beheerteam";
+      notice.append(heading, body, foot);
       anchor.insertAdjacentElement("afterend", notice);
     }
   }
 
   const buildEffects = cfg => {
     removeEffects();
-    if (reducedMotion) return;
     addStyle();
+    renderHomeNotices(cfg);
+    if (reducedMotion) return;
     const layer = document.createElement("div");
     layer.id = LAYER_ID;
     layer.setAttribute("aria-hidden", "true");
     document.body.appendChild(layer);
     startWeather(layer);
-    renderHomeNotices(cfg);
 
     if (cfg.snow) {
       for (let i = 0; i < 105; i++) {
