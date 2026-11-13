@@ -1133,7 +1133,7 @@ html[lang="en"] .hpmw-translations-tool-link .hpmw-tool-en{display:inline}
 html[lang="pt"] .hpmw-translations-tool-link .hpmw-tool-pt{display:inline}
 </style></head><body><header class="topbar luxury-nav-v2"><nav aria-label="Support navigatie" class="top-actions"><a class="lux-nav-item" href="https://testforumjoost.forumactie.com/forum" rel="noopener noreferrer" target="_blank"><span class="lux-nav-icon"><i class="fa-solid fa-comments"></i></span><span class="lux-nav-label">Forum</span></a><a class="lux-nav-item" href="https://testforumjoost.forumactie.com/h3-portaal" target="_self"><span class="lux-nav-icon"><i class="fa-solid fa-house"></i></span><span class="lux-nav-label">Portaal</span></a><button aria-expanded="false" aria-haspopup="dialog" class="lux-nav-item" id="faqLaunch" type="button"><span class="lux-nav-icon"><i class="fa-solid fa-circle-question"></i></span><span class="lux-nav-label">FAQ</span></button><button aria-expanded="false" class="lux-nav-item" id="ticketSupportLaunch" type="button"><span class="lux-nav-icon"><i class="fa-solid fa-ticket"></i></span><span class="lux-nav-label">Ticket Support</span></button>
 <a class="lux-nav-item" href="https://testforumjoost.forumactie.com/h13-dev-sorting-hat" id="sortingHatNav" rel="noopener noreferrer" target="_blank"><span class="lux-nav-icon"><i class="fa-solid fa-hat-wizard"></i></span><span class="lux-nav-label">De Sorteerhoed</span></a>
-<button class="lux-nav-item" id="adminLaunch" type="button" style="display:none"><span class="lux-nav-icon"><i class="fa-solid fa-shield-halved"></i></span><span class="lux-nav-label">Ticketbeheer</span></button><label aria-label="Taal kiezen" class="hpmw-language-wrap" for="hpmwLanguage"><i aria-hidden="true" class="fa-solid fa-language"></i><select id="hpmwLanguage"><option selected="" value="nl">Nederlands</option><option value="en">English</option><option value="pt">Português</option></select></label><button class="lux-nav-item" data-extracted-style="2" id="myTicketsLaunch" style="display:none"><span class="lux-nav-icon"><i class="fa-solid fa-envelope"></i></span><span class="lux-nav-label">Mijn tickets</span><b class="count-badge" id="myTicketsCount">0</b></button><a class="lux-nav-item lux-user" href="/login" id="accountLink"><span class="lux-nav-icon"><i class="fa-solid fa-user"></i></span><span class="lux-nav-usertext"><small>INGELOGD ALS</small><strong id="username">Gast</strong></span></a></nav></header><div class="hpmw-global-brandbar" role="banner"><div class="hpmw-global-brandbar-inner"><img src="https://i44.servimg.com/u/f44/11/48/74/42/banner10.png" alt="Muggle Ministry — A safer world for all Muggles"></div></div><main class="shell"><section class="view active" id="introView">
+<button class="lux-nav-item" id="adminLaunch" type="button" style="display:none"><span class="lux-nav-icon"><i class="fa-solid fa-shield-halved"></i></span><span class="lux-nav-label">Ticketbeheer</span></button><label aria-label="Taal kiezen" class="hpmw-language-wrap" for="hpmwLanguage"><i aria-hidden="true" class="fa-solid fa-language"></i><select id="hpmwLanguage"><option selected="" value="nl">Nederlands</option><option value="en">English</option><option value="pt">Português</option></select></label><button class="lux-nav-item" data-extracted-style="2" id="myTicketsLaunch" style="display:none"><span class="lux-nav-icon"><i class="fa-solid fa-envelope"></i></span><span class="lux-nav-label">Mijn tickets</span><b class="count-badge" id="myTicketsCount">0</b></button><a class="lux-nav-item lux-user" href="/login" id="accountLink"><span class="lux-nav-icon"><i class="fa-solid fa-user"></i></span><span class="lux-nav-usertext"><small>INGELOGD ALS</small><strong id="username">Gast</strong></span></a></nav></header><div class="hpmw-global-brandbar" role="banner" aria-label="Muggle Ministry"></div><main class="shell"><section class="view active" id="introView">
 <!-- EIGEN AFBEELDING VOOR DEZE PAGINA: vervang IMAGE_URL_HIER en LINK_URL_HIER.
 <a href="LINK_URL_HIER"><img src="IMAGE_URL_HIER" alt="Beschrijving afbeelding" style="max-width:100%;height:auto;display:block;margin:0 auto;"></a>
 -->
@@ -3290,5 +3290,51 @@ main.shell>.view::before,#introView::before,#homeView::before,#formView::before,
 #hpmwHomeLayout .hpmw-side-heading i,#hpmwHomeNews>h2:before{font-family:"Font Awesome 6 Free"!important;font-style:normal!important}
 #hpmwHomeLayout .hpmw-link-icon{font-family:"Font Awesome 6 Free"!important}
 @media(max-width:650px){.hpmw-global-brandbar{margin-bottom:14px!important}}
+</style>
+<style id="hpmw-banner-definitive-render">
+/* Definitieve banner: één achtergrondbeeld, geen losse logo's, sterren of pseudo-banners. */
+.hpmw-global-brandbar{
+ display:block!important;position:relative!important;z-index:6!important;
+ width:100%!important;height:auto!important;aspect-ratio:2048/640!important;
+ min-height:0!important;margin:0 0 22px!important;padding:0!important;
+ overflow:hidden!important;box-sizing:border-box!important;
+ background-color:#080f1b!important;
+ background-image:url("https://i44.servimg.com/u/f44/11/48/74/42/banner10.png")!important;
+ background-repeat:no-repeat!important;background-position:center center!important;
+ background-size:100% 100%!important;border:0!important;
+ border-bottom:1px solid rgba(214,179,108,.6)!important;
+ box-shadow:0 12px 30px rgba(0,0,0,.45)!important;
+}
+.hpmw-global-brandbar-inner,.hpmw-global-brandbar img,.hpmw-brand-ornament{display:none!important}
+#introView .hpmw-portal-logo,#introView .hpmw-portal-logo img{display:none!important}
+main.shell>.view::before,
+#introView::before,#homeView::before,#formView::before,
+#myTicketsView::before,#adminView::before,#faqView::before{
+ content:none!important;display:none!important;visibility:hidden!important;
+ width:0!important;height:0!important;margin:0!important;padding:0!important;
+ background-image:none!important;box-shadow:none!important;border:0!important;
+ position:static!important;transform:none!important;
+}
+#hpmwHomeLayout .hpmw-side-cta{
+ display:flex!important;align-items:center!important;justify-content:space-between!important;
+ flex-direction:row!important;flex-wrap:nowrap!important;gap:10px!important;
+ width:100%!important;min-width:0!important;box-sizing:border-box!important;
+}
+#hpmwHomeLayout .hpmw-side-cta>span{display:inline-flex!important;align-items:center!important;gap:8px!important;min-width:0!important;flex:1 1 auto!important}
+#hpmwHomeLayout .hpmw-side-cta>i{display:inline-block!important;flex:0 0 auto!important;margin-left:auto!important}
+#hpmwHomeLayout .hpmw-side-heading>i,
+#hpmwHomeLayout .hpmw-link-icon i,
+#hpmwHomeLayout .hpmw-feature-mark i,
+#hpmwHomeLayout .hpmw-side-cta i,
+#hpmwHomeNews>h2:before{
+ font-family:"Font Awesome 6 Free"!important;font-style:normal!important;
+}
+#hpmwHomeLayout .hpmw-side-heading>i,
+#hpmwHomeLayout .hpmw-link-icon i,
+#hpmwHomeLayout .hpmw-feature-mark i,
+#hpmwHomeLayout .hpmw-side-cta i{font-weight:900!important}
+@media(max-width:650px){
+ .hpmw-global-brandbar{aspect-ratio:2048/640!important;margin-bottom:14px!important}
+}
 </style>
 </body></html>
