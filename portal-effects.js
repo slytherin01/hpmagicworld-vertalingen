@@ -142,11 +142,16 @@
 
   function renderHomeNotices(cfg) {
     const home = document.getElementById("homeView");
-    if (!home) return;
-    home.querySelectorAll(".hpmw-home-notice").forEach(node => node.remove());
-    const hero = home.querySelector(".support-hero");
-    if (!hero) return;
-    let anchor = hero;
+    const landing = document.getElementById("introView");
+    [home, landing].filter(Boolean).forEach(view => {
+      view.querySelectorAll(".hpmw-home-notice").forEach(node => node.remove());
+    });
+    // The visible homepage for signed-in members is introView; homeView is
+    // the separate Ticket Support dashboard. Support both homepage layouts.
+    const hero = home?.querySelector(".support-hero");
+    const welcome = landing?.querySelector(".center-message.hpmw-welcome-box");
+    let anchor = hero || welcome;
+    if (!anchor) return;
     if (cfg.greeting && cfg.year) {
       const greeting = document.createElement("div");
       greeting.className = "hpmw-home-notice hpmw-home-newyear";
