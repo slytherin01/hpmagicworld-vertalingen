@@ -18,6 +18,8 @@
     document.getElementById(LAYER_ID)?.remove();
     document.getElementById(STYLE_ID)?.remove();
     if (refreshTimer) { clearInterval(refreshTimer); refreshTimer = null; }
+    if (weatherFetchTimer) { clearInterval(weatherFetchTimer); weatherFetchTimer = null; }
+    if (weatherFrame) { cancelAnimationFrame(weatherFrame); weatherFrame = null; }
     if (fireworksInstance) { try { fireworksInstance.stop(true); } catch (_) {} fireworksInstance = null; }
   };
 
@@ -50,14 +52,95 @@
     document.head.appendChild(style);
   };
 
+
+  // Live weer boven Amsterdam; Open-Meteo levert weer_code volgens WMO.
+  const WEATHER_URL = "https://api.open-meteo.com/v1/forecast?latitude=52.3676&longitude=4.9041&current=temperature_2m,precipitation,rain,showers,snowfall,weather_code,wind_speed_10m&timezone=Europe%2FAmsterdam";
+  let weatherState = { code: 1, wind: 8, intensity: 0 };
+  let weatherFetchTimer = null;
+  let weatherFrame = null;
+
+  async function updateLiveWeather() {
+    try {
+      const response = await fetch(WEATHER_URL, { cache: "no-store" });
+      if (!response.ok) throw new Error("HTTP " + response.status);
+      const data = await response.json();
+      const c = data.current || {};
+      weatherState = {
+        code: Number(c.weather_code ?? 1),
+        wind: Number(c.wind_speed_10m ?? 8),
+        intensity: Math.max(Number(c.precipitation || 0), Number(c.rain || 0), Number(c.showers || 0), Number(c.snowfall || 0))
+      };
+      drawWeather();
+    } catch (e) {
+      console.warn("[Hpmagicworld weather] Live weer kon niet worden opgehaald.", e);
+    }
+  }
+
+  function drawWeather() {
+    const canvas = document.getElementById("hpmw-live-weather");
+    if (!canvas || reducedMotion) return;
+    const ctx = canvas.getContext("2d");
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    let w = canvas.clientWidth, h = canvas.clientHeight;
+    if (!w || !h) return;
+    canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const code = weatherState.code;
+    const storm = code >= 95;
+    const hail = code === 96 || code === 99 || code === 66 || code === 67;
+    const snow = (code >= 71 && code <= 77) || code === 85 || code === 86;
+    const rain = (code >= 51 && code <= 67) || (code >= 80 && code <= 82) || storm;
+    const fog = code === 45 || code === 48;
+    const sunny = code <= 1;
+    const count = rain ? Math.min(190, 65 + weatherState.intensity * 16) : snow ? 105 : hail ? 90 : 0;
+    const t = performance.now() / 1000;
+    ctx.clearRect(0, 0, w, h);
+    if (sunny) {
+      const g = ctx.createRadialGradient(w*.82,h*.12,5,w*.82,h*.12,Math.max(w,h)*.62);
+      g.addColorStop(0,"rgba(255,221,120,.16)"); g.addColorStop(1,"rgba(255,221,120,0)");
+      ctx.fillStyle=g; ctx.fillRect(0,0,w,h);
+    }
+    if (fog) {
+      for(let i=0;i<5;i++){ctx.fillStyle="rgba(205,218,225,.10)";ctx.fillRect(0,((i*23+t*5)%125)/100*h,w,34);}
+    }
+    if (code >= 2 && code <= 3) {
+      ctx.fillStyle="rgba(190,205,220,.07)";ctx.beginPath();ctx.ellipse(w*.72,h*.16,150,35,0,0,Math.PI*2);ctx.fill();
+    }
+    for(let i=0;i<count;i++){
+      const x=(i*83.17 + (rain ? t*(weatherState.wind+24)*5 : t*8))%(w+40)-20;
+      const y=(i*47.73 + t*(snow?24:hail?260:620))%(h+30)-15;
+      if(snow){ctx.fillStyle="rgba(255,255,255,.82)";ctx.beginPath();ctx.arc(x+Math.sin(t+i)*9,y,1.5+(i%4)*.55,0,Math.PI*2);ctx.fill();}
+      else if(hail){ctx.fillStyle="rgba(230,245,255,.9)";ctx.beginPath();ctx.arc(x,y,2+(i%3),0,Math.PI*2);ctx.fill();}
+      else {ctx.strokeStyle=storm?"rgba(190,215,255,.52)":"rgba(180,215,245,.43)";ctx.lineWidth=rain?1.25:1;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x-4,y+14+(weatherState.wind*.35));ctx.stroke();}
+    }
+    if(storm && Math.sin(t*2.1)>0.985){ctx.fillStyle="rgba(220,230,255,.22)";ctx.fillRect(0,0,w,h);}
+  }
+
+  function startWeather(layer) {
+    if (reducedMotion) return;
+    const canvas=document.createElement("canvas");
+    canvas.id="hpmw-live-weather";
+    canvas.setAttribute("aria-hidden","true");
+    canvas.style.cssText="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1";
+    layer.appendChild(canvas);
+    updateLiveWeather();
+    if(weatherFetchTimer) clearInterval(weatherFetchTimer);
+    weatherFetchTimer=setInterval(updateLiveWeather,10*60*1000);
+    if(weatherFrame) cancelAnimationFrame(weatherFrame);
+    const animate=()=>{drawWeather();weatherFrame=requestAnimationFrame(animate);};
+    animate();
+    window.addEventListener("resize",drawWeather,{passive:true});
+  }
+
   const buildEffects = cfg => {
     removeEffects();
-    if (reducedMotion || (!cfg.snow && !cfg.fireworks && !cfg.pumpkins && !cfg.greeting)) return;
+    if (reducedMotion) return;
     addStyle();
     const layer = document.createElement("div");
     layer.id = LAYER_ID;
     layer.setAttribute("aria-hidden", "true");
     document.body.appendChild(layer);
+    startWeather(layer);
 
     if (cfg.snow) {
       for (let i = 0; i < 105; i++) {
