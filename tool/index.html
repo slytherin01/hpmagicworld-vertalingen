@@ -4048,6 +4048,72 @@ html body.supabase-authenticated main.shell{
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",setup,{once:true});else setup();
 })();
 </script>
+
+<style id="hpmw-tool-rebuild">
+:root{--tool-bg:#080f1b;--tool-panel:#111d2d;--tool-panel2:#17263a;--tool-line:#2b3e56;--tool-text:#edf3fb;--tool-muted:#9aacc2;--tool-accent:#9b8cff}
+html,body{height:100%;overflow:hidden}
+body{background:radial-gradient(ellipse at 70% 0%,#172b43 0%,#080f1b 58%)!important;color:var(--tool-text)}
+#adminTopbar{height:66px!important;min-height:66px!important;position:relative!important;z-index:100!important;background:#091321!important;border-bottom:1px solid var(--tool-line)!important}
+#adminTopbar .top-actions{gap:8px!important}
+#adminTopbar #navSettings,#adminTopbar #navTranslations{display:none!important}
+.hpmw-tool-sidebar{position:fixed;z-index:90;left:0;top:66px;bottom:0;width:236px;padding:22px 14px;background:#0c1726;border-right:1px solid var(--tool-line);display:flex;flex-direction:column;gap:8px}
+.hpmw-tool-sidebar .side-caption{padding:8px 10px 4px;color:#8195af;font-size:10px;font-weight:850;letter-spacing:.14em;text-transform:uppercase}
+.hpmw-tool-sidebar button{display:flex;align-items:center;gap:12px;width:100%;padding:12px 13px;border:1px solid transparent;border-radius:11px;background:transparent;color:#c9d6e7;text-align:left;font-size:13px;font-weight:720;cursor:pointer}
+.hpmw-tool-sidebar button i{width:18px;color:#a99cff;text-align:center}
+.hpmw-tool-sidebar button:hover{background:#17263a;border-color:#30445e}
+.hpmw-tool-sidebar button.active{background:#29284a;border-color:#6259a0;color:white}
+.hpmw-tool-sidebar .side-spacer{flex:1}
+main.shell{position:fixed!important;left:236px!important;right:0!important;top:66px!important;bottom:0!important;width:auto!important;max-width:none!important;margin:0!important;padding:24px clamp(18px,3vw,42px) 24px!important;overflow:hidden!important}
+main.shell>.view{display:none!important}
+main.shell>.view.active{display:block!important;visibility:visible!important;height:100%!important;max-height:100%!important;overflow-y:auto!important;overflow-x:hidden!important;padding:0 4px 28px 0!important;scrollbar-width:thin;scrollbar-color:#3a4e69 transparent}
+main.shell>.view.active::-webkit-scrollbar{width:8px}
+main.shell>.view.active::-webkit-scrollbar-thumb{background:#344963;border-radius:8px}
+.hpmw-view-quicknav,.hpmw-admin-shortcuts{display:none!important}
+#newAdminDashboard .hpmw-admin-intro{margin:0 0 22px!important;padding:28px 30px!important;border:1px solid #344967!important;border-left:4px solid var(--tool-accent)!important;border-radius:18px!important;background:linear-gradient(115deg,#172a43,#101b2b)!important;box-shadow:0 14px 38px #0003}
+#newAdminDashboard .hpmw-admin-intro h1{font-size:clamp(25px,3vw,36px)!important;letter-spacing:-.025em}
+#newAdminDashboard .hpmw-admin-intro>p{display:block!important;color:#aebdd0!important}
+#newAdminDashboard .dash-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:16px!important}
+#newAdminDashboard .dash-card{min-height:154px!important;padding:22px!important;border:1px solid var(--tool-line)!important;border-radius:16px!important;background:linear-gradient(145deg,#17283d,#101a29)!important;box-shadow:0 12px 30px #0002}
+#newAdminDashboard .dash-card p{display:block!important;color:var(--tool-muted)!important;line-height:1.55}
+#newAdminDashboard .dash-card h2{font-size:17px!important}
+#newSettingsView .page-head,#newTranslationsView .page-head,#adminCmsView .page-head{margin:0 0 18px!important;border-radius:16px!important}
+#newSettingsView .settings-grid,#newSettingsView .panel-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px!important}
+#newSettingsView .panel,#newSettingsView .settings-panel,#newSettingsView .portal-effect-setting{background:var(--tool-panel)!important;border:1px solid var(--tool-line)!important;border-radius:14px!important;padding:17px!important}
+#newSettingsView textarea,#newSettingsView input,#newTranslationsView input,#newTranslationsView textarea,#adminCmsView input,#adminCmsView textarea{max-width:100%}
+#adminCmsView .cms-tabs{display:flex!important;gap:8px!important;flex-wrap:wrap!important;margin:0 0 16px!important;padding:10px!important;border:1px solid var(--tool-line)!important;border-radius:13px!important;background:#0e1928!important}
+#adminCmsView .cms-tabs button{min-width:120px!important;padding:11px 14px!important}
+#adminCmsView .cms-grid{display:grid!important;grid-template-columns:minmax(0,1.05fr) minmax(320px,.95fr)!important;gap:14px!important;align-items:start!important}
+#adminCmsView .cms-panel{background:var(--tool-panel)!important;border:1px solid var(--tool-line)!important;border-radius:15px!important;padding:18px!important}
+#adminCmsView #ticketModeratorsPanel,#adminCmsView #ticketModeratorsPanel+ .cms-panel{margin-top:14px!important}
+#adminCmsView .cms-item{background:#0d1827!important;border-color:#2a3b51!important;border-radius:11px!important;gap:12px!important;flex-wrap:wrap}
+#adminCmsView .cms-item>div:last-child{display:flex;gap:7px;flex-wrap:wrap}
+#adminCmsView .cms-user-rights{background:#0d1827!important;border-color:#2a3b51!important;border-radius:12px!important}
+#adminCmsView .cms-right-group{grid-template-columns:minmax(100px,1fr) repeat(4,minmax(76px,auto))!important}
+#newTranslationsView .translation-panel,#newTranslationsView .panel{background:var(--tool-panel)!important;border:1px solid var(--tool-line)!important;border-radius:15px!important;padding:18px!important}
+#newTranslationsView .form-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}
+#adminView .panel,#adminView .ticket-panel{background:var(--tool-panel)!important;border:1px solid var(--tool-line)!important;border-radius:14px!important}
+#adminTopbar~footer,#adminTopbar~.site-footer{display:none!important}
+@media(max-width:900px){
+ .hpmw-tool-sidebar{width:68px;padding:14px 8px}.hpmw-tool-sidebar .side-caption,.hpmw-tool-sidebar button span{display:none}
+ .hpmw-tool-sidebar button{justify-content:center;padding:13px 6px}.hpmw-tool-sidebar button i{width:auto;font-size:17px}
+ main.shell{left:68px!important;padding:18px 14px!important}
+ #newAdminDashboard .dash-grid{grid-template-columns:1fr 1fr!important}
+ #adminCmsView .cms-grid{grid-template-columns:1fr!important}
+}
+@media(max-width:620px){
+ #adminTopbar{height:58px!important;min-height:58px!important}
+ .hpmw-tool-sidebar{top:58px;bottom:0;width:56px;padding:10px 5px}
+ main.shell{left:56px!important;top:58px!important;padding:12px 9px!important}
+ #newAdminDashboard .dash-grid{grid-template-columns:1fr!important}
+ #newSettingsView .settings-grid,#newSettingsView .panel-grid,#newTranslationsView .form-grid{grid-template-columns:1fr!important}
+ #adminCmsView .cms-right-group{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+</style>
+<script id="hpmw-tool-rebuild-nav">
+(()=>{const $=s=>document.querySelector(s);const views=[["newAdminDashboard","Overzicht","fa-house"],["newSettingsView","Instellingen","fa-sliders"],["newTranslationsView","Vertalingen","fa-language"],["adminCmsView","Beheer & rechten","fa-shield-halved"]];function show(id){if(id==="adminCmsView"&&!$("#adminCmsView")){$("#openAdminCms")?.click();if(!$("#adminCmsView"))return}document.querySelectorAll("main.shell>.view").forEach(v=>{v.classList.toggle("active",v.id===id);v.style.setProperty("display",v.id===id?"block":"none","important")});document.querySelectorAll(".hpmw-tool-sidebar button").forEach(b=>b.classList.toggle("active",b.dataset.view===id));if(id==="adminCmsView"&&$("#cmsTabs button")){$("#cmsTabs button").forEach?.(()=>{});const first=$("#cmsTabs button");if(first&&!first.classList.contains("active"))first.click()} }
+function init(){if(!$("#adminTopbar")||$(".hpmw-tool-sidebar"))return;const side=document.createElement("aside");side.className="hpmw-tool-sidebar";side.innerHTML='<div class="side-caption">Werkruimte</div>';views.forEach(([id,label,icon])=>{const b=document.createElement("button");b.type="button";b.dataset.view=id;b.innerHTML='<i class="fa-solid '+icon+'"></i><span>'+label+'</span>';b.onclick=()=>show(id);side.append(b)});side.insertAdjacentHTML("beforeend",'<div class="side-spacer"></div><div class="side-caption">Hpmagicworld beheer</div>');document.body.append(side);document.querySelectorAll("#adminTopbar .top-actions button").forEach(b=>{if(/Admin|Vertalingen|HP Nieuws/i.test(b.textContent.trim()))b.hidden=true});document.addEventListener("hpmw:supabase-role",e=>{const ok=e.detail?.role==="admin";side.hidden=!ok});side.hidden=document.body.dataset.supabaseRole!=="admin";const adminButton=[...document.querySelectorAll("#adminTopbar button")].find(b=>b.textContent.trim()==="Admin");if(adminButton)adminButton.hidden=true;show("newAdminDashboard")}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init()})();
+</script>
 </body>
 </html>
 <style id="hpmw-force-pt-editor-visible">
