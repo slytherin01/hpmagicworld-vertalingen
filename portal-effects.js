@@ -140,12 +140,12 @@
   function loadFireworks() {
     if (fireworksLoadPromise) return fireworksLoadPromise;
     fireworksLoadPromise = new Promise((resolve, reject) => {
-      if (window.Fireworks && window.Fireworks.default) { resolve(window.Fireworks.default); return; }
+      if (window.Fireworks && (window.Fireworks.default || typeof window.Fireworks === "function")) { resolve(window.Fireworks.default || window.Fireworks); return; }
       const script = document.createElement("script");
-      script.src = "https://cdn.jsdelivr.net/npm/fireworks-js@2.10.7/dist/index.umd.js";
+      script.src = "https://cdn.jsdelivr.net/npm/fireworks-js@2.10.8/dist/index.umd.min.js";
       script.async = true;
       script.onload = () => {
-        const ctor = window.Fireworks && (window.Fireworks.default || window.Fireworks);
+        const ctor = window.Fireworks && (window.Fireworks.default || (typeof window.Fireworks === "function" ? window.Fireworks : null));
         if (ctor) resolve(ctor);
         else reject(new Error("Fireworks constructor ontbreekt"));
       };
