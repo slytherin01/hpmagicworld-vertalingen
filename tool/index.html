@@ -1258,7 +1258,7 @@ body:not(.supabase-authenticated)>:not(#supabaseAuthGate){display:none!important
 <div class="portal-effect-setting" style="align-items:flex-start"><div style="flex:1"><h2>Jaartal voor nieuwjaarswens</h2><p>De wens verschijnt onder het blauwe supportblok, uitsluitend op de startpagina.</p><input id="effectYear" type="number" min="2024" max="2100" placeholder="Bijv. 2027" style="margin-top:10px;width:min(220px,100%);padding:11px;border:1px solid var(--line);border-radius:9px;background:#080e19;color:var(--text)"></div></div>
 <div class="portal-effect-setting"><div><h2>🛠️ Onderhoudsmelding</h2><p>Toon of verberg een melding direct onder het blauwe blok op de startpagina.</p></div><label class="effect-switch"><input type="checkbox" id="effectMaintenance"><span class="effect-slider"></span></label></div>
 <div class="portal-effect-setting" style="align-items:flex-start"><div style="flex:1"><h2>Tekst onderhoudsmelding</h2><textarea id="effectMaintenanceMessage" rows="4" maxlength="1200" placeholder="Typ hier de onderhoudsmelding..." style="margin-top:10px;width:100%;padding:11px;border:1px solid var(--line);border-radius:9px;background:#080e19;color:var(--text);resize:vertical"></textarea></div></div>
-<div class="actions" style="padding:18px 0 0"><button class="btn primary" id="savePortalEffects">Instellingen opslaan</button><span id="portalEffectsStatus" role="status" style="color:var(--muted);align-self:center"></span></div>
+<div class="actions" style="padding:18px 0 0"><button class="btn primary" id="savePortalEffects">Nu handmatig synchroniseren</button><span id="portalEffectsStatus" role="status" style="color:var(--muted);align-self:center"></span></div>
 <div class="portal-effect-code" style="margin-top:24px;padding-top:20px;border-top:1px solid var(--line)">
 <h2 style="font-size:16px;margin:0 0 6px">Eenmalig instellen voor je Forumactie-portaal</h2>
 <p class="subtitle" style="margin:0 0 12px">Voer de SQL hieronder één keer uit in Supabase → SQL Editor om de instellingen op te slaan. De complete portalpagina met geïntegreerde effecten staat al online; je hoeft geen script meer op het forum te plakken.</p>
@@ -3904,15 +3904,32 @@ html body.supabase-authenticated main.shell{
    if(error){showStatus("portalEffectsStatus","Database nog niet ingesteld? Voer eerst de SQL hieronder uit in Supabase.");return localRead();}
    return data?{snow:!!data.snow,fireworks:!!data.fireworks,pumpkins:!!data.pumpkins,greeting:!!data.greeting,year:data.year||"",maintenance_enabled:!!data.maintenance_enabled,maintenance_message:data.maintenance_message||""}:localRead();
  }
+ let autoSaveTimer=null,saveInFlight=false;
+ function collectSettings(){
+   const v={};Object.keys(ids).forEach(k=>v[k]=!!byId(ids[k])?.checked);
+   v.year=(byId("effectYear")?.value||"").trim();
+   v.maintenance_message=(byId("effectMaintenanceMessage")?.value||"").trim();
+   return v;
+ }
  async function save(){
-   const v={};Object.keys(ids).forEach(k=>v[k]=byId(ids[k]).checked);v.year=(byId("effectYear")?.value||"").trim();v.maintenance_message=(byId("effectMaintenanceMessage")?.value||"").trim();
+   const v=collectSettings();
    localStorage.setItem(KEY,JSON.stringify(v));
    const c=client();
-   if(!c){showStatus("portalEffectsStatus","Geen Supabase-verbinding. Log opnieuw in.");return;}
-   showStatus("portalEffectsStatus","Instellingen opslaan…");
-   const {error}=await c.from("portal_effects_settings").upsert({id:1,...v,updated_at:new Date().toISOString()},{onConflict:"id"});
-   if(error){showStatus("portalEffectsStatus","Opslaan mislukt: "+error.message+" — controleer of je de SQL hebt uitgevoerd.");return;}
-   showStatus("portalEffectsStatus","Opgeslagen! Het portaal gebruikt deze instellingen automatisch (binnen maximaal 60 seconden).");
+   if(!c){showStatus("portalEffectsStatus","Niet gesynchroniseerd: log in en controleer de Supabase-verbinding.");return false;}
+   if(saveInFlight){showStatus("portalEffectsStatus","Synchroniseren…");return false;}
+   saveInFlight=true;showStatus("portalEffectsStatus","Automatisch synchroniseren met portal…");
+   try{
+     const {error}=await c.from("portal_effects_settings").upsert({id:1,...v,updated_at:new Date().toISOString()},{onConflict:"id"});
+     if(error)throw error;
+     showStatus("portalEffectsStatus","Gesynchroniseerd! De portal neemt de wijziging binnen 60 seconden over.");
+     return true;
+   }catch(error){showStatus("portalEffectsStatus","Synchronisatie mislukt: "+(error.message||error)+" — voer zo nodig eerst de SQL hieronder uit.");return false;}
+   finally{saveInFlight=false;}
+ }
+ function queueAutoSave(){
+   if(autoSaveTimer)clearTimeout(autoSaveTimer);
+   showStatus("portalEffectsStatus","Wijziging klaar om automatisch op te slaan…");
+   autoSaveTimer=setTimeout(()=>{autoSaveTimer=null;save();},650);
  }
  async function copy(id,statusId){
    const el=byId(id);try{await navigator.clipboard.writeText(el.value);showStatus(statusId,"Gekopieerd!");}
@@ -3925,7 +3942,9 @@ html body.supabase-authenticated main.shell{
    byId("dashSettings").onclick=e=>{e.preventDefault();e.stopPropagation();activateView("newSettingsView")};
    byId("settingsBack").onclick=e=>{e.preventDefault();activateView("newAdminDashboard")};
    byId("navTranslations").onclick=e=>{e.preventDefault();activateView("newTranslationsView")};
-   Object.values(ids).forEach(id=>byId(id).addEventListener("change",()=>{}));
+   Object.values(ids).forEach(id=>byId(id).addEventListener("change",queueAutoSave));
+   byId("effectYear").addEventListener("input",queueAutoSave);
+   byId("effectMaintenanceMessage").addEventListener("input",queueAutoSave);
    byId("savePortalEffects").onclick=save;
    byId("copyPortalEffectsSql").onclick=()=>copy("portalEffectsSql","portalEffectsSqlStatus");
  }
