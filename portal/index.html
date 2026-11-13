@@ -1119,21 +1119,23 @@ html:not([lang]),html[lang=""] .hpmw-translations-tool-link .hpmw-tool-nl{displa
 html[lang="en"] .hpmw-translations-tool-link .hpmw-tool-en{display:inline}
 html[lang="pt"] .hpmw-translations-tool-link .hpmw-tool-pt{display:inline}
 </style><style id="hpmw-banner-single-source">
-/* One compact shared banner; remove the former second logo panel. */
+/* Elegante, bescheiden headerbanner: gecentreerd en niet afgesneden tot een smalle strook. */
 html body .hpmw-global-brandbar{
  display:block!important;position:relative!important;z-index:6!important;
- width:100%!important;height:82px!important;min-height:82px!important;max-height:82px!important;
+ width:100%!important;height:clamp(118px,12vw,168px)!important;
+ min-height:118px!important;max-height:168px!important;
  aspect-ratio:auto!important;flex:none!important;box-sizing:border-box!important;
- margin:0 0 10px!important;padding:0!important;overflow:hidden!important;
- background:#080f1b url("https://i44.servimg.com/u/f44/11/48/74/42/banner10.png") center 48%/cover no-repeat!important;
- border:0!important;box-shadow:none!important;
+ margin:0 auto 14px!important;padding:0!important;overflow:hidden!important;
+ background:#080f1b url("https://i44.servimg.com/u/f44/11/48/74/42/banner10.png") center 47%/cover no-repeat!important;
+ border:0!important;border-bottom:1px solid rgba(201,164,92,.45)!important;
+ box-shadow:0 7px 20px rgba(0,0,0,.28)!important;
 }
 html body .hpmw-global-brandbar:before,html body .hpmw-global-brandbar:after{display:none!important;content:none!important}
 html body .hpmw-global-brandbar-inner,html body .hpmw-global-brandbar img,html body .hpmw-brand-ornament{display:none!important}
 html body #introView{padding-top:0!important;margin-top:0!important;max-height:none!important;overflow:visible!important}
 html body #introView .hpmw-portal-logo{display:none!important}
 @media(max-width:650px){
- html body .hpmw-global-brandbar{height:66px!important;min-height:66px!important;max-height:66px!important;margin-bottom:8px!important}
+ html body .hpmw-global-brandbar{height:96px!important;min-height:96px!important;max-height:96px!important;margin-bottom:10px!important;background-position:center 47%!important}
 }
 </style></head><body><header class="topbar luxury-nav-v2"><nav aria-label="Support navigatie" class="top-actions"><a class="lux-nav-item" href="https://testforumjoost.forumactie.com/forum" rel="noopener noreferrer" target="_blank"><span class="lux-nav-icon"><i class="fa-solid fa-comments"></i></span><span class="lux-nav-label">Forum</span></a><a class="lux-nav-item" href="https://testforumjoost.forumactie.com/h3-portaal" target="_self"><span class="lux-nav-icon"><i class="fa-solid fa-house"></i></span><span class="lux-nav-label">Portaal</span></a><button aria-expanded="false" aria-haspopup="dialog" class="lux-nav-item" id="faqLaunch" type="button"><span class="lux-nav-icon"><i class="fa-solid fa-circle-question"></i></span><span class="lux-nav-label">FAQ</span></button><button aria-expanded="false" class="lux-nav-item" id="ticketSupportLaunch" type="button"><span class="lux-nav-icon"><i class="fa-solid fa-ticket"></i></span><span class="lux-nav-label">Ticket Support</span></button>
 <a class="lux-nav-item" href="https://testforumjoost.forumactie.com/h13-dev-sorting-hat" id="sortingHatNav" rel="noopener noreferrer" target="_blank"><span class="lux-nav-icon"><i class="fa-solid fa-hat-wizard"></i></span><span class="lux-nav-label">De Sorteerhoed</span></a>
