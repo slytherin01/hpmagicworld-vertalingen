@@ -1,0 +1,155 @@
+<!doctype html><html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sorteeraanvraag | Hpmagicworld Ticket Support</title><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"><style>
+:root{color-scheme:dark;--bg:#090e18;--text:#edf2f7;--muted:#9aa8b7;--line:#273341;--accent:#8ab4e8;--panel:#111820}*{box-sizing:border-box}html,body{margin:0;min-height:100%;font:13px/1.5 Arial,Helvetica,sans-serif;color:var(--text);background:#090e18}body{padding:58px 0 72px;background-image:url("https://i.servimg.com/u/f28/11/54/28/73/88751d10.png");background-position:center top;background-size:cover;background-repeat:no-repeat;background-attachment:fixed}a{color:inherit;text-decoration:none}.topbar{position:fixed;inset:0 0 auto;z-index:99;min-height:58px;padding:7px 24px;display:flex;align-items:center;background:rgba(12,19,32,.96);border-bottom:1px solid #273b50;box-shadow:0 8px 30px #0005;backdrop-filter:blur(14px)}.top-actions{width:min(1180px,100%);margin:auto;display:flex;align-items:center;gap:10px}.lux-nav-item{min-height:42px;padding:8px 13px;border:1px solid transparent;border-radius:11px;background:transparent;color:#c3cde0;display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:650}.lux-nav-item:hover{background:#1a2633;border-color:#50677f;color:white}.lux-nav-icon{width:30px;height:30px;border-radius:9px;background:#1c2b3a;border:1px solid #425b73;color:#c5def7;display:grid;place-items:center}.lux-user{margin-left:auto}.shell{width:min(760px,calc(100% - 36px));margin:8px auto 10px}.support-logo-wrap{display:flex;justify-content:center;margin:0 auto 4px}.support-logo{width:auto;max-width:min(100%,340px);max-height:68px;object-fit:contain}.support-hero{text-align:center;padding:0 16px 20px}.support-hero-line{width:54px;height:3px;border-radius:3px;background:linear-gradient(90deg,transparent,#527da8,transparent);margin:0 auto 7px}.eyebrow{color:#a9c8e8;font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}.support-hero h1{font-size:clamp(24px,4vw,34px);line-height:1.2;letter-spacing:-.035em;margin:7px 0}.support-hero p{margin:6px 0 0;color:var(--muted);font-size:13px}.panel{background:linear-gradient(160deg,#121d2d,#0e1725);border:1px solid var(--line);border-radius:16px;box-shadow:0 18px 50px #0005;overflow:hidden}.panel-head{padding:12px 18px;border-bottom:1px solid var(--line)}.panel-head h2{font-size:16px;margin:0}.panel-head p{margin:5px 0 0;color:var(--muted);font-size:12px}.form-grid{padding:14px 18px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.field{min-width:0}.field.full{grid-column:1/-1}.field label{display:block;margin-bottom:7px;color:#a9c8e8;font-size:11px;font-weight:750;letter-spacing:.04em}.field input,.field textarea,.field select{width:100%;border:1px solid #344354;border-radius:10px;background:#0b1118;color:var(--text);padding:12px 14px;outline:none;font:inherit}.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--accent);box-shadow:0 0 0 3px #8ab4e820}.field textarea{min-height:145px;resize:vertical}.hint{margin-top:6px;color:var(--muted);font-size:11px}.actions{display:flex;justify-content:flex-end;gap:9px;padding:0 18px 10px}.form-status{padding:0 18px 14px;text-align:right;color:#b8d6f4;font-size:12px}.form-status a{color:#c5def7;text-decoration:underline}.btn{min-height:38px;padding:8px 14px;border:1px solid #394a5d;border-radius:10px;background:#1a2531;color:#e8eef5;display:inline-flex;align-items:center;justify-content:center;gap:8px;font-size:12px;font-weight:750;cursor:pointer}.btn.primary{background:linear-gradient(135deg,#315b82,#294b70);border-color:#527da8;color:#fff}.lux-footer{position:fixed;inset:auto 0 0;z-index:89;background:#0c1320ed;border-top:1px solid #273b50}.lux-footer-line{height:2px;background:linear-gradient(90deg,transparent,#527da8,transparent)}.lux-footer-inner{width:min(1180px,calc(100% - 36px));min-height:58px;margin:auto;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--muted);font-size:11px;padding:8px}.lux-footer-meta{display:flex;justify-content:center;gap:16px;flex-wrap:wrap}.footer-social a{display:grid;place-items:center;width:30px;height:30px;border:1px solid #49617a;border-radius:9px;background:#222344;color:#c5def7}@media(max-width:600px){.topbar{padding:8px 10px}.lux-nav-item{padding:6px 8px;font-size:11px}.shell{margin:24px auto}.form-grid{grid-template-columns:1fr;padding:17px;gap:14px}.field.full{grid-column:auto}.actions{padding:0 17px 17px}.lux-footer-meta{gap:7px 12px}}
+
+.faq-tip{display:none;position:absolute;top:calc(100% + 9px);left:50%;transform:translateX(-50%);width:min(310px,calc(100vw - 28px));padding:11px 13px;border:1px solid #49617a;border-radius:10px;background:#111c2b;color:#edf2f7;box-shadow:0 12px 30px #0008;font-size:12px;font-weight:400;line-height:1.45;letter-spacing:0;z-index:120;text-align:left}
+#faqButton{position:relative}#faqButton:hover .faq-tip,#faqButton:focus-visible .faq-tip,#faqButton.is-open .faq-tip{display:block}
+
+.faq-menu{display:none;position:fixed;z-index:150;top:66px;left:50%;transform:translateX(-50%);width:min(610px,calc(100vw - 24px));max-height:min(75vh,650px);overflow:auto;background:#111c2b;border:1px solid #49617a;border-radius:15px;box-shadow:0 20px 60px #000b;padding:18px}
+.faq-menu.open{display:block}.popup-head{display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid #344354;padding-bottom:12px;margin-bottom:13px}.popup-head h2{font-size:18px;margin:0}.close-btn{border:1px solid #52677c;background:#1b2a3a;color:#fff;border-radius:9px;width:34px;height:34px;font-size:23px;line-height:1;cursor:pointer;flex:none}.faq-content{display:grid;gap:10px}.faq-content article{padding:12px 14px;border:1px solid #2c3d50;border-radius:10px;background:#0c1522}.faq-content h3{font-size:13px;margin:0 0 6px;color:#b8d6f4}.faq-content p{font-size:12px;color:#d2dbe6;margin:0}.quiz-backdrop{display:none;position:fixed;inset:0;z-index:180;background:#02060dcc;align-items:center;justify-content:center;padding:16px}.quiz-backdrop.open{display:flex}.quiz-dialog{width:min(560px,100%);max-height:88vh;overflow:auto;background:linear-gradient(155deg,#172538,#0d1624);border:1px solid #49617a;border-radius:17px;padding:20px;box-shadow:0 25px 80px #000c}.quiz-kicker{font-size:10px;letter-spacing:.15em;color:#a9c8e8;font-weight:800}.quiz-intro{color:#bdc9d8;font-size:13px}.quiz-q{font-size:16px;font-weight:750;margin:18px 0 12px}.quiz-options{display:grid;gap:9px}.quiz-option{width:100%;text-align:left;padding:12px 14px;border:1px solid #3b5066;border-radius:10px;background:#101d2b;color:#edf2f7;cursor:pointer;font:inherit}.quiz-option:hover,.quiz-option:focus{border-color:#9bc5ed;background:#1a2c40}.quiz-progress{margin-top:15px;color:#9fb2c8;font-size:11px;text-align:right}.quiz-result{padding:14px;border:1px solid #49617a;border-radius:12px;background:#101d2b;margin-top:15px}.quiz-result h3{color:#c5def7;margin:0 0 6px}.quiz-result p{margin:0 0 12px;color:#d5deea;font-size:13px}.quiz-result .btn{margin-right:6px;margin-bottom:6px}
+@media(max-width:600px){.faq-menu{top:62px}.quiz-dialog{padding:15px}.top-actions{gap:3px}.lux-nav-item{gap:5px}.lux-nav-item span:not(.lux-nav-icon){font-size:10px}}
+
+.transfer-check{display:flex!important;align-items:flex-start;gap:10px;color:#edf2f7!important;font-size:13px!important;letter-spacing:0!important;cursor:pointer}
+.transfer-check input{width:17px;height:17px;margin:1px 0 0;accent-color:#8ab4e8;flex:none}
+.transfer-option .hint{margin:7px 0 12px}
+.transfer-reason{margin-top:12px;padding:13px;border:1px solid #6b5740;border-radius:10px;background:#211b16}
+.transfer-reason[hidden]{display:none}
+.transfer-reason>label{display:block!important;color:#f0c98e!important;margin-bottom:7px}
+</style></head><body>
+<header class="topbar"><div class="top-actions"><a class="lux-nav-item" href="/"><span class="lux-nav-icon"><i class="fa-solid fa-ticket"></i></span><span>Ticket Support</span></a><a class="lux-nav-item" href="/"><span class="lux-nav-icon"><i class="fa-solid fa-house"></i></span><span>Portaal</span></a><button class="lux-nav-item" id="faqButton" type="button" aria-expanded="false"><span class="lux-nav-icon"><i class="fa-solid fa-circle-question"></i></span><span>FAQ</span></button>
+<button class="lux-nav-item" id="quizButton" type="button" aria-haspopup="dialog"><span class="lux-nav-icon"><i class="fa-solid fa-hat-wizard"></i></span><span>Afdelingsquiz</span></button><a class="lux-nav-item lux-user" href="/login" id="accountLink"><span class="lux-nav-icon"><i class="fa-solid fa-user"></i></span><span class="lux-nav-usertext"><small>INGELOGD ALS</small><strong id="username">Gast</strong></span></a></div></header>
+<main class="shell"><div class="support-logo-wrap"><img class="support-logo" src="https://i.servimg.com/u/f28/11/54/28/73/ticket11.png" alt="Hpmagicworld Ticket Support"></div><section class="support-hero"><div class="support-hero-line"></div><h1>Sorteeraanvraag</h1><p>Vul hieronder je aanvraag in. Support behandelt je aanvraag via Ticket Support.</p></section>
+<section class="panel"><div class="panel-head"><h2><i class="fa-solid fa-feather-pointed"></i> Aanvraagformulier</h2><p>Vul de verplichte velden in.</p></div><form id="sortingRequestForm" action="/post?f=27&mode=newtopic" method="post"><div class="form-grid"><input type="hidden" id="applicantName" name="username" value=""><div class="field"><label for="department">Gewenste afdeling *</label><select id="department" name="department" required><option value="">Kies een afdeling</option><option>Griffoendor</option><option>Zwadderich</option><option>Huffelpuf</option><option>Ravenklauw</option></select></div><input type="hidden" id="subject" name="subject" value="Sorteerhoed afdeling aanvraag"><input type="hidden" id="transferSummary" name="transfer_summary" value=""><div class="field full transfer-option"><label class="transfer-check" for="transfer"><input id="transfer" name="transfer" type="checkbox" value="Ja"> Ik vraag uitzonderlijk een verhuizing naar een andere afdeling aan</label><div class="hint">Een afdelingsverhuizing is een uitzondering en geen standaardkeuze. Je verzoek kan worden afgewezen als er geen goede en duidelijke reden is.</div><div class="transfer-reason" id="transferReason" hidden><label for="reason">Reden voor de verhuizing *</label><textarea id="reason" name="reason" maxlength="1200" placeholder="Leg duidelijk uit waarom je naar een andere afdeling wilt verhuizen."></textarea><div class="hint">Een duidelijke, inhoudelijke motivatie is verplicht voor een verhuisverzoek.</div></div></div><div class="field full"><label for="message">Vragen of opmerkingen</label><textarea id="message" name="message" maxlength="1500" placeholder="Heb je vragen of wil je iets toevoegen aan je sorteer-aanvraag? (optioneel)"></textarea><div class="hint">Je kunt hier eventuele vragen of opmerkingen kwijt.</div></div></div><div class="actions"><button class="btn primary" id="submitRequest" type="submit"><i class="fa-solid fa-paper-plane"></i> Aanvraag versturen</button></div><div class="form-status" id="formStatus" role="status" aria-live="polite"></div></form></section></main>
+<section class="faq-menu" id="faqMenu" aria-hidden="true"><div class="popup-head"><h2>Veelgestelde vragen</h2><button type="button" class="close-btn" id="faqClose" aria-label="Sluiten">×</button></div><div class="faq-content">
+<article><h3>Q: Wat gebeurt er na mijn aanvraag?</h3><p><b>A:</b> Je aanvraag wordt via Ticket Support naar het supportteam gestuurd. Zij behandelen je aanvraag en kunnen zo nodig contact opnemen.</p></article>
+<article><h3>Q: Kan ik mijn afdeling zelf kiezen?</h3><p><b>A:</b> Ja. Kies een afdeling in het formulier. Twijfel je? Gebruik dan de Afdelingsquiz bovenaan.</p></article>
+<article><h3>Q: Wat als ik nog niet weet welke afdeling bij mij past?</h3><p><b>A:</b> Beantwoord de vragen in de Afdelingsquiz. De uitkomst is een vrijblijvende suggestie; je kunt daarna zelf je keuze aanpassen.</p></article>
+<article><h3>Q: Waar wordt mijn aanvraag behandeld?</h3><p><b>A:</b> In het bestaande Ticket Support-forumonderdeel.</p></article>
+</div></section><div class="quiz-backdrop" id="quizBackdrop">
+<section class="quiz-dialog" role="dialog" aria-modal="true" aria-labelledby="quizTitle"><div class="popup-head"><div><div class="quiz-kicker">DE AFDELINGSQUIZ</div><h2 id="quizTitle">Welke afdeling past bij jou?</h2></div><button type="button" class="close-btn" id="quizClose" aria-label="Quiz sluiten">×</button></div><div id="quizBody"><p class="quiz-intro">Beantwoord vier korte vragen. Kies steeds het antwoord dat het beste bij jou past. Je kunt de quiz sluiten wanneer je zelf wilt.</p><div id="quizQuestion"></div><div class="quiz-progress" id="quizProgress">Vraag 1 van 4</div></div>
+</section></div>
+<footer class="lux-footer"><div class="lux-footer-line"></div><div class="lux-footer-inner"><div class="lux-footer-meta"><span>Versie 3.0</span><span>© 2026 Hpmagicworld</span><span><a href="https://www.actieforum.com" target="_blank" rel="noopener">actieforum.com</a></span><span>Alle rechten voorbehouden</span></div><div class="footer-social"><a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a></div></div></footer>
+<script>
+(()=>{"use strict";
+const nameEl=document.getElementById("username"),account=document.getElementById("accountLink");
+function readUser(source){
+ const doc=new DOMParser().parseFromString(source,"text/html");
+ const read=k=>{const pats=[new RegExp("_userdata\\s*(?:\\[\\s*['\"]"+k+"['\"]\\s*\\]|\\.\\s*"+k+")\\s*=\\s*['\"]?([^;'\"\\s]+)['\"]?","i"),new RegExp("['\"]"+k+"['\"]\\s*:\\s*['\"]?([^,;'\"}\\s]+)","i")];for(const p of pats){const m=source.match(p);if(m)return m[1]}return ""};
+ let id=Number(read("user_id"))||0,name=read("username");
+ const logged=Number(read("session_logged_in"))>0||!!doc.querySelector('a[href*="logout"],a[href*="mode=logout"]');
+ if(!id){const a=doc.querySelector('#fa_welcome a[href^="/u"],#fa_right a[href^="/u"],.welcome a[href^="/u"],#username a[href^="/u"]');const m=(a?.getAttribute("href")||"").match(/^\/u(\d+)/i);if(m)id=+m[1];if(!name&&a)name=a.textContent.trim()}
+ return id&&logged?{id,name:name||"Gebruiker"}:null;
+}
+function paint(u){nameEl.textContent=u?u.name:"Gast";account.href=u?"/u"+u.id:"/login";account.title=u?"Ingelogd als "+u.name:"Niet ingelogd — klik om in te loggen";document.getElementById("applicantName").value=u?u.name:""}
+async function init(){
+ if(window._userdata&&Number(window._userdata.session_logged_in)>0){const d=window._userdata;paint({id:Number(d.user_id),name:String(d.username||"Gebruiker")});return}
+ for(const path of ["/","/forum"]){try{const r=await fetch(path,{credentials:"include",cache:"no-store"});if(r.ok){const u=readUser(await r.text());if(u){paint(u);return}}}catch(e){}}
+ paint(null)
+}
+const faq=document.getElementById("faqButton");
+faq.addEventListener("click",()=>{const open=faq.classList.toggle("is-open");faq.setAttribute("aria-expanded",String(open))});
+document.addEventListener("click",e=>{if(!faq.contains(e.target)){faq.classList.remove("is-open");faq.setAttribute("aria-expanded","false")}});
+init();
+})();
+</script>
+
+<script>
+(()=>{"use strict";
+const faqButton=document.getElementById("faqButton"),faqMenu=document.getElementById("faqMenu"),faqClose=document.getElementById("faqClose");
+function closeFaq(){faqMenu.classList.remove("open");faqMenu.setAttribute("aria-hidden","true");faqButton.setAttribute("aria-expanded","false")}
+faqButton.addEventListener("click",e=>{e.stopPropagation();const open=!faqMenu.classList.contains("open");faqMenu.classList.toggle("open",open);faqMenu.setAttribute("aria-hidden",String(!open));faqButton.setAttribute("aria-expanded",String(open))});
+faqClose.addEventListener("click",closeFaq);
+document.addEventListener("click",e=>{if(faqMenu.classList.contains("open")&&!faqMenu.contains(e.target)&&!faqButton.contains(e.target))closeFaq()});
+const department=document.getElementById("department"),subject=document.getElementById("subject");
+function updateSubject(){subject.value="Sorteerhoed afdeling aanvraag"+(department.value?" - "+department.value:"")}
+department.addEventListener("change",updateSubject);updateSubject();
+
+const quizButton=document.getElementById("quizButton"),backdrop=document.getElementById("quizBackdrop"),quizClose=document.getElementById("quizClose"),questionBox=document.getElementById("quizQuestion"),progress=document.getElementById("quizProgress");
+const questions=[
+{q:"Wat vind je het belangrijkst?",a:[["Moed en opkomen voor anderen","Griffoendor"],["Ambitie en je doelen bereiken","Zwadderich"],["Vriendschap en trouw","Huffelpuf"],["Nieuwsgierigheid en kennis","Ravenklauw"]]},
+{q:"Je ziet iemand oneerlijk behandeld worden. Wat doe je?",a:[["Ik spreek de situatie direct aan","Griffoendor"],["Ik bedenk een slimme aanpak","Zwadderich"],["Ik blijf bij die persoon en help","Huffelpuf"],["Ik onderzoek eerst wat er precies speelt","Ravenklauw"]]},
+{q:"Welke plek spreekt je het meest aan?",a:[["Een plek vol avontuur","Griffoendor"],["Een plek waar ik mijn ambities kan waarmaken","Zwadderich"],["Een gezellige plek waar iedereen welkom is","Huffelpuf"],["Een rustige plek vol boeken en ideeën","Ravenklauw"]]},
+{q:"Welke eigenschap herken je het meest in jezelf?",a:[["Dapper","Griffoendor"],["Vastberaden","Zwadderich"],["Betrouwbaar","Huffelpuf"],["Leergierig","Ravenklauw"]]}
+];
+const descriptions={Griffoendor:"Je kiest vaak voor moed, lef en opkomen voor anderen.",Zwadderich:"Je bent doelgericht, vindingrijk en vastberaden.",Huffelpuf:"Je hecht aan eerlijkheid, geduld en trouw.",Ravenklauw:"Je bent nieuwsgierig, creatief en houdt van kennis."};
+let step=0,scores={Griffoendor:0,Zwadderich:0,Huffelpuf:0,Ravenklauw:0};
+function renderQuiz(){
+ if(step>=questions.length){const winner=Object.keys(scores).sort((a,b)=>scores[b]-scores[a])[0];questionBox.innerHTML='<div class="quiz-result"><h3>Jouw suggestie: '+winner+'</h3><p>'+descriptions[winner]+'</p><button type="button" class="btn primary" id="useHouse">Kies '+winner+'</button><button type="button" class="btn" id="retryQuiz">Opnieuw</button></div>';progress.textContent="Quiz afgerond";document.getElementById("useHouse").addEventListener("click",()=>{department.value=winner;updateSubject();backdrop.classList.remove("open");department.scrollIntoView({behavior:"smooth",block:"center"})});document.getElementById("retryQuiz").addEventListener("click",resetQuiz);return}
+ const q=questions[step];questionBox.innerHTML='<div class="quiz-q">'+(step+1)+'. '+q.q+'</div><div class="quiz-options">'+q.a.map((a,i)=>'<button class="quiz-option" type="button" data-answer="'+i+'">'+a[0]+'</button>').join("")+'</div>';progress.textContent="Vraag "+(step+1)+" van "+questions.length;
+ questionBox.querySelectorAll("[data-answer]").forEach(b=>b.addEventListener("click",()=>{scores[q.a[+b.dataset.answer][1]]++;step++;renderQuiz()}));
+}
+function resetQuiz(){step=0;scores={Griffoendor:0,Zwadderich:0,Huffelpuf:0,Ravenklauw:0};renderQuiz()}
+quizButton.addEventListener("click",()=>{closeFaq();resetQuiz();backdrop.classList.add("open")});
+quizClose.addEventListener("click",()=>backdrop.classList.remove("open"));
+/* Intentionally no backdrop/outside-click handler: the member closes the quiz with X. */
+})();
+</script>
+
+<script>
+(()=>{const check=document.getElementById("transfer"),wrap=document.getElementById("transferReason"),reason=document.getElementById("reason"),summary=document.getElementById("transferSummary");if(!check||!wrap||!reason)return;function update(){wrap.hidden=!check.checked;reason.required=check.checked;if(!check.checked)reason.value=""}check.addEventListener("change",update);update();const form=check.closest("form");form.addEventListener("submit",()=>{summary.value=check.checked?"VERHUIZINGSVERZOEK: "+reason.value.trim():"Geen verhuisverzoek";});form.addEventListener("submit",e=>{if(check.checked&&!reason.value.trim()){e.preventDefault();reason.focus();reason.setCustomValidity("Vul een duidelijke reden voor je verhuisverzoek in.");reason.reportValidity()}else reason.setCustomValidity("")});reason.addEventListener("input",()=>reason.setCustomValidity(""))})();
+</script>
+
+<script>
+(()=>{"use strict";
+const form=document.getElementById("sortingRequestForm");
+if(!form)return;
+const button=document.getElementById("submitRequest");
+const status=document.getElementById("formStatus");
+const subject=document.getElementById("subject");
+const department=document.getElementById("department");
+const applicant=document.getElementById("applicantName");
+const message=document.getElementById("message");
+const transfer=document.getElementById("transfer");
+const reason=document.getElementById("reason");
+function setStatus(text){status.textContent=text}
+form.addEventListener("submit",async e=>{
+ e.preventDefault();
+ if(!form.reportValidity())return;
+ if(!applicant.value.trim()){setStatus("Log eerst in op je forumaccount en probeer opnieuw.");return}
+ subject.value="Sorteerhoed afdeling aanvraag - "+department.value;
+ const lines=[
+  "SORTEERHOED - AFDELINGSAANVRAAG",
+  "Gebruikersnaam: "+applicant.value.trim(),
+  "Gekozen afdeling: "+department.value,
+  "Verhuizing aangevraagd: "+(transfer&&transfer.checked?"Ja":"Nee")
+ ];
+ if(transfer&&transfer.checked)lines.push("Reden verhuizing: "+(reason?reason.value.trim():""));
+ if(message.value.trim())lines.push("Vragen of opmerkingen: "+message.value.trim());
+ button.disabled=true;setStatus("Aanvraag wordt als nieuw topic aangemaakt...");
+ try{
+  const response=await fetch("/post?f=27&mode=newtopic",{credentials:"include",cache:"no-store"});
+  if(!response.ok)throw Error("Het Forumotion-formulier kon niet worden geopend (HTTP "+response.status+").");
+  const doc=new DOMParser().parseFromString(await response.text(),"text/html");
+  const forumForm=[...doc.forms].find(f=>
+   f.querySelector('input[name="subject"],input[name="topic_name"]')&&
+   f.querySelector('textarea[name="message"],textarea#text_editor_textarea')
+  );
+  if(!forumForm)throw Error("Forumotion heeft geen formulier voor een nieuw topic aangeboden. Controleer of je bent ingelogd en rechten hebt in De Grote Zaal.");
+  const subjectField=forumForm.querySelector('input[name="subject"],input[name="topic_name"]');
+  const messageField=forumForm.querySelector('textarea[name="message"],textarea#text_editor_textarea');
+  const data=new FormData(forumForm);
+  data.set(subjectField.name,subject.value);
+  data.set(messageField.name,lines.join("\n\n"));
+  const postButton=forumForm.querySelector('[name="post"]');
+  if(postButton)data.set("post",postButton.value||"Verstuur");
+  const action=new URL(forumForm.getAttribute("action")||"/post",location.origin).href;
+  const posted=await fetch(action,{method:"POST",body:data,credentials:"include",cache:"no-store",redirect:"follow"});
+  if(!posted.ok)throw Error("Forumotion kon het nieuwe topic niet plaatsen (HTTP "+posted.status+").");
+  const finalUrl=posted.url||"";
+  const topicMatch=finalUrl.match(/\/t(\d+)/i);
+  if(topicMatch){
+   setStatus("Je sorteeraanvraag is geplaatst. ");
+   const link=document.createElement("a");link.href=finalUrl;link.textContent="Bekijk je nieuwe topic";link.target="_blank";link.rel="noopener";status.appendChild(link);
+   form.reset();
+   if(window.updateSortingSubject)window.updateSortingSubject();
+  }else{
+   const responseDoc=new DOMParser().parseFromString(await posted.text(),"text/html");
+   const topicLink=responseDoc.querySelector('a[href*="/t"]');
+   if(topicLink&&topicLink.href){setStatus("Je sorteeraanvraag is geplaatst. ");const link=document.createElement("a");link.href=topicLink.href;link.textContent="Bekijk je nieuwe topic";link.target="_blank";link.rel="noopener";status.appendChild(link);form.reset()}
+   else throw Error("Forumotion heeft geen bevestiging van een nieuw topic teruggegeven. Controleer De Grote Zaal voordat je opnieuw verstuurt.");
+  }
+ }catch(err){setStatus(err.message||"Er ging iets mis bij het plaatsen van je aanvraag.")}
+ finally{button.disabled=false}
+});
+})();
+</script>
+</body></html>
