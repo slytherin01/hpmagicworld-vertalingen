@@ -1255,7 +1255,12 @@ body:not(.supabase-authenticated)>:not(#supabaseAuthGate){display:none!important
 <div class="portal-effect-setting"><div><h2>🎆 Vuurwerk</h2><p>Toon feestelijk vuurwerk op de portaalpagina.</p></div><label class="effect-switch"><input type="checkbox" id="effectFireworks"><span class="effect-slider"></span></label></div>
 <div class="portal-effect-setting"><div><h2>🎃 Zwevende pompoenen</h2><p>Laat decoratieve pompoenen over de portaalpagina zweven.</p></div><label class="effect-switch"><input type="checkbox" id="effectPumpkins"><span class="effect-slider"></span></label></div>
 <div class="actions" style="padding:18px 0 0"><button class="btn primary" id="savePortalEffects">Instellingen opslaan</button><span id="portalEffectsStatus" role="status" style="color:var(--muted);align-self:center"></span></div>
-<p class="subtitle" style="margin-top:16px">Let op: deze versie bewaart de keuzes in deze browser. Voor automatische synchronisatie naar alle bezoekers moet dezelfde instelling ook door de Forumactie-portaalpagina worden uitgelezen.</p>
+<div class="portal-effect-code" style="margin-top:24px;padding-top:20px;border-top:1px solid var(--line)">
+<h2 style="font-size:16px;margin:0 0 6px">Script voor je Forumactie-portaal</h2>
+<p class="subtitle" style="margin:0 0 12px">Zet dit korte script in de HTML/JavaScript-instellingen van je portaal. De effecten hieronder bepalen welke onderdelen het script toont. Pas je de schakelaars aan, kopieer dan de nieuwe code opnieuw.</p>
+<textarea id="portalEffectsSnippet" readonly rows="2" spellcheck="false" style="width:100%;min-height:66px;resize:vertical;padding:12px;border-radius:10px;border:1px solid var(--line);background:#080e19;color:#dce7fa;font:12px/1.5 ui-monospace,monospace"></textarea>
+<div class="actions" style="padding:10px 0 0"><button class="btn primary" type="button" id="copyPortalEffectsSnippet">Script kopiëren</button><span id="portalEffectsCopyStatus" role="status" style="color:var(--muted);align-self:center"></span></div>
+</div>
 </div></section>
 <section class="view" id="newTranslationsView">
 <div class="page-head translation-bluebar"><div class="translation-bluebar-copy"><div class="eyebrow">VERTALINGEN</div><h1>Vertalingen beheren</h1><p class="subtitle">Eén sleutel met drie taalversies. Bewaar en synchroniseer naar de portal.</p></div><div class="translation-bluebar-actions"><button class="btn" id="translationBack">← Dashboard</button></div></div>
@@ -3837,18 +3842,25 @@ html body.supabase-authenticated main.shell{
 </style>
 <script id="portal-effects-settings-script">
 (function(){
- const KEY="hpmw_portal_effects_v1";
+ const KEY="hpmw_portal_effects_v1", BASE="https://slytherin01.github.io/muggle-ministry/portal-effects.js";
  const ids={snow:"effectSnow",fireworks:"effectFireworks",pumpkins:"effectPumpkins"};
  const defaults={snow:false,fireworks:false,pumpkins:false};
  const read=()=>{try{return {...defaults,...JSON.parse(localStorage.getItem(KEY)||"{}")}}catch(_){return {...defaults}}};
- const write=()=>{const v={};Object.keys(ids).forEach(k=>v[k]=document.getElementById(ids[k]).checked);localStorage.setItem(KEY,JSON.stringify(v));const status=document.getElementById("portalEffectsStatus");if(status)status.textContent="Opgeslagen in deze browser.";};
- const load=()=>{const v=read();Object.keys(ids).forEach(k=>{const el=document.getElementById(ids[k]);if(el)el.checked=!!v[k]})};
+ const snippet=()=>'<script src="'+BASE+'?snow='+(+ids.snow.checked)+'&fireworks='+(+ids.fireworks.checked)+'&pumpkins='+(+ids.pumpkins.checked)+'"><\\/script>';
+ const updateSnippet=()=>{const el=document.getElementById("portalEffectsSnippet");if(el)el.value=snippet()};
+ const write=()=>{const v={};Object.keys(ids).forEach(k=>v[k]=document.getElementById(ids[k]).checked);localStorage.setItem(KEY,JSON.stringify(v));updateSnippet();const status=document.getElementById("portalEffectsStatus");if(status)status.textContent="Keuzes opgeslagen. Kopieer het script hieronder naar Forumactie.";};
+ const load=()=>{const v=read();Object.keys(ids).forEach(k=>{const el=document.getElementById(ids[k]);if(el)el.checked=!!v[k]});updateSnippet()};
  document.addEventListener("DOMContentLoaded",()=>{
   load();
+  Object.values(ids).forEach(id=>document.getElementById(id)?.addEventListener("change",updateSnippet));
   document.getElementById("navSettings")?.addEventListener("click",()=>show("newSettingsView"));
   document.getElementById("dashSettings")?.addEventListener("click",()=>show("newSettingsView"));
   document.getElementById("settingsBack")?.addEventListener("click",()=>show("newAdminDashboard"));
   document.getElementById("savePortalEffects")?.addEventListener("click",write);
+  document.getElementById("copyPortalEffectsSnippet")?.addEventListener("click",async()=>{
+   const el=document.getElementById("portalEffectsSnippet"),status=document.getElementById("portalEffectsCopyStatus");
+   try{await navigator.clipboard.writeText(el.value);status.textContent="Gekopieerd!";}catch(_){el.focus();el.select();try{document.execCommand("copy");status.textContent="Gekopieerd!";}catch(e){status.textContent="Selecteer en kopieer de code handmatig.";}}
+  });
  });
 })();
 </script>
