@@ -89,7 +89,7 @@
   const head=document.createElement("div");head.className="cms-user-rights-head";
   const who=document.createElement("code");who.textContent=row.user_id;head.append(who);
   const del=document.createElement("button");del.className="cms-btn";del.textContent="Profiel verwijderen";del.onclick=async()=>{if(!confirm("CMS-rechten verwijderen?"))return;const {error}=await db.from("admin_permissions").delete().eq("user_id",row.user_id);$("#cmsPermStatus").textContent=error?.message||"Profiel verwijderd.";loadPermissions()};head.append(del);card.append(head);
-  [["FAQ","faq"],["Nieuws","news"],["Vacatures","jobs"],["Onderhoud","maintenance"]].forEach(([name,slug])=>{
+  [["Onderhoud","maintenance"]].forEach(([name,slug])=>{
    const group=document.createElement("div");group.className="cms-right-group";const title=document.createElement("strong");title.textContent=name;group.append(title);
    [["Bekijken","view"],["Bewerken","edit"],["Publiceren","publish"],["Verwijderen","delete"]].forEach(([label,action])=>{
     if(slug!=="maintenance")return;const key="can_"+action+"_"+slug,wrap=document.createElement("label");wrap.className="cms-right-check";const cb=document.createElement("input");cb.type="checkbox";cb.checked=!!row[key];
