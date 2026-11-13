@@ -3337,4 +3337,26 @@ main.shell>.view::before,
  .hpmw-global-brandbar{aspect-ratio:2048/640!important;margin-bottom:14px!important}
 }
 </style>
+<style id="hpmw-banner-compact-final">
+/* Compacte gedeelde banner: minder hoog, volledige breedte, bronafbeelding niet vervormen. */
+.hpmw-global-brandbar{
+ display:block!important;position:relative!important;z-index:6!important;
+ width:100%!important;height:clamp(125px,17vw,220px)!important;
+ min-height:0!important;aspect-ratio:auto!important;
+ margin:0 0 18px!important;padding:0!important;overflow:hidden!important;
+ box-sizing:border-box!important;background-color:#080f1b!important;
+ background-image:url("https://i44.servimg.com/u/f44/11/48/74/42/banner10.png")!important;
+ background-repeat:no-repeat!important;background-position:center center!important;
+ background-size:cover!important;border:0!important;
+ border-bottom:1px solid rgba(214,179,108,.55)!important;
+ box-shadow:0 10px 26px rgba(0,0,0,.4)!important;
+}
+.hpmw-global-brandbar-inner,.hpmw-global-brandbar img,.hpmw-brand-ornament{display:none!important}
+body #introView .hpmw-portal-logo,
+body #introView .hpmw-portal-logo img{display:none!important;visibility:hidden!important;height:0!important;max-height:0!important;min-height:0!important;margin:0!important;padding:0!important;opacity:0!important}
+body #introView{padding-top:0!important}
+@media(max-width:650px){
+ .hpmw-global-brandbar{height:clamp(100px,22vw,155px)!important;margin-bottom:14px!important}
+}
+</style>
 </body></html>
