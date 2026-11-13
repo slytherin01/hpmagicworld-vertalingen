@@ -1256,10 +1256,14 @@ body:not(.supabase-authenticated)>:not(#supabaseAuthGate){display:none!important
 <div class="portal-effect-setting"><div><h2>🎃 Zwevende pompoenen</h2><p>Laat decoratieve pompoenen over de portaalpagina zweven.</p></div><label class="effect-switch"><input type="checkbox" id="effectPumpkins"><span class="effect-slider"></span></label></div>
 <div class="actions" style="padding:18px 0 0"><button class="btn primary" id="savePortalEffects">Instellingen opslaan</button><span id="portalEffectsStatus" role="status" style="color:var(--muted);align-self:center"></span></div>
 <div class="portal-effect-code" style="margin-top:24px;padding-top:20px;border-top:1px solid var(--line)">
-<h2 style="font-size:16px;margin:0 0 6px">Script voor je Forumactie-portaal</h2>
-<p class="subtitle" style="margin:0 0 12px">Zet dit korte script in de HTML/JavaScript-instellingen van je portaal. De effecten hieronder bepalen welke onderdelen het script toont. Pas je de schakelaars aan, kopieer dan de nieuwe code opnieuw.</p>
+<h2 style="font-size:16px;margin:0 0 6px">Eenmalig instellen voor je Forumactie-portaal</h2>
+<p class="subtitle" style="margin:0 0 12px">Voer eerst de SQL hieronder één keer uit in Supabase → SQL Editor. Daarna plak je het vaste script op je portaal. Alle toekomstige wijzigingen sla je alleen nog hier in de tool op.</p>
+<textarea id="portalEffectsSql" readonly rows="10" spellcheck="false" style="width:100%;min-height:210px;resize:vertical;padding:12px;border-radius:10px;border:1px solid var(--line);background:#080e19;color:#dce7fa;font:11px/1.5 ui-monospace,monospace"></textarea>
+<div class="actions" style="padding:10px 0"><button class="btn" type="button" id="copyPortalEffectsSql">SQL kopiëren</button><span id="portalEffectsSqlStatus" role="status" style="color:var(--muted);align-self:center"></span></div>
+<h3 style="font-size:15px;margin:16px 0 6px">Vast portaal-script</h3>
+<p class="subtitle" style="margin:0 0 12px">Dit script hoef je na het plaatsen niet meer te wijzigen. Het portaal haalt de nieuwste opgeslagen instellingen automatisch op.</p>
 <textarea id="portalEffectsSnippet" readonly rows="2" spellcheck="false" style="width:100%;min-height:66px;resize:vertical;padding:12px;border-radius:10px;border:1px solid var(--line);background:#080e19;color:#dce7fa;font:12px/1.5 ui-monospace,monospace"></textarea>
-<div class="actions" style="padding:10px 0 0"><button class="btn primary" type="button" id="copyPortalEffectsSnippet">Script kopiëren</button><span id="portalEffectsCopyStatus" role="status" style="color:var(--muted);align-self:center"></span></div>
+<div class="actions" style="padding:10px 0 0"><button class="btn primary" type="button" id="copyPortalEffectsSnippet">Vast script kopiëren</button><span id="portalEffectsCopyStatus" role="status" style="color:var(--muted);align-self:center"></span></div>
 </div>
 </div></section>
 <section class="view" id="newTranslationsView">
@@ -3843,44 +3847,78 @@ html body.supabase-authenticated main.shell{
 <script id="portal-effects-settings-script">
 (function(){
  "use strict";
- const KEY="hpmw_portal_effects_v1", BASE="https://slytherin01.github.io/muggle-ministry/portal-effects.js";
+ const KEY="hpmw_portal_effects_v1";
+ const BASE="https://slytherin01.github.io/muggle-ministry/portal-effects.js";
  const ids={snow:"effectSnow",fireworks:"effectFireworks",pumpkins:"effectPumpkins"};
  const defaults={snow:false,fireworks:false,pumpkins:false};
+ const SQL=`create table if not exists public.portal_effects_settings (
+   id integer primary key check (id = 1),
+   snow boolean not null default false,
+   fireworks boolean not null default false,
+   pumpkins boolean not null default false,
+   updated_at timestamptz not null default now()
+ );
+ insert into public.portal_effects_settings (id) values (1) on conflict (id) do nothing;
+ alter table public.portal_effects_settings enable row level security;
+ grant select on public.portal_effects_settings to anon, authenticated;
+ grant insert, update on public.portal_effects_settings to authenticated;
+ drop policy if exists "Portal effects are readable by visitors" on public.portal_effects_settings;
+ create policy "Portal effects are readable by visitors"
+   on public.portal_effects_settings for select to anon, authenticated using (true);
+ drop policy if exists "Admins can insert portal effects" on public.portal_effects_settings;
+ create policy "Admins can insert portal effects"
+   on public.portal_effects_settings for insert to authenticated
+   with check (exists (select 1 from public.user_roles r where r.user_id = auth.uid() and r.role in ('admin','moderator')));
+ drop policy if exists "Admins can update portal effects" on public.portal_effects_settings;
+ create policy "Admins can update portal effects"
+   on public.portal_effects_settings for update to authenticated
+   using (exists (select 1 from public.user_roles r where r.user_id = auth.uid() and r.role in ('admin','moderator')))
+   with check (exists (select 1 from public.user_roles r where r.user_id = auth.uid() and r.role in ('admin','moderator')));
+`;
  const byId=id=>document.getElementById(id);
- const read=()=>{try{return {...defaults,...JSON.parse(localStorage.getItem(KEY)||"{}")}}catch(_){return {...defaults}}};
+ const client=()=>window.hpmwSupabase;
+ const localRead=()=>{try{return {...defaults,...JSON.parse(localStorage.getItem(KEY)||"{}")}}catch(_){return {...defaults}}};
  function activateView(id){
    document.querySelectorAll(".view").forEach(v=>{v.classList.remove("active");v.style.setProperty("display","none","important")});
-   const target=byId(id);
-   if(!target)return;
-   target.classList.add("active");
-   target.style.setProperty("display","block","important");
-   target.style.setProperty("visibility","visible","important");
-   target.style.setProperty("opacity","1","important");
-   window.scrollTo(0,0);
+   const target=byId(id);if(!target)return;
+   target.classList.add("active");target.style.setProperty("display","block","important");
+   target.style.setProperty("visibility","visible","important");target.style.setProperty("opacity","1","important");window.scrollTo(0,0);
  }
- function snippet(){
-   return '<script src="'+BASE+'?snow='+(+byId(ids.snow).checked)+'&fireworks='+(+byId(ids.fireworks).checked)+'&pumpkins='+(+byId(ids.pumpkins).checked)+'"><\\/script>';
+ const snippet=()=>'<script src="'+BASE+'"><\\/script>';
+ function updateSnippet(){if(byId("portalEffectsSnippet"))byId("portalEffectsSnippet").value=snippet();if(byId("portalEffectsSql"))byId("portalEffectsSql").value=SQL;}
+ function showStatus(id,msg){const el=byId(id);if(el)el.textContent=msg;}
+ async function loadSettings(){
+   const c=client();
+   if(!c)return localRead();
+   const {data,error}=await c.from("portal_effects_settings").select("snow,fireworks,pumpkins").eq("id",1).maybeSingle();
+   if(error){showStatus("portalEffectsStatus","Database nog niet ingesteld? Voer eerst de SQL hieronder uit in Supabase.");return localRead();}
+   return data?{snow:!!data.snow,fireworks:!!data.fireworks,pumpkins:!!data.pumpkins}:localRead();
  }
- function updateSnippet(){const el=byId("portalEffectsSnippet");if(el)el.value=snippet()}
- function save(){
+ async function save(){
    const v={};Object.keys(ids).forEach(k=>v[k]=byId(ids[k]).checked);
-   localStorage.setItem(KEY,JSON.stringify(v));updateSnippet();
-   const status=byId("portalEffectsStatus");if(status)status.textContent="Keuzes opgeslagen. Kopieer het script hieronder naar Forumactie.";
+   localStorage.setItem(KEY,JSON.stringify(v));
+   const c=client();
+   if(!c){showStatus("portalEffectsStatus","Geen Supabase-verbinding. Log opnieuw in.");return;}
+   showStatus("portalEffectsStatus","Instellingen opslaan…");
+   const {error}=await c.from("portal_effects_settings").upsert({id:1,...v,updated_at:new Date().toISOString()},{onConflict:"id"});
+   if(error){showStatus("portalEffectsStatus","Opslaan mislukt: "+error.message+" — controleer of je de SQL hebt uitgevoerd.");return;}
+   showStatus("portalEffectsStatus","Opgeslagen! Het portaal gebruikt deze instellingen automatisch (binnen maximaal 60 seconden).");
  }
- function init(){
-   const v=read();Object.keys(ids).forEach(k=>{const el=byId(ids[k]);if(el)el.checked=!!v[k]});
+ async function copy(id,statusId){
+   const el=byId(id);try{await navigator.clipboard.writeText(el.value);showStatus(statusId,"Gekopieerd!");}
+   catch(_){el.focus();el.select();try{document.execCommand("copy");showStatus(statusId,"Gekopieerd!");}catch(e){showStatus(statusId,"Selecteer en kopieer de tekst handmatig.");}}
+ }
+ async function init(){
    updateSnippet();
+   const v=await loadSettings();Object.keys(ids).forEach(k=>{if(byId(ids[k]))byId(ids[k]).checked=!!v[k]});
    byId("navSettings").onclick=e=>{e.preventDefault();e.stopPropagation();activateView("newSettingsView")};
    byId("dashSettings").onclick=e=>{e.preventDefault();e.stopPropagation();activateView("newSettingsView")};
    byId("settingsBack").onclick=e=>{e.preventDefault();activateView("newAdminDashboard")};
    byId("navTranslations").onclick=e=>{e.preventDefault();activateView("newTranslationsView")};
-   Object.values(ids).forEach(id=>byId(id).addEventListener("change",updateSnippet));
+   Object.values(ids).forEach(id=>byId(id).addEventListener("change",()=>{}));
    byId("savePortalEffects").onclick=save;
-   byId("copyPortalEffectsSnippet").onclick=async()=>{
-     const el=byId("portalEffectsSnippet"),status=byId("portalEffectsCopyStatus");
-     try{await navigator.clipboard.writeText(el.value);status.textContent="Gekopieerd!"}
-     catch(_){el.focus();el.select();try{document.execCommand("copy");status.textContent="Gekopieerd!"}catch(e){status.textContent="Selecteer en kopieer de code handmatig."}}
-   };
+   byId("copyPortalEffectsSnippet").onclick=()=>copy("portalEffectsSnippet","portalEffectsCopyStatus");
+   byId("copyPortalEffectsSql").onclick=()=>copy("portalEffectsSql","portalEffectsSqlStatus");
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
 })();
