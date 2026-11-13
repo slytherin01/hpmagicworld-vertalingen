@@ -1262,10 +1262,10 @@ body:not(.supabase-authenticated)>:not(#supabaseAuthGate){display:none!important
 <p class="subtitle" style="margin:0 0 12px">Voer eerst de SQL hieronder één keer uit in Supabase → SQL Editor. Daarna plak je het vaste script op je portaal. Alle toekomstige wijzigingen sla je alleen nog hier in de tool op.</p>
 <textarea id="portalEffectsSql" readonly rows="10" spellcheck="false" style="width:100%;min-height:210px;resize:vertical;padding:12px;border-radius:10px;border:1px solid var(--line);background:#080e19;color:#dce7fa;font:11px/1.5 ui-monospace,monospace"></textarea>
 <div class="actions" style="padding:10px 0"><button class="btn" type="button" id="copyPortalEffectsSql">SQL kopiëren</button><span id="portalEffectsSqlStatus" role="status" style="color:var(--muted);align-self:center"></span></div>
-<h3 style="font-size:15px;margin:16px 0 6px">Scriptregel voor je bestaande portaal</h3>
-<p class="subtitle" style="margin:0 0 12px">Dit is alleen de korte laadregel. VERWIJDER NIET je bestaande portaalcode en vervang niet de hele pagina. Laat alle bestaande HTML staan en plaats deze regel helemaal onderaan je bestaande portaalcode (of vervang alleen de oude scriptregel). Live weer uit Amsterdam wordt automatisch nagebootst.</p>
-<textarea id="portalEffectsSnippet" readonly rows="2" spellcheck="false" style="width:100%;min-height:66px;resize:vertical;padding:12px;border-radius:10px;border:1px solid var(--line);background:#080e19;color:#dce7fa;font:12px/1.5 ui-monospace,monospace"></textarea>
-<div class="actions" style="padding:10px 0 0"><button class="btn primary" type="button" id="copyPortalEffectsSnippet">Scriptregel kopiëren</button><span id="portalEffectsCopyStatus" role="status" style="color:var(--muted);align-self:center"></span></div>
+<h3 style="font-size:15px;margin:16px 0 6px">Volledige portal-effects.js-code</h3>
+<p class="subtitle" style="margin:0 0 12px">Hieronder staat de volledige JavaScript-code zelf (dus niet alleen een laadregel). De tool haalt steeds de nieuwste versie op uit GitHub. Kopieer deze volledige code naar het JavaScript-gedeelte van je portaal; laat je bestaande HTML en portaalonderdelen intact. Live weer uit Amsterdam is inbegrepen.</p>
+<textarea id="portalEffectsSnippet" readonly rows="18" spellcheck="false" style="width:100%;min-height:360px;resize:vertical;padding:12px;border-radius:10px;border:1px solid var(--line);background:#080e19;color:#dce7fa;font:11px/1.5 ui-monospace,monospace"></textarea>
+<div class="actions" style="padding:10px 0 0"><button class="btn primary" type="button" id="copyPortalEffectsSnippet">Volledige JS-code kopiëren</button><span id="portalEffectsCopyStatus" role="status" style="color:var(--muted);align-self:center"></span></div>
 </div>
 </div></section>
 <section class="view" id="newTranslationsView">
@@ -3890,8 +3890,21 @@ html body.supabase-authenticated main.shell{
    target.classList.add("active");target.style.setProperty("display","block","important");
    target.style.setProperty("visibility","visible","important");target.style.setProperty("opacity","1","important");window.scrollTo(0,0);
  }
- const snippet=()=>'<script src="'+BASE+'">'+'<'+'/script>';
- function updateSnippet(){if(byId("portalEffectsSnippet"))byId("portalEffectsSnippet").value=snippet();if(byId("portalEffectsSql"))byId("portalEffectsSql").value=SQL;}
+ async function updateSnippet(){
+   if(byId("portalEffectsSql"))byId("portalEffectsSql").value=SQL;
+   const field=byId("portalEffectsSnippet");
+   if(!field)return;
+   field.value="Volledige JavaScript-code laden…";
+   try{
+     const response=await fetch("https://raw.githubusercontent.com/slytherin01/muggle-ministry/main/portal-effects.js?"+Date.now(),{cache:"no-store"});
+     if(!response.ok)throw new Error("HTTP "+response.status);
+     field.value=await response.text();
+     showStatus("portalEffectsCopyStatus","Volledige JS-code geladen.");
+   }catch(error){
+     field.value="De JS-code kon niet automatisch worden geladen. Open https://github.com/slytherin01/muggle-ministry/blob/main/portal-effects.js en kopieer daar de volledige inhoud.";
+     showStatus("portalEffectsCopyStatus","Laden mislukt; probeer de tool opnieuw te verversen.");
+   }
+ }
  function showStatus(id,msg){const el=byId(id);if(el)el.textContent=msg;}
  async function loadSettings(){
    const c=client();
