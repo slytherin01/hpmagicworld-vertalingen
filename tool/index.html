@@ -3884,7 +3884,7 @@ html body.supabase-authenticated main.shell{
    target.classList.add("active");target.style.setProperty("display","block","important");
    target.style.setProperty("visibility","visible","important");target.style.setProperty("opacity","1","important");window.scrollTo(0,0);
  }
- const snippet=()=>'<script src="'+BASE+'"><\\/script>';
+ const snippet=()=>'<script src="'+BASE+'">'+'<'+'/script>';
  function updateSnippet(){if(byId("portalEffectsSnippet"))byId("portalEffectsSnippet").value=snippet();if(byId("portalEffectsSql"))byId("portalEffectsSql").value=SQL;}
  function showStatus(id,msg){const el=byId(id);if(el)el.textContent=msg;}
  async function loadSettings(){
