@@ -3953,6 +3953,45 @@ html body.supabase-authenticated main.shell{
 })();
 </script>
 <script src="./admin-cms.js?v=20261113-5" defer></script>
+
+<style id="hpmw-universal-quicknav-css">
+.hpmw-view-quicknav{position:sticky;top:78px;z-index:35;display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 18px;padding:12px 14px;border:1px solid #34465b;border-radius:13px;background:rgba(13,22,36,.96);box-shadow:0 8px 24px #0004;backdrop-filter:blur(12px)}
+.hpmw-view-quicknav strong{color:#aeb8ff;font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin-right:4px}
+.hpmw-view-quicknav button{padding:7px 11px;border:1px solid #3b4d65;border-radius:9px;background:#19283c;color:#dce7f7;font-size:11px;font-weight:750}
+.hpmw-view-quicknav button:hover,.hpmw-view-quicknav button:focus-visible{background:#302b58;border-color:#8b7cff;color:#fff}
+.hpmw-view-quicknav button.active{background:#51458e;border-color:#a99cff;color:#fff}
+@media(max-width:650px){.hpmw-view-quicknav{top:68px;padding:9px;gap:6px}.hpmw-view-quicknav strong{width:100%}.hpmw-view-quicknav button{font-size:10px;padding:7px 9px}}
+</style>
+<script id="hpmw-universal-view-quicknav">
+(()=> {
+ "use strict";
+ const labelOf=(node)=>((node.querySelector("h2,h3,h4,.panel-head h2,.section-title")?.textContent||node.getAttribute("aria-label")||"Onderdeel").trim().replace(/\\s+/g," ").slice(0,34));
+ const targetFor=(heading)=>{
+  return heading.closest(".panel,.cms-panel,.translation-panel,.settings-panel,.admin-section,.ticket-panel")||heading.parentElement;
+ };
+ function enhance(view){
+  if(!view||view.dataset.quicknavReady==="1")return;
+  const heads=[...view.querySelectorAll("h2,h3")].filter(h=>!h.closest(".hpmw-view-quicknav")&&h.offsetParent!==null);
+  const targets=[],seen=new Set();
+  heads.forEach(h=>{const t=targetFor(h);if(!t||t===view||seen.has(t))return;seen.add(t);targets.push({node:t,label:labelOf(t)});});
+  if(targets.length<2)return;
+  const bar=document.createElement("nav");bar.className="hpmw-view-quicknav";bar.setAttribute("aria-label","Snel naar onderdelen");
+  const title=document.createElement("strong");title.textContent="Snel naar";bar.append(title);
+  targets.forEach((item,i)=>{
+   if(!item.node.id)item.node.id="hpmw-quick-section-"+Math.random().toString(36).slice(2,9);
+   const b=document.createElement("button");b.type="button";b.textContent=item.label;b.onclick=()=>{
+    targets.forEach(x=>x.node.classList.remove("hpmw-quicknav-current"));
+    item.node.classList.add("hpmw-quicknav-current");
+    item.node.scrollIntoView({behavior:"smooth",block:"start"});
+   };bar.append(b);
+  });
+  view.insertBefore(bar,view.firstChild);view.dataset.quicknavReady="1";
+ }
+ function scan(){document.querySelectorAll(".view").forEach(enhance);}
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",scan,{once:true});else scan();
+ new MutationObserver(scan).observe(document.querySelector("main.shell")||document.body,{childList:true,subtree:true});
+})();
+</script>
 </body>
 </html>
 <style id="hpmw-force-pt-editor-visible">
