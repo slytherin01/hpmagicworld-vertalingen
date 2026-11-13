@@ -3120,14 +3120,41 @@ s.textContent += "#introView{height:auto!important;min-height:0!important;max-he
   if(pages){const welcome=document.querySelector(".hpmw-welcome-box");if(welcome){const guest=pages.find(x=>x.title==="Welkomsttekst voor bezoekers"),member=pages.find(x=>x.title==="Welkomsttekst voor leden");if(guest){const p=welcome.querySelector(".hpmw-guest-welcome");if(p)p.textContent=guest.body}if(member){const p=welcome.querySelector(".hpmw-member-welcome");if(p)p.textContent=member.body}}}
   if(news && home){
    let section=document.getElementById("hpmwHomeNews");
-   if(!section){section=el("section","hpmw-cms-section");section.id="hpmwHomeNews";
-    const loginLayout=home.querySelector(".intro-login-layout");
-    if(loginLayout)loginLayout.insertAdjacentElement("afterend",section);else home.append(section);
-   }
+   const loginLayout=home.querySelector(".intro-login-layout");
+   const logo=home.querySelector(".hpmw-portal-logo");
+   /* Forceer de welkomstkaart terug in de normale documentstroom; voorkom vaste/overlappende positionering. */
+   [home,loginLayout,home.querySelector(".intro-static-card"),home.querySelector(".hpmw-welcome-box")].filter(Boolean).forEach(node=>{
+    node.style.setProperty("position","relative","important");
+    node.style.setProperty("top","auto","important");
+    node.style.setProperty("left","auto","important");
+    node.style.setProperty("right","auto","important");
+    node.style.setProperty("bottom","auto","important");
+    node.style.setProperty("transform","none","important");
+    node.style.setProperty("float","none","important");
+    node.style.setProperty("max-height","none","important");
+    node.style.setProperty("height","auto","important");
+    node.style.setProperty("overflow","visible","important");
+   });
+   if(logo){logo.style.setProperty("position","relative","important");logo.style.setProperty("margin","18px auto 12px","important")}
+   if(loginLayout){loginLayout.style.setProperty("display","block","important");loginLayout.style.setProperty("width","min(100%,1100px)","important");loginLayout.style.setProperty("margin","0 auto","important")}
+   if(!section){section=el("section","hpmw-cms-section");section.id="hpmwHomeNews"}
+   if(loginLayout){if(section.parentElement!==home||section.previousElementSibling!==loginLayout)loginLayout.insertAdjacentElement("afterend",section)}
+   else if(section.parentElement!==home)home.append(section);
+   section.style.setProperty("position","relative","important");
+   section.style.setProperty("display","block","important");
+   section.style.setProperty("clear","both","important");
+   section.style.setProperty("float","none","important");
+   section.style.setProperty("width","min(100%,1100px)","important");
+   section.style.setProperty("margin","30px auto 44px","important");
+   section.style.setProperty("z-index","1","important");
    section.replaceChildren(el("h2","","Nieuwsberichten"));
    if(news.length)section.append(...news.map(card));
    else section.append(el("p","","Er zijn nog geen nieuwsberichten gepubliceerd."));
   }
+  /* Verwijder een eventueel door de Forumotion-header toegevoegde link naar de losse nieuwspagina. */
+  document.querySelectorAll("header nav a, header nav button").forEach(item=>{
+   if(item.textContent.replace(/\\s+/g," ").trim().toLowerCase()==="nieuwspagina")item.remove();
+  });
   if(maintenance&&home){document.getElementById("hpmwCmsMaintenance")?.remove();if(maintenance.length){const n=el("section","hpmw-home-notice hpmw-home-maintenance");n.id="hpmwCmsMaintenance";n.append(el("div","hpmw-maintenance-head",maintenance[0].title),el("p","",maintenance[0].body),el("div","hpmw-maintenance-foot","Bericht van het beheerteam"));home.append(n)}}
   if(errors.length)status("Synchronisatieprobleem: "+errors.join(", ")+". Controleer de verbinding met Supabase.");else document.getElementById("hpmwCmsSyncStatus")?.remove();
  }
