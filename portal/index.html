@@ -1319,7 +1319,7 @@ async function loadMyDepartment(){
   const department=aliases[normalized]||Object.keys(DEPARTMENT_INFO).find(name=>normalized.includes(name.toLocaleLowerCase("nl").normalize("NFD").replace(/[^a-z]/g,"")));
   const info=department?DEPARTMENT_INFO[department]:null;
   if(!info){box.innerHTML='<span class="hpmw-department-status">Afdeling nog niet ingesteld.</span>';return;}
-  const animal=info.image?'<div class="hpmw-department-animal-image" role="img" aria-label="'+esc(department)+'" style="background-image:url(\''+info.image+'\')"></div>':'<span class="hpmw-department-animal">'+info.animal+'</span>';
+  const animal=info.image?'<img class="hpmw-department-animal-image" src="'+info.image+'" alt="'+esc(department)+'" style="display:block!important;visibility:visible!important;opacity:1!important;width:84px!important;height:84px!important;max-width:100%!important;object-fit:contain!important;margin:0 auto!important;border:0!important;background:transparent!important">':'<span class="hpmw-department-animal">'+info.animal+'</span>';
   box.innerHTML=info.url?'<a class="hpmw-department-link" href="'+info.url+'" target="_blank" rel="noopener" aria-label="Open leerlingenkamer '+esc(department)+'">'+animal+'<strong>'+esc(department)+'</strong><span>Open leerlingenkamer ↗</span></a>':'<div class="hpmw-department-unassigned">'+animal+'<strong>'+esc(department)+'</strong></div>';
  }catch(e){box.innerHTML='<span class="hpmw-department-status">Je afdeling kon niet worden opgehaald.</span>';}
 }
