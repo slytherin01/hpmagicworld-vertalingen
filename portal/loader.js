@@ -13,7 +13,7 @@
     var controller = new AbortController();
     var timer = setTimeout(function () { controller.abort(); }, ms);
     return fetch(url, {
-      cache: "no-store",
+      cache: "default",
       credentials: "omit",
       mode: "cors",
       signal: controller.signal
@@ -60,5 +60,5 @@
     });
   }
 
-  loadFrom(0);
+  loadPortal();
 })();
