@@ -2783,28 +2783,7 @@ main.shell>.view#homeView::before{content:none!important;display:none!important;
 #formView .box,#adminView .box,#myTicketsView .box,#homeView .box {background-color:#0E1623!important}
 </style>
 
-<style id="hpmw-logos-centered-top-in-bars">
-/* Oude logo's linksonder verwijderen. */
-#formView::after,#adminView::after,#myTicketsView::after,#homeView::after{content:none!important;display:none!important;background:none!important}
-#formView,#adminView,#myTicketsView,#homeView{padding-bottom:24px!important}
-/* Logo bovenaan, horizontaal gecentreerd, BINNEN de donkere titelbalk. */
-#homeView .support-hero,#formView .new-ticket-head,#myTicketsView>.page-head,#adminView>.page-head{
- position:relative!important;padding-top:115px!important;box-sizing:border-box!important;
- background-color:#0E1623!important;
-}
-#homeView .support-hero::before,#formView .new-ticket-head::before,#myTicketsView>.page-head::before,#adminView>.page-head::before{
- content:""!important;display:block!important;position:absolute!important;
- top:14px!important;left:50%!important;transform:translateX(-50%)!important;
- width:145px!important;height:88px!important;
- background:transparent url("https://i28.servimg.com/u/f28/11/54/28/73/logo10.png") center / contain no-repeat!important;
- visibility:visible!important;opacity:1!important;pointer-events:none!important;
- border:0!important;box-shadow:none!important;
-}
-@media(max-width:600px){
-#homeView .support-hero,#formView .new-ticket-head,#myTicketsView>.page-head,#adminView>.page-head{padding-top:105px!important}
-#homeView .support-hero::before,#formView .new-ticket-head::before,#myTicketsView>.page-head::before,#adminView>.page-head::before{width:122px!important;height:76px!important;top:12px!important}
-}
-</style>
+
 <style id="hpmw-portal-logo-three-times-higher">
 /* Portalpagina: logo nog eens circa 72px omhoog, zonder de welkomsttekst mee te verplaatsen. */
 #introView .hpmw-portal-logo{transform:translateY(-72px)!important;}
@@ -3137,37 +3116,7 @@ main.shell>.view#homeView::before{content:none!important;display:none!important;
 })();
 </script>
 
-<style id="hpmw-home-notices-and-equal-page-logo-final">
-/* Onderhouds- en nieuwjaarsmeldingen horen uitsluitend bij de startpagina. */
-#homeView>.hpmw-home-notice{display:block}
-#formView .hpmw-home-notice,#myTicketsView .hpmw-home-notice,#adminView .hpmw-home-notice,
-#faqView .hpmw-home-notice,#introView .hpmw-home-notice{display:none!important}
 
-/* Hetzelfde bannerlogo op Home, Mijn tickets en Ticketbeheer; Home iets lager. */
-main.shell>.view#homeView::before,
-main.shell>.view#myTicketsView::before,
-main.shell>.view#adminView::before{
-  content:""!important;
-  display:block!important;
-  width:100%!important;
-  height:clamp(130px,16vw,180px)!important;
-  margin:0 0 18px!important;
-  background-image:url("https://i.servimg.com/u/f28/11/54/28/73/ticket11.png")!important;
-  background-repeat:no-repeat!important;
-  background-position:center center!important;
-  background-size:contain!important;
-}
-main.shell>.view#homeView::before{margin-top:16px!important}
-@media(max-width:600px){
-  main.shell>.view#homeView::before,
-  main.shell>.view#myTicketsView::before,
-  main.shell>.view#adminView::before{
-    height:clamp(105px,23vw,145px)!important;
-    margin-bottom:13px!important;
-  }
-  main.shell>.view#homeView::before{margin-top:12px!important}
-}
-</style>
 
 
 <script id="hpmw-admin-content-live">
@@ -3354,29 +3303,7 @@ body #hpmwHomeNews .hpmw-cms-kicker{color:#d6b36c!important}body #hpmwHomeNews .
 
 
 
-<style id="hpmw-individual-ticket-page-banners">
-/* Eigen headerafbeeldingen voor Mijn Tickets en Ticketbeheer. */
-main.shell>.view#myTicketsView::before,
-main.shell>.view#adminView::before{
- content:""!important;display:block!important;width:100%!important;
- height:clamp(105px,13vw,155px)!important;min-height:0!important;
- margin:0 0 14px!important;padding:0!important;
- background-repeat:no-repeat!important;background-position:center center!important;
- background-size:contain!important;border:0!important;box-shadow:none!important;
-}
-main.shell>.view#myTicketsView::before{
- background-image:url("https://i44.servimg.com/u/f44/11/48/74/42/mijnti10.png")!important;
-}
-main.shell>.view#adminView::before{
- background-image:url("https://i44.servimg.com/u/f44/11/48/74/42/ticket12.png")!important;
-}
-@media(max-width:600px){
- main.shell>.view#myTicketsView::before,
- main.shell>.view#adminView::before{
-  height:clamp(82px,20vw,118px)!important;margin-bottom:10px!important;
- }
-}
-</style>
+
 <style id="hpmw-widget-nav-palette-white-type">
 /* Widgets in dezelfde donkerblauwe tinten als de navigatie; geel vervangen door wit. */
 :root{--hm-gold:#dce5f0;--hm-gold-soft:#ffffff;--hm-line:rgba(125,157,190,.32)}
@@ -3648,46 +3575,22 @@ html body main.shell>.view#formView .support-logo{display:none!important;visibil
 html body main.shell>.view#formView .new-ticket-head{padding-top:14px!important}
 </style>
 
-<style id="hpmw-my-tickets-remove-all-artwork-final">
-/* Mijn tickets: zelfde opschoning als Ticket Support; behoud titel en ticketinhoud. */
-html body main.shell>.view#myTicketsView::before,
-html body main.shell>.view#myTicketsView::after,
-html body main.shell>.view#myTicketsView>.page-head::before,
-html body main.shell>.view#myTicketsView>.page-head::after{
- content:none!important;display:none!important;visibility:hidden!important;
- background:none!important;background-image:none!important;
- width:0!important;height:0!important;min-height:0!important;margin:0!important;padding:0!important;border:0!important;box-shadow:none!important
-}
-html body main.shell>.view#myTicketsView img,
-html body main.shell>.view#myTicketsView picture,
-html body main.shell>.view#myTicketsView .support-logo-wrap,
-html body main.shell>.view#myTicketsView .support-logo{display:none!important;visibility:hidden!important}
-html body main.shell>.view#myTicketsView>.page-head{padding-top:14px!important;margin-top:0!important}
-</style>
 
-<style id="hpmw-my-tickets-force-remove-banner-artwork-v2">
-/* Definitieve override: Mijn Tickets mag nergens een banner- of logo-afbeelding tonen. */
-body:has(#myTicketsView.active) main.shell>.view#myTicketsView,
-body:has(#myTicketsView.active) main.shell>.view#myTicketsView>.page-head{
- background-image:none!important;background:none!important;
-}
-body:has(#myTicketsView.active) main.shell>.view#myTicketsView::before,
-body:has(#myTicketsView.active) main.shell>.view#myTicketsView::after,
-body:has(#myTicketsView.active) main.shell>.view#myTicketsView>.page-head::before,
-body:has(#myTicketsView.active) main.shell>.view#myTicketsView>.page-head::after,
-html body main.shell>.view#myTicketsView::before,
-html body main.shell>.view#myTicketsView::after,
-html body main.shell>.view#myTicketsView>.page-head::before,
-html body main.shell>.view#myTicketsView>.page-head::after{
+
+
+
+<style id="hpmw-my-tickets-clean-layout-source-fix">
+/* Mijn Tickets: geen bannerafbeeldingen of logo's. Alleen de bestaande paginakop met titel blijft staan. */
+#myTicketsView::before,#myTicketsView::after,
+#myTicketsView .page-head::before,#myTicketsView .page-head::after,
+#myTicketsView>.page-head::before,#myTicketsView>.page-head::after{
  content:none!important;display:none!important;visibility:hidden!important;opacity:0!important;
  background:none!important;background-image:none!important;
  width:0!important;height:0!important;min-height:0!important;max-height:0!important;
- margin:0!important;padding:0!important;border:0!important;box-shadow:none!important;
+ margin:0!important;padding:0!important;border:0!important;box-shadow:none!important
 }
-html body main.shell>.view#myTicketsView *{background-image:none!important}
-html body main.shell>.view#myTicketsView img,
-html body main.shell>.view#myTicketsView picture,
-html body main.shell>.view#myTicketsView svg[aria-label*="logo" i]{display:none!important;visibility:hidden!important;opacity:0!important}
-html body main.shell>.view#myTicketsView>.page-head{padding:14px 18px!important;min-height:0!important;margin:0 0 16px!important}
+#myTicketsView,#myTicketsView .page-head{background-image:none!important}
+#myTicketsView img,#myTicketsView picture,#myTicketsView .support-logo,#myTicketsView .support-logo-wrap{display:none!important}
+#myTicketsView>.page-head{padding:14px 60px!important;min-height:66px!important;margin:0 0 16px!important}
 </style>
 </body></html>
