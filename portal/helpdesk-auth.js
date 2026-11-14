@@ -17,10 +17,14 @@
   async function authorizedUser() {
     const result = await db.auth.getUser();
     if (result.error || !result.data.user) return null;
-    const check = await db.from("translation_admins")
-      .select("user_id").eq("user_id", result.data.user.id).maybeSingle();
-    if (check.error) throw check.error;
-    return check.data ? result.data.user : null;
+    const uid = result.data.user.id;
+    const [translationCheck, roleCheck] = await Promise.all([
+      db.from("translation_admins").select("user_id").eq("user_id", uid).maybeSingle(),
+      db.from("tool_access_roles").select("user_id,role").eq("user_id", uid).eq("role", "administrator").maybeSingle()
+    ]);
+    if (translationCheck.error) throw translationCheck.error;
+    if (roleCheck.error) throw roleCheck.error;
+    return (translationCheck.data || roleCheck.data) ? result.data.user : null;
   }
 
   window.hpmwGetSupabaseAccessToken = async function () {
@@ -36,7 +40,7 @@
       try {
         let user = await authorizedUser();
         if (user) return true;
-        const email = window.prompt("Log in met hetzelfde e-mailadres als bij het vertalingenbeheer:");
+        const email = window.prompt("Log in met hetzelfde e-mailadres als bij het vertalingen- of portaalbeheer:");
         if (!email) return false;
         const password = window.prompt("Supabase-wachtwoord:");
         if (!password) return false;
