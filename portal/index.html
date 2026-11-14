@@ -1295,7 +1295,7 @@ if(!name&&link)name=(link.textContent||"").trim();
 }
 return id&&logged?{id,name:name||"Gebruiker",logged:true}:null;
 }
-const DEPARTMENT_INFO={"Griffoendor":{image:"https://i.servimg.com/u/f28/11/54/28/73/th/griffo23.png",url:"https://testforumjoost.forumactie.com/f66-de-griffoendor-leerlingenkamer"},"Zwadderich":{image:"https://i.servimg.com/u/f28/11/54/28/73/th/zwadde19.png",url:"https://testforumjoost.forumactie.com/f67-de-zwadderich-leerlingenkamer"},"Huffelpuf":{image:"https://i.servimg.com/u/f28/11/54/28/73/th/huffel19.png",url:"https://testforumjoost.forumactie.com/f68-de-huffelpuf-leerlingenkamer"},"Ravenklauw":{image:"https://i.servimg.com/u/f28/11/54/28/73/th/ravenk20.png",url:"https://testforumjoost.forumactie.com/f69-de-ravenklauw-leerlingenkamer"},"Ongesorteerd":{image:"https://i.servimg.com/u/f28/11/54/28/73/sortee17.png",url:""}};
+const DEPARTMENT_INFO={"Griffoendor":{image:"https://i44.servimg.com/u/f44/11/48/74/42/griffo10.png",url:"https://testforumjoost.forumactie.com/f66-de-griffoendor-leerlingenkamer"},"Zwadderich":{image:"https://i44.servimg.com/u/f44/11/48/74/42/zwadde10.png",url:"https://testforumjoost.forumactie.com/f67-de-zwadderich-leerlingenkamer"},"Huffelpuf":{image:"https://i44.servimg.com/u/f44/11/48/74/42/huffel10.png",url:"https://testforumjoost.forumactie.com/f68-de-huffelpuf-leerlingenkamer"},"Ravenklauw":{image:"https://i44.servimg.com/u/f44/11/48/74/42/ravenk10.png",url:"https://testforumjoost.forumactie.com/f69-de-ravenklauw-leerlingenkamer"},"Ongesorteerd":{image:"https://i.servimg.com/u/f28/11/54/28/73/sortee17.png",url:""}};
 async function loadMyDepartment(){
  const box=document.querySelector("#hpmwMyDepartment .hpmw-department-content");if(!box)return;
  if(!user.logged||!user.id){box.innerHTML='<span class="hpmw-department-status">Log in om je afdeling te bekijken.</span>';return;}
@@ -3599,5 +3599,15 @@ html body main.shell>.view#myTicketsView .intro-support-logo,
 html body main.shell>.view#myTicketsView [class*="logo"],
 html body main.shell>.view#myTicketsView [id*="logo"]{display:none!important;visibility:hidden!important}
 html body main.shell>.view#myTicketsView>.page-head{background-image:none!important}
+</style>
+
+<style id="hpmw-my-tickets-no-border-final">
+/* Mijn Tickets: haal de omlijning volledig weg, zonder inhoud te verbergen. */
+html body main.shell>.view#myTicketsView>.page-head,
+html body main.shell>.view#myTicketsView>.panel,
+html body main.shell>.view#myTicketsView .panel,
+html body main.shell>.view#myTicketsView .ticket-list{
+ border:0!important;outline:0!important;box-shadow:none!important
+}
 </style>
 </body></html>
