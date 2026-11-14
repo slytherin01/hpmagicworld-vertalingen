@@ -3614,4 +3614,37 @@ html body #introView #hpmwHomeLayout .hpmw-home-side > .hpmw-side-card .hpmw-enc
 #homeView .support-categories-panel::before,#homeView .support-categories-panel::after,#homeView .support-categories-panel .panel-head::before,#homeView .support-categories-panel .panel-head::after{content:none!important;display:none!important;background:none!important;background-image:none!important;width:0!important;height:0!important;margin:0!important;padding:0!important}
 #homeView .support-categories-panel .panel-head{display:none!important}
 </style>
+
+<style id="hpmw-ticket-support-strip-all-artwork-final">
+/* Ticket Support-overzicht: verwijder alle banner- en logo-afbeeldingen. */
+html body main.shell>.view#homeView::before,
+html body main.shell>.view#homeView::after,
+html body main.shell>.view#homeView .support-hero::before,
+html body main.shell>.view#homeView .support-hero::after,
+html body main.shell>.view#homeView .support-categories-panel::before,
+html body main.shell>.view#homeView .support-categories-panel::after,
+html body main.shell>.view#homeView .support-categories-panel .panel-head::before,
+html body main.shell>.view#homeView .support-categories-panel .panel-head::after{
+ content:none!important;display:none!important;visibility:hidden!important;
+ background:none!important;background-image:none!important;
+ width:0!important;height:0!important;min-height:0!important;margin:0!important;padding:0!important;border:0!important;box-shadow:none!important
+}
+html body main.shell>.view#homeView img,
+html body main.shell>.view#homeView picture,
+html body main.shell>.view#homeView .support-logo-wrap,
+html body main.shell>.view#homeView .support-logo{display:none!important;visibility:hidden!important}
+html body main.shell>.view#homeView .support-hero{padding:0 16px 8px!important;margin:0 auto 18px!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
+/* Nieuw ticket-formulier: verwijder het ingevoegde logo uit de titelbalk en eventuele losse logo's. */
+html body main.shell>.view#formView .new-ticket-head::before,
+html body main.shell>.view#formView .new-ticket-head::after,
+html body main.shell>.view#formView::before,
+html body main.shell>.view#formView::after{
+ content:none!important;display:none!important;visibility:hidden!important;background:none!important;background-image:none!important;
+ width:0!important;height:0!important;min-height:0!important;margin:0!important;padding:0!important;border:0!important;box-shadow:none!important
+}
+html body main.shell>.view#formView img,
+html body main.shell>.view#formView .support-logo-wrap,
+html body main.shell>.view#formView .support-logo{display:none!important;visibility:hidden!important}
+html body main.shell>.view#formView .new-ticket-head{padding-top:14px!important}
+</style>
 </body></html>
