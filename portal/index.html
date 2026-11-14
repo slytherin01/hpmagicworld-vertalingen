@@ -2084,7 +2084,7 @@ document.addEventListener('DOMContentLoaded',function(){
  const bind=(id,fn)=>{const el=document.getElementById(id);if(el){el.addEventListener('click',function(e){e.preventDefault();fn();});}};
  bind('ticketSupportLaunch',()=>{if(typeof show==='function')show('homeView');});
  bind('myTicketsLaunch',()=>{if(typeof showMyTickets==='function')showMyTickets();});
- bind('adminLaunch',async()=>{await refreshTicketModerators();if(typeof isAdmin==='function'&&isAdmin()){if(typeof show==='function')show('adminView');if(typeof loadTickets==='function')loadTickets();}else{alert('Ticketbeheer is alleen beschikbaar voor supportmoderators. Controleer of het juiste Forumotion-gebruikersnummer is ingeschakeld bij Ticketbeheerrechten.');}});
+ bind('adminLaunch',async()=>{const button=document.getElementById('adminLaunch');if(button){button.disabled=true;button.setAttribute('aria-busy','true');}try{await refreshTicketModerators();if(typeof isAdmin!=='function'||!isAdmin()){alert('Je Forumotion-account heeft geen Ticketbeheerrechten.');return;}if(!window.HpmwHelpdeskAuth||typeof window.HpmwHelpdeskAuth.ensure!=='function'){alert('De beveiligde Ticketbeheer-login is niet geladen. Ververs de portal en probeer opnieuw.');return;}const authorized=await window.HpmwHelpdeskAuth.ensure();if(!authorized)return;if(typeof show==='function')show('adminView');if(typeof loadTickets==='function')await loadTickets();}catch(error){console.error('[Hpmw] Ticketbeheer openen mislukt',error);alert('Ticketbeheer kon niet worden geopend: '+(error&&error.message?error.message:'onbekende fout'));}finally{if(button){button.disabled=false;button.removeAttribute('aria-busy');}}});
 });
 </script>
 <style id="hpmw-member-nav-right-and-hide-account-actions">
