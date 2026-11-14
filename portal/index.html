@@ -1905,24 +1905,33 @@ html body #introView #hpmwHomeLayout .hpmw-sorting-hat-widget > button.hpmw-sort
 <a href="LINK_URL_HIER"><img src="IMAGE_URL_HIER" alt="Beschrijving afbeelding" style="max-width:100%;height:auto;display:block;margin:0 auto;"></a>
 -->
 <div class="page-head"><div><div class="eyebrow">Mijn support</div><h1>Mijn Tickets</h1><p class="subtitle">Bekijk je eigen open en gesloten tickets.</p></div><button class="btn" id="myTicketsBack"><span class="fa-button-icon"><i class="fa-solid fa-arrow-left hm-fa"></i></span> Terug</button></div><div class="panel"><div class="member-tabs"><button class="member-tab active" data-member-tab="open"><span class="fa-button-icon"><i class="fa-solid fa-folder-open hm-fa"></i></span> Open</button><button class="member-tab" data-member-tab="closed"><span class="fa-button-icon"><i class="fa-solid fa-folder hm-fa"></i></span> Gesloten</button></div><div class="ticket-list" id="myTicketsList"><div class="loading">Mijn tickets laden...</div></div><div class="member-detail" id="memberDetail"><div class="detail-head"><div data-extracted-style="4"><div class="detail-kicker">MIJN TICKET</div><div class="detail-title" id="memberDetailTitle"></div><div class="detail-facts" id="memberFacts"><div><small>Ticket ID</small><strong id="memberFactId">—</strong></div><div><small>Onderwerp</small><strong id="memberFactSubject">—</strong></div><div><small>Categorie</small><strong id="memberFactCategory">—</strong></div><div><small>Auteur</small><strong id="memberFactAuthor">—</strong></div><div><small>Datum / tijd</small><strong id="memberFactDateTime">—</strong></div></div><div class="detail-sub" id="memberDetailMeta"></div></div><button class="btn" id="memberDetailBack"><span class="fa-button-icon"><i class="fa-solid fa-arrow-left hm-fa"></i></span> Terug naar mijn tickets</button></div><div class="member-posts" id="memberPosts"></div><div class="reply-box"><h3>Reactie plaatsen</h3><textarea id="memberReply" placeholder="Schrijf je reactie..."></textarea><div class="reply-status" id="memberReplyStatus"></div><div class="reply-actions"><button class="btn primary" id="memberReplySend"><span class="fa-button-icon"><i class="fa-solid fa-paper-plane hm-fa"></i></span> Reactie versturen</button></div></div><div class="reply-box" id="memberEditBox"><h3>Bewerk je eerste bericht</h3><div class="member-edit-note" id="memberEditNote"></div><textarea id="memberEditMessage" placeholder="Pas je eerste bericht aan..."></textarea><div class="reply-status" id="memberEditStatus"></div><div class="reply-actions"><button class="btn primary" id="memberEditSend"><span class="fa-button-icon"><i class="fa-solid fa-pen-to-square hm-fa"></i></span> Wijzigingen opslaan</button></div></div><div class="close-request" id="memberCloseRequest"><strong>Ticket sluiten aanvragen</strong><p>Wil je dat support dit ticket sluit? Na bevestiging ontvangt de support moderator een melding.</p><div class="close-request-actions"><button class="btn" id="memberCloseRequestBtn"><span class="fa-button-icon"><i class="fa-solid fa-lock hm-fa"></i></span> Sluiten aanvragen</button><button class="btn primary" data-extracted-style="5" id="memberCloseConfirm"><span class="fa-button-icon"><i class="fa-solid fa-check hm-fa"></i></span> Bevestigen</button><button class="btn" data-extracted-style="6" id="memberCloseCancel"><span class="fa-button-icon"><i class="fa-solid fa-xmark hm-fa"></i></span> Annuleren</button></div><div class="reply-status" id="memberCloseStatus"></div></div></div></div></section><section class="view" id="sortingHatView">
- <div class="hpmw-sort-shell">
-  <section class="hpmw-sort-one-card"><div class="hpmw-sort-hero hpmw-sort-combined">
-   <div class="hpmw-sort-combined-top">
-    <div class="hpmw-sort-heading"><div class="eyebrow">Zweinstein</div><h1>De Sorteerhoed</h1><p class="subtitle">Kies je afdeling of ontdek welke afdeling bij jou past.</p></div>
-    <button class="btn" id="sortingHatBack" type="button"><i class="fa-solid fa-arrow-left"></i> Terug naar portaal</button>
-   </div>
-   <div class="hpmw-sort-kicker">ZWEINSTEIN · AFDELINGSAANVRAAG</div>
-   <h2>Waar hoor jij thuis?</h2>
-   <p>Vul je aanvraag in of doe eerst de afdelingsquiz.</p>
+ <div class="hpmw-sorting-ticket-shell">
+  <div class="new-ticket-head hpmw-sorting-ticket-head">
+   <div class="new-ticket-icon"><i class="fa-solid fa-hat-wizard"></i></div>
+   <div><div class="eyebrow">Zweinstein · Afdelingsaanvraag</div><h1>De Sorteerhoed</h1><p class="subtitle">Vraag je afdeling aan of ontdek welke afdeling bij je past.</p></div>
+   <button class="btn" id="sortingHatBack" type="button"><i class="fa-solid fa-arrow-left"></i> Terug</button>
+  </div>
+  <div class="hpmw-sorting-quiz-strip">
+   <div><strong><i class="fa-solid fa-wand-magic-sparkles"></i> Weet je nog niet welke afdeling bij je past?</strong><span>Beantwoord vier korte vragen en laat de Sorteerhoed een suggestie doen.</span></div>
    <button class="btn" id="sortingHatQuizOpen" type="button"><i class="fa-solid fa-hat-wizard"></i> Doe de afdelingsquiz</button>
-  <div class="hpmw-sort-form-heading"><h2><i class="fa-solid fa-feather-pointed"></i> Aanvraagformulier</h2><p>Vul de verplichte velden in.</p></div>
-   <form id="sortingRequestForm"><div class="form-grid">
-    <div class="field"><label for="sortDepartment">Gewenste afdeling *</label><select id="sortDepartment" required><option value="">Kies een afdeling</option><option>Griffoendor</option><option>Zwadderich</option><option>Huffelpuf</option><option>Ravenklauw</option></select></div>
-    <div class="field"><label>Gebruikersnaam</label><input id="sortApplicant" readonly></div>
-    <div class="field full"><label class="transfer-check" for="sortTransfer"><input id="sortTransfer" type="checkbox"> Ik vraag uitzonderlijk een verhuizing naar een andere afdeling aan</label><div class="hint">Een afdelingsverhuizing is een uitzondering. Je verzoek kan worden afgewezen als er geen duidelijke reden is.</div><div class="transfer-reason" id="sortTransferReason" hidden><label for="sortReason">Reden voor de verhuizing *</label><textarea id="sortReason" maxlength="1200" placeholder="Leg duidelijk uit waarom je naar een andere afdeling wilt verhuizen."></textarea></div></div>
-    <div class="field full"><label for="sortMessage">Vragen of opmerkingen</label><textarea id="sortMessage" maxlength="1500" placeholder="Heb je vragen of wil je iets toevoegen? (optioneel)"></textarea></div>
-   </div><div class="actions"><button class="btn primary" id="sortSubmit" type="submit"><i class="fa-solid fa-paper-plane"></i> Aanvraag versturen</button></div><div class="form-status" id="sortStatus" role="status" aria-live="polite"></div></form>
-  </div></section>
+  </div>
+  <section class="panel hpmw-sorting-ticket-panel">
+   <div class="panel-head"><div><h2><i class="fa-solid fa-feather-pointed"></i> Afdelingsaanvraag</h2><p>Vul de onderstaande gegevens in om je aanvraag in te dienen.</p></div></div>
+   <form id="sortingRequestForm">
+    <div class="form-grid">
+     <div class="field"><label for="sortApplicant">Gebruikersnaam</label><input id="sortApplicant" readonly placeholder="Wordt automatisch ingevuld"></div>
+     <div class="field"><label for="sortDepartment">Gewenste afdeling <b>*</b></label><select id="sortDepartment" required><option value="">Kies een afdeling</option><option>Griffoendor</option><option>Zwadderich</option><option>Huffelpuf</option><option>Ravenklauw</option></select></div>
+     <div class="field full hpmw-sort-transfer-field">
+      <label class="transfer-check" for="sortTransfer"><input id="sortTransfer" type="checkbox"> Ik vraag uitzonderlijk een verhuizing naar een andere afdeling aan</label>
+      <div class="hint">Ben je al ingedeeld bij een afdeling? Een verhuizing is een uitzondering en moet duidelijk worden gemotiveerd.</div>
+      <div class="transfer-reason" id="sortTransferReason" hidden><label for="sortReason">Reden voor de verhuizing <b>*</b></label><textarea id="sortReason" maxlength="1200" placeholder="Leg uit waarom je een andere afdeling wilt aanvragen."></textarea></div>
+     </div>
+     <div class="field full"><label for="sortMessage">Vragen of opmerkingen</label><textarea id="sortMessage" maxlength="1500" placeholder="Heb je nog iets toe te voegen aan je aanvraag? (optioneel)"></textarea><div class="hpmw-sort-form-help">Maximaal 1.500 tekens.</div></div>
+    </div>
+    <div class="notice" id="sortStatus" role="status" aria-live="polite"></div>
+    <div class="actions"><button class="btn" id="sortingHatCancel" type="button"><i class="fa-solid fa-xmark"></i> Annuleren</button><button class="btn primary" id="sortSubmit" type="submit"><i class="fa-solid fa-paper-plane"></i> Aanvraag versturen</button></div>
+   </form>
+  </section>
  </div>
 </section>
 <section class="view" id="vacanciesView">
@@ -5166,5 +5175,134 @@ html body #sortingHatView #sortStatus{
  if(applicant){applicant.setAttribute("aria-readonly","true");const note=document.createElement("div");note.className="hpmw-sort-field-note";note.textContent="Deze naam wordt automatisch overgenomen van je ingelogde forumaccount.";applicant.insertAdjacentElement("afterend",note)}
  const submit=document.getElementById("sortSubmit");
  if(submit){submit.setAttribute("aria-label","Afdelingsaanvraag versturen")}
+})();
+</script>
+
+
+<style id="hpmw-sorting-hat-ticket-form-20261114">
+/* Rebuild the Sorting Hat page to follow the same structure as the Ticket Support form. */
+html body #sortingHatView .hpmw-sorting-ticket-shell{
+ width:min(1000px,calc(100% - 36px))!important;max-width:1000px!important;margin:30px auto 54px!important;
+}
+html body #sortingHatView .hpmw-sorting-ticket-head{
+ display:flex!important;align-items:center!important;justify-content:flex-start!important;
+ gap:16px!important;margin:0 0 18px!important;
+}
+html body #sortingHatView .hpmw-sorting-ticket-head>div:nth-child(2){flex:1!important;min-width:0}
+html body #sortingHatView .hpmw-sorting-ticket-head h1{
+ margin:3px 0!important;color:#f5f7fb!important;font-size:clamp(25px,3.5vw,34px)!important;
+ letter-spacing:-.025em!important;
+}
+html body #sortingHatView .hpmw-sorting-ticket-head .subtitle{margin:4px 0 0!important;color:#aebdd0!important}
+html body #sortingHatView .hpmw-sorting-ticket-head .eyebrow{color:#d2b477!important}
+html body #sortingHatView .hpmw-sorting-quiz-strip{
+ display:flex!important;align-items:center!important;justify-content:space-between!important;gap:18px!important;
+ margin:0 0 18px!important;padding:15px 18px!important;
+ border:1px solid #344b67!important;border-radius:12px!important;
+ background:linear-gradient(120deg,#172a40,#101e30)!important;
+}
+html body #sortingHatView .hpmw-sorting-quiz-strip>div{display:flex;flex-direction:column;gap:4px;min-width:0}
+html body #sortingHatView .hpmw-sorting-quiz-strip strong{color:#f1e4c9;font-size:13px}
+html body #sortingHatView .hpmw-sorting-quiz-strip strong i{color:#d4b477;margin-right:7px}
+html body #sortingHatView .hpmw-sorting-quiz-strip span{color:#aebdd0;font-size:11px;line-height:1.5}
+html body #sortingHatView .hpmw-sorting-quiz-strip #sortingHatQuizOpen{flex:0 0 auto;background:#203b5b!important;border:1px solid #49617e!important;color:#fff!important}
+html body #sortingHatView .hpmw-sorting-ticket-panel{
+ border:1px solid #30445d!important;border-radius:14px!important;
+ background:#0e1827!important;box-shadow:0 18px 48px rgba(0,0,0,.3)!important;
+}
+html body #sortingHatView .hpmw-sorting-ticket-panel .panel-head{
+ padding:19px 22px!important;background:linear-gradient(90deg,#17283d,#101d2d)!important;
+ border-bottom:1px solid #30445d!important;
+}
+html body #sortingHatView .hpmw-sorting-ticket-panel .panel-head h2{
+ color:#f1f5fb!important;font-size:17px!important;
+}
+html body #sortingHatView .hpmw-sorting-ticket-panel .panel-head h2 i{color:#d2b477;margin-right:8px}
+html body #sortingHatView .hpmw-sorting-ticket-panel .panel-head p{color:#9eafc3!important;font-size:11px!important}
+html body #sortingHatView .hpmw-sorting-ticket-panel #sortingRequestForm{padding:0!important;margin:0!important;background:transparent!important}
+html body #sortingHatView .hpmw-sorting-ticket-panel .form-grid{
+ padding:22px!important;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:17px!important;
+}
+html body #sortingHatView .hpmw-sorting-ticket-panel .field{min-width:0!important}
+html body #sortingHatView .hpmw-sorting-ticket-panel .field.full{grid-column:1/-1!important}
+html body #sortingHatView .hpmw-sorting-ticket-panel .field label:not(.transfer-check){
+ display:block!important;margin-bottom:7px!important;color:#dce8f6!important;
+ font-size:11px!important;font-weight:750!important;
+}
+html body #sortingHatView .hpmw-sorting-ticket-panel .field input:not([type=checkbox]),
+html body #sortingHatView .hpmw-sorting-ticket-panel .field select,
+html body #sortingHatView .hpmw-sorting-ticket-panel .field textarea{
+ width:100%!important;min-height:42px!important;box-sizing:border-box!important;
+ padding:11px 13px!important;border:1px solid #344b67!important;border-radius:9px!important;
+ background:#0a1421!important;color:#edf4ff!important;font-size:12px!important;
+}
+html body #sortingHatView .hpmw-sorting-ticket-panel .field textarea{
+ min-height:122px!important;resize:vertical!important;line-height:1.6!important;
+}
+html body #sortingHatView .hpmw-sorting-ticket-panel .field input[readonly]{
+ color:#c3d1e1!important;background:#111e2e!important;
+}
+html body #sortingHatView .hpmw-sorting-ticket-panel .field input:focus,
+html body #sortingHatView .hpmw-sorting-ticket-panel .field select:focus,
+html body #sortingHatView .hpmw-sorting-ticket-panel .field textarea:focus{
+ outline:none!important;border-color:#91b5d8!important;
+ box-shadow:0 0 0 3px rgba(113,159,205,.15)!important;
+}
+html body #sortingHatView .hpmw-sorting-ticket-panel .transfer-check{
+ display:flex!important;align-items:center!important;gap:10px!important;
+ padding:13px 14px!important;border:1px solid #344b67!important;border-radius:9px!important;
+ background:#111f30!important;color:#e5edf7!important;font-size:12px!important;font-weight:700!important;
+ cursor:pointer!important;
+}
+html body #sortingHatView .hpmw-sorting-ticket-panel .transfer-check input{
+ width:17px!important;height:17px!important;flex:0 0 17px!important;accent-color:#d0ad68!important;
+}
+html body #sortingHatView .hpmw-sorting-ticket-panel .hint{
+ margin:7px 2px 0!important;padding:0!important;background:transparent!important;border:0!important;
+ color:#96a9bf!important;font-size:10px!important;line-height:1.6!important;
+}
+html body #sortingHatView .hpmw-sorting-ticket-panel .transfer-reason{
+ margin-top:13px!important;padding:14px!important;border:1px solid #344b67!important;
+ border-radius:10px!important;background:#0b1725!important;
+}
+html body #sortingHatView .hpmw-sort-form-help{
+ margin-top:6px;color:#91a4bb;font-size:10px;
+}
+html body #sortingHatView .hpmw-sorting-ticket-panel .notice{
+ margin:0 22px 14px!important;padding:11px 13px!important;border-radius:9px!important;
+ font-size:11px!important;line-height:1.55!important;
+}
+html body #sortingHatView .hpmw-sorting-ticket-panel .notice:not(:empty){display:block!important}
+html body #sortingHatView .hpmw-sorting-ticket-panel .actions{
+ display:flex!important;justify-content:flex-end!important;gap:9px!important;flex-wrap:wrap!important;
+ padding:0 22px 21px!important;margin:0!important;
+}
+html body #sortingHatView .hpmw-sorting-ticket-panel .actions .btn{
+ min-height:39px!important;padding:9px 15px!important;border-radius:9px!important;
+}
+html body #sortingHatView .hpmw-sorting-ticket-panel #sortSubmit{
+ background:linear-gradient(135deg,#315a80,#203e5b)!important;
+ border:1px solid #6487aa!important;color:#fff!important;
+}
+html body #sortingHatView .hpmw-sorting-ticket-panel #sortSubmit:hover{
+ filter:brightness(1.12)!important;transform:translateY(-1px)!important;
+}
+html body #sortingHatView .hpmw-sorting-ticket-panel #sortSubmit:disabled{opacity:.6!important;cursor:wait!important}
+@media(max-width:650px){
+ html body #sortingHatView .hpmw-sorting-ticket-shell{width:calc(100% - 20px)!important;margin:20px auto 34px!important}
+ html body #sortingHatView .hpmw-sorting-ticket-head{align-items:flex-start!important;flex-wrap:wrap!important}
+ html body #sortingHatView .hpmw-sorting-ticket-head>.btn{margin-left:auto!important}
+ html body #sortingHatView .hpmw-sorting-quiz-strip{align-items:flex-start!important;flex-direction:column!important;padding:14px!important}
+ html body #sortingHatView .hpmw-sorting-quiz-strip #sortingHatQuizOpen{width:100%!important;justify-content:center!important}
+ html body #sortingHatView .hpmw-sorting-ticket-panel .form-grid{grid-template-columns:1fr!important;padding:17px!important}
+ html body #sortingHatView .hpmw-sorting-ticket-panel .field.full{grid-column:1!important}
+ html body #sortingHatView .hpmw-sorting-ticket-panel .actions{padding:0 17px 17px!important}
+ html body #sortingHatView .hpmw-sorting-ticket-panel .actions .btn{flex:1 1 100%!important}
+}
+</style>
+<script id="hpmw-sorting-hat-ticket-form-actions-20261114">
+(()=>{"use strict";
+ const cancel=document.getElementById("sortingHatCancel");
+ cancel?.addEventListener("click",()=>document.getElementById("sortingRequestForm")?.reset());
 })();
 </script>
