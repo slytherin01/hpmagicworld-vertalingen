@@ -2,43 +2,38 @@
 <html lang="nl">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Wizarding World Encyclopedie | Muggle Ministry</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>Muggle Ministry | Encyclopedie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{color-scheme:dark;--bg:#090e18;--panel:#111b2a;--panel2:#172438;--line:#304158;--gold:#d7b875;--gold2:#f2d99b;--text:#edf2fa;--muted:#9baac0;--violet:#a99bff}
-*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% -10%,#273552 0,transparent 48%),#090e18;color:var(--text);font:14px/1.6 Inter,system-ui,sans-serif}
-header{padding:24px 20px 18px;text-align:center;border-bottom:1px solid #27364a;background:#0c1320d9}
-.brand{font:700 clamp(25px,5vw,40px) Cinzel,serif;color:var(--gold2);letter-spacing:.04em}.sub{color:var(--muted);margin:7px auto 0;max-width:720px}
-.wrap{width:min(1180px,calc(100% - 28px));margin:24px auto 70px}.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
-input{flex:1;min-width:220px;background:#0d1725;border:1px solid var(--line);border-radius:12px;padding:13px 15px;color:var(--text);font:inherit;outline:none}
-input:focus{border-color:var(--gold)}button,.back{border:1px solid #66583d;background:linear-gradient(135deg,#332d22,#1a2230);color:var(--gold2);border-radius:11px;padding:10px 14px;font:600 12px Inter;cursor:pointer;transition:.18s}
-button:hover,.back:hover{transform:translateY(-2px);border-color:var(--gold);background:#393326}
-.stats{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 18px;color:var(--muted);font-size:12px}.stats b{color:var(--gold2)}
-.categories{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:10px;margin-bottom:22px}
-.cat{min-height:100px;text-align:left;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(145deg,#18263a,#111a28);border-color:#33445b;padding:15px}
-.cat .emoji{font-size:23px}.cat strong{font:600 13px Cinzel,serif;color:#f0d99f}.cat small{color:var(--muted);font-size:10px}
-.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:24px 0 12px}.section-head h2{font:600 20px Cinzel,serif;color:var(--gold2);margin:0}
-.entries{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:12px}
-.entry{border:1px solid var(--line);border-radius:14px;padding:16px;background:linear-gradient(150deg,#152235,#0f1825);cursor:pointer;text-align:left;color:var(--text);min-height:130px}
-.entry:hover{border-color:var(--gold);transform:translateY(-2px)}.entry small{color:var(--violet);text-transform:uppercase;letter-spacing:.12em;font-size:9px;font-weight:700}.entry h3{font:600 16px Cinzel,serif;color:var(--gold2);margin:8px 0 5px}.entry p{color:var(--muted);font-size:12px;margin:0}
-.detail{display:none;border:1px solid #65563c;border-radius:16px;background:#111b2a;padding:22px;margin-top:20px}.detail.show{display:block}.detail h2{font:600 25px Cinzel,serif;color:var(--gold2);margin:12px 0}.detail p{color:#c2cddd}.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:9px;margin-top:18px}.fact{padding:12px;border:1px solid var(--line);border-radius:10px;background:#0c1624}.fact small{display:block;color:var(--muted);font-size:9px;text-transform:uppercase;letter-spacing:.1em}.fact b{display:block;margin-top:3px;font-size:12px;overflow-wrap:anywhere}
-.empty{padding:28px;border:1px dashed var(--line);border-radius:13px;color:var(--muted);text-align:center;grid-column:1/-1}
-footer{text-align:center;color:#75869d;font-size:10px;padding:20px}
-@media(max-width:600px){.wrap{width:calc(100% - 20px)}.categories{grid-template-columns:repeat(2,minmax(0,1fr))}.cat{min-height:92px;padding:11px}.detail{padding:15px}}
-/* Portal visual theme */
-:root{--bg:#090d16;--line:#26364c;--gold:#b7aaff;--gold2:#e4e0ff;--text:#edf2fa;--muted:#91a0b5;--violet:#aaa0ff}body{background:radial-gradient(ellipse at 50% -20%,#202448 0,transparent 48%),#090d16;font:14px/1.5 Inter,ui-sans-serif,system-ui,sans-serif}header{padding:34px 20px 25px;background:transparent;border:0}.brand{font:800 clamp(25px,5vw,40px) Inter,system-ui;color:#f0f2ff;letter-spacing:-.035em}.sub{color:#91a0b5}.wrap{margin:28px auto 56px}input{background:#0b1421;border-color:#26364c;border-radius:10px}button,.back{border:1px solid #34445b;background:#192538;color:#dbe4f2;border-radius:10px;font:700 12px Inter,system-ui}button:hover,.back:hover{background:#252448;border-color:#7569bd}.cat{background:linear-gradient(145deg,#18263a,#111b2b);border-color:#26364c;border-radius:14px}.cat:hover{border-color:#7569bd;background:linear-gradient(145deg,#202d48,#151f32)}.cat strong,.section-head h2,.entry h3,.detail h2{font-family:Inter,system-ui;color:#e4e0ff}.entry{background:linear-gradient(150deg,#152235,#0f1825);border-color:#26364c;border-radius:14px}.entry:hover{border-color:#7569bd}.entry small{color:#aaa0ff}.detail{background:#111b2a;border-color:#4b467c;border-radius:16px}.fact{background:#0c1624;border-color:#26364c}footer{border-top:1px solid #26364c;background:#0c1320;color:#91a0b5;margin-top:36px;padding:24px}.portal-nav{position:sticky;top:0;z-index:50;min-height:64px;padding:9px 20px;background:#0c1320ed;border-bottom:1px solid #26364c;backdrop-filter:blur(16px);display:flex;align-items:center}.portal-nav-inner{width:min(1180px,100%);margin:auto;display:flex;align-items:center;gap:9px;flex-wrap:wrap}.portal-nav a{min-height:40px;padding:8px 13px;border:1px solid transparent;border-radius:11px;color:#c3cde0;display:inline-flex;align-items:center;gap:9px;font-size:12px;font-weight:700;text-decoration:none}.portal-nav a:hover,.portal-nav a.active{background:#252448;border-color:#4b467c;color:#fff}.portal-nav .nav-mark{width:29px;height:29px;border-radius:9px;background:#29264b;color:#bcb1ff;display:grid;place-items:center}@media(max-width:600px){.portal-nav{padding:8px 10px}.portal-nav a{padding:7px 9px;font-size:11px}}</style>
+:root{color-scheme:dark;--bg:#090d16;--surface:#101827;--surface2:#151f30;--line:#26364c;--text:#edf2fa;--muted:#91a0b5;--accent:#9b8cff;--accent2:#b7aaff}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;background:#090d16 url("https://i28.servimg.com/u/f28/11/54/28/73/backgr10.png") center top/cover fixed no-repeat;color:var(--text);font:14px/1.5 Inter,system-ui,sans-serif}
+a{color:inherit}.topbar{position:sticky;top:0;z-index:50;min-height:64px;padding:9px 20px;background:#0c1320ed;border-bottom:1px solid var(--line);backdrop-filter:blur(16px)}.top-actions{width:min(1180px,100%);margin:auto;display:flex;align-items:center;gap:8px;flex-wrap:wrap}.nav-item{min-height:40px;padding:7px 12px;border:1px solid transparent;border-radius:11px;color:#c3cde0;display:inline-flex;align-items:center;gap:9px;text-decoration:none;font-size:12px;font-weight:700}.nav-item:hover,.nav-item.active{background:#252448;border-color:#4b467c;color:white}.nav-icon{width:28px;height:28px;border-radius:9px;background:#29264b;color:#bcb1ff;display:grid;place-items:center}
+.hero{width:min(1180px,calc(100% - 36px));min-height:190px;margin:22px auto 0;padding:30px 20px;border:1px solid #34445b;border-radius:16px;background:linear-gradient(180deg,#07101b20,#07101bdd),url("https://i44.servimg.com/u/f44/11/48/74/42/banner10.png") center/cover no-repeat;box-shadow:0 18px 50px #0008;text-align:center;display:flex;flex-direction:column;justify-content:center}.hero h1{margin:0;font-size:clamp(25px,5vw,42px);font-weight:800;letter-spacing:-.035em;color:#fff;text-shadow:0 2px 12px #000}.hero p{margin:10px auto 0;max-width:780px;color:#edf2fa;text-shadow:0 2px 8px #000}
+.shell{width:min(1180px,calc(100% - 36px));margin:24px auto 50px;padding:22px;border:1px solid var(--line);border-radius:16px;background:#0c1320ed;box-shadow:0 18px 50px #0009}.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}.toolbar input,.toolbar select{min-height:44px;padding:11px 13px;border:1px solid #304158;border-radius:10px;background:#0b1421;color:var(--text);font:inherit}.toolbar input{flex:1;min-width:210px}.toolbar select{min-width:145px}.btn{min-height:42px;padding:9px 14px;border:1px solid #34445b;border-radius:10px;background:#192538;color:#dbe4f2;font:700 12px Inter;cursor:pointer}.btn:hover{background:#252448;border-color:#7569bd}
+.stats{display:flex;gap:9px;flex-wrap:wrap;margin:0 0 18px;color:var(--muted);font-size:12px}.stats b{color:#e4e0ff}.categories{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:9px;margin-bottom:23px}.cat{min-height:94px;padding:13px;border:1px solid var(--line);border-radius:14px;background:linear-gradient(145deg,#18263a,#111b2b);color:var(--text);display:flex;flex-direction:column;justify-content:space-between;text-align:left;cursor:pointer}.cat:hover{border-color:#7569bd;background:linear-gradient(145deg,#202d48,#151f32);transform:translateY(-2px)}.cat .emoji{font-size:22px}.cat strong{color:#e4e0ff;font-size:13px}.cat small{color:var(--muted);font-size:10px}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin:22px 0 12px}.section-head h2{margin:0;font-size:19px;color:#e4e0ff}.entries{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:11px}.entry{min-height:125px;padding:15px;border:1px solid var(--line);border-radius:14px;background:linear-gradient(150deg,#152235,#0f1825);color:var(--text);text-align:left;cursor:pointer}.entry:hover{border-color:#7569bd;transform:translateY(-2px)}.entry small{color:#aaa0ff;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.1em}.entry h3{margin:7px 0 4px;color:#e4e0ff;font-size:16px}.entry p{margin:0;color:var(--muted);font-size:12px}
+.detail{display:none;margin-top:18px;padding:20px;border:1px solid #4b467c;border-radius:16px;background:#111b2a}.detail.show{display:block}.detail h2{margin:10px 0;color:#e4e0ff;font-size:25px}.detail p{color:#c2cddd}.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:9px;margin-top:16px}.fact{padding:12px;border:1px solid var(--line);border-radius:10px;background:#0c1624}.fact small{display:block;color:var(--muted);font-size:9px;text-transform:uppercase}.fact b{display:block;margin-top:4px;font-size:12px;overflow-wrap:anywhere}.source-note{margin-top:16px;padding:13px 15px;border:1px solid #34445b;border-radius:11px;background:#0c1624;color:#aab8cc;font-size:11px}.source-note a{color:#bcb1ff;text-decoration:underline}.empty{padding:28px;border:1px dashed var(--line);border-radius:13px;color:var(--muted);text-align:center;grid-column:1/-1}
+.footer{padding:20px;border-top:1px solid var(--line);background:#0c1320ed;text-align:center;color:var(--muted);font-size:10px}.footer a{color:#bcb1ff}
+@media(max-width:600px){.hero{width:calc(100% - 20px);min-height:145px;padding:22px 12px}.shell{width:calc(100% - 20px);padding:13px}.categories{grid-template-columns:repeat(2,minmax(0,1fr))}.cat{min-height:88px;padding:10px}.topbar{padding:7px 9px}.nav-item{padding:6px 8px;font-size:11px}}
+</style>
 </head>
 <body>
-<nav class="portal-nav"><div class="portal-nav-inner"><a href="https://slytherin01.github.io/muggle-ministry/portal/"><span class="nav-mark">✦</span> Portaal</a><a class="active" href="https://slytherin01.github.io/muggle-ministry/wizarding-world/"><span class="nav-mark">📚</span> Encyclopedie</a></div></nav>
-<header><div class="brand">Wizarding World</div><div class="sub">De magische encyclopedie van Muggle Ministry · Ontdek spreuken, personages, voorwerpen, wezens en locaties.</div></header>
-<main class="wrap">
-<div class="toolbar"><input id="search" type="search" placeholder="Zoek op naam, spreuk, eigenschap of alias…" aria-label="Zoeken"><button id="allBtn">Alles tonen</button><button id="backPortal" onclick="location.href='https://slytherin01.github.io/muggle-ministry/portal/'">← Terug naar portaal</button></div>
-<div class="stats"><span><b id="count">0</b> vermeldingen</span><span>·</span><span><b id="catCount">17</b> categorieën</span><span>·</span><span>Bronnen en canonstatus per item</span></div>
-<nav class="categories" id="categories" aria-label="Encyclopedie categorieën"></nav>
-<section id="resultsSection"><div class="section-head"><h2 id="resultTitle">Uitgelichte kennis</h2></div><div class="entries" id="entries"><div class="empty">Database laden…</div></div></section>
-<section class="detail" id="detail"><button class="back" id="closeDetail">← Terug naar resultaten</button><div id="detailContent"></div></section>
+<nav class="topbar"><div class="top-actions">
+<a class="nav-item" href="https://testforumjoost.forumactie.com/forum"><span class="nav-icon">☰</span> Forum</a>
+<a class="nav-item" href="https://testforumjoost.forumactie.com/h3-portaal"><span class="nav-icon">⌂</span> Portaal</a>
+<a class="nav-item active" href="https://testforumjoost.forumactie.com/h1-dev-encyclopedie"><span class="nav-icon">📚</span> Wiki</a>
+<a class="nav-item" href="https://testforumjoost.forumactie.com/faq"><span class="nav-icon">?</span> FAQ</a>
+<a class="nav-item" href="https://testforumjoost.forumactie.com/h4-ticket-support"><span class="nav-icon">▣</span> Ticket Support</a>
+</div></nav>
+<header class="hero"><h1>Muggle Ministry · Encyclopedie</h1><p>Een onafhankelijke, door fans gemaakte kennisbank over de magische wereld. Ontdek, zoek en lees in Nederlands, English of Português.</p></header>
+<main class="shell">
+<div class="toolbar"><input id="search" type="search" placeholder="Zoek in de encyclopedie…" aria-label="Zoeken"><select id="language" aria-label="Taal"><option value="nl">🇳🇱 Nederlands</option><option value="en">🇬🇧 English</option><option value="pt">🇵🇹 Português</option></select><button class="btn" id="allBtn">Alles tonen</button></div>
+<div class="stats"><span><b id="count">0</b> <span id="countLabel">vermeldingen</span></span><span>·</span><span><b id="catCount">17</b> <span id="catLabel">categorieën</span></span><span>·</span><span id="sourceLabel">Bronnen bij elk artikel</span></div>
+<nav class="categories" id="categories" aria-label="Wiki categorieën"></nav>
+<section id="resultsSection"><div class="section-head"><h2 id="resultTitle">Uitgelichte kennis</h2></div><div class="entries" id="entries"><div class="empty">Encyclopedie laden…</div></div></section>
+<section class="detail" id="detail"><button class="btn" id="closeDetail">← Terug naar resultaten</button><div id="detailContent"></div></section>
 </main>
-<footer>Muggle Ministry · Wizarding World Encyclopedie · Fanproject, niet officieel verbonden aan Warner Bros. of de rechthebbenden.</footer>
+<footer class="footer">© Muggle Ministry · Onafhankelijk fanproject, niet officieel verbonden aan Warner Bros. Entertainment Inc. of J.K. Rowling.<div class="source-note">Bron en verdere lectuur: <a href="https://www.harrypotter.com/" target="_blank" rel="noopener">HarryPotter.com — officiële website</a>. De feiten worden door Muggle Ministry in eigen woorden samengevat en vertaald. Teksten, afbeeldingen, logo’s en merken van de rechthebbenden worden niet als eigen werk gepresenteerd. Alle rechten op oorspronkelijke personages en elementen blijven bij hun respectieve rechthebbenden. <a href="https://www.harrypotter.com/terms/terms-row" target="_blank" rel="noopener">Gebruiksvoorwaarden</a> · <a href="https://www.harrypotter.com/legals" target="_blank" rel="noopener">Juridische vermeldingen</a>.</div></footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 (function(){
@@ -46,39 +41,65 @@ const SUPABASE_URL="https://vuaajsjjluwgqmneinds.supabase.co";
 const SUPABASE_KEY="sb_publishable_tto6sNxZPLv1VhUdMRlPHg_ptzg9odx";
 const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 const CATS=[
-["spreuken","✨","Spreuken","Incantaties en magie"],["personages","🧙","Personages","Heksen en tovenaars"],["voorwerpen","🪄","Voorwerpen","Artefacten en relieken"],["toverstokken","🌳","Toverstokken","Hout, kern en eigenaar"],["dranken","🧪","Dranken","Brouwsels en ingrediënten"],["fabeldieren","🐉","Fabeldieren","Magische wezens"],["planten","🌿","Planten","Magische flora"],["locaties","🏰","Locaties","Plekken en gebouwen"],["zweinstein","🎓","Zweinstein","Afdelingen en vakken"],["families","🧬","Families","Stambomen en bloedlijnen"],["beroepen","⚖️","Beroepen","Werk in de tovenaarswereld"],["geschiedenis","📜","Geschiedenis","Tijdlijn en gebeurtenissen"],["organisaties","🛡️","Organisaties","Orden en ministeries"],["quidditch","🏆","Quidditch","Teams en spelregels"],["begrippen","📚","Begrippen","Magische terminologie"],["boeken-films","🎬","Boeken & films","Verhalen en adaptaties"],["fantastic-beasts","🦄","Fantastic Beasts","Personages en kennis"]
+["spreuken","✨",["Spreuken","Spells","Feitiços"],["Incantaties en magie","Incantations and magic","Encantamentos e magia"]],
+["personages","🧙",["Personages","Characters","Personagens"],["Heksen en tovenaars","Witches and wizards","Bruxas e feiticeiros"]],
+["voorwerpen","🪄",["Voorwerpen","Objects","Objetos"],["Artefacten en relieken","Artifacts and relics","Artefactos e relíquias"]],
+["toverstokken","🌳",["Toverstokken","Wands","Varinhas"],["Hout, kern en eigenaar","Wood, core and owner","Madeira, núcleo e dono"]],
+["dranken","🧪",["Dranken","Potions","Poções"],["Brouwsels en ingrediënten","Brews and ingredients","Misturas e ingredientes"]],
+["fabeldieren","🐉",["Fabeldieren","Creatures","Criaturas"],["Magische wezens","Magical beings","Seres mágicos"]],
+["planten","🌿",["Planten","Plants","Plantas"],["Magische flora","Magical flora","Flora mágica"]],
+["locaties","🏰",["Locaties","Locations","Localizações"],["Plekken en gebouwen","Places and buildings","Lugares e edifícios"]],
+["zweinstein","🎓",["Zweinstein","Hogwarts","Hogwarts"],["Afdelingen en vakken","Houses and subjects","Casas e disciplinas"]],
+["families","🧬",["Families","Families","Famílias"],["Stambomen en bloedlijnen","Family trees and bloodlines","Árvores genealógicas e linhagens"]],
+["beroepen","⚖️",["Beroepen","Professions","Profissões"],["Werk in de tovenaarswereld","Work in the wizarding world","Trabalho no mundo mágico"]],
+["geschiedenis","📜",["Geschiedenis","History","História"],["Tijdlijn en gebeurtenissen","Timeline and events","Cronologia e acontecimentos"]],
+["organisaties","🛡️",["Organisaties","Organisations","Organizações"],["Orden en ministeries","Orders and ministries","Ordens e ministérios"]],
+["quidditch","🏆",["Zwerkbal","Quidditch","Quidditch"],["Teams en spelregels","Teams and rules","Equipas e regras"]],
+["begrippen","📚",["Begrippen","Concepts","Conceitos"],["Magische terminologie","Magical terminology","Terminologia mágica"]],
+["boeken-films","🎬",["Boeken & films","Books & films","Livros e filmes"],["Verhalen en adaptaties","Stories and adaptations","Histórias e adaptações"]],
+["fantastic-beasts","🦄",["Fantastic Beasts","Fantastic Beasts","Animais Fantásticos"],["Personages en kennis","Characters and lore","Personagens e universo"]]
 ];
-let rows=[],activeCategory=null;
+const UI={
+nl:{search:"Zoek in de encyclopedie…",all:"Alles tonen",featured:"Uitgelichte kennis",count:"vermeldingen",cats:"categorieën",source:"Officiële bron",back:"← Terug naar resultaten",empty:"Geen vermeldingen gevonden. Probeer een andere zoekterm.",facts:"Feiten en kenmerken",sourceTitle:"Bron en verdere lectuur"},
+en:{search:"Search the encyclopedia…",all:"Show all",featured:"Featured knowledge",count:"entries",cats:"categories",source:"Official source",back:"← Back to results",empty:"No entries found. Try another search.",facts:"Facts and details",sourceTitle:"Source and further reading"},
+pt:{search:"Pesquisar na enciclopédia…",all:"Mostrar tudo",featured:"Conhecimento em destaque",count:"entradas",cats:"categorias",source:"Fonte oficial",back:"← Voltar aos resultados",empty:"Nenhuma entrada encontrada. Tente outra pesquisa.",facts:"Factos e detalhes",sourceTitle:"Fonte e leitura adicional"}
+};
+let rows=[],activeCategory=null,locale="nl";
 const $=id=>document.getElementById(id);
+const tr=k=>UI[locale][k]||UI.nl[k]||k;
 function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
-function categoryName(k){return (CATS.find(c=>c[0]===k)||[])[2]||k;}
+function field(r,k){return r[k+(locale==="nl"?"":locale==="en"?"_en":"_pt")]||r[k]||"";}
+function catName(k){const c=CATS.find(x=>x[0]===k);return c?c[2][["nl","en","pt"].indexOf(locale)]:k;}
 function drawCategories(){
-$("categories").innerHTML=CATS.map(c=>'<button class="cat" data-cat="'+c[0]+'"><span class="emoji">'+c[1]+'</span><strong>'+c[2]+'</strong><small>'+c[3]+'</small></button>').join("");
-$("categories").querySelectorAll("[data-cat]").forEach(b=>b.addEventListener("click",()=>{activeCategory=b.dataset.cat;render();$("resultTitle").textContent=categoryName(activeCategory);$("resultsSection").scrollIntoView({behavior:"smooth"});}));
+$("categories").innerHTML=CATS.map(c=>'<button class="cat" data-cat="'+c[0]+'"><span class="emoji">'+c[1]+'</span><strong>'+c[2][["nl","en","pt"].indexOf(locale)]+'</strong><small>'+c[3][["nl","en","pt"].indexOf(locale)]+'</small></button>').join("");
+$("categories").querySelectorAll("[data-cat]").forEach(b=>b.addEventListener("click",()=>{activeCategory=b.dataset.cat;render();$("resultTitle").textContent=catName(activeCategory);$("resultsSection").scrollIntoView({behavior:"smooth"});}));
 }
 function render(){
-const q=$("search").value.trim().toLocaleLowerCase("nl");
-const list=rows.filter(r=>(!activeCategory||r.category===activeCategory)&&(!q||[r.name,r.subtitle,r.description,...(r.aliases||[]),JSON.stringify(r.details||{})].join(" ").toLocaleLowerCase("nl").includes(q)));
+const q=$("search").value.trim().toLocaleLowerCase();
+const list=rows.filter(r=>(!activeCategory||r.category===activeCategory)&&(!q||[r.name,r.name_en,r.name_pt,r.subtitle,r.subtitle_en,r.subtitle_pt,r.description,r.description_en,r.description_pt,...(r.aliases||[]),JSON.stringify(r.details||{})].join(" ").toLocaleLowerCase().includes(q)));
 $("count").textContent=rows.length;
-$("entries").innerHTML=list.length?list.map(r=>'<button class="entry" data-id="'+r.id+'"><small>'+esc(categoryName(r.category))+' · '+esc(r.canon_status)+'</small><h3>'+esc(r.name)+'</h3><p>'+esc(r.subtitle||r.description)+'</p></button>').join(""):'<div class="empty">Nog geen vermeldingen in deze categorie. De database is klaar om verder gevuld te worden.</div>';
+$("entries").innerHTML=list.length?list.map(r=>'<button class="entry" data-id="'+r.id+'"><small>'+esc(catName(r.category))+' · '+esc(r.canon_status)+'</small><h3>'+esc(field(r,"name"))+'</h3><p>'+esc(field(r,"subtitle")||field(r,"description"))+'</p></button>').join(""):'<div class="empty">'+tr("empty")+'</div>';
 $("entries").querySelectorAll("[data-id]").forEach(b=>b.addEventListener("click",()=>showDetail(rows.find(r=>r.id===b.dataset.id))));
 }
 function showDetail(r){
 if(!r)return;
 const facts=Object.entries(r.details||{}).map(([k,v])=>'<div class="fact"><small>'+esc(k.replace(/_/g," "))+'</small><b>'+esc(Array.isArray(v)?v.join(", "):typeof v==="object"?JSON.stringify(v):v)+'</b></div>').join("");
-$("detailContent").innerHTML='<small>'+esc(categoryName(r.category))+' · '+esc(r.universe)+' · '+esc(r.canon_status)+'</small><h2>'+esc(r.name)+'</h2><p>'+esc(r.description)+'</p>'+(r.subtitle?'<p><b>'+esc(r.subtitle)+'</b></p>':'')+'<div class="facts">'+facts+'<div class="fact"><small>Bron</small><b>'+esc(r.source_title||"Nog niet vastgelegd")+'</b></div></div>';
+const src=r.source_url||"https://www.harrypotter.com/fact-file";
+$("detailContent").innerHTML='<small>'+esc(catName(r.category))+' · '+esc(r.universe||"Wizarding World")+' · '+esc(r.canon_status)+'</small><h2>'+esc(field(r,"name"))+'</h2><p>'+esc(field(r,"description"))+'</p>'+(field(r,"subtitle")?'<p><b>'+esc(field(r,"subtitle"))+'</b></p>':'')+'<div class="section-head"><h2>'+tr("facts")+'</h2></div><div class="facts">'+facts+'</div><div class="source-note">'+tr("source")+': <a href="'+esc(src)+'" target="_blank" rel="noopener">'+esc(r.source_title||"HarryPotter.com — Official Fact Files")+'</a><br>Samenvatting en vertaling door Muggle Ministry. Dit is geen officiële publicatie.</div>';
 $("detail").classList.add("show");$("resultsSection").style.display="none";$("categories").style.display="none";$("detail").scrollIntoView({behavior:"smooth"});
 }
-function closeDetail(){$("detail").classList.remove("show");$("resultsSection").style.display="block";$("categories").style.display="grid";}
+function closeDetail(){$("detail").classList.remove("show");$("resultsSection").style.display="block";$("categories").style.display="grid";drawCategories();}
 async function init(){
-drawCategories();$("catCount").textContent=CATS.length;
+drawCategories();$("catCount").textContent=CATS.length;$("search").placeholder=tr("search");
 const {data,error}=await db.from("wizarding_entries").select("*").eq("is_published",true).order("category").order("sort_order").order("name");
-if(error){$("entries").innerHTML='<div class="empty">De encyclopedie kon niet laden. Controleer de database-migratie en Data API-toegang.</div>';console.error(error);return;}
+if(error){$("entries").innerHTML='<div class="empty">De encyclopedie kon niet laden. Controleer de Supabase Data API-toegang.</div>';console.error(error);return;}
 rows=data||[];render();
 }
 $("search").addEventListener("input",render);
-$("allBtn").addEventListener("click",()=>{activeCategory=null;$("search").value="";$("resultTitle").textContent="Alle kennis";closeDetail();render();});
+$("language").addEventListener("change",e=>{locale=e.target.value;document.documentElement.lang=locale;$("search").placeholder=tr("search");$("allBtn").textContent=tr("all");$("countLabel").textContent=tr("count");$("catLabel").textContent=tr("cats");$("sourceLabel").textContent=tr("sourceTitle");$("closeDetail").textContent=tr("back");$("resultTitle").textContent=tr("featured");drawCategories();render();});
+$("allBtn").addEventListener("click",()=>{activeCategory=null;$("search").value="";$("resultTitle").textContent=tr("featured");closeDetail();render();});
 $("closeDetail").addEventListener("click",closeDetail);
+$("countLabel").textContent=tr("count");$("catLabel").textContent=tr("cats");$("sourceLabel").textContent=tr("sourceTitle");
 init();
 })();
 </script>
