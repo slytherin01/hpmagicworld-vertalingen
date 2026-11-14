@@ -5323,12 +5323,13 @@ html body #sortingHatView .hpmw-sorting-ticket-panel #sortSubmit:disabled{opacit
 </style>
 <script id="hpmw-transfer-request-details-20261114">
 (()=>{"use strict";
+ const safe=value=>String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
  const parseTransfer=posts=>{
   const text=posts?.[0]?.text||"";
   const get=label=>{const m=text.match(new RegExp("^"+label.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"\\s*:\\s*(.+)$","im"));return m?m[1].trim():""};
   const type=get("Type aanvraag"),from=get("Huidige afdeling"),to=get("Nieuwe afdeling")||get("Gewenste afdeling"),reason=get("Reden verhuizing");
   if(!/verhuizing/i.test(type)&&!from&&!reason)return "";
-  return '<section class="hpmw-transfer-summary"><div class="hpmw-transfer-summary-head"><i class="fa-solid fa-right-left"></i><strong>Afdelingsverhuizing</strong></div><div class="hpmw-transfer-summary-route"><div><small>Van afdeling</small><b>'+esc(from||"Niet vermeld")+'</b></div><i class="fa-solid fa-arrow-right"></i><div><small>Naar afdeling</small><b>'+esc(to||"Niet vermeld")+'</b></div></div><div class="hpmw-transfer-summary-reason"><small>Motivatie</small><p>'+esc(reason||"Geen motivatie vermeld")+'</p></div></section>';
+  return '<section class="hpmw-transfer-summary"><div class="hpmw-transfer-summary-head"><i class="fa-solid fa-right-left"></i><strong>Afdelingsverhuizing</strong></div><div class="hpmw-transfer-summary-route"><div><small>Van afdeling</small><b>'+safe(from||"Niet vermeld")+'</b></div><i class="fa-solid fa-arrow-right"></i><div><small>Naar afdeling</small><b>'+safe(to||"Niet vermeld")+'</b></div></div><div class="hpmw-transfer-summary-reason"><small>Motivatie</small><p>'+safe(reason||"Geen motivatie vermeld")+'</p></div></section>';
  };
  window.hpmwTransferSummary=parseTransfer;
 })();
