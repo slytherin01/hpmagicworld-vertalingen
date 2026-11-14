@@ -4180,31 +4180,42 @@ html body #introView .hpmw-intro-quicklinks>button{
 </style>
 
 
-<script id="hpmw-portal-internal-widget-navigation-v4">
+
+
+
+
+<script id="hpmw-portal-internal-widget-navigation-v5">
 (()=>{"use strict";
  document.addEventListener("click",event=>{
   const sort=event.target.closest("[data-open-sorting-hat]");
   const jobs=event.target.closest("[data-open-vacancies]");
   if(sort){event.preventDefault();if(typeof show==="function")show("sortingHatView");}
   if(jobs){event.preventDefault();if(typeof show==="function")show("vacanciesView");}
-  if(event.target.closest("#vacanciesBack")){if(typeof show==="function")show("introView");}
+  if(event.target.closest("#sortingHatBack,#vacanciesBack")){if(typeof show==="function")show("introView");}
  });
 })();
 </script>
-
-<style id="hpmw-final-uniform-widget-layout-20261114-v4">
-/* Definitieve zijwidgethoogte: compacter; afbeeldingen behouden hun bestaande maat en verhouding. */
+<style id="hpmw-final-uniform-widget-layout-20261114-v5">
+/* Definitieve widgetmaat: sluit aan op de bestaande artwork-afmetingen. Afbeeldingsregels niet aanpassen. */
 html body #introView #hpmwHomeLayout{
  display:grid!important;grid-template-columns:minmax(220px,1fr) minmax(0,2.15fr) minmax(220px,1fr)!important;
  align-items:start!important;gap:20px!important;width:min(1480px,calc(100% - 40px))!important;margin:0 auto!important;
 }
-html body #introView #hpmwHomeLayout > aside.hpmw-home-side{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:16px!important;width:100%!important;min-width:0!important}
-html body #introView #hpmwHomeLayout > aside.hpmw-home-side > section.hpmw-side-card{
- display:flex!important;flex:0 0 240px!important;flex-direction:column!important;align-items:stretch!important;
- box-sizing:border-box!important;width:100%!important;min-width:0!important;height:240px!important;min-height:240px!important;max-height:240px!important;margin:0!important;overflow:hidden!important;
+html body #introView #hpmwHomeLayout > aside.hpmw-home-side{
+ display:flex!important;flex-direction:column!important;align-items:stretch!important;
+ gap:12px!important;width:100%!important;min-width:0!important;
 }
-html body #introView #hpmwHomeLayout > aside.hpmw-home-side > section.hpmw-side-card > .hpmw-side-heading{display:flex!important;flex:0 0 42px!important;align-items:center!important;box-sizing:border-box!important;height:42px!important;min-height:42px!important}
+html body #introView #hpmwHomeLayout > aside.hpmw-home-side > section.hpmw-side-card{
+ display:flex!important;flex:0 0 184px!important;flex-direction:column!important;align-items:stretch!important;
+ box-sizing:border-box!important;width:100%!important;min-width:0!important;
+ height:184px!important;min-height:184px!important;max-height:184px!important;margin:0!important;overflow:hidden!important;
+}
+html body #introView #hpmwHomeLayout > aside.hpmw-home-side > section.hpmw-side-card > .hpmw-side-heading{
+ display:flex!important;flex:0 0 38px!important;align-items:center!important;box-sizing:border-box!important;
+ height:38px!important;min-height:38px!important;
+}
 html body #introView #hpmwHomeLayout > .hpmw-home-main{min-width:0!important}
+#vacanciesView{max-width:1100px!important;margin:0 auto!important}
 #vacanciesView .hpmw-vacancies-panel{padding:22px!important;min-height:230px!important}
 #vacanciesView .hpmw-vacancies-empty{padding:26px 20px!important;text-align:center!important;border:1px dashed #52647d!important;border-radius:12px!important;background:rgba(15,25,40,.72)!important}
 #vacanciesView .hpmw-vacancies-empty h2{margin:0 0 8px!important;color:#f4d28a!important}
@@ -4216,8 +4227,10 @@ html body #introView #hpmwHomeLayout > .hpmw-home-main{min-width:0!important}
  html body #introView #hpmwHomeLayout > .hpmw-home-right{grid-column:2!important;grid-row:2!important;display:flex!important}
 }
 @media(max-width:700px){
- html body #introView #hpmwHomeLayout{display:flex!important;flex-direction:column!important;width:calc(100% - 20px)!important;gap:14px!important}
- html body #introView #hpmwHomeLayout > .hpmw-home-main,html body #introView #hpmwHomeLayout > .hpmw-home-left,html body #introView #hpmwHomeLayout > .hpmw-home-right{display:flex!important;flex-direction:column!important;grid-column:auto!important;grid-row:auto!important;width:100%!important}
- html body #introView #hpmwHomeLayout > aside.hpmw-home-side > section.hpmw-side-card{flex-basis:240px!important;height:240px!important;min-height:240px!important;max-height:240px!important}
+ html body #introView #hpmwHomeLayout{display:flex!important;flex-direction:column!important;width:calc(100% - 20px)!important;gap:12px!important}
+ html body #introView #hpmwHomeLayout > .hpmw-home-main,
+ html body #introView #hpmwHomeLayout > .hpmw-home-left,
+ html body #introView #hpmwHomeLayout > .hpmw-home-right{display:flex!important;flex-direction:column!important;grid-column:auto!important;grid-row:auto!important;width:100%!important}
+ html body #introView #hpmwHomeLayout > aside.hpmw-home-side > section.hpmw-side-card{flex-basis:184px!important;height:184px!important;min-height:184px!important;max-height:184px!important}
 }
 </style>
