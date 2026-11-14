@@ -3885,3 +3885,39 @@ body{background-color:#090e18!important;background-image:url("https://i28.servim
 #hpmwHomeLayout .hpmw-forum-widget-link:hover img{transform:scale(1.045)!important;filter:drop-shadow(0 7px 12px rgba(0,0,0,.58))!important}
 @media(max-width:700px){#hpmwHomeLayout .hpmw-forum-widget-art img{width:124px!important;height:104px!important}}
 </style>
+
+<style id="hpmw-forum-widget-containment-fix">
+/* Houd de Forum-afbeelding volledig binnen de Binnenkort-kaart. */
+html body #hpmwHomeLayout .hpmw-home-left .hpmw-coming-soon{
+ display:flex!important;flex-direction:column!important;align-items:stretch!important;
+ min-width:0!important;overflow:hidden!important;box-sizing:border-box!important;
+}
+html body #hpmwHomeLayout .hpmw-home-left .hpmw-coming-soon .hpmw-side-heading{
+ flex:0 0 auto!important;
+}
+html body #hpmwHomeLayout .hpmw-home-left .hpmw-coming-soon .hpmw-forum-widget-link{
+ display:flex!important;flex:1 1 auto!important;min-height:0!important;height:auto!important;
+ max-height:118px!important;box-sizing:border-box!important;overflow:hidden!important;
+ padding:5px 8px 8px!important;margin:0!important;gap:3px!important;
+ transform:none!important;border-radius:0 0 10px 10px!important;
+}
+html body #hpmwHomeLayout .hpmw-home-left .hpmw-coming-soon .hpmw-forum-widget-art{
+ display:flex!important;flex:1 1 auto!important;align-items:center!important;justify-content:center!important;
+ width:100%!important;min-height:0!important;height:82px!important;max-height:82px!important;overflow:hidden!important;
+}
+html body #hpmwHomeLayout .hpmw-home-left .hpmw-coming-soon .hpmw-forum-widget-art img{
+ display:block!important;width:auto!important;max-width:100%!important;height:82px!important;max-height:82px!important;
+ object-fit:contain!important;object-position:center!important;margin:0 auto!important;transform:none!important;
+}
+html body #hpmwHomeLayout .hpmw-home-left .hpmw-coming-soon .hpmw-forum-widget-caption{
+ flex:0 0 auto!important;margin:0 auto!important;padding:4px 9px!important;font-size:8px!important;
+}
+html body #hpmwHomeLayout .hpmw-home-left .hpmw-coming-soon .hpmw-forum-widget-link:hover img{
+ transform:scale(1.02)!important;
+}
+@media(max-width:700px){
+ html body #hpmwHomeLayout .hpmw-home-left .hpmw-coming-soon .hpmw-forum-widget-link{max-height:130px!important}
+ html body #hpmwHomeLayout .hpmw-home-left .hpmw-coming-soon .hpmw-forum-widget-art,
+ html body #hpmwHomeLayout .hpmw-home-left .hpmw-coming-soon .hpmw-forum-widget-art img{height:90px!important;max-height:90px!important}
+}
+</style>
