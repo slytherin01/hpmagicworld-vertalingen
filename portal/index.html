@@ -1927,7 +1927,6 @@ html body #introView #hpmwHomeLayout .hpmw-sorting-hat-widget > button.hpmw-sort
       <div class="transfer-reason" id="sortTransferReason" hidden>
        <div class="hpmw-transfer-grid">
         <div class="field"><label for="sortFromDepartment">Huidige afdeling <b>*</b></label><select id="sortFromDepartment"><option value="">Kies je huidige afdeling</option><option>Griffoendor</option><option>Zwadderich</option><option>Huffelpuf</option><option>Ravenklauw</option></select></div>
-        <div class="field"><label for="sortDepartment">Gewenste nieuwe afdeling <b>*</b></label><select id="sortDepartment"><option value="">Kies een afdeling</option><option>Griffoendor</option><option>Zwadderich</option><option>Huffelpuf</option><option>Ravenklauw</option></select></div>
        </div>
        <div class="field"><label for="sortReason">Waarom wil je van afdeling veranderen? <b>*</b></label><textarea id="sortReason" maxlength="1200" placeholder="Geef een duidelijke motivatie voor je verhuisaanvraag."></textarea></div>
       </div>
@@ -4131,7 +4130,7 @@ function getMember(){const d=window._userdata||{};if(Number(d.session_logged_in)
 function syncMember(){const u=getMember();$("sortApplicant").value=u?u.name:""}
 syncMember();setTimeout(syncMember,800);
 back?.addEventListener("click",()=>{if(typeof show==="function")show("introView")});
-const fromDept=$("sortFromDepartment");transfer.addEventListener("change",()=>{reasonWrap.hidden=!transfer.checked;reason.required=transfer.checked;if(fromDept)fromDept.required=transfer.checked;dept.required=true;if(!transfer.checked){reason.value="";if(fromDept)fromDept.value=""}});
+const fromDept=$("sortFromDepartment"),deptLabel=form.querySelector('label[for="sortDepartment"]');transfer.addEventListener("change",()=>{reasonWrap.hidden=!transfer.checked;reason.required=transfer.checked;if(fromDept)fromDept.required=transfer.checked;if(deptLabel)deptLabel.innerHTML=transfer.checked?"Nieuwe afdeling <b>*</b>":"Gewenste afdeling <b>*</b>";dept.required=true;if(!transfer.checked){reason.value="";if(fromDept)fromDept.value=""}});
 const questions=[
 {q:"Wat vind je het belangrijkst?",a:[["Moed en opkomen voor anderen","Griffoendor"],["Ambitie en je doelen bereiken","Zwadderich"],["Vriendschap en trouw","Huffelpuf"],["Nieuwsgierigheid en kennis","Ravenklauw"]]},
 {q:"Je ziet iemand oneerlijk behandeld worden. Wat doe je?",a:[["Ik spreek de situatie direct aan","Griffoendor"],["Ik bedenk een slimme aanpak","Zwadderich"],["Ik blijf bij die persoon en help","Huffelpuf"],["Ik onderzoek eerst wat er precies speelt","Ravenklauw"]]},
