@@ -3,7 +3,7 @@
   if (window.__muggleMinistryPortalLoading) return;
   window.__muggleMinistryPortalLoading = true;
 
-  var version = "20261114-99";
+  var version = "20261114-100";
   var sources = [
     "https://raw.githubusercontent.com/slytherin01/muggle-ministry/main/portal/index.html?cachebust=" + version,
     "https://slytherin01.github.io/muggle-ministry/portal/index.html?v=" + version
@@ -41,14 +41,11 @@
         return html;
       });
     });
-    Promise.any(attempts).then(async function (html) {
-      /* Wacht op Forumotion: de _userdata-global wordt soms pas na de eerste paginarender gevuld. */
+    Promise.any(attempts).then(function (html) {
+      /* Sla Forumotion-gegevens alleen op als ze al beschikbaar zijn.
+         De pagina wordt nooit opgehouden door een sessiecontrole. */
       try {
         var d = window._userdata || null;
-        for (var i = 0; i < 40 && (!d || Number(d.session_logged_in) <= 0 || Number(d.user_id) <= 0); i++) {
-          await new Promise(function (resolve) { setTimeout(resolve, 150); });
-          d = window._userdata || d;
-        }
         var id = d ? (Number(d.user_id) || 0) : 0;
         if (d && id > 0 && Number(d.session_logged_in) > 0) {
           sessionStorage.setItem("hpmw_forumotion_session", JSON.stringify({
@@ -58,12 +55,6 @@
             logged: true,
             savedAt: Date.now()
           }));
-        } else {
-          /* Verwijder nooit een geldige eerdere sessie alleen omdat Forumotion nog niet klaar is. */
-          var previous = JSON.parse(sessionStorage.getItem("hpmw_forumotion_session") || "null");
-          if (!previous || !previous.logged || Number(previous.id) <= 0) {
-            sessionStorage.removeItem("hpmw_forumotion_session");
-          }
         }
       } catch (e) { console.warn("Forumotion-sessie kon niet vooraf worden vastgelegd:", e); }
       document.open();
