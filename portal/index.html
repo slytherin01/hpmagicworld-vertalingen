@@ -1603,38 +1603,16 @@ a[href="/forum"],a[href="/"],a[href*="viewforum"],a[href*="index.php"],.global-b
 }
 </style>
 <style id="hpmw-banner-all-pages">
-/* De aangeleverde ticketbanner bovenaan iedere Ticket Support-weergave. */
-main.shell>.view::before{
- content:"";
- display:block;
- width:100%;
- height:clamp(100px,16vw,180px);
- margin:0 0 18px;
- border:0!important;
- outline:0!important;
- border-radius:0;
- background-image:url("https://i.servimg.com/u/f28/11/54/28/73/ticket11.png");
- background-repeat:no-repeat;
- background-position:center center;
- background-size:contain;
-}
+/* Geen ticketbanner op Mijn Tickets of andere paginaweergaven: de algemene portaalhoofdbanner staat al bovenaan. */
+main.shell>.view::before{content:none!important;display:none!important;background:none!important;background-image:none!important}
 #myTicketsView>.page-head,#adminView>.page-head{
- min-height:0!important;
- margin:0 0 14px!important;
- padding:0!important;
- border:0!important;
- border-radius:0!important;
- background:transparent!important;
- box-shadow:none!important;
+ min-height:66px!important;margin:0 0 14px!important;padding:14px 60px!important;
+ border:1px solid #b99a52!important;border-radius:13px!important;
+ background:linear-gradient(110deg,#172943,#223754 50%,#172943)!important;
+ box-shadow:0 8px 24px #0005!important
 }
+#myTicketsView>.page-head>div,#adminView>.page-head>div{display:block!important}
 #myTicketsView>.page-head:before,#adminView>.page-head:before{content:none!important;display:none!important}
-#myTicketsView>.page-head>div,#adminView>.page-head>div{display:none!important}
-/* Verwijder dubbele/kleine logo's: per weergave blijft alleen de banner staan. */
-.topbar .global-brand,
-main.shell>.view#homeView .support-logo-wrap{display:none!important}
-@media(max-width:600px){
- main.shell>.view::before{height:clamp(78px,23vw,125px);margin-bottom:13px;border:0!important;outline:0!important;border-radius:0}
-}
 </style>
 <style id="hpmw-language-and-right-nav">
 .top-actions #myTicketsLaunch{margin-left:auto!important}
@@ -2754,19 +2732,12 @@ main.shell>.view#homeView::before{content:none!important;display:none!important;
 
 
 <style id="hpmw-small-bottom-left-logos">
-/* Geen groot logo boven de inhoud op de vier ticketpagina's. */
-#formView, #adminView, #myTicketsView, #homeView {position:relative!important;padding-bottom:92px!important;}
-#formView::before, #adminView::before, #myTicketsView::before, #homeView::before {content:none!important;display:none!important;background-image:none!important;}
-#formView .support-logo-wrap, #adminView .support-logo-wrap,
-#myTicketsView .support-logo-wrap, #homeView .support-logo-wrap {display:none!important;}
-/* Klein logo linksonder, onder de formulieren / ticketinhoud. */
-#formView::after, #adminView::after, #myTicketsView::after, #homeView::after {
- content:""!important;display:block!important;position:absolute!important;
- left:12px!important;bottom:14px!important;width:112px!important;height:65px!important;
- background:url("https://i28.servimg.com/u/f28/11/54/28/73/logo10.png") center left / contain no-repeat!important;
- border:0!important;box-shadow:none!important;pointer-events:none!important;
-}
-@media(max-width:600px){#formView::after,#adminView::after,#myTicketsView::after,#homeView::after{width:86px!important;height:52px!important;left:8px!important;bottom:12px!important;}}
+/* Geen extra ticketlogo's op Mijn Tickets. */
+#myTicketsView{padding-bottom:0!important}
+#myTicketsView::before,#myTicketsView::after{content:none!important;display:none!important;background:none!important;background-image:none!important}
+#myTicketsView .support-logo-wrap,#myTicketsView .support-logo,#myTicketsView .intro-support-logo,
+#myTicketsView [class*="logo"],#myTicketsView [id*="logo"],
+#myTicketsView img[alt*="logo" i]{display:none!important;visibility:hidden!important}
 </style>
 
 <style id="hpmw-dark-blocks-0e1623">
@@ -3614,5 +3585,19 @@ html body main.shell>.view#myTicketsView>.page-head>div{
 }
 html body main.shell>.view#myTicketsView>.page-head h1,
 html body main.shell>.view#myTicketsView>.page-head .subtitle{display:block!important;visibility:visible!important;opacity:1!important}
+</style>
+
+<style id="hpmw-my-tickets-final-no-banner-no-logo">
+/* Extra zekerheid: alleen de globale hoofdbanner blijft zichtbaar op Mijn Tickets. */
+html body main.shell>.view#myTicketsView::before,
+html body main.shell>.view#myTicketsView::after,
+html body main.shell>.view#myTicketsView>.page-head::before,
+html body main.shell>.view#myTicketsView>.page-head::after{content:none!important;display:none!important;background:none!important;background-image:none!important;width:0!important;height:0!important;margin:0!important;padding:0!important;border:0!important}
+html body main.shell>.view#myTicketsView .support-logo-wrap,
+html body main.shell>.view#myTicketsView .support-logo,
+html body main.shell>.view#myTicketsView .intro-support-logo,
+html body main.shell>.view#myTicketsView [class*="logo"],
+html body main.shell>.view#myTicketsView [id*="logo"]{display:none!important;visibility:hidden!important}
+html body main.shell>.view#myTicketsView>.page-head{background-image:none!important}
 </style>
 </body></html>
