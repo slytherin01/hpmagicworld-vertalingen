@@ -3,7 +3,7 @@
   if (window.__muggleMinistryPortalLoading) return;
   window.__muggleMinistryPortalLoading = true;
 
-  var version = "20261114-94";
+  var version = "20261114-95";
   var sources = [
     "https://raw.githubusercontent.com/slytherin01/muggle-ministry/main/portal/index.html?cachebust=" + version,
     "https://slytherin01.github.io/muggle-ministry/portal/index.html?v=" + version
@@ -41,10 +41,35 @@
       if (!html || html.length < 10000 || !/<html[\s>]/i.test(html) || !/<body[\s>]/i.test(html)) {
         throw new Error("De portaalbron gaf geen volledige HTML-pagina terug.");
       }
-      try { var d=window._userdata; var id=d?(Number(d.user_id)||0):0; var ok=!!(d&&Number(d.session_logged_in)>0&&id); sessionStorage.setItem('hpmw_forumotion_session',JSON.stringify({id:ok?id:0,name:ok?String(d.username||d.username_clean||'Gebruiker'):'',avatar:ok?String(d.user_avatar||d.avatar||''):'',logged:ok,savedAt:Date.now()})); } catch(e) {}
-      document.open();
-      document.write(html);
-      document.close();
+      (async function () {
+        /* Forumotion initialiseert _userdata soms pas nadat de pagina is geladen. */
+        var d = null;
+        for (var attempt = 0; attempt < 50; attempt++) {
+          try {
+            d = window._userdata || null;
+            if (d && Number(d.user_id) > 0 && Number(d.session_logged_in) > 0) break;
+          } catch (e) {}
+          await new Promise(function (resolve) { setTimeout(resolve, 150); });
+        }
+        try {
+          var id = d ? (Number(d.user_id) || 0) : 0;
+          var ok = !!(d && id > 0 && Number(d.session_logged_in) > 0);
+          if (ok) {
+            sessionStorage.setItem('hpmw_forumotion_session', JSON.stringify({
+              id: id,
+              name: String(d.username || d.username_clean || 'Gebruiker'),
+              avatar: String(d.user_avatar || d.avatar || ''),
+              logged: true,
+              savedAt: Date.now()
+            }));
+          } else {
+            sessionStorage.removeItem('hpmw_forumotion_session');
+          }
+        } catch (e) {}
+        document.open();
+        document.write(html);
+        document.close();
+      })();
     }).catch(function (error) {
       console.warn("Portaalbron " + (index + 1) + " niet beschikbaar; volgende bron wordt geprobeerd.", error);
       loadFrom(index + 1, error);
