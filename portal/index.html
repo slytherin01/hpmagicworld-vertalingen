@@ -3414,7 +3414,7 @@ s.textContent += "#introView{height:auto!important;min-height:0!important;max-he
     const layout=home.querySelector(".intro-login-layout");
     const news=document.getElementById("hpmwHomeNews");
     const right=grid.querySelector(".hpmw-home-right");
-    if(right)right.innerHTML='<section class="hpmw-side-card hpmw-sorting-hat-widget"><div class="hpmw-side-heading"><i class="fa-solid fa-wand-magic-sparkles"></i> De Sorteerhoed</div><div class="hpmw-sorting-hat-link" role="button" tabindex="0" data-open-sorting-hat aria-label="Open De Sorteerhoed"><img src="https://i44.servimg.com/u/f44/11/48/74/42/sortee11.png" alt="Klik op de afbeelding om De Sorteerhoed te openen" loading="eager" decoding="async"></button></section><section class="hpmw-side-card hpmw-side-note hpmw-sorting-hat-widget"><div class="hpmw-side-heading"><i class="fa-solid fa-briefcase"></i> Vacatures</div><div class="hpmw-sorting-hat-link hpmw-vacancies-image" role="button" tabindex="0" data-open-vacancies aria-label="Open Vacatures"><img src="https://i44.servimg.com/u/f44/11/48/74/42/vacatu12.png" alt="Vacatures" loading="eager" decoding="async"></button></section>';
+    if(right)right.innerHTML='<section class="hpmw-side-card hpmw-sorting-hat-widget"><div class="hpmw-side-heading"><i class="fa-solid fa-wand-magic-sparkles"></i> De Sorteerhoed</div><div class="hpmw-sorting-hat-link" role="button" tabindex="0" data-open-sorting-hat aria-label="Open De Sorteerhoed"><img src="https://i44.servimg.com/u/f44/11/48/74/42/sortee11.png" alt="Klik op de afbeelding om De Sorteerhoed te openen" loading="eager" decoding="async"></div></section><section class="hpmw-side-card hpmw-side-note hpmw-sorting-hat-widget"><div class="hpmw-side-heading"><i class="fa-solid fa-briefcase"></i> Vacatures</div><div class="hpmw-sorting-hat-link hpmw-vacancies-image" role="button" tabindex="0" data-open-vacancies aria-label="Open Vacatures"><img src="https://i44.servimg.com/u/f44/11/48/74/42/vacatu12.png" alt="Vacatures" loading="eager" decoding="async"></div></section>';
     if(center&&layout&&layout.parentElement!==center)center.prepend(layout);
     if(center&&news&&news.parentElement!==center)center.append(news);
    }
@@ -3821,13 +3821,13 @@ publicJobs();setInterval(publicJobs,60000);
   if(vacancy){
    event.preventDefault();
    event.stopPropagation();
-   if(typeof show==="function")show("vacanciesView");
+   if(typeof window.hpmwShowPortalView==="function")window.hpmwShowPortalView("vacanciesView");
    return;
   }
   if(sorting){
    event.preventDefault();
    event.stopPropagation();
-   if(typeof show==="function")show("sortingHatView");
+   if(typeof window.hpmwShowPortalView==="function")window.hpmwShowPortalView("sortingHatView");
   }
  });
 })();
