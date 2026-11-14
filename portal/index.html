@@ -1277,11 +1277,11 @@ question:`<i class="fa-solid fa-circle-question"></i>`
 const doc=new DOMParser().parseFromString(html,"text/html");
 const readKey=(key)=>{
 const patterns=[
-new RegExp("_userdata\\s*(?:\\[\\s*['\"]"+key+"['\"]\\s*\\]|\\.\\s*"+key+")\\s*=\\s*\\"([^\\"]*)\\"","i"),
-new RegExp("_userdata\\s*(?:\\[\\s*['\"]"+key+"['\"]\\s*\\]|\\.\\s*"+key+")\\s*=\\s*'([^']*)'","i"),
-new RegExp("['\"]"+key+"['\"]\\s*:\\s*\\"([^\\"]*)\\"","i"),
-new RegExp("['\"]"+key+"['\"]\\s*:\\s*'([^']*)'","i"),
-new RegExp("_userdata\\s*(?:\\[\\s*['\"]"+key+"['\"]\\s*\\]|\\.\\s*"+key+")\\s*=\\s*([^;\\s]+)","i")
+new RegExp(`_userdata\\s*(?:\\[\\s*['"]${key}['"]\\s*\\]|\\.\\s*${key})\\s*=\\s*"([^"]*)"`,"i"),
+new RegExp(`_userdata\\s*(?:\\[\\s*['"]${key}['"]\\s*\\]|\\.\\s*${key})\\s*=\\s*'([^']*)'`,"i"),
+new RegExp(`['"]${key}['"]\\s*:\\s*"([^"]*)"`,"i"),
+new RegExp(`['"]${key}['"]\\s*:\\s*'([^']*)'`,"i"),
+new RegExp(`_userdata\\s*(?:\\[\\s*['"]${key}['"]\\s*\\]|\\.\\s*${key})\\s*=\\s*([^;\\s]+)`,"i")
 ];
 for(const re of patterns){const m=html.match(re);if(m)return m[1];}
 return "";
