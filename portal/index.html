@@ -1371,6 +1371,49 @@ html body #introView #hpmwHomeLayout .hpmw-sorting-hat-widget > button.hpmw-sort
 #vacanciesView .hpmw-vacancies-heading-panel .subtitle{color:#c2cedd!important;margin:0!important}
 #vacanciesView .hpmw-vacancies-heading-panel #vacanciesBack{flex:0 0 auto!important}
 @media(max-width:600px){#vacanciesView .page-head.hpmw-vacancies-heading-panel{flex-direction:column!important;align-items:flex-start!important;padding:21px!important}}
+</style><style id="hpmw-unified-deep-blue-theme">
+/* Eén uniforme nachtblauwe kleur voor alle onderdelen van Sorteerhoed en Vacatures. */
+#sortingHatView,#vacanciesView{--hpmw-deep-blue:#0d1b2d;--hpmw-blue-panel:#13243a;--hpmw-blue-border:#344b67;--hpmw-blue-hover:#1a304b;color:#eaf2fc!important}
+#sortingHatView .page-head,#vacanciesView .page-head,
+#sortingHatView .hpmw-sort-hero,#sortingHatView .hpmw-sort-panel,
+#sortingHatView .panel,#vacanciesView .hpmw-vacancies-panel,
+#vacanciesView .hpmw-vacancies-empty,#vacanciesView .hpmw-vacancy-public,
+#vacanciesView #hpmwVacancyDetail{
+ background:var(--hpmw-deep-blue)!important;
+ background-image:none!important;
+ border-color:var(--hpmw-blue-border)!important;
+ color:#eaf2fc!important;
+ box-shadow:0 16px 38px rgba(0,0,0,.28),inset 0 1px rgba(255,255,255,.035)!important;
+}
+#sortingHatView .panel-head,#sortingHatView .hpmw-sort-hero .panel-head,
+#vacanciesView .panel-head{
+ background:var(--hpmw-blue-panel)!important;background-image:none!important;
+ border-color:var(--hpmw-blue-border)!important;color:#edf4ff!important;
+}
+#sortingHatView .field input,#sortingHatView .field textarea,#sortingHatView .field select,
+#vacanciesView input,#vacanciesView textarea,#vacanciesView select{
+ background:var(--hpmw-blue-panel)!important;background-image:none!important;
+ border-color:var(--hpmw-blue-border)!important;color:#edf4ff!important;
+}
+#sortingHatView .field input:focus,#sortingHatView .field textarea:focus,#sortingHatView .field select:focus,
+#vacanciesView input:focus,#vacanciesView textarea:focus,#vacanciesView select:focus{
+ border-color:#7892b2!important;box-shadow:0 0 0 3px rgba(120,146,178,.18)!important;
+}
+#sortingHatView .transfer-reason,#sortingHatView .hint,
+#vacanciesView .hpmw-vacancy-public small{background:var(--hpmw-blue-panel)!important;border-color:var(--hpmw-blue-border)!important}
+#sortingHatView button,#vacanciesView button,
+#sortQuizBackdrop .quiz-dialog,#sortQuizBackdrop .quiz-option{
+ background:var(--hpmw-blue-panel)!important;background-image:none!important;
+ border-color:var(--hpmw-blue-border)!important;color:#edf4ff!important;
+}
+#sortingHatView button:hover,#vacanciesView button:hover,
+#sortQuizBackdrop .quiz-option:hover{
+ background:var(--hpmw-blue-hover)!important;border-color:#607b9c!important;
+}
+#sortingHatView .page-head .eyebrow,#vacanciesView .page-head .eyebrow{color:#b7c9df!important}
+#sortingHatView .page-head h1,#vacanciesView .page-head h1{color:#f3f6fb!important}
+#sortingHatView .page-head .subtitle,#vacanciesView .page-head .subtitle,
+#sortingHatView .hpmw-sort-hero p,#vacanciesView .hpmw-vacancies-empty p{color:#c2cedd!important}
 </style></head><body><header class="topbar luxury-nav-v2"><nav aria-label="Support navigatie" class="top-actions"><a class="lux-nav-item" href="https://testforumjoost.forumactie.com/forum" rel="noopener noreferrer" target="_blank"><span class="lux-nav-icon"><i class="fa-solid fa-comments"></i></span><span class="lux-nav-label">Forum</span></a><a class="lux-nav-item" href="https://testforumjoost.forumactie.com/h3-portaal" target="_self"><span class="lux-nav-icon"><i class="fa-solid fa-house"></i></span><span class="lux-nav-label">Portaal</span></a><button aria-expanded="false" aria-haspopup="dialog" class="lux-nav-item" id="faqLaunch" type="button"><span class="lux-nav-icon"><i class="fa-solid fa-circle-question"></i></span><span class="lux-nav-label">FAQ</span></button><button aria-expanded="false" class="lux-nav-item" id="ticketSupportLaunch" type="button"><span class="lux-nav-icon"><i class="fa-solid fa-ticket"></i></span><span class="lux-nav-label">Ticket Support</span></button>
 <button class="lux-nav-item" id="adminLaunch" type="button" style="display:none"><span class="lux-nav-icon"><i class="fa-solid fa-shield-halved"></i></span><span class="lux-nav-label">Ticketbeheer</span></button><label aria-label="Taal kiezen" class="hpmw-language-wrap" for="hpmwLanguage"><i aria-hidden="true" class="fa-solid fa-language"></i><select id="hpmwLanguage"><option selected="" value="nl">Nederlands</option><option value="en">English</option><option value="pt">Português</option></select></label><button class="lux-nav-item" data-extracted-style="2" id="myTicketsLaunch" style="display:none"><span class="lux-nav-icon"><i class="fa-solid fa-envelope"></i></span><span class="lux-nav-label">Mijn tickets</span><b class="count-badge" id="myTicketsCount">0</b></button><a class="lux-nav-item lux-user" href="/login" id="accountLink"><span class="lux-nav-icon"><i class="fa-solid fa-user"></i></span><span class="lux-nav-usertext"><small>INGELOGD ALS</small><strong id="username">Gast</strong></span></a></nav></header><div class="hpmw-global-brandbar" role="banner" aria-label="Muggle Ministry"></div><main class="shell"><section class="view active" id="introView">
 <!-- EIGEN AFBEELDING VOOR DEZE PAGINA: vervang IMAGE_URL_HIER en LINK_URL_HIER.
