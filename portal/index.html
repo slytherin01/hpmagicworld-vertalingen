@@ -3459,7 +3459,7 @@ function closeQuiz(){quizBackdrop.classList.remove("open")}
 function getMember(){const d=window._userdata||{};if(Number(d.session_logged_in)>0&&Number(d.user_id)>0)return {id:Number(d.user_id),name:String(d.username||"Gebruiker")};const a=document.querySelector("#accountLink[href^='/u']");const m=(a?.getAttribute("href")||"").match(/^\/u(\d+)/);const n=document.querySelector("#accountLink .lux-nav-usertext strong")?.textContent?.trim();return m?{id:+m[1],name:n||"Gebruiker"}:null}
 function syncMember(){const u=getMember();$("sortApplicant").value=u?u.name:""}
 syncMember();setTimeout(syncMember,800);
-back?.addEventListener("click",()=>{if(typeof show==="function")show("homeView")});
+back?.addEventListener("click",()=>{if(typeof show==="function")show("introView")});
 transfer.addEventListener("change",()=>{reasonWrap.hidden=!transfer.checked;reason.required=transfer.checked;if(!transfer.checked)reason.value=""});
 const questions=[
 {q:"Wat vind je het belangrijkst?",a:[["Moed en opkomen voor anderen","Griffoendor"],["Ambitie en je doelen bereiken","Zwadderich"],["Vriendschap en trouw","Huffelpuf"],["Nieuwsgierigheid en kennis","Ravenklauw"]]},
