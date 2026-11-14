@@ -4024,3 +4024,62 @@ html body #introView #hpmwHomeLayout .hpmw-home-left > .hpmw-forum-widget .hpmw-
 }
 @media(max-width:700px){html body #introView #hpmwHomeLayout .hpmw-home-left > .hpmw-forum-widget .hpmw-forum-widget-link img{max-height:118px!important}}
 </style>
+
+<style id="hpmw-all-sidebar-widgets-match-department">
+/* Eén vaste maat voor alle widgets links en rechts, gelijk aan Mijn Afdeling. */
+html body #introView #hpmwHomeLayout .hpmw-home-left > .hpmw-side-card,
+html body #introView #hpmwHomeLayout .hpmw-home-right > .hpmw-side-card{
+ display:flex!important;flex-direction:column!important;align-items:stretch!important;
+ box-sizing:border-box!important;width:100%!important;min-width:0!important;
+ height:184px!important;min-height:184px!important;max-height:184px!important;
+ overflow:hidden!important;
+}
+html body #introView #hpmwHomeLayout .hpmw-home-left > .hpmw-side-card > .hpmw-side-heading,
+html body #introView #hpmwHomeLayout .hpmw-home-right > .hpmw-side-card > .hpmw-side-heading{
+ flex:0 0 auto!important;min-height:36px!important;box-sizing:border-box!important;
+}
+html body #introView #hpmwHomeLayout .hpmw-home-left > .hpmw-side-card > a,
+html body #introView #hpmwHomeLayout .hpmw-home-right > .hpmw-side-card > a,
+html body #introView #hpmwHomeLayout #hpmwMyDepartment .hpmw-department-content{
+ flex:1 1 auto!important;min-height:0!important;max-height:none!important;
+ box-sizing:border-box!important;overflow:hidden!important;
+}
+html body #introView #hpmwHomeLayout .hpmw-home-left > .hpmw-forum-widget > .hpmw-forum-widget-link{
+ display:flex!important;align-items:center!important;justify-content:center!important;
+ width:100%!important;min-height:0!important;height:auto!important;max-height:none!important;
+ flex:1 1 auto!important;padding:3px 6px!important;margin:0!important;
+}
+html body #introView #hpmwHomeLayout .hpmw-home-left > .hpmw-forum-widget > .hpmw-forum-widget-link img{
+ display:block!important;visibility:visible!important;opacity:1!important;
+ width:auto!important;height:auto!important;max-width:100%!important;max-height:146px!important;
+ object-fit:contain!important;object-position:center!important;margin:0 auto!important;
+}
+html body #introView #hpmwHomeLayout .hpmw-home-left > .hpmw-side-card .hpmw-sorting-hat-link,
+html body #introView #hpmwHomeLayout .hpmw-home-right > .hpmw-side-card .hpmw-sorting-hat-link{
+ display:flex!important;flex:1 1 auto!important;min-height:0!important;max-height:none!important;
+ align-items:center!important;justify-content:center!important;width:100%!important;
+ padding:3px 6px!important;margin:0!important;overflow:hidden!important;
+}
+html body #introView #hpmwHomeLayout .hpmw-home-left > .hpmw-side-card .hpmw-sorting-hat-link img,
+html body #introView #hpmwHomeLayout .hpmw-home-right > .hpmw-side-card .hpmw-sorting-hat-link img,
+html body #introView #hpmwHomeLayout .hpmw-home-right > .hpmw-side-card .hpmw-vacancies-image img{
+ display:block!important;width:auto!important;height:auto!important;max-width:100%!important;max-height:146px!important;
+ object-fit:contain!important;object-position:center!important;margin:0 auto!important;
+}
+html body #introView #hpmwHomeLayout #hpmwMyDepartment .hpmw-department-content{
+ display:flex!important;align-items:center!important;justify-content:center!important;padding:4px!important;
+}
+html body #introView #hpmwHomeLayout #hpmwMyDepartment .hpmw-department-animal-image{
+ width:140px!important;height:140px!important;max-width:100%!important;max-height:140px!important;object-fit:contain!important;
+}
+@media(max-width:700px){
+ html body #introView #hpmwHomeLayout .hpmw-home-left > .hpmw-side-card,
+ html body #introView #hpmwHomeLayout .hpmw-home-right > .hpmw-side-card{
+  height:184px!important;min-height:184px!important;max-height:184px!important;
+ }
+ html body #introView #hpmwHomeLayout .hpmw-home-left > .hpmw-forum-widget > .hpmw-forum-widget-link img,
+ html body #introView #hpmwHomeLayout .hpmw-home-left > .hpmw-side-card .hpmw-sorting-hat-link img,
+ html body #introView #hpmwHomeLayout .hpmw-home-right > .hpmw-side-card .hpmw-sorting-hat-link img,
+ html body #introView #hpmwHomeLayout .hpmw-home-right > .hpmw-side-card .hpmw-vacancies-image img{max-height:146px!important}
+}
+</style>
