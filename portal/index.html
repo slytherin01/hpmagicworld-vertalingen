@@ -3921,3 +3921,29 @@ html body #hpmwHomeLayout .hpmw-home-left .hpmw-coming-soon .hpmw-forum-widget-l
  html body #hpmwHomeLayout .hpmw-home-left .hpmw-coming-soon .hpmw-forum-widget-art img{height:90px!important;max-height:90px!important}
 }
 </style>
+
+<style id="hpmw-forum-widget-match-sibling-size">
+/* Het Forum krijgt exact dezelfde kaart- en afbeeldingsmaat als de andere zijwidgets. */
+html body #introView #hpmwHomeLayout .hpmw-home-left > .hpmw-coming-soon{
+ height:230px!important;min-height:230px!important;max-height:230px!important;
+ box-sizing:border-box!important;overflow:hidden!important;
+}
+html body #introView #hpmwHomeLayout .hpmw-home-left > .hpmw-coming-soon .hpmw-forum-widget-link{
+ display:flex!important;flex:1 1 auto!important;min-height:0!important;height:auto!important;max-height:none!important;
+ width:100%!important;box-sizing:border-box!important;overflow:hidden!important;
+ align-items:center!important;justify-content:center!important;padding:6px 8px 8px!important;gap:0!important;
+}
+html body #introView #hpmwHomeLayout .hpmw-home-left > .hpmw-coming-soon .hpmw-forum-widget-art{
+ display:flex!important;flex:1 1 auto!important;align-items:center!important;justify-content:center!important;
+ width:100%!important;min-height:0!important;height:100%!important;max-height:none!important;overflow:hidden!important;
+}
+html body #introView #hpmwHomeLayout .hpmw-home-left > .hpmw-coming-soon .hpmw-forum-widget-art img{
+ display:block!important;width:auto!important;max-width:100%!important;height:auto!important;max-height:146px!important;
+ object-fit:contain!important;object-position:center!important;margin:0 auto!important;transform:none!important;
+}
+html body #introView #hpmwHomeLayout .hpmw-home-left > .hpmw-coming-soon .hpmw-forum-widget-caption{display:none!important}
+@media(max-width:700px){
+ html body #introView #hpmwHomeLayout .hpmw-home-left > .hpmw-coming-soon{height:184px!important;min-height:184px!important;max-height:184px!important}
+ html body #introView #hpmwHomeLayout .hpmw-home-left > .hpmw-coming-soon .hpmw-forum-widget-art img{max-height:118px!important}
+}
+</style>
