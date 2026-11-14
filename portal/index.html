@@ -3593,4 +3593,26 @@ html body main.shell>.view#formView .new-ticket-head{padding-top:14px!important}
 #myTicketsView img,#myTicketsView picture,#myTicketsView .support-logo,#myTicketsView .support-logo-wrap{display:none!important}
 #myTicketsView>.page-head{padding:14px 60px!important;min-height:66px!important;margin:0 0 16px!important}
 </style>
+
+<style id="hpmw-my-tickets-remove-overlapping-banner-and-logo-v3">
+/* Mijn Tickets: verwijder de extra ticketbanner die over de hoofdbanner valt én het logo/beeldmerk in de eigen titelbalk. */
+html body main.shell>.view#myTicketsView::before,
+html body main.shell>.view#myTicketsView::after,
+html body main.shell>.view#myTicketsView>.page-head::before,
+html body main.shell>.view#myTicketsView>.page-head::after{
+ content:none!important;display:none!important;visibility:hidden!important;opacity:0!important;
+ background:none!important;background-image:none!important;
+ width:0!important;height:0!important;min-height:0!important;max-height:0!important;
+ margin:0!important;padding:0!important;border:0!important;box-shadow:none!important
+}
+html body main.shell>.view#myTicketsView,
+html body main.shell>.view#myTicketsView>.page-head{
+ background-image:none!important
+}
+html body main.shell>.view#myTicketsView>.page-head>div{
+ display:block!important;visibility:visible!important;opacity:1!important
+}
+html body main.shell>.view#myTicketsView>.page-head h1,
+html body main.shell>.view#myTicketsView>.page-head .subtitle{display:block!important;visibility:visible!important;opacity:1!important}
+</style>
 </body></html>
