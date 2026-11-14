@@ -1188,7 +1188,17 @@ html body #introView .intro-static-card .hpmw-welcome-box.center-message {
 }
 </style>
 
-</head><body><header class="topbar luxury-nav-v2"><nav aria-label="Support navigatie" class="top-actions"><a class="lux-nav-item" href="https://testforumjoost.forumactie.com/forum" rel="noopener noreferrer" target="_blank"><span class="lux-nav-icon"><i class="fa-solid fa-comments"></i></span><span class="lux-nav-label">Forum</span></a><a class="lux-nav-item" href="https://testforumjoost.forumactie.com/h3-portaal" target="_self"><span class="lux-nav-icon"><i class="fa-solid fa-house"></i></span><span class="lux-nav-label">Portaal</span></a><button aria-expanded="false" aria-haspopup="dialog" class="lux-nav-item" id="faqLaunch" type="button"><span class="lux-nav-icon"><i class="fa-solid fa-circle-question"></i></span><span class="lux-nav-label">FAQ</span></button><button aria-expanded="false" class="lux-nav-item" id="ticketSupportLaunch" type="button"><span class="lux-nav-icon"><i class="fa-solid fa-ticket"></i></span><span class="lux-nav-label">Ticket Support</span></button>
+<style id="hpmw-widget-clickability-fix">
+html body #introView #hpmwHomeLayout aside.hpmw-home-side section.hpmw-side-card.hpmw-sorting-hat-widget{
+ position:relative!important;z-index:30!important;pointer-events:auto!important;cursor:pointer!important;
+}
+html body #introView #hpmwHomeLayout aside.hpmw-home-side section.hpmw-side-card.hpmw-sorting-hat-widget > a{
+ position:relative!important;z-index:31!important;pointer-events:auto!important;cursor:pointer!important;
+}
+html body #introView #hpmwHomeLayout aside.hpmw-home-side section.hpmw-side-card.hpmw-sorting-hat-widget img{
+ pointer-events:none!important;
+}
+</style></head><body><header class="topbar luxury-nav-v2"><nav aria-label="Support navigatie" class="top-actions"><a class="lux-nav-item" href="https://testforumjoost.forumactie.com/forum" rel="noopener noreferrer" target="_blank"><span class="lux-nav-icon"><i class="fa-solid fa-comments"></i></span><span class="lux-nav-label">Forum</span></a><a class="lux-nav-item" href="https://testforumjoost.forumactie.com/h3-portaal" target="_self"><span class="lux-nav-icon"><i class="fa-solid fa-house"></i></span><span class="lux-nav-label">Portaal</span></a><button aria-expanded="false" aria-haspopup="dialog" class="lux-nav-item" id="faqLaunch" type="button"><span class="lux-nav-icon"><i class="fa-solid fa-circle-question"></i></span><span class="lux-nav-label">FAQ</span></button><button aria-expanded="false" class="lux-nav-item" id="ticketSupportLaunch" type="button"><span class="lux-nav-icon"><i class="fa-solid fa-ticket"></i></span><span class="lux-nav-label">Ticket Support</span></button>
 <button class="lux-nav-item" id="adminLaunch" type="button" style="display:none"><span class="lux-nav-icon"><i class="fa-solid fa-shield-halved"></i></span><span class="lux-nav-label">Ticketbeheer</span></button><label aria-label="Taal kiezen" class="hpmw-language-wrap" for="hpmwLanguage"><i aria-hidden="true" class="fa-solid fa-language"></i><select id="hpmwLanguage"><option selected="" value="nl">Nederlands</option><option value="en">English</option><option value="pt">Português</option></select></label><button class="lux-nav-item" data-extracted-style="2" id="myTicketsLaunch" style="display:none"><span class="lux-nav-icon"><i class="fa-solid fa-envelope"></i></span><span class="lux-nav-label">Mijn tickets</span><b class="count-badge" id="myTicketsCount">0</b></button><a class="lux-nav-item lux-user" href="/login" id="accountLink"><span class="lux-nav-icon"><i class="fa-solid fa-user"></i></span><span class="lux-nav-usertext"><small>INGELOGD ALS</small><strong id="username">Gast</strong></span></a></nav></header><div class="hpmw-global-brandbar" role="banner" aria-label="Muggle Ministry"></div><main class="shell"><section class="view active" id="introView">
 <!-- EIGEN AFBEELDING VOOR DEZE PAGINA: vervang IMAGE_URL_HIER en LINK_URL_HIER.
 <a href="LINK_URL_HIER"><img src="IMAGE_URL_HIER" alt="Beschrijving afbeelding" style="max-width:100%;height:auto;display:block;margin:0 auto;"></a>
@@ -3292,6 +3302,13 @@ s.textContent += "#introView{height:auto!important;min-height:0!important;max-he
     const news=document.getElementById("hpmwHomeNews");
     if(news)center.append(news);
     grid.addEventListener("click",event=>{
+     const card=event.target.closest("#hpmwHomeLayout .hpmw-side-card");
+     if(card){
+      const vacancy=card.querySelector("[data-open-vacancies]");
+      const sorting=card.querySelector("[data-open-sorting-hat]");
+      if(vacancy){event.preventDefault();if(typeof show==="function")show("vacanciesView");return;}
+      if(sorting){event.preventDefault();if(typeof show==="function")show("sortingHatView");return;}
+     }
      const action=event.target.closest("[data-home-action]")?.dataset.homeAction;
      if(action==="tickets")document.getElementById("ticketSupportLaunch")?.click();
      if(action==="faq")document.getElementById("faqLaunch")?.click();
@@ -3436,8 +3453,6 @@ function resetQuiz(){step=0;scores={Griffoendor:0,Zwadderich:0,Huffelpuf:0,Raven
 $("sortingHatQuizOpen").addEventListener("click",()=>{resetQuiz();quizBackdrop.classList.add("open")});$("sortQuizClose").addEventListener("click",closeQuiz);
 form.addEventListener("submit",async e=>{e.preventDefault();if(!form.reportValidity())return;const u=getMember();if(!u){showStatus("Log eerst in op je forumaccount en probeer opnieuw.");return}if(transfer.checked&&!reason.value.trim()){reason.setCustomValidity("Vul een duidelijke reden voor je verhuisverzoek in.");reason.reportValidity();return}reason.setCustomValidity("");const subject="Sorteerhoed afdeling aanvraag - "+dept.value;const lines=["SORTEERHOED - AFDELINGSAANVRAAG","Gebruikersnaam: "+u.name,"Gekozen afdeling: "+dept.value,"Verhuizing aangevraagd: "+(transfer.checked?"Ja":"Nee")];if(transfer.checked)lines.push("Reden verhuizing: "+reason.value.trim());if($("sortMessage").value.trim())lines.push("Vragen of opmerkingen: "+$("sortMessage").value.trim());submit.disabled=true;showStatus("Aanvraag wordt als nieuw topic aangemaakt...");try{const response=await fetch("/post?f=27&mode=newtopic",{credentials:"include",cache:"no-store"});if(!response.ok)throw Error("Het Forumotion-formulier kon niet worden geopend (HTTP "+response.status+").");const doc=new DOMParser().parseFromString(await response.text(),"text/html");const ff=[...doc.forms].find(x=>x.querySelector('input[name="subject"],input[name="topic_name"]')&&x.querySelector('textarea[name="message"],textarea#text_editor_textarea'));if(!ff)throw Error("Forumotion heeft geen formulier voor een nieuw topic aangeboden. Controleer of je bent ingelogd en rechten hebt in De Grote Zaal.");const sf=ff.querySelector('input[name="subject"],input[name="topic_name"]'),mf=ff.querySelector('textarea[name="message"],textarea#text_editor_textarea'),data=new FormData(ff);data.set(sf.name,subject);data.set(mf.name,lines.join("\n\n"));const pb=ff.querySelector('[name="post"]');if(pb)data.set("post",pb.value||"Verstuur");const action=new URL(ff.getAttribute("action")||"/post",location.origin).href;const posted=await fetch(action,{method:"POST",body:data,credentials:"include",cache:"no-store",redirect:"follow"});if(!posted.ok)throw Error("Forumotion kon het nieuwe topic niet plaatsen (HTTP "+posted.status+").");const finalUrl=posted.url||"",tm=finalUrl.match(/\/t(\d+)/i);if(tm){showStatus("Je sorteeraanvraag is geplaatst. ");const a=document.createElement("a");a.href=finalUrl;a.textContent="Bekijk je nieuwe topic";a.target="_blank";a.rel="noopener";status.append(a);form.reset();reasonWrap.hidden=true;syncMember()}else{const rd=new DOMParser().parseFromString(await posted.text(),"text/html"),tl=rd.querySelector('a[href*="/t"]');if(tl&&tl.href){showStatus("Je sorteeraanvraag is geplaatst. ");const a=document.createElement("a");a.href=tl.href;a.textContent="Bekijk je nieuwe topic";a.target="_blank";a.rel="noopener";status.append(a);form.reset();reasonWrap.hidden=true}else throw Error("Forumotion heeft geen bevestiging van een nieuw topic teruggegeven. Controleer De Grote Zaal voordat je opnieuw verstuurt.")}}catch(err){showStatus(err.message||"Er ging iets mis bij het plaatsen van je aanvraag.")}finally{submit.disabled=false}});
 })();
-</script><script id="hpmw-sorting-hat-view-navigation">
-document.addEventListener("click",function(e){const a=e.target.closest("[data-open-sorting-hat]");if(a){e.preventDefault();if(typeof show==="function")show("sortingHatView");}});
 </script>
 <style id="hpmw-intro-quicklinks-and-placeholder">
 .hpmw-intro-quicklinks{display:flex;flex-wrap:wrap;justify-content:center;gap:9px;margin:18px auto 4px;max-width:680px}
@@ -3695,6 +3710,13 @@ async function publicJobs(){const host=$("hpmwVacancyList");if(!host)return;try{
 publicJobs();setInterval(publicJobs,60000);
 })();
 </script>
+<script id="hpmw-portal-internal-widget-navigation-v7">
+(()=>{"use strict";
+ document.addEventListener("click",event=>{
+  if(event.target.closest("#sortingHatBack,#vacanciesBack")){event.preventDefault();if(typeof show==="function")show("introView");}
+ });
+})();
+</script>
 </body></html>
 
 
@@ -3718,17 +3740,7 @@ publicJobs();setInterval(publicJobs,60000);
 
 
 
-<script id="hpmw-portal-internal-widget-navigation-v6">
-(()=>{"use strict";
- document.addEventListener("click",event=>{
-  const sort=event.target.closest("[data-open-sorting-hat],a[href='#sortingHatView'],button[data-widget='sortingHatView']");
-  const jobs=event.target.closest("[data-open-vacancies],a[href='#vacanciesView'],button[data-widget='vacanciesView']");
-  if(sort){event.preventDefault();if(typeof show==="function")show("sortingHatView");}
-  else if(jobs){event.preventDefault();if(typeof show==="function")show("vacanciesView");}
-  else if(event.target.closest("#sortingHatBack,#vacanciesBack")){event.preventDefault();if(typeof show==="function")show("introView");}
- });
-})();
-</script>
+
 
 
 
