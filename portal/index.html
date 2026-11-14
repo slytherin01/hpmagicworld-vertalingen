@@ -3966,7 +3966,7 @@ s.textContent += "#introView{height:auto!important;min-height:0!important;max-he
    if(!grid){
     grid=el("div","hpmw-home-layout");grid.id="hpmwHomeLayout";
     const left=el("aside","hpmw-home-side hpmw-home-left");
-    left.innerHTML='<section class="hpmw-side-card hpmw-side-note hpmw-my-department" id="hpmwMyDepartment" style="display:none"><div class="hpmw-side-heading"><i class="fa-solid fa-landmark"></i> Mijn Afdeling</div><div class="hpmw-department-content"></div></section><section class="hpmw-side-card hpmw-side-note hpmw-forum-widget"><div class="hpmw-side-heading"><i class="fa-solid fa-comments"></i> Het Forum</div><a class="hpmw-sorting-hat-link hpmw-forum-widget-link" href="https://testforumjoost.forumactie.com/forum" target="_blank" rel="noopener" aria-label="Open Het Forum"><img src="https://i44.servimg.com/u/f44/11/48/74/42/hetfor11.png" alt="Het Forum" loading="eager" decoding="async"></a></section>';
+    left.innerHTML='<section class="hpmw-side-card hpmw-side-note hpmw-my-department" id="hpmwMyDepartment" style="display:none"><div class="hpmw-side-heading"><i class="fa-solid fa-landmark"></i> Mijn Afdeling</div><div class="hpmw-department-content"></div></section><section class="hpmw-side-card hpmw-side-note hpmw-forum-widget" role="link" tabindex="0" aria-label="Open Het Forum"><div class="hpmw-side-heading"><i class="fa-solid fa-comments"></i> Het Forum</div><a class="hpmw-sorting-hat-link hpmw-forum-widget-link" href="https://testforumjoost.forumactie.com/forum" target="_blank" rel="noopener" aria-label="Open Het Forum"><img src="https://i44.servimg.com/u/f44/11/48/74/42/hetfor11.png" alt="Het Forum" loading="eager" decoding="async"></a></section>';
     const center=el("div","hpmw-home-main");center.id="hpmwHomeMain";
     const right=el("aside","hpmw-home-side hpmw-home-right");
     right.innerHTML='<section class="hpmw-side-card hpmw-sorting-hat-widget"><div class="hpmw-side-heading"><i class="fa-solid fa-wand-magic-sparkles"></i> De Sorteerhoed</div><div class="hpmw-sorting-hat-link" role="button" tabindex="0" data-open-sorting-hat aria-label="Open De Sorteerhoed"><img src="https://raw.githubusercontent.com/slytherin01/muggle-ministry/main/portal/images/sorteerhoed.png" alt="Klik op de afbeelding om De Sorteerhoed te openen" loading="eager" decoding="async"></div></section><section class="hpmw-side-card hpmw-side-note hpmw-sorting-hat-widget"><div class="hpmw-side-heading"><i class="fa-solid fa-briefcase"></i> Vacatures</div><div class="hpmw-sorting-hat-link hpmw-vacancies-image" role="button" tabindex="0" data-open-vacancies aria-label="Open Vacatures"><img src="https://raw.githubusercontent.com/slytherin01/muggle-ministry/main/portal/images/vacatures.png" alt="Vacatures" loading="eager" decoding="async"></div></section>';
@@ -4824,3 +4824,40 @@ html body #sortQuizBackdrop .quiz-result p{color:#d6dce2!important;line-height:1
   html body #sortingHatView *,html body #sortQuizBackdrop *{transition:none!important;animation:none!important}
 }
 </style>
+
+
+<style id="hpmw-forum-card-clickable-20261114">
+/* Maak het volledige forum-paneel een duidelijke, toegankelijke klikzone. */
+html body #introView #hpmwHomeLayout .hpmw-forum-widget{
+ cursor:pointer!important;position:relative!important;
+ transition:border-color .18s ease,background .18s ease,box-shadow .18s ease,transform .18s ease!important;
+}
+html body #introView #hpmwHomeLayout .hpmw-forum-widget:hover{
+ border-color:#c5a363!important;
+ background:linear-gradient(145deg,#1b2b3b,#121d29)!important;
+ box-shadow:0 10px 28px rgba(0,0,0,.24),0 0 0 1px rgba(197,163,99,.12)!important;
+}
+html body #introView #hpmwHomeLayout .hpmw-forum-widget:focus-visible{
+ outline:2px solid #d4b475!important;outline-offset:3px!important;
+}
+html body #introView #hpmwHomeLayout .hpmw-forum-widget .hpmw-forum-widget-link{
+ cursor:pointer!important;position:relative!important;z-index:2!important;
+}
+</style>
+<script id="hpmw-forum-card-click-handler-20261114">
+(()=>{"use strict";
+ const forumUrl="https://testforumjoost.forumactie.com/forum";
+ document.addEventListener("click",event=>{
+  const card=event.target instanceof Element?event.target.closest("#introView .hpmw-forum-widget"):null;
+  if(!card||event.target.closest("a,button,input,select,textarea"))return;
+  window.open(forumUrl,"_blank","noopener");
+ });
+ document.addEventListener("keydown",event=>{
+  if(event.key!=="Enter"&&event.key!==" ")return;
+  const card=event.target instanceof Element?event.target.closest("#introView .hpmw-forum-widget"):null;
+  if(!card||event.target.closest("a,button,input,select,textarea"))return;
+  event.preventDefault();
+  window.open(forumUrl,"_blank","noopener");
+ });
+})();
+</script>
