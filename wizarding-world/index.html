@@ -82,7 +82,8 @@ $("entries").querySelectorAll("[data-id]").forEach(b=>b.addEventListener("click"
 }
 function showDetail(r){
 if(!r)return;
-const detailData=locale==="en"?(r.details_en||r.details||{}):locale==="pt"?(r.details_pt||r.details||{}):(r.details||{});\nconst facts=Object.entries(detailData).map(([k,v])=>'<div class="fact"><small>'+esc(k.replace(/_/g," "))+'</small><b>'+esc(Array.isArray(v)?v.join(", "):typeof v==="object"?JSON.stringify(v):v)+'</b></div>').join("");
+const detailData=locale==="en"?(r.details_en||r.details||{}):locale==="pt"?(r.details_pt||r.details||{}):(r.details||{});
+const facts=Object.entries(detailData).map(([k,v])=>'<div class="fact"><small>'+esc(k.replace(/_/g," "))+'</small><b>'+esc(Array.isArray(v)?v.join(", "):typeof v==="object"?JSON.stringify(v):v)+'</b></div>').join("");
 const src=r.source_url||"https://www.harrypotter.com/fact-file";
 $("detailContent").innerHTML='<small>'+esc(catName(r.category))+' · '+esc(r.universe||"Wizarding World")+' · '+esc(r.canon_status)+'</small><h2>'+esc(field(r,"name"))+'</h2><p>'+esc(field(r,"description"))+'</p>'+(field(r,"subtitle")?'<p><b>'+esc(field(r,"subtitle"))+'</b></p>':'')+'<div class="section-head"><h2>'+tr("facts")+'</h2></div><div class="facts">'+facts+'</div><div class="source-note">'+tr("source")+': <a href="'+esc(src)+'" target="_blank" rel="noopener">'+esc(r.source_title||"HarryPotter.com — Official Fact Files")+'</a><br>Samenvatting en vertaling door Muggle Ministry. Dit is geen officiële publicatie.</div>';
 $("detail").classList.add("show");$("resultsSection").style.display="none";$("categories").style.display="none";$("detail").scrollIntoView({behavior:"smooth"});
