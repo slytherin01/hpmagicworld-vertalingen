@@ -2080,12 +2080,27 @@ html.member-login-ready #introView .forumotion-login-panel{display:none!importan
 </style>
 <style id="hpmw-remove-background-logo">[style*="ticket11.png"]{background-image:none!important}</style>
 <script id="hpmw-view-navigation-fix">
-document.addEventListener('DOMContentLoaded',function(){
- const bind=(id,fn)=>{const el=document.getElementById(id);if(el){el.addEventListener('click',function(e){e.preventDefault();fn();});}};
- bind('ticketSupportLaunch',()=>{if(typeof show==='function')show('homeView');});
- bind('myTicketsLaunch',()=>{if(typeof showMyTickets==='function')showMyTickets();});
- bind('adminLaunch',async()=>{const button=document.getElementById('adminLaunch');if(button){button.disabled=true;button.setAttribute('aria-busy','true');}try{await refreshTicketModerators();if(typeof isAdmin!=='function'||!isAdmin()){alert('Je Forumotion-account heeft geen Ticketbeheerrechten.');return;}if(!window.HpmwHelpdeskAuth||typeof window.HpmwHelpdeskAuth.ensure!=='function'){alert('De beveiligde Ticketbeheer-login is niet geladen. Ververs de portal en probeer opnieuw.');return;}const authorized=await window.HpmwHelpdeskAuth.ensure();if(!authorized)return;if(typeof show==='function')show('adminView');if(typeof loadTickets==='function')await loadTickets();}catch(error){console.error('[Hpmw] Ticketbeheer openen mislukt',error);alert('Ticketbeheer kon niet worden geopend: '+(error&&error.message?error.message:'onbekende fout'));}finally{if(button){button.disabled=false;button.removeAttribute('aria-busy');}}});
-});
+/* Delegated click handling: blijft werken wanneer Forumotion de portal via document.write injecteert. */
+document.addEventListener('click',async function(e){
+ const button=e.target&&e.target.closest?e.target.closest('#ticketSupportLaunch,#myTicketsLaunch,#adminLaunch'):null;
+ if(!button)return;
+ e.preventDefault();
+ if(button.id==='ticketSupportLaunch'){if(typeof show==='function')show('homeView');return;}
+ if(button.id==='myTicketsLaunch'){if(typeof showMyTickets==='function')showMyTickets();return;}
+ if(button.id!=='adminLaunch'||button.disabled)return;
+ button.disabled=true;button.setAttribute('aria-busy','true');
+ try{
+  if(typeof resolveUser==='function'&&(!window.user||!window.user.logged))await resolveUser();
+  await refreshTicketModerators();
+  if(typeof isAdmin!=='function'||!isAdmin()){alert('Je Forumotion-account heeft geen Ticketbeheerrechten. Controleer of je met het juiste Forumotion-account bent ingelogd.');return;}
+  if(!window.HpmwHelpdeskAuth||typeof window.HpmwHelpdeskAuth.ensure!=='function'){alert('De beveiligde Ticketbeheer-login is niet geladen.');return;}
+  const authorized=await window.HpmwHelpdeskAuth.ensure();
+  if(!authorized)return;
+  if(typeof show==='function')show('adminView');
+  if(typeof loadTickets==='function')await loadTickets();
+ }catch(error){console.error('[Hpmw] Ticketbeheer openen mislukt',error);alert('Ticketbeheer kon niet worden geopend: '+(error&&error.message?error.message:'onbekende fout'));}
+ finally{button.disabled=false;button.removeAttribute('aria-busy');}
+},true);
 </script>
 <style id="hpmw-member-nav-right-and-hide-account-actions">
 /* Ledenmenu: persoonlijke onderdelen en taalkeuze rechts uitlijnen. */
