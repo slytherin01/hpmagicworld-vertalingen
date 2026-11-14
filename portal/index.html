@@ -3610,4 +3610,30 @@ html body main.shell>.view#myTicketsView .ticket-list{
  border:0!important;outline:0!important;box-shadow:none!important
 }
 </style>
+
+<style id="hpmw-my-tickets-text-only-header">
+/* Mijn Tickets: alleen de tekstkop tonen; geen banner, logo, omlijsting of gekleurd vlak. */
+html body main.shell>.view#myTicketsView::before,
+html body main.shell>.view#myTicketsView::after,
+html body main.shell>.view#myTicketsView>.page-head::before,
+html body main.shell>.view#myTicketsView>.page-head::after{
+ content:none!important;display:none!important;background:none!important;background-image:none!important;
+ width:0!important;height:0!important;margin:0!important;padding:0!important;border:0!important
+}
+html body main.shell>.view#myTicketsView>.page-head{
+ display:flex!important;align-items:center!important;justify-content:space-between!important;
+ min-height:0!important;margin:0 0 16px!important;padding:0!important;
+ border:0!important;outline:0!important;border-radius:0!important;
+ background:transparent!important;background-image:none!important;box-shadow:none!important
+}
+html body main.shell>.view#myTicketsView>.page-head>div{display:block!important;visibility:visible!important;opacity:1!important}
+html body main.shell>.view#myTicketsView>.page-head .eyebrow{display:none!important}
+html body main.shell>.view#myTicketsView>.page-head h1{
+ display:block!important;margin:0!important;padding:0!important;border:0!important;
+ background:transparent!important;box-shadow:none!important;color:#fff!important;
+ font-size:28px!important;font-weight:800!important;text-align:left!important
+}
+html body main.shell>.view#myTicketsView>.page-head .subtitle{display:none!important}
+html body main.shell>.view#myTicketsView>.page-head>button{margin-left:auto!important}
+</style>
 </body></html>
