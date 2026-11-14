@@ -1307,7 +1307,7 @@ const DEPARTMENT_INFO={
  "Ongesorteerd":{image:"https://i44.servimg.com/u/f44/11/48/74/42/ongeso10.png",url:""}
 };
 function paintCachedDepartmentEarly(){
- try{const saved=JSON.parse(sessionStorage.getItem("hpmw_forumotion_session")||"null");if(!saved||!saved.logged||Number(saved.id)<=0)return;const cached=JSON.parse(localStorage.getItem("hpmw_department_"+Number(saved.id))||"null");if(!cached||!DEPARTMENT_INFO[cached.department])return;const card=document.querySelector("#hpmwMyDepartment"),box=card?.querySelector(".hpmw-department-content");if(card&&box){card.style.display="";paintDepartment(box,cached.department);}}catch(e){}
+ try{const saved=JSON.parse(sessionStorage.getItem("hpmw_forumotion_session")||"null");if(!saved||!saved.logged||Number(saved.id)<=0)return;const cached=JSON.parse(localStorage.getItem("hpmw_department_"+Number(saved.id))||"null");if(!cached||!DEPARTMENT_INFO[cached.department]||cached.department==="Ongesorteerd")return;const card=document.querySelector("#hpmwMyDepartment"),box=card?.querySelector(".hpmw-department-content");if(card&&box){card.style.display="";paintDepartment(box,cached.department);}}catch(e){}
 }
  function paintDepartment(box,department){
  const info=DEPARTMENT_INFO[department];
@@ -1322,7 +1322,7 @@ async function loadMyDepartment(){
  const cacheKey="hpmw_department_"+Number(user.id);
  let cached=null;
  try{cached=JSON.parse(localStorage.getItem(cacheKey)||"null");}catch(e){}
- if(cached&&cached.department&&DEPARTMENT_INFO[cached.department]&&Date.now()-Number(cached.savedAt)<30*24*60*60*1000){card.style.display="";paintDepartment(box,cached.department);}
+ if(cached&&cached.department&&cached.department!=="Ongesorteerd"&&DEPARTMENT_INFO[cached.department]&&Date.now()-Number(cached.savedAt)<30*24*60*60*1000){card.style.display="";paintDepartment(box,cached.department);}else if(cached&&cached.department==="Ongesorteerd"){try{localStorage.removeItem(cacheKey);}catch(e){}}
  try{
   const response=await fetch(BASE+"/u"+user.id,{credentials:"include",cache:"force-cache"});
   if(!response.ok)throw Error("Profiel niet bereikbaar");
