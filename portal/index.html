@@ -1295,15 +1295,30 @@ if(!name&&link)name=(link.textContent||"").trim();
 }
 return id&&logged?{id,name:name||"Gebruiker",logged:true}:null;
 }
-const DEPARTMENT_INFO={"Griffoendor":{image:"https://i44.servimg.com/u/f44/11/48/74/42/griffo10.png",url:"https://testforumjoost.forumactie.com/f66-de-griffoendor-leerlingenkamer"},"Zwadderich":{image:"https://i44.servimg.com/u/f44/11/48/74/42/zwadde10.png",url:"https://testforumjoost.forumactie.com/f67-de-zwadderich-leerlingenkamer"},"Huffelpuf":{image:"https://i44.servimg.com/u/f44/11/48/74/42/huffel10.png",url:"https://testforumjoost.forumactie.com/f68-de-huffelpuf-leerlingenkamer"},"Ravenklauw":{image:"https://i44.servimg.com/u/f44/11/48/74/42/ravenk10.png",url:"https://testforumjoost.forumactie.com/f69-de-ravenklauw-leerlingenkamer"},"Ongesorteerd":{image:"https://i.servimg.com/u/f28/11/54/28/73/sortee17.png",url:""}};
+const DEPARTMENT_INFO={
+ "Griffoendor":{animal:"🦁",url:"https://testforumjoost.forumactie.com/f66-de-griffoendor-leerlingenkamer"},
+ "Zwadderich":{animal:"🐍",url:"https://testforumjoost.forumactie.com/f67-de-zwadderich-leerlingenkamer"},
+ "Huffelpuf":{animal:"🦡",url:"https://testforumjoost.forumactie.com/f68-de-huffelpuf-leerlingenkamer"},
+ "Ravenklauw":{animal:"🦅",url:"https://testforumjoost.forumactie.com/f69-de-ravenklauw-leerlingenkamer"},
+ "Ongesorteerd":{animal:"✨",url:""}
+};
 async function loadMyDepartment(){
  const box=document.querySelector("#hpmwMyDepartment .hpmw-department-content");if(!box)return;
  if(!user.logged||!user.id){box.innerHTML='<span class="hpmw-department-status">Log in om je afdeling te bekijken.</span>';return;}
- try{const response=await fetch(BASE+"/u"+user.id,{credentials:"include",cache:"no-store"});if(!response.ok)throw Error("Profiel niet bereikbaar");
- const doc=new DOMParser().parseFromString(await response.text(),"text/html"),field=doc.querySelector("#field_id3 .field_uneditable img"),department=(field?.getAttribute("alt")||field?.getAttribute("title")||"").trim(),info=DEPARTMENT_INFO[department];
- if(!info){box.innerHTML='<span class="hpmw-department-status">Afdeling nog niet ingesteld.</span>';return;}
- const img='<img class="hpmw-department-crest" src="'+info.image+'" alt="'+esc(department)+'" title="'+esc(department)+'">';
- box.innerHTML=info.url?'<a class="hpmw-department-link" href="'+info.url+'" target="_blank" rel="noopener" aria-label="Open leerlingenkamer '+esc(department)+'">'+img+'<strong>'+esc(department)+'</strong><span>Open leerlingenkamer ↗</span></a>':'<div class="hpmw-department-unassigned">'+img+'<strong>'+esc(department)+'</strong></div>';
+ try{
+  const response=await fetch(BASE+"/u"+user.id,{credentials:"include",cache:"no-store"});
+  if(!response.ok)throw Error("Profiel niet bereikbaar");
+  const doc=new DOMParser().parseFromString(await response.text(),"text/html");
+  const field=doc.querySelector("#field_id3 .field_uneditable, #field_id3");
+  const fieldImage=field?.querySelector("img");
+  const raw=(fieldImage?.getAttribute("alt")||fieldImage?.getAttribute("title")||field?.textContent||"").trim();
+  const normalized=raw.toLocaleLowerCase("nl").normalize("NFD").replace(/[\\u0300-\\u036f]/g,"").replace(/[^a-z]/g,"");
+  const aliases={"griffoendor":"Griffoendor","zwadderich":"Zwadderich","huffelpuf":"Huffelpuf","ravenklauw":"Ravenklauw","ongesorteerd":"Ongesorteerd"};
+  const department=aliases[normalized]||Object.keys(DEPARTMENT_INFO).find(name=>normalized.includes(name.toLocaleLowerCase("nl").normalize("NFD").replace(/[\\u0300-\\u036f]/g,"").replace(/[^a-z]/g,"")));
+  const info=department?DEPARTMENT_INFO[department]:null;
+  if(!info){box.innerHTML='<span class="hpmw-department-status">Afdeling nog niet ingesteld.</span>';return;}
+  const animal='<span class="hpmw-department-animal" role="img" aria-label="'+esc(department)+'">'+info.animal+'</span>';
+  box.innerHTML=info.url?'<a class="hpmw-department-link" href="'+info.url+'" target="_blank" rel="noopener" aria-label="Open leerlingenkamer '+esc(department)+'">'+animal+'<strong>'+esc(department)+'</strong><span>Open leerlingenkamer ↗</span></a>':'<div class="hpmw-department-unassigned">'+animal+'<strong>'+esc(department)+'</strong></div>';
  }catch(e){box.innerHTML='<span class="hpmw-department-status">Je afdeling kon niet worden opgehaald.</span>';}
 }
 async function resolveUser(){
@@ -3468,7 +3483,7 @@ html body #introView #hpmwHomeLayout .hpmw-home-side > .hpmw-side-card .hpmw-enc
 }
 #hpmwMyDepartment .hpmw-department-content{display:flex;flex:1 1 auto;align-items:center;justify-content:center;min-height:0;text-align:center}
 #hpmwMyDepartment .hpmw-department-link,#hpmwMyDepartment .hpmw-department-unassigned{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;width:100%;height:100%;color:#edf2fa;text-decoration:none}
-#hpmwMyDepartment .hpmw-department-crest{display:block;width:auto;height:auto;max-width:100%;max-height:125px;object-fit:contain}
+#hpmwMyDepartment .hpmw-department-animal{display:block;font-size:64px;line-height:1.15;filter:drop-shadow(0 3px 5px #0008)}
 #hpmwMyDepartment .hpmw-department-link span{font-size:11px;color:#c5d9ef}
 #hpmwMyDepartment .hpmw-department-status{font-size:12px;color:#c5d2e1}
 </style>
