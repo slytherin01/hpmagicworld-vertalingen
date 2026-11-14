@@ -3281,7 +3281,7 @@ s.textContent += "#introView{height:auto!important;min-height:0!important;max-he
    if(!grid){
     grid=el("div","hpmw-home-layout");grid.id="hpmwHomeLayout";
     const left=el("aside","hpmw-home-side hpmw-home-left");
-    left.innerHTML='<section class="hpmw-side-card hpmw-side-note hpmw-my-department" id="hpmwMyDepartment" style="display:none"><div class="hpmw-side-heading"><i class="fa-solid fa-landmark"></i> Mijn Afdeling</div><div class="hpmw-department-content"></div></section><section class="hpmw-side-card hpmw-side-note hpmw-forum-widget"><div class="hpmw-side-heading"><i class="fa-solid fa-comments"></i> Het Forum</div><a class="hpmw-forum-widget-link" href="https://testforumjoost.forumactie.com/forum" target="_blank" rel="noopener" aria-label="Open Het Forum"><span class="hpmw-forum-widget-art"><img src="https://i44.servimg.com/u/f44/11/48/74/42/hetfor11.png" alt="Het Forum" loading="eager" decoding="async"></span></a></section>';
+    left.innerHTML='<section class="hpmw-side-card hpmw-side-note hpmw-my-department" id="hpmwMyDepartment" style="display:none"><div class="hpmw-side-heading"><i class="fa-solid fa-landmark"></i> Mijn Afdeling</div><div class="hpmw-department-content"></div></section><section class="hpmw-side-card hpmw-side-note hpmw-forum-widget"><div class="hpmw-side-heading"><i class="fa-solid fa-comments"></i> Het Forum</div><a class="hpmw-sorting-hat-link hpmw-forum-widget-link" href="https://testforumjoost.forumactie.com/forum" target="_blank" rel="noopener" aria-label="Open Het Forum"><img src="https://i44.servimg.com/u/f44/11/48/74/42/hetfor11.png" alt="Het Forum" loading="eager" decoding="async"></a></section>';
     const center=el("div","hpmw-home-main");center.id="hpmwHomeMain";
     const right=el("aside","hpmw-home-side hpmw-home-right");
     right.innerHTML='<section class="hpmw-side-card hpmw-sorting-hat-widget"><div class="hpmw-side-heading"><i class="fa-solid fa-wand-magic-sparkles"></i> Zweinstein &gt; De Sorteerhoed</div><a class="hpmw-sorting-hat-link" href="https://testforumjoost.forumactie.com/h13-beta-de-sorteerhoed" target="_blank" rel="noopener" aria-label="Open De Sorteerhoed"><img src="https://i44.servimg.com/u/f44/11/48/74/42/sortee10.png" alt="Klik op de afbeelding om De Sorteerhoed te openen" loading="eager" decoding="async"></a></section><section class="hpmw-side-card hpmw-side-note hpmw-sorting-hat-widget"><div class="hpmw-side-heading"><i class="fa-solid fa-briefcase"></i> Vacatures</div><a class="hpmw-sorting-hat-link hpmw-vacancies-image" href="https://testforumjoost.forumactie.com/h5-dev-vacatures" target="_blank" rel="noopener" aria-label="Open Vacatures"><img src="https://i44.servimg.com/u/f44/11/48/74/42/vacatu10.png" alt="Vacatures" loading="eager" decoding="async"></a></section>';
@@ -3977,4 +3977,19 @@ html body #introView #hpmwHomeLayout .hpmw-home-left > .hpmw-forum-widget .hpmw-
  html body #introView #hpmwHomeLayout .hpmw-home-left > .hpmw-forum-widget{height:184px!important;min-height:184px!important;max-height:184px!important}
  html body #introView #hpmwHomeLayout .hpmw-home-left > .hpmw-forum-widget .hpmw-forum-widget-art img{max-height:118px!important}
 }
+</style>
+
+<style id="hpmw-forum-widget-image-restore">
+/* Gebruik exact dezelfde afbeeldingsstructuur als de andere werkende zijwidgets. */
+html body #introView #hpmwHomeLayout .hpmw-home-left > .hpmw-forum-widget .hpmw-forum-widget-link{
+ display:flex!important;flex:1 1 auto!important;min-height:0!important;width:100%!important;
+ align-items:center!important;justify-content:center!important;padding:2px 0!important;margin:0!important;
+ background:transparent!important;border:0!important;box-shadow:none!important;line-height:0!important;overflow:hidden!important;
+}
+html body #introView #hpmwHomeLayout .hpmw-home-left > .hpmw-forum-widget .hpmw-forum-widget-link img{
+ display:block!important;visibility:visible!important;opacity:1!important;width:auto!important;height:auto!important;
+ max-width:100%!important;max-height:146px!important;object-fit:contain!important;object-position:center!important;
+ margin:0 auto!important;transform:none!important;filter:drop-shadow(0 4px 7px rgba(0,0,0,.42))!important;
+}
+@media(max-width:700px){html body #introView #hpmwHomeLayout .hpmw-home-left > .hpmw-forum-widget .hpmw-forum-widget-link img{max-height:118px!important}}
 </style>
