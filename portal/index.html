@@ -4196,24 +4196,42 @@ html body #introView .hpmw-intro-quicklinks>button{
 })();
 </script>
 
-<style id="hpmw-final-uniform-widget-layout-20261114-v6">
-/* Zijwidgets iets hoger voor de volledige afdelingstegel; beeldformaat blijft intact. */
-html body #introView #hpmwHomeLayout > aside.hpmw-home-side > section.hpmw-side-card{
- box-sizing:border-box!important;height:200px!important;min-height:200px!important;max-height:200px!important;flex:0 0 200px!important;
+
+
+<style id="hpmw-final-widget-polish-20261114-v7">
+/* Gelijke, ruimere kaarten met complete artwork en compacte titelbalk. */
+html body #introView #hpmwHomeLayout aside.hpmw-home-side section.hpmw-side-card{
+ display:flex!important;flex-direction:column!important;align-items:stretch!important;
+ box-sizing:border-box!important;width:100%!important;min-width:0!important;
+ height:204px!important;min-height:204px!important;max-height:204px!important;flex:0 0 204px!important;
+ overflow:hidden!important;border-radius:13px!important;
 }
-html body #introView #hpmwHomeLayout > aside.hpmw-home-side > section.hpmw-side-card > .hpmw-side-heading{
- flex:0 0 38px!important;height:38px!important;min-height:38px!important;
+html body #introView #hpmwHomeLayout aside.hpmw-home-side section.hpmw-side-card > .hpmw-side-heading{
+ display:flex!important;flex:0 0 40px!important;min-height:40px!important;height:40px!important;
+ align-items:center!important;box-sizing:border-box!important;white-space:nowrap!important;
 }
-html body #introView #hpmwHomeLayout #hpmwMyDepartment .hpmw-department-content{
- flex:1 1 auto!important;min-height:0!important;display:flex!important;align-items:center!important;justify-content:center!important;
- padding:0 8px 6px!important;overflow:visible!important;
+html body #introView #hpmwHomeLayout aside.hpmw-home-side section.hpmw-side-card > a,
+html body #introView #hpmwHomeLayout aside.hpmw-home-side #hpmwMyDepartment .hpmw-department-content{
+ display:flex!important;flex:1 1 auto!important;min-height:0!important;height:auto!important;max-height:none!important;
+ width:100%!important;box-sizing:border-box!important;align-items:center!important;justify-content:center!important;
+ overflow:hidden!important;margin:0!important;padding:6px 8px!important;
+}
+html body #introView #hpmwHomeLayout aside.hpmw-home-side section.hpmw-side-card > a img,
+html body #introView #hpmwHomeLayout #hpmwMyDepartment .hpmw-department-animal-image{
+ display:block!important;visibility:visible!important;opacity:1!important;
+ width:auto!important;height:auto!important;max-width:100%!important;max-height:146px!important;
+ object-fit:contain!important;object-position:center!important;margin:0 auto!important;
 }
 html body #introView #hpmwHomeLayout #hpmwMyDepartment .hpmw-department-link{
- min-height:150px!important;height:150px!important;max-height:150px!important;
+ display:flex!important;flex:1 1 auto!important;align-items:center!important;justify-content:center!important;
+ width:100%!important;min-height:0!important;height:auto!important;max-height:none!important;padding:0!important;
+}
+html body #introView #hpmwHomeLayout aside.hpmw-home-side section.hpmw-side-card .hpmw-side-heading{
+ overflow:hidden!important;text-overflow:ellipsis!important;
 }
 @media(max-width:700px){
- html body #introView #hpmwHomeLayout > aside.hpmw-home-side > section.hpmw-side-card{
-  height:200px!important;min-height:200px!important;max-height:200px!important;flex-basis:200px!important;
+ html body #introView #hpmwHomeLayout aside.hpmw-home-side section.hpmw-side-card{
+  height:204px!important;min-height:204px!important;max-height:204px!important;flex-basis:204px!important;
  }
 }
 </style>
