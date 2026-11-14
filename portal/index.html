@@ -3647,4 +3647,21 @@ html body main.shell>.view#formView .support-logo-wrap,
 html body main.shell>.view#formView .support-logo{display:none!important;visibility:hidden!important}
 html body main.shell>.view#formView .new-ticket-head{padding-top:14px!important}
 </style>
+
+<style id="hpmw-my-tickets-remove-all-artwork-final">
+/* Mijn tickets: zelfde opschoning als Ticket Support; behoud titel en ticketinhoud. */
+html body main.shell>.view#myTicketsView::before,
+html body main.shell>.view#myTicketsView::after,
+html body main.shell>.view#myTicketsView>.page-head::before,
+html body main.shell>.view#myTicketsView>.page-head::after{
+ content:none!important;display:none!important;visibility:hidden!important;
+ background:none!important;background-image:none!important;
+ width:0!important;height:0!important;min-height:0!important;margin:0!important;padding:0!important;border:0!important;box-shadow:none!important
+}
+html body main.shell>.view#myTicketsView img,
+html body main.shell>.view#myTicketsView picture,
+html body main.shell>.view#myTicketsView .support-logo-wrap,
+html body main.shell>.view#myTicketsView .support-logo{display:none!important;visibility:hidden!important}
+html body main.shell>.view#myTicketsView>.page-head{padding-top:14px!important;margin-top:0!important}
+</style>
 </body></html>
