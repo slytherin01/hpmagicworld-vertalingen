@@ -3319,7 +3319,7 @@ s.textContent += "#introView{height:auto!important;min-height:0!important;max-he
     left.innerHTML='<section class="hpmw-side-card hpmw-side-note hpmw-my-department" id="hpmwMyDepartment" style="display:none"><div class="hpmw-side-heading"><i class="fa-solid fa-landmark"></i> Mijn Afdeling</div><div class="hpmw-department-content"></div></section><section class="hpmw-side-card hpmw-side-note hpmw-forum-widget"><div class="hpmw-side-heading"><i class="fa-solid fa-comments"></i> Het Forum</div><a class="hpmw-sorting-hat-link hpmw-forum-widget-link" href="https://testforumjoost.forumactie.com/forum" target="_blank" rel="noopener" aria-label="Open Het Forum"><img src="https://i44.servimg.com/u/f44/11/48/74/42/hetfor11.png" alt="Het Forum" loading="eager" decoding="async"></a></section>';
     const center=el("div","hpmw-home-main");center.id="hpmwHomeMain";
     const right=el("aside","hpmw-home-side hpmw-home-right");
-    right.innerHTML='<section class="hpmw-side-card hpmw-sorting-hat-widget"><div class="hpmw-side-heading"><i class="fa-solid fa-wand-magic-sparkles"></i> Zweinstein &gt; De Sorteerhoed</div><a class="hpmw-sorting-hat-link" href="#sortingHatView" data-open-sorting-hat aria-label="Open De Sorteerhoed"><img src="https://i44.servimg.com/u/f44/11/48/74/42/sortee11.png" alt="Klik op de afbeelding om De Sorteerhoed te openen" loading="eager" decoding="async"></a></section><section class="hpmw-side-card hpmw-side-note hpmw-sorting-hat-widget"><div class="hpmw-side-heading"><i class="fa-solid fa-briefcase"></i> Vacatures</div><a class="hpmw-sorting-hat-link hpmw-vacancies-image" href="#vacanciesView" data-open-vacancies aria-label="Open Vacatures"><img src="https://i44.servimg.com/u/f44/11/48/74/42/vacatu12.png" alt="Vacatures" loading="eager" decoding="async"></a></section>';
+    right.innerHTML='<section class="hpmw-side-card hpmw-sorting-hat-widget"><div class="hpmw-side-heading"><i class="fa-solid fa-wand-magic-sparkles"></i> De Sorteerhoed</div><a class="hpmw-sorting-hat-link" href="#sortingHatView" data-open-sorting-hat aria-label="Open De Sorteerhoed"><img src="https://i44.servimg.com/u/f44/11/48/74/42/sortee11.png" alt="Klik op de afbeelding om De Sorteerhoed te openen" loading="eager" decoding="async"></a></section><section class="hpmw-side-card hpmw-side-note hpmw-sorting-hat-widget"><div class="hpmw-side-heading"><i class="fa-solid fa-briefcase"></i> Vacatures</div><a class="hpmw-sorting-hat-link hpmw-vacancies-image" href="#vacanciesView" data-open-vacancies aria-label="Open Vacatures"><img src="https://i44.servimg.com/u/f44/11/48/74/42/vacatu12.png" alt="Vacatures" loading="eager" decoding="async"></a></section>';
     grid.append(left,center,right);
     const logo=home.querySelector(".hpmw-portal-logo");
     if(logo)logo.insertAdjacentElement("afterend",grid);else home.prepend(grid);
@@ -3337,7 +3337,7 @@ s.textContent += "#introView{height:auto!important;min-height:0!important;max-he
     const layout=home.querySelector(".intro-login-layout");
     const news=document.getElementById("hpmwHomeNews");
     const right=grid.querySelector(".hpmw-home-right");
-    if(right)right.innerHTML='<section class="hpmw-side-card hpmw-sorting-hat-widget"><div class="hpmw-side-heading"><i class="fa-solid fa-wand-magic-sparkles"></i> Zweinstein &gt; De Sorteerhoed</div><a class="hpmw-sorting-hat-link" href="#sortingHatView" data-open-sorting-hat aria-label="Open De Sorteerhoed"><img src="https://i44.servimg.com/u/f44/11/48/74/42/sortee11.png" alt="Klik op de afbeelding om De Sorteerhoed te openen" loading="eager" decoding="async"></a></section><section class="hpmw-side-card hpmw-side-note hpmw-sorting-hat-widget"><div class="hpmw-side-heading"><i class="fa-solid fa-briefcase"></i> Vacatures</div><a class="hpmw-sorting-hat-link hpmw-vacancies-image" href="#vacanciesView" data-open-vacancies aria-label="Open Vacatures"><img src="https://i44.servimg.com/u/f44/11/48/74/42/vacatu12.png" alt="Vacatures" loading="eager" decoding="async"></a></section>';
+    if(right)right.innerHTML='<section class="hpmw-side-card hpmw-sorting-hat-widget"><div class="hpmw-side-heading"><i class="fa-solid fa-wand-magic-sparkles"></i> De Sorteerhoed</div><a class="hpmw-sorting-hat-link" href="#sortingHatView" data-open-sorting-hat aria-label="Open De Sorteerhoed"><img src="https://i44.servimg.com/u/f44/11/48/74/42/sortee11.png" alt="Klik op de afbeelding om De Sorteerhoed te openen" loading="eager" decoding="async"></a></section><section class="hpmw-side-card hpmw-side-note hpmw-sorting-hat-widget"><div class="hpmw-side-heading"><i class="fa-solid fa-briefcase"></i> Vacatures</div><a class="hpmw-sorting-hat-link hpmw-vacancies-image" href="#vacanciesView" data-open-vacancies aria-label="Open Vacatures"><img src="https://i44.servimg.com/u/f44/11/48/74/42/vacatu12.png" alt="Vacatures" loading="eager" decoding="async"></a></section>';
     if(center&&layout&&layout.parentElement!==center)center.prepend(layout);
     if(center&&news&&news.parentElement!==center)center.append(news);
    }
@@ -4195,42 +4195,25 @@ html body #introView .hpmw-intro-quicklinks>button{
  });
 })();
 </script>
-<style id="hpmw-final-uniform-widget-layout-20261114-v5">
-/* Definitieve widgetmaat: sluit aan op de bestaande artwork-afmetingen. Afbeeldingsregels niet aanpassen. */
-html body #introView #hpmwHomeLayout{
- display:grid!important;grid-template-columns:minmax(220px,1fr) minmax(0,2.15fr) minmax(220px,1fr)!important;
- align-items:start!important;gap:20px!important;width:min(1480px,calc(100% - 40px))!important;margin:0 auto!important;
-}
-html body #introView #hpmwHomeLayout > aside.hpmw-home-side{
- display:flex!important;flex-direction:column!important;align-items:stretch!important;
- gap:12px!important;width:100%!important;min-width:0!important;
-}
+
+<style id="hpmw-final-uniform-widget-layout-20261114-v6">
+/* Zijwidgets iets hoger voor de volledige afdelingstegel; beeldformaat blijft intact. */
 html body #introView #hpmwHomeLayout > aside.hpmw-home-side > section.hpmw-side-card{
- display:flex!important;flex:0 0 184px!important;flex-direction:column!important;align-items:stretch!important;
- box-sizing:border-box!important;width:100%!important;min-width:0!important;
- height:184px!important;min-height:184px!important;max-height:184px!important;margin:0!important;overflow:hidden!important;
+ box-sizing:border-box!important;height:200px!important;min-height:200px!important;max-height:200px!important;flex:0 0 200px!important;
 }
 html body #introView #hpmwHomeLayout > aside.hpmw-home-side > section.hpmw-side-card > .hpmw-side-heading{
- display:flex!important;flex:0 0 38px!important;align-items:center!important;box-sizing:border-box!important;
- height:38px!important;min-height:38px!important;
+ flex:0 0 38px!important;height:38px!important;min-height:38px!important;
 }
-html body #introView #hpmwHomeLayout > .hpmw-home-main{min-width:0!important}
-#vacanciesView{max-width:1100px!important;margin:0 auto!important}
-#vacanciesView .hpmw-vacancies-panel{padding:22px!important;min-height:230px!important}
-#vacanciesView .hpmw-vacancies-empty{padding:26px 20px!important;text-align:center!important;border:1px dashed #52647d!important;border-radius:12px!important;background:rgba(15,25,40,.72)!important}
-#vacanciesView .hpmw-vacancies-empty h2{margin:0 0 8px!important;color:#f4d28a!important}
-#vacanciesView .hpmw-vacancies-empty p{margin:0!important;color:#c4cede!important}
-@media(max-width:1050px){
- html body #introView #hpmwHomeLayout{grid-template-columns:minmax(190px,1fr) minmax(0,1fr)!important;width:calc(100% - 28px)!important;gap:14px!important}
- html body #introView #hpmwHomeLayout > .hpmw-home-main{grid-column:1/-1!important;grid-row:1!important}
- html body #introView #hpmwHomeLayout > .hpmw-home-left{grid-column:1!important;grid-row:2!important}
- html body #introView #hpmwHomeLayout > .hpmw-home-right{grid-column:2!important;grid-row:2!important;display:flex!important}
+html body #introView #hpmwHomeLayout #hpmwMyDepartment .hpmw-department-content{
+ flex:1 1 auto!important;min-height:0!important;display:flex!important;align-items:center!important;justify-content:center!important;
+ padding:0 8px 6px!important;overflow:visible!important;
+}
+html body #introView #hpmwHomeLayout #hpmwMyDepartment .hpmw-department-link{
+ min-height:150px!important;height:150px!important;max-height:150px!important;
 }
 @media(max-width:700px){
- html body #introView #hpmwHomeLayout{display:flex!important;flex-direction:column!important;width:calc(100% - 20px)!important;gap:12px!important}
- html body #introView #hpmwHomeLayout > .hpmw-home-main,
- html body #introView #hpmwHomeLayout > .hpmw-home-left,
- html body #introView #hpmwHomeLayout > .hpmw-home-right{display:flex!important;flex-direction:column!important;grid-column:auto!important;grid-row:auto!important;width:100%!important}
- html body #introView #hpmwHomeLayout > aside.hpmw-home-side > section.hpmw-side-card{flex-basis:184px!important;height:184px!important;min-height:184px!important;max-height:184px!important}
+ html body #introView #hpmwHomeLayout > aside.hpmw-home-side > section.hpmw-side-card{
+  height:200px!important;min-height:200px!important;max-height:200px!important;flex-basis:200px!important;
+ }
 }
 </style>
