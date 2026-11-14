@@ -4083,3 +4083,38 @@ html body #introView #hpmwHomeLayout #hpmwMyDepartment .hpmw-department-animal-i
  html body #introView #hpmwHomeLayout .hpmw-home-right > .hpmw-side-card .hpmw-vacancies-image img{max-height:146px!important}
 }
 </style>
+
+<style id="hpmw-sidebar-cards-final-uniform-height">
+/* Laat de volledige zijbalk-kaarten dezelfde maat houden; gebruik descendant-selectors omdat de widgets dynamisch worden ingevoegd. */
+html body #introView #hpmwHomeLayout aside.hpmw-home-side section.hpmw-side-card{
+ display:flex!important;flex-direction:column!important;align-items:stretch!important;
+ box-sizing:border-box!important;width:100%!important;min-width:0!important;
+ height:170px!important;min-height:170px!important;max-height:170px!important;
+ overflow:hidden!important;
+}
+html body #introView #hpmwHomeLayout aside.hpmw-home-side section.hpmw-side-card > .hpmw-side-heading{
+ display:flex!important;flex:0 0 38px!important;height:38px!important;min-height:38px!important;
+ box-sizing:border-box!important;align-items:center!important;
+}
+html body #introView #hpmwHomeLayout aside.hpmw-home-side section.hpmw-side-card > a{
+ display:flex!important;flex:1 1 auto!important;min-height:0!important;max-height:none!important;
+ width:100%!important;box-sizing:border-box!important;align-items:center!important;justify-content:center!important;
+ overflow:hidden!important;margin:0!important;padding:4px 6px!important;
+}
+html body #introView #hpmwHomeLayout aside.hpmw-home-side section.hpmw-side-card > a img{
+ display:block!important;visibility:visible!important;opacity:1!important;
+ width:auto!important;height:auto!important;max-width:100%!important;max-height:126px!important;
+ object-fit:contain!important;object-position:center!important;margin:0 auto!important;
+}
+html body #introView #hpmwHomeLayout aside.hpmw-home-side section.hpmw-forum-widget > a img{
+ max-height:126px!important;
+}
+html body #introView #hpmwHomeLayout #hpmwMyDepartment{
+ height:170px!important;min-height:170px!important;max-height:170px!important;
+}
+@media(max-width:700px){
+ html body #introView #hpmwHomeLayout aside.hpmw-home-side section.hpmw-side-card{
+  height:170px!important;min-height:170px!important;max-height:170px!important;
+ }
+}
+</style>
