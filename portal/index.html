@@ -5471,3 +5471,28 @@ html body #sortingHatView .hpmw-sorting-ticket-panel #sortSubmit:disabled{opacit
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
 })();
 </script>
+
+
+<style id="hpmw-relocation-dropdown-visibility-and-heading-cleanup-20261114">
+/* Remove the unwanted Hogwarts heading and keep native department menus readable. */
+#sortingHatView #sortingRequestForm:before{content:none!important;display:none!important}
+#sortingHatView #sortingRequestForm select,
+#sortingHatView #sortingRequestForm .field select,
+#sortingHatView #sortTransferReason select{
+ display:block!important;visibility:visible!important;opacity:1!important;
+ width:100%!important;min-height:46px!important;
+ color:#f4f7fc!important;background-color:#111f30!important;
+ border:1px solid #526984!important;border-radius:9px!important;
+ padding:11px 38px 11px 13px!important;
+ appearance:auto!important;-webkit-appearance:menulist!important;
+ color-scheme:dark!important;pointer-events:auto!important;
+ position:relative!important;z-index:5!important;
+}
+#sortingHatView #sortingRequestForm select option{
+ color:#f4f7fc!important;background:#111f30!important;
+}
+#sortingHatView #sortTransferReason .hpmw-transfer-new-department,
+#sortingHatView #sortTransferReason .hpmw-transfer-current-department{
+ width:100%!important;min-width:0!important;
+}
+</style>
