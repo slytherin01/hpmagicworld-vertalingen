@@ -1305,7 +1305,7 @@ const DEPARTMENT_INFO={
 async function loadMyDepartment(){
  const card=document.querySelector("#hpmwMyDepartment");
  const box=card?.querySelector(".hpmw-department-content");if(!card||!box)return;
- if(!user.logged||!user.id){card.style.display="none";return;}
+ if(!user.logged||!user.id){card.style.display="";box.innerHTML='<img class="hpmw-department-animal-image" src="https://i44.servimg.com/u/f44/11/48/74/42/ongeso10.png" alt="Ongesorteerd">';return;}
  card.style.display="";
  try{
   const response=await fetch(BASE+"/u"+user.id,{credentials:"include",cache:"no-store"});
@@ -1327,8 +1327,10 @@ async function loadMyDepartment(){
 }
 async function resolveUser(){
 try{
+/* Forumotion kan _userdata pas na het laden van de pagina beschikbaar maken. Wacht daar kort op voordat we als gast terugvallen. */
+for(let attempt=0;attempt<24&&!window._userdata;attempt++)await new Promise(resolve=>setTimeout(resolve,250));
 if(window._userdata&&Number(window._userdata.session_logged_in)>0){
-const uid=Number(window._userdata.user_id)||0;user={id:uid,name:uid===3?"Test Account 2":String(window._userdata.username||"Gebruiker"),avatar:String(window._userdata.user_avatar||window._userdata.avatar||""),logged:true};paintUser();return;
+const uid=Number(window._userdata.user_id)||0;const forumName=String(window._userdata.username||window._userdata.username_clean||"").trim();user={id:uid,name:uid===3?"Test Account 2":(forumName||"Gebruiker"),avatar:String(window._userdata.user_avatar||window._userdata.avatar||""),logged:true};paintUser();return;
 }
 for(const path of ["/","/forum"]){
 try{
