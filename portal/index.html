@@ -1320,7 +1320,7 @@ async function loadMyDepartment(){
   const info=department?DEPARTMENT_INFO[department]:null;
   if(!info){box.innerHTML='<span class="hpmw-department-status">Afdeling nog niet ingesteld.</span>';return;}
   const animal=info.image?'<img class="hpmw-department-animal-image" src="'+info.image+'" alt="'+esc(department)+'" style="display:block!important;visibility:visible!important;opacity:1!important;width:84px!important;height:84px!important;max-width:100%!important;object-fit:contain!important;margin:0 auto!important;border:0!important;background:transparent!important">':'<span class="hpmw-department-animal">'+info.animal+'</span>';
-  box.innerHTML=info.url?'<a class="hpmw-department-link" href="'+info.url+'" target="_blank" rel="noopener" aria-label="Open leerlingenkamer '+esc(department)+'">'+animal+'<strong>'+esc(department)+'</strong><span>Open leerlingenkamer ↗</span></a>':'<div class="hpmw-department-unassigned">'+animal+'<strong>'+esc(department)+'</strong></div>';
+  box.innerHTML=info.url?'<a class="hpmw-department-link" href="'+info.url+'" target="_blank" rel="noopener" aria-label="Open leerlingenkamer '+esc(department)+'">'+animal+'</a>':animal;
  }catch(e){box.innerHTML='<span class="hpmw-department-status">Je afdeling kon niet worden opgehaald.</span>';}
 }
 async function resolveUser(){
@@ -3692,5 +3692,11 @@ html body main.shell>.view#myTicketsView>.page-head>button{margin-left:auto!impo
 
 <style id="hpmw-department-house-images-final">
 #hpmwMyDepartment .hpmw-department-animal-image{display:block!important;flex:0 0 84px!important;width:84px!important;height:84px!important;min-width:84px!important;min-height:84px!important;margin:0 auto!important;padding:0!important;border:0!important;background-color:transparent!important;background-repeat:no-repeat!important;background-position:center!important;background-size:contain!important;visibility:visible!important;opacity:1!important}
+</style>
+
+<style id="hpmw-department-image-only">
+#hpmwMyDepartment .hpmw-department-content{display:flex!important;align-items:center!important;justify-content:center!important;min-height:110px!important;padding:12px!important}
+#hpmwMyDepartment .hpmw-department-link{display:flex!important;align-items:center!important;justify-content:center!important;width:100%!important;min-height:100px!important;padding:0!important;margin:0!important;text-decoration:none!important}
+#hpmwMyDepartment .hpmw-department-animal-image{display:block!important;width:100px!important;height:100px!important;max-width:100%!important;object-fit:contain!important;margin:0 auto!important}
 </style>
 </body></html>
