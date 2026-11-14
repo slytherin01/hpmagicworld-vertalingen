@@ -1306,8 +1306,15 @@ const DEPARTMENT_INFO={
  "Ongesorteerd":{image:"https://i44.servimg.com/u/f44/11/48/74/42/ongeso10.png",url:""}
 };
 async function loadMyDepartment(){
- const card=document.querySelector("#hpmwMyDepartment");
- const box=card?.querySelector(".hpmw-department-content");if(!card||!box)return;
+ /* De Home-widgets worden pas door de CMS-renderer opgebouwd. Wacht daarop zodat de afdeling niet op de laadtekst blijft staan. */
+ let card=null,box=null;
+ for(let attempt=0;attempt<24;attempt++){
+  card=document.querySelector("#hpmwMyDepartment");
+  box=card?.querySelector(".hpmw-department-content");
+  if(card&&box)break;
+  await new Promise(resolve=>setTimeout(resolve,250));
+ }
+ if(!card||!box)return;
  if(!user.logged||!user.id){card.style.display="";box.innerHTML='<img class="hpmw-department-animal-image" src="https://i44.servimg.com/u/f44/11/48/74/42/ongeso10.png" alt="Ongesorteerd">';return;}
  card.style.display="";
  try{
