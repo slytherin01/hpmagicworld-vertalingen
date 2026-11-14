@@ -1651,6 +1651,8 @@ finally{btn.disabled=false;}
 window.addEventListener('hpmw:open-ticket-admin',async function(){
  try{
   await resolveUser();
+  if(window.HPMW_HELPDESK_BOOT){const booted=await window.HPMW_HELPDESK_BOOT;if(!booted)throw new Error("De beveiligde login kon niet worden geladen. Controleer de browserconsole voor de laadfout.");}
+  if(!window.HpmwHelpdeskAuth||typeof window.HpmwHelpdeskAuth.ensure!=="function")throw new Error("De beveiligde Ticketbeheer-login is niet beschikbaar na het laden van de scripts.");
   const moderatorResponse=await fetch("https://vuaajsjjluwgqmneinds.supabase.co/rest/v1/ticket_moderators?select=forumotion_user_id,enabled,can_view_tickets,can_moderate_tickets,can_delete_tickets",{headers:{apikey:"sb_publishable_tto6sNxZPLv1VhUdMRlPHg_ptzg9odx",Authorization:"Bearer sb_publishable_tto6sNxZPLv1VhUdMRlPHg_ptzg9odx"},cache:"no-store"});
   if(!moderatorResponse.ok)throw Error("Ticketbeheerrechten konden niet worden opgehaald (HTTP "+moderatorResponse.status+").");
   const moderatorRows=await moderatorResponse.json();
