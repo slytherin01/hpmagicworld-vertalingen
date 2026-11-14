@@ -1696,6 +1696,75 @@ html body #introView #hpmwHomeLayout .hpmw-sorting-hat-widget > button.hpmw-sort
  #vacanciesView .hpmw-vacancies-combined>.hpmw-vacancies-heading-panel{align-items:flex-start!important;flex-direction:column!important}
  #sortingHatView .hpmw-sort-one-card .hpmw-sort-form-heading{align-items:flex-start!important;flex-direction:column!important}
 }
+</style><style id="hpmw-outer-shell-is-the-only-card">
+/* Make the page shell itself the single visible card, not the title/quiz/form children. */
+#sortingHatView .hpmw-sort-shell{
+ display:block!important;width:min(1000px,100%)!important;max-width:1000px!important;
+ box-sizing:border-box!important;margin:0 auto 24px!important;padding:28px 30px!important;
+ background:#101f33!important;background-color:#101f33!important;background-image:none!important;
+ border:1px solid #344b67!important;border-radius:18px!important;
+ box-shadow:0 16px 38px rgba(0,0,0,.28)!important;overflow:hidden!important;
+}
+#sortingHatView .hpmw-sort-one-card,
+#sortingHatView .hpmw-sort-one-card>.hpmw-sort-hero,
+#sortingHatView .hpmw-sort-one-card .hpmw-sort-form-heading,
+#sortingHatView .hpmw-sort-one-card #sortingRequestForm,
+#sortingHatView .hpmw-sort-one-card #sortingRequestForm .form-grid,
+#sortingHatView .hpmw-sort-one-card #sortingRequestForm .field,
+#sortingHatView .hpmw-sort-one-card #sortingRequestForm .actions{
+ display:block!important;width:100%!important;max-width:none!important;box-sizing:border-box!important;
+ margin:0!important;padding:0!important;
+ background:transparent!important;background-color:transparent!important;background-image:none!important;
+ border:0!important;border-radius:0!important;box-shadow:none!important;
+}
+#sortingHatView .hpmw-sort-one-card .hpmw-sort-combined-top{
+ display:flex!important;align-items:center!important;justify-content:space-between!important;
+ gap:20px!important;margin:0 0 22px!important;padding:0 0 20px!important;
+ border:0!important;border-bottom:1px solid #344b67!important;
+}
+#sortingHatView .hpmw-sort-one-card .hpmw-sort-form-heading{
+ display:flex!important;align-items:center!important;justify-content:space-between!important;
+ gap:12px!important;margin:26px 0 14px!important;padding:18px 0 12px!important;
+ border-top:1px solid #344b67!important;border-bottom:1px solid #344b67!important;
+}
+#sortingHatView .hpmw-sort-one-card #sortingRequestForm .form-grid{
+ display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:16px!important;
+}
+#sortingHatView .hpmw-sort-one-card #sortingRequestForm .field.full{grid-column:1/-1!important}
+#sortingHatView .hpmw-sort-one-card #sortingRequestForm input:not([type=checkbox]),
+#sortingHatView .hpmw-sort-one-card #sortingRequestForm select,
+#sortingHatView .hpmw-sort-one-card #sortingRequestForm textarea{
+ background:#101f33!important;border:1px solid #344b67!important;color:#edf4ff!important;
+}
+#vacanciesView .hpmw-vacancies-combined{
+ display:block!important;width:min(1000px,100%)!important;max-width:1000px!important;
+ box-sizing:border-box!important;margin:0 auto 24px!important;padding:28px 30px!important;
+ background:#101f33!important;background-color:#101f33!important;background-image:none!important;
+ border:1px solid #344b67!important;border-radius:18px!important;
+ box-shadow:0 16px 38px rgba(0,0,0,.28)!important;overflow:hidden!important;
+}
+#vacanciesView .hpmw-vacancies-combined>.hpmw-vacancies-heading-panel,
+#vacanciesView .hpmw-vacancies-combined>#hpmwVacancyList,
+#vacanciesView .hpmw-vacancies-combined>#hpmwVacancyDetail{
+ display:block!important;width:100%!important;max-width:none!important;box-sizing:border-box!important;
+ margin:0!important;padding:0!important;background:transparent!important;background-color:transparent!important;
+ background-image:none!important;border:0!important;border-radius:0!important;box-shadow:none!important;
+}
+#vacanciesView .hpmw-vacancies-combined>.hpmw-vacancies-heading-panel{
+ display:flex!important;align-items:center!important;justify-content:space-between!important;
+ gap:20px!important;margin:0 0 20px!important;padding:0 0 20px!important;
+ border-bottom:1px solid #344b67!important;
+}
+#vacanciesView .hpmw-vacancies-combined .hpmw-vacancy-public{
+ background:#101f33!important;border:1px solid #344b67!important;
+}
+@media(max-width:620px){
+ #sortingHatView .hpmw-sort-shell,#vacanciesView .hpmw-vacancies-combined{padding:20px!important}
+ #sortingHatView .hpmw-sort-one-card .hpmw-sort-combined-top,
+ #sortingHatView .hpmw-sort-one-card .hpmw-sort-form-heading,
+ #vacanciesView .hpmw-vacancies-combined>.hpmw-vacancies-heading-panel{align-items:flex-start!important;flex-direction:column!important}
+ #sortingHatView .hpmw-sort-one-card #sortingRequestForm .form-grid{grid-template-columns:1fr!important}
+}
 </style></head><body><header class="topbar luxury-nav-v2"><nav aria-label="Support navigatie" class="top-actions"><a class="lux-nav-item" href="https://testforumjoost.forumactie.com/forum" rel="noopener noreferrer" target="_blank"><span class="lux-nav-icon"><i class="fa-solid fa-comments"></i></span><span class="lux-nav-label">Forum</span></a><a class="lux-nav-item" href="https://testforumjoost.forumactie.com/h3-portaal" target="_self"><span class="lux-nav-icon"><i class="fa-solid fa-house"></i></span><span class="lux-nav-label">Portaal</span></a><button aria-expanded="false" aria-haspopup="dialog" class="lux-nav-item" id="faqLaunch" type="button"><span class="lux-nav-icon"><i class="fa-solid fa-circle-question"></i></span><span class="lux-nav-label">FAQ</span></button><button aria-expanded="false" class="lux-nav-item" id="ticketSupportLaunch" type="button"><span class="lux-nav-icon"><i class="fa-solid fa-ticket"></i></span><span class="lux-nav-label">Ticket Support</span></button>
 <button class="lux-nav-item" id="adminLaunch" type="button" style="display:none"><span class="lux-nav-icon"><i class="fa-solid fa-shield-halved"></i></span><span class="lux-nav-label">Ticketbeheer</span></button><label aria-label="Taal kiezen" class="hpmw-language-wrap" for="hpmwLanguage"><i aria-hidden="true" class="fa-solid fa-language"></i><select id="hpmwLanguage"><option selected="" value="nl">Nederlands</option><option value="en">English</option><option value="pt">Português</option></select></label><button class="lux-nav-item" data-extracted-style="2" id="myTicketsLaunch" style="display:none"><span class="lux-nav-icon"><i class="fa-solid fa-envelope"></i></span><span class="lux-nav-label">Mijn tickets</span><b class="count-badge" id="myTicketsCount">0</b></button><a class="lux-nav-item lux-user" href="/login" id="accountLink"><span class="lux-nav-icon"><i class="fa-solid fa-user"></i></span><span class="lux-nav-usertext"><small>INGELOGD ALS</small><strong id="username">Gast</strong></span></a></nav></header><div class="hpmw-global-brandbar" role="banner" aria-label="Muggle Ministry"></div><main class="shell"><section class="view active" id="introView">
 <!-- EIGEN AFBEELDING VOOR DEZE PAGINA: vervang IMAGE_URL_HIER en LINK_URL_HIER.
