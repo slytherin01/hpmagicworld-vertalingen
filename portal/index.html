@@ -5013,3 +5013,158 @@ html body #sortQuizBackdrop .quiz-option:focus-visible{
   html body #sortingHatView #sortingRequestForm .actions{padding:0 19px 20px!important}
 }
 </style>
+
+
+<style id="hpmw-sorting-hat-form-builder-20261114">
+/* A clearer, guided application form; all original field IDs and submission behavior stay intact. */
+html body #sortingHatView #sortingRequestForm{padding:0 0 8px!important}
+html body #sortingHatView .hpmw-sort-form-intro{
+ display:flex;align-items:flex-start;gap:13px;
+ margin:22px clamp(18px,4.5vw,44px) 0;padding:15px 17px;
+ border:1px solid rgba(197,160,91,.25);border-radius:13px;
+ background:linear-gradient(110deg,rgba(197,160,91,.09),rgba(255,255,255,.018));
+}
+html body #sortingHatView .hpmw-sort-form-intro-icon{
+ display:grid;place-items:center;flex:0 0 38px;height:38px;border-radius:11px;
+ color:#e3c88f;background:rgba(197,160,91,.13);border:1px solid rgba(197,160,91,.3);
+}
+html body #sortingHatView .hpmw-sort-form-intro strong{
+ display:block;margin:0 0 3px;color:#f2e5cc;font-size:13px;
+}
+html body #sortingHatView .hpmw-sort-form-intro p{
+ margin:0;color:#aebbc8;font-size:11px;line-height:1.6;
+}
+html body #sortingHatView .hpmw-sort-form-layout{
+ display:grid;grid-template-columns:1fr;gap:14px;
+ padding:19px clamp(18px,4.5vw,44px) 17px!important;
+}
+html body #sortingHatView .hpmw-sort-form-section{
+ min-width:0;padding:17px 18px 18px;border:1px solid #2e4054;
+ border-radius:14px;background:linear-gradient(145deg,rgba(22,37,54,.86),rgba(12,22,34,.9));
+ box-shadow:inset 0 1px rgba(255,255,255,.025);
+}
+html body #sortingHatView .hpmw-sort-section-heading{
+ display:flex;align-items:center;gap:11px;margin:0 0 15px;
+}
+html body #sortingHatView .hpmw-sort-section-number{
+ display:grid;place-items:center;flex:0 0 28px;height:28px;border-radius:50%;
+ border:1px solid rgba(207,174,112,.48);background:rgba(197,160,91,.12);
+ color:#e4c88e;font-size:11px;font-weight:850;
+}
+html body #sortingHatView .hpmw-sort-section-heading strong{
+ display:block;color:#f0e3cc;font-family:Georgia,"Times New Roman",serif;font-size:16px;font-weight:600;
+}
+html body #sortingHatView .hpmw-sort-section-heading small{
+ display:block;margin-top:2px;color:#9eacba;font-size:10px;line-height:1.5;
+}
+html body #sortingHatView .hpmw-sort-section-fields{
+ display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;
+}
+html body #sortingHatView .hpmw-sort-section-fields>.field{min-width:0}
+html body #sortingHatView .hpmw-sort-section-fields>.field.full{grid-column:1/-1}
+html body #sortingHatView .hpmw-sort-form-section .field label:not(.transfer-check){
+ color:#e7d8bd!important;font-size:11px!important;font-weight:800!important;
+}
+html body #sortingHatView .hpmw-sort-form-section .field input,
+html body #sortingHatView .hpmw-sort-form-section .field select,
+html body #sortingHatView .hpmw-sort-form-section .field textarea{
+ min-height:47px!important;border:1px solid #3a4e64!important;border-radius:10px!important;
+ background:#0d1928!important;color:#f4f0e7!important;
+}
+html body #sortingHatView .hpmw-sort-form-section .field textarea{min-height:112px!important}
+html body #sortingHatView .hpmw-sort-form-section .field input:focus,
+html body #sortingHatView .hpmw-sort-form-section .field select:focus,
+html body #sortingHatView .hpmw-sort-form-section .field textarea:focus{
+ border-color:#d0b477!important;box-shadow:0 0 0 3px rgba(208,180,119,.14)!important;outline:none!important;
+}
+html body #sortingHatView .hpmw-sort-form-section .field input[readonly]{
+ color:#c2cbd4!important;background:#172436!important;border-style:dashed!important;
+}
+html body #sortingHatView .hpmw-sort-field-note{
+ margin-top:6px;color:#91a2b4;font-size:10px;line-height:1.55;
+}
+html body #sortingHatView .hpmw-sort-char-count{
+ display:flex;justify-content:flex-end;margin-top:5px;color:#91a2b4;font-size:10px;font-variant-numeric:tabular-nums;
+}
+html body #sortingHatView .hpmw-sort-char-count.near-limit{color:#e8bd75}
+html body #sortingHatView .hpmw-sort-char-count.at-limit{color:#ef8f8f}
+html body #sortingHatView #sortingRequestForm .field.full:has(.transfer-check){
+ padding:13px 14px!important;border:1px solid rgba(197,160,91,.32)!important;
+ border-radius:11px!important;background:rgba(197,160,91,.055)!important;
+}
+html body #sortingHatView #sortingRequestForm .transfer-check{
+ color:#f0e3cc!important;line-height:1.55!important;
+}
+html body #sortingHatView #sortingRequestForm .transfer-check input{
+ width:18px!important;height:18px!important;accent-color:#c9a96c!important;
+}
+html body #sortingHatView #sortingRequestForm .hint{padding-left:29px!important}
+html body #sortingHatView #sortingRequestForm .transfer-reason{
+ margin-top:12px!important;padding:13px!important;border-radius:10px!important;
+}
+html body #sortingHatView #sortingRequestForm .actions{
+ display:flex!important;justify-content:center!important;padding:4px clamp(18px,4.5vw,44px) 15px!important;
+}
+html body #sortingHatView #sortSubmit{min-width:min(280px,100%)!important}
+html body #sortingHatView #sortSubmit:disabled{opacity:.62!important;cursor:wait!important;transform:none!important}
+html body #sortingHatView #sortStatus{
+ min-height:20px;margin:0 clamp(18px,4.5vw,44px) 8px;padding:0!important;
+ text-align:center;line-height:1.6;
+}
+@media(max-width:650px){
+ html body #sortingHatView .hpmw-sort-form-intro{margin:17px 18px 0;padding:13px}
+ html body #sortingHatView .hpmw-sort-form-layout{padding:15px 18px 15px!important;gap:11px}
+ html body #sortingHatView .hpmw-sort-form-section{padding:14px 13px 15px}
+ html body #sortingHatView .hpmw-sort-section-fields{grid-template-columns:1fr;gap:13px}
+ html body #sortingHatView .hpmw-sort-section-fields>.field.full{grid-column:auto}
+ html body #sortingHatView #sortingRequestForm .hint{padding-left:0!important}
+ html body #sortingHatView #sortingRequestForm .actions{padding:0 18px 12px!important}
+}
+</style>
+<script id="hpmw-sorting-hat-form-builder-logic-20261114">
+(()=>{"use strict";
+ const form=document.getElementById("sortingRequestForm");
+ if(!form||form.dataset.formBuilderReady)return;
+ const grid=form.querySelector(":scope > .form-grid");
+ if(!grid)return;
+ form.dataset.formBuilderReady="1";
+ const fields=[...grid.querySelectorAll(":scope > .field")];
+ const findField=id=>fields.find(field=>field.querySelector("#"+id));
+ const department=findField("sortDepartment"),username=findField("sortApplicant");
+ const transfer=findField("sortTransfer"),message=findField("sortMessage");
+ const intro=document.createElement("div");
+ intro.className="hpmw-sort-form-intro";
+ intro.innerHTML='<span class="hpmw-sort-form-intro-icon" aria-hidden="true"><i class="fa-solid fa-scroll"></i></span><div><strong>Jouw afdelingsaanvraag</strong><p>Vul hieronder je voorkeur in. Je aanvraag wordt doorgestuurd naar het Ministerie en als nieuw topic aangemaakt.</p></div>';
+ grid.className="hpmw-sort-form-layout";
+ grid.before(intro);
+ const makeSection=(number,title,description,nodes)=>{
+  const section=document.createElement("section");section.className="hpmw-sort-form-section";
+  const heading=document.createElement("div");heading.className="hpmw-sort-section-heading";
+  const num=document.createElement("span");num.className="hpmw-sort-section-number";num.textContent=number;
+  const copy=document.createElement("div"),strong=document.createElement("strong"),small=document.createElement("small");
+  strong.textContent=title;small.textContent=description;copy.append(strong,small);heading.append(num,copy);
+  const body=document.createElement("div");body.className="hpmw-sort-section-fields";
+  nodes.filter(Boolean).forEach(node=>body.append(node));
+  section.append(heading,body);return section;
+ };
+ grid.replaceChildren(
+  makeSection("1","Kies je afdeling","Welke afdeling past het beste bij jou?",[department,username]),
+  makeSection("2","Bijzondere aanvraag","Alleen invullen als je al bij een andere afdeling bent ingedeeld.",[transfer]),
+  makeSection("3","Extra toelichting","Geef eventueel extra informatie mee aan de medewerkers.",[message])
+ );
+ const addCounter=(id,max)=>{
+  const field=document.getElementById(id);if(!field)return;
+  const counter=document.createElement("div");counter.className="hpmw-sort-char-count";
+  counter.setAttribute("aria-live","polite");counter.setAttribute("aria-atomic","true");
+  const update=()=>{const count=field.value.length;counter.textContent=count+" / "+max+" tekens";counter.classList.toggle("near-limit",count>=max*.85&&count<max);counter.classList.toggle("at-limit",count>=max)};
+  field.insertAdjacentElement("afterend",counter);field.addEventListener("input",update);update();
+ };
+ addCounter("sortReason",1200);addCounter("sortMessage",1500);
+ const deptSelect=document.getElementById("sortDepartment");
+ if(deptSelect){const note=document.createElement("div");note.className="hpmw-sort-field-note";note.textContent="Je kunt kiezen uit Griffoendor, Zwadderich, Huffelpuf of Ravenklauw.";deptSelect.insertAdjacentElement("afterend",note)}
+ const applicant=document.getElementById("sortApplicant");
+ if(applicant){applicant.setAttribute("aria-readonly","true");const note=document.createElement("div");note.className="hpmw-sort-field-note";note.textContent="Deze naam wordt automatisch overgenomen van je ingelogde forumaccount.";applicant.insertAdjacentElement("afterend",note)}
+ const submit=document.getElementById("sortSubmit");
+ if(submit){submit.setAttribute("aria-label","Afdelingsaanvraag versturen")}
+})();
+</script>
