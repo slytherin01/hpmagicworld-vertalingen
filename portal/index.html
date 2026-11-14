@@ -1294,6 +1294,34 @@ html body #introView #hpmwHomeLayout .hpmw-sorting-hat-widget > button.hpmw-sort
 #sortQuizBackdrop .quiz-option{background:#102945!important;border-color:#42688d!important;color:#eef6ff!important}
 #sortQuizBackdrop .quiz-option:hover{background:#1c4165!important;border-color:#8bc5ff!important}
 @media(max-width:650px){#vacanciesView .page-head,#sortingHatView .page-head{align-items:flex-start!important}#vacanciesView .hpmw-vacancies-empty{padding:18px!important}}
+</style><style id="hpmw-final-artwork-and-empty-state-fix">
+/* Use repository-hosted artwork and explicitly size the DIV-based controls. */
+#introView #hpmwHomeLayout .hpmw-side-card.hpmw-sorting-hat-widget > div.hpmw-sorting-hat-link{
+ display:flex!important;flex:1 1 auto!important;align-items:center!important;justify-content:center!important;
+ width:100%!important;height:178px!important;min-height:178px!important;max-height:178px!important;
+ padding:8px!important;margin:0!important;box-sizing:border-box!important;cursor:pointer!important;
+ background:transparent!important;border:0!important;box-shadow:none!important;
+}
+#introView #hpmwHomeLayout .hpmw-side-card.hpmw-sorting-hat-widget > div.hpmw-sorting-hat-link img{
+ display:block!important;visibility:visible!important;opacity:1!important;
+ width:156px!important;height:156px!important;min-width:156px!important;min-height:156px!important;
+ max-width:156px!important;max-height:156px!important;object-fit:contain!important;
+ position:static!important;transform:none!important;margin:0 auto!important;
+}
+#introView #hpmwHomeLayout .hpmw-side-card.hpmw-sorting-hat-widget > div.hpmw-sorting-hat-link:focus-visible{
+ outline:2px solid #9acbff!important;outline-offset:-4px!important;border-radius:12px!important;
+}
+#vacanciesView .hpmw-vacancies-empty:has(>p):not(:has(.hpmw-vacancy-public)){
+ text-align:center!important;padding:38px 24px!important;
+ background:radial-gradient(ellipse at 50% 0%,#244b70 0%,transparent 72%)!important;
+ border:1px solid #365d85!important;border-radius:16px!important;
+}
+#vacanciesView .hpmw-vacancies-empty:has(>p):not(:has(.hpmw-vacancy-public)) h2{
+ color:#f2f7ff!important;font-size:23px!important;
+}
+#vacanciesView .hpmw-vacancies-empty:has(>p):not(:has(.hpmw-vacancy-public))>p{
+ max-width:560px!important;margin:12px auto!important;color:#c6d9ed!important;line-height:1.75!important;
+}
 </style></head><body><header class="topbar luxury-nav-v2"><nav aria-label="Support navigatie" class="top-actions"><a class="lux-nav-item" href="https://testforumjoost.forumactie.com/forum" rel="noopener noreferrer" target="_blank"><span class="lux-nav-icon"><i class="fa-solid fa-comments"></i></span><span class="lux-nav-label">Forum</span></a><a class="lux-nav-item" href="https://testforumjoost.forumactie.com/h3-portaal" target="_self"><span class="lux-nav-icon"><i class="fa-solid fa-house"></i></span><span class="lux-nav-label">Portaal</span></a><button aria-expanded="false" aria-haspopup="dialog" class="lux-nav-item" id="faqLaunch" type="button"><span class="lux-nav-icon"><i class="fa-solid fa-circle-question"></i></span><span class="lux-nav-label">FAQ</span></button><button aria-expanded="false" class="lux-nav-item" id="ticketSupportLaunch" type="button"><span class="lux-nav-icon"><i class="fa-solid fa-ticket"></i></span><span class="lux-nav-label">Ticket Support</span></button>
 <button class="lux-nav-item" id="adminLaunch" type="button" style="display:none"><span class="lux-nav-icon"><i class="fa-solid fa-shield-halved"></i></span><span class="lux-nav-label">Ticketbeheer</span></button><label aria-label="Taal kiezen" class="hpmw-language-wrap" for="hpmwLanguage"><i aria-hidden="true" class="fa-solid fa-language"></i><select id="hpmwLanguage"><option selected="" value="nl">Nederlands</option><option value="en">English</option><option value="pt">Português</option></select></label><button class="lux-nav-item" data-extracted-style="2" id="myTicketsLaunch" style="display:none"><span class="lux-nav-icon"><i class="fa-solid fa-envelope"></i></span><span class="lux-nav-label">Mijn tickets</span><b class="count-badge" id="myTicketsCount">0</b></button><a class="lux-nav-item lux-user" href="/login" id="accountLink"><span class="lux-nav-icon"><i class="fa-solid fa-user"></i></span><span class="lux-nav-usertext"><small>INGELOGD ALS</small><strong id="username">Gast</strong></span></a></nav></header><div class="hpmw-global-brandbar" role="banner" aria-label="Muggle Ministry"></div><main class="shell"><section class="view active" id="introView">
 <!-- EIGEN AFBEELDING VOOR DEZE PAGINA: vervang IMAGE_URL_HIER en LINK_URL_HIER.
@@ -3389,7 +3417,7 @@ s.textContent += "#introView{height:auto!important;min-height:0!important;max-he
     left.innerHTML='<section class="hpmw-side-card hpmw-side-note hpmw-my-department" id="hpmwMyDepartment" style="display:none"><div class="hpmw-side-heading"><i class="fa-solid fa-landmark"></i> Mijn Afdeling</div><div class="hpmw-department-content"></div></section><section class="hpmw-side-card hpmw-side-note hpmw-forum-widget"><div class="hpmw-side-heading"><i class="fa-solid fa-comments"></i> Het Forum</div><a class="hpmw-sorting-hat-link hpmw-forum-widget-link" href="https://testforumjoost.forumactie.com/forum" target="_blank" rel="noopener" aria-label="Open Het Forum"><img src="https://i44.servimg.com/u/f44/11/48/74/42/hetfor11.png" alt="Het Forum" loading="eager" decoding="async"></a></section>';
     const center=el("div","hpmw-home-main");center.id="hpmwHomeMain";
     const right=el("aside","hpmw-home-side hpmw-home-right");
-    right.innerHTML='<section class="hpmw-side-card hpmw-sorting-hat-widget"><div class="hpmw-side-heading"><i class="fa-solid fa-wand-magic-sparkles"></i> De Sorteerhoed</div><div class="hpmw-sorting-hat-link" role="button" tabindex="0" data-open-sorting-hat aria-label="Open De Sorteerhoed"><img src="https://i44.servimg.com/u/f44/11/48/74/42/sortee11.png" alt="Klik op de afbeelding om De Sorteerhoed te openen" loading="eager" decoding="async"></div></section><section class="hpmw-side-card hpmw-side-note hpmw-sorting-hat-widget"><div class="hpmw-side-heading"><i class="fa-solid fa-briefcase"></i> Vacatures</div><div class="hpmw-sorting-hat-link hpmw-vacancies-image" role="button" tabindex="0" data-open-vacancies aria-label="Open Vacatures"><img src="https://i44.servimg.com/u/f44/11/48/74/42/vacatu12.png" alt="Vacatures" loading="eager" decoding="async"></div></section>';
+    right.innerHTML='<section class="hpmw-side-card hpmw-sorting-hat-widget"><div class="hpmw-side-heading"><i class="fa-solid fa-wand-magic-sparkles"></i> De Sorteerhoed</div><div class="hpmw-sorting-hat-link" role="button" tabindex="0" data-open-sorting-hat aria-label="Open De Sorteerhoed"><img src="https://raw.githubusercontent.com/slytherin01/muggle-ministry/main/portal/images/sorteerhoed.png" alt="Klik op de afbeelding om De Sorteerhoed te openen" loading="eager" decoding="async"></div></section><section class="hpmw-side-card hpmw-side-note hpmw-sorting-hat-widget"><div class="hpmw-side-heading"><i class="fa-solid fa-briefcase"></i> Vacatures</div><div class="hpmw-sorting-hat-link hpmw-vacancies-image" role="button" tabindex="0" data-open-vacancies aria-label="Open Vacatures"><img src="https://raw.githubusercontent.com/slytherin01/muggle-ministry/main/portal/images/vacatures.png" alt="Vacatures" loading="eager" decoding="async"></div></section>';
     grid.append(left,center,right);
     const logo=home.querySelector(".hpmw-portal-logo");
     if(logo)logo.insertAdjacentElement("afterend",grid);else home.prepend(grid);
@@ -3414,7 +3442,7 @@ s.textContent += "#introView{height:auto!important;min-height:0!important;max-he
     const layout=home.querySelector(".intro-login-layout");
     const news=document.getElementById("hpmwHomeNews");
     const right=grid.querySelector(".hpmw-home-right");
-    if(right)right.innerHTML='<section class="hpmw-side-card hpmw-sorting-hat-widget"><div class="hpmw-side-heading"><i class="fa-solid fa-wand-magic-sparkles"></i> De Sorteerhoed</div><div class="hpmw-sorting-hat-link" role="button" tabindex="0" data-open-sorting-hat aria-label="Open De Sorteerhoed"><img src="https://i44.servimg.com/u/f44/11/48/74/42/sortee11.png" alt="Klik op de afbeelding om De Sorteerhoed te openen" loading="eager" decoding="async"></div></section><section class="hpmw-side-card hpmw-side-note hpmw-sorting-hat-widget"><div class="hpmw-side-heading"><i class="fa-solid fa-briefcase"></i> Vacatures</div><div class="hpmw-sorting-hat-link hpmw-vacancies-image" role="button" tabindex="0" data-open-vacancies aria-label="Open Vacatures"><img src="https://i44.servimg.com/u/f44/11/48/74/42/vacatu12.png" alt="Vacatures" loading="eager" decoding="async"></div></section>';
+    if(right)right.innerHTML='<section class="hpmw-side-card hpmw-sorting-hat-widget"><div class="hpmw-side-heading"><i class="fa-solid fa-wand-magic-sparkles"></i> De Sorteerhoed</div><div class="hpmw-sorting-hat-link" role="button" tabindex="0" data-open-sorting-hat aria-label="Open De Sorteerhoed"><img src="https://raw.githubusercontent.com/slytherin01/muggle-ministry/main/portal/images/sorteerhoed.png" alt="Klik op de afbeelding om De Sorteerhoed te openen" loading="eager" decoding="async"></div></section><section class="hpmw-side-card hpmw-side-note hpmw-sorting-hat-widget"><div class="hpmw-side-heading"><i class="fa-solid fa-briefcase"></i> Vacatures</div><div class="hpmw-sorting-hat-link hpmw-vacancies-image" role="button" tabindex="0" data-open-vacancies aria-label="Open Vacatures"><img src="https://raw.githubusercontent.com/slytherin01/muggle-ministry/main/portal/images/vacatures.png" alt="Vacatures" loading="eager" decoding="async"></div></section>';
     if(center&&layout&&layout.parentElement!==center)center.prepend(layout);
     if(center&&news&&news.parentElement!==center)center.append(news);
    }
