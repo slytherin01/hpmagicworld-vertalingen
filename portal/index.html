@@ -1322,6 +1322,41 @@ html body #introView #hpmwHomeLayout .hpmw-sorting-hat-widget > button.hpmw-sort
 #vacanciesView .hpmw-vacancies-empty:has(>p):not(:has(.hpmw-vacancy-public))>p{
  max-width:560px!important;margin:12px auto!important;color:#c6d9ed!important;line-height:1.75!important;
 }
+</style><style id="hpmw-page-heading-intro-blue">
+/* Page headings use the same midnight-blue palette as the portal intro panel. */
+#sortingHatView > .page-head,
+#vacanciesView > .page-head{
+ position:relative!important;display:flex!important;align-items:center!important;justify-content:space-between!important;
+ gap:20px!important;padding:25px 28px!important;margin:0 auto 24px!important;
+ border:1px solid rgba(166,194,229,.28)!important;border-radius:20px!important;
+ background:
+  radial-gradient(ellipse at 50% 0%,rgba(93,126,174,.23),transparent 55%),
+  linear-gradient(145deg,rgba(19,31,49,.97),rgba(12,18,31,.96))!important;
+ box-shadow:0 24px 55px rgba(0,0,0,.30),inset 0 1px 0 rgba(255,255,255,.05)!important;
+}
+#sortingHatView > .page-head .eyebrow,
+#vacanciesView > .page-head .eyebrow{
+ color:#b7d5f4!important;font-size:12px!important;letter-spacing:.24em!important;font-weight:800!important;
+}
+#sortingHatView > .page-head h1,
+#vacanciesView > .page-head h1{
+ margin:9px 0 10px!important;color:#f3f6fb!important;font-size:clamp(28px,4vw,38px)!important;
+ line-height:1.12!important;letter-spacing:-.035em!important;text-shadow:0 3px 22px #0007!important;
+}
+#sortingHatView > .page-head .subtitle,
+#vacanciesView > .page-head .subtitle{
+ margin:0!important;color:#c2cedd!important;font-size:15px!important;line-height:1.75!important;
+}
+#sortingHatView > .page-head #sortingHatBack,
+#vacanciesView > .page-head #vacanciesBack{
+ flex:0 0 auto!important;border-color:#49698d!important;
+ background:linear-gradient(145deg,#203c5d,#142941)!important;color:#eaf3ff!important;
+}
+#sortingHatView > .page-head #sortingHatBack:hover,
+#vacanciesView > .page-head #vacanciesBack:hover{border-color:#8db9e7!important;filter:brightness(1.12)!important}
+@media(max-width:600px){
+ #sortingHatView > .page-head,#vacanciesView > .page-head{align-items:flex-start!important;flex-direction:column!important;padding:21px!important}
+}
 </style></head><body><header class="topbar luxury-nav-v2"><nav aria-label="Support navigatie" class="top-actions"><a class="lux-nav-item" href="https://testforumjoost.forumactie.com/forum" rel="noopener noreferrer" target="_blank"><span class="lux-nav-icon"><i class="fa-solid fa-comments"></i></span><span class="lux-nav-label">Forum</span></a><a class="lux-nav-item" href="https://testforumjoost.forumactie.com/h3-portaal" target="_self"><span class="lux-nav-icon"><i class="fa-solid fa-house"></i></span><span class="lux-nav-label">Portaal</span></a><button aria-expanded="false" aria-haspopup="dialog" class="lux-nav-item" id="faqLaunch" type="button"><span class="lux-nav-icon"><i class="fa-solid fa-circle-question"></i></span><span class="lux-nav-label">FAQ</span></button><button aria-expanded="false" class="lux-nav-item" id="ticketSupportLaunch" type="button"><span class="lux-nav-icon"><i class="fa-solid fa-ticket"></i></span><span class="lux-nav-label">Ticket Support</span></button>
 <button class="lux-nav-item" id="adminLaunch" type="button" style="display:none"><span class="lux-nav-icon"><i class="fa-solid fa-shield-halved"></i></span><span class="lux-nav-label">Ticketbeheer</span></button><label aria-label="Taal kiezen" class="hpmw-language-wrap" for="hpmwLanguage"><i aria-hidden="true" class="fa-solid fa-language"></i><select id="hpmwLanguage"><option selected="" value="nl">Nederlands</option><option value="en">English</option><option value="pt">Português</option></select></label><button class="lux-nav-item" data-extracted-style="2" id="myTicketsLaunch" style="display:none"><span class="lux-nav-icon"><i class="fa-solid fa-envelope"></i></span><span class="lux-nav-label">Mijn tickets</span><b class="count-badge" id="myTicketsCount">0</b></button><a class="lux-nav-item lux-user" href="/login" id="accountLink"><span class="lux-nav-icon"><i class="fa-solid fa-user"></i></span><span class="lux-nav-usertext"><small>INGELOGD ALS</small><strong id="username">Gast</strong></span></a></nav></header><div class="hpmw-global-brandbar" role="banner" aria-label="Muggle Ministry"></div><main class="shell"><section class="view active" id="introView">
 <!-- EIGEN AFBEELDING VOOR DEZE PAGINA: vervang IMAGE_URL_HIER en LINK_URL_HIER.
