@@ -34,12 +34,11 @@ a{color:inherit}.topbar{position:sticky;top:0;z-index:50;min-height:64px;padding
 <section class="detail" id="detail"><button class="btn" id="closeDetail">← Terug naar resultaten</button><div id="detailContent"></div></section>
 </main>
 <footer class="footer">© Muggle Ministry · Onafhankelijk fanproject, niet officieel verbonden aan Warner Bros. Entertainment Inc. of J.K. Rowling.<div class="source-note">Bron en verdere lectuur: <a href="https://www.harrypotter.com/" target="_blank" rel="noopener">HarryPotter.com — officiële website</a>. De feiten worden door Muggle Ministry in eigen woorden samengevat en vertaald. Teksten, afbeeldingen, logo’s en merken van de rechthebbenden worden niet als eigen werk gepresenteerd. Alle rechten op oorspronkelijke personages en elementen blijven bij hun respectieve rechthebbenden. <a href="https://www.harrypotter.com/terms/terms-row" target="_blank" rel="noopener">Gebruiksvoorwaarden</a> · <a href="https://www.harrypotter.com/legals" target="_blank" rel="noopener">Juridische vermeldingen</a>.</div></footer>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 (function(){
 const SUPABASE_URL="https://vuaajsjjluwgqmneinds.supabase.co";
 const SUPABASE_KEY="sb_publishable_tto6sNxZPLv1VhUdMRlPHg_ptzg9odx";
-const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+
 const CATS=[
 ["spreuken","✨",["Spreuken","Spells","Feitiços"],["Incantaties en magie","Incantations and magic","Encantamentos e magia"]],
 ["personages","🧙",["Personages","Characters","Personagens"],["Heksen en tovenaars","Witches and wizards","Bruxas e feiticeiros"]],
@@ -91,9 +90,27 @@ $("detail").classList.add("show");$("resultsSection").style.display="none";$("ca
 function closeDetail(){$("detail").classList.remove("show");$("resultsSection").style.display="block";$("categories").style.display="grid";drawCategories();}
 async function init(){
 drawCategories();$("catCount").textContent=CATS.length;$("search").placeholder=tr("search");
-const {data,error}=await db.from("wizarding_entries").select("*").eq("is_published",true).order("category").order("sort_order").order("name");
-if(error){$("entries").innerHTML='<div class="empty">De encyclopedie kon niet laden. Controleer de Supabase Data API-toegang.</div>';console.error(error);return;}
-rows=data||[];render();
+$("entries").innerHTML='<div class="empty">Verbinding maken met de encyclopedie…</div>';
+try{
+ const controller=new AbortController();
+ const timer=setTimeout(()=>controller.abort(),15000);
+ const response=await fetch(SUPABASE_URL+"/rest/v1/wizarding_entries?select=*&is_published=eq.true&order=category.asc,sort_order.asc,name.asc",{
+  method:"GET",mode:"cors",cache:"no-store",signal:controller.signal,
+  headers:{apikey:SUPABASE_KEY,Authorization:"Bearer "+SUPABASE_KEY,Accept:"application/json"}
+ });
+ clearTimeout(timer);
+ if(!response.ok){const detail=await response.text();throw new Error("Supabase antwoord "+response.status+": "+detail.slice(0,240));}
+ const data=await response.json();
+ if(!Array.isArray(data))throw new Error("De database gaf geen lijst met artikelen terug.");
+ rows=data;
+ render();
+ if(rows.length===0)$("entries").innerHTML='<div class="empty">De verbinding werkt, maar er zijn nog geen gepubliceerde artikelen gevonden.</div>';
+}catch(error){
+ console.error("Wiki database load:",error);
+ const message=error.name==="AbortError"?"De verbinding duurde langer dan 15 seconden.":error.message||"Onbekende verbindingsfout.";
+ $("entries").innerHTML='<div class="empty"><b>De Wiki kon de artikelen niet ophalen.</b><br>'+esc(message)+'<br><br><button class="btn" id="retryLoad">Opnieuw proberen</button></div>';
+ $("retryLoad")?.addEventListener("click",init);
+}
 }
 $("search").addEventListener("input",render);
 $("language").addEventListener("change",e=>{locale=e.target.value;document.documentElement.lang=locale;$("search").placeholder=tr("search");$("allBtn").textContent=tr("all");$("countLabel").textContent=tr("count");$("catLabel").textContent=tr("cats");$("sourceLabel").textContent=tr("sourceTitle");$("closeDetail").textContent=tr("back");$("resultTitle").textContent=tr("featured");drawCategories();render();});
