@@ -3,7 +3,7 @@
   if (window.__muggleMinistryWikiLoading) return;
   window.__muggleMinistryWikiLoading = true;
 
-  var version = "20261114-6";
+  var version = "20261114-7";
   var sources = [
     "https://raw.githubusercontent.com/slytherin01/muggle-ministry/main/wizarding-world/index.html?cachebust=" + version,
     "https://slytherin01.github.io/muggle-ministry/wizarding-world/index.html?v=" + version
