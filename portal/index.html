@@ -5132,6 +5132,7 @@ html body #sortingHatView #sortStatus{
 </style>
 <script id="hpmw-sorting-hat-form-builder-logic-20261114">
 (()=>{"use strict";
+ if(document.querySelector("#sortingHatView .hpmw-sorting-ticket-panel"))return;
  const form=document.getElementById("sortingRequestForm");
  if(!form||form.dataset.formBuilderReady)return;
  const grid=form.querySelector(":scope > .form-grid");
@@ -5303,6 +5304,6 @@ html body #sortingHatView .hpmw-sorting-ticket-panel #sortSubmit:disabled{opacit
 <script id="hpmw-sorting-hat-ticket-form-actions-20261114">
 (()=>{"use strict";
  const cancel=document.getElementById("sortingHatCancel");
- cancel?.addEventListener("click",()=>document.getElementById("sortingRequestForm")?.reset());
+ cancel?.addEventListener("click",()=>{const form=document.getElementById("sortingRequestForm");form?.reset();const name=document.querySelector("#accountLink .lux-nav-usertext strong")?.textContent?.trim();const applicant=document.getElementById("sortApplicant");if(applicant)applicant.value=name||"";});
 })();
 </script>
