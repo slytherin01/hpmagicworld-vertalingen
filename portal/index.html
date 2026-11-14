@@ -1276,11 +1276,11 @@ html body #introView .intro-static-card .hpmw-welcome-box.center-message {
  </div>
 </section>
 <section class="view" id="vacanciesView">
- <div class="page-head"><div><div class="eyebrow">Ministerie van Dreuzels</div><h1>Vacatures</h1><p class="subtitle">Bekijk de openstaande functies binnen het Ministerie.</p></div><button class="btn" id="vacanciesBack" type="button"><i class="fa-solid fa-arrow-left"></i> Terug naar portaal</button></div>
+ <div class="page-head"><div><div class="eyebrow">Ministerie van Dreuzels</div><h1>Vacatures</h1><p class="subtitle">Vacatureoverzicht binnen het Ministerie.</p></div><button class="btn" id="vacanciesBack" type="button"><i class="fa-solid fa-arrow-left"></i> Terug naar portaal</button></div>
  <section class="panel hpmw-vacancies-panel">
-  <iframe id="hpmwVacanciesFrame" title="Vacatures binnen het Ministerie" src="https://testforumjoost.forumactie.com/h5-dev-vacatures" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
-  <p class="hpmw-vacancies-fallback">Laadt de vacaturepagina niet? <a href="https://testforumjoost.forumactie.com/h5-dev-vacatures" target="_blank" rel="noopener noreferrer">Open Vacatures in een nieuw tabblad</a>.</p>
+  <div class="hpmw-vacancies-empty"><h2><i class="fa-solid fa-briefcase"></i> Vacatures</h2><p>Dit is de interne vacaturepagina van het portaal. Er zijn nog geen vacaturegegevens aan deze pagina gekoppeld.</p></div>
  </section>
+</section>
 </section>
 <div class="quiz-backdrop" id="sortQuizBackdrop"><section class="quiz-dialog" role="dialog" aria-modal="true" aria-labelledby="sortQuizTitle"><div class="popup-head"><div><div class="quiz-kicker">DE AFDELINGSQUIZ</div><h2 id="sortQuizTitle">Welke afdeling past bij jou?</h2></div><button type="button" class="close-btn" id="sortQuizClose" aria-label="Quiz sluiten">×</button></div><div><p class="quiz-intro">Beantwoord vier korte vragen. Kies steeds het antwoord dat het beste bij jou past.</p><div id="sortQuizQuestion"></div><div class="quiz-progress" id="sortQuizProgress">Vraag 1 van 4</div></div></section></div>
 <section class="view" id="adminView">
@@ -4181,7 +4181,7 @@ html body #introView .hpmw-intro-quicklinks>button{
 </style>
 
 
-<script id="hpmw-portal-internal-widget-navigation-v3">
+<script id="hpmw-portal-internal-widget-navigation-v4">
 (()=>{"use strict";
  document.addEventListener("click",event=>{
   const sort=event.target.closest("[data-open-sorting-hat]");
@@ -4233,5 +4233,35 @@ html body #introView #hpmwHomeLayout > .hpmw-home-main{min-width:0!important}
  html body #introView #hpmwHomeLayout > .hpmw-home-right{display:flex!important;flex-direction:column!important;grid-column:auto!important;grid-row:auto!important;width:100%!important}
  html body #introView #hpmwHomeLayout > aside.hpmw-home-side > section.hpmw-side-card{flex-basis:280px!important;height:280px!important;min-height:280px!important;max-height:280px!important}
  #vacanciesView #hpmwVacanciesFrame{min-height:480px!important;height:72vh!important}
+}
+</style>
+
+<style id="hpmw-final-uniform-widget-layout-20261114-v4">
+/* Definitieve zijwidgethoogte: compacter; afbeeldingen behouden hun bestaande maat en verhouding. */
+html body #introView #hpmwHomeLayout{
+ display:grid!important;grid-template-columns:minmax(220px,1fr) minmax(0,2.15fr) minmax(220px,1fr)!important;
+ align-items:start!important;gap:20px!important;width:min(1480px,calc(100% - 40px))!important;margin:0 auto!important;
+}
+html body #introView #hpmwHomeLayout > aside.hpmw-home-side{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:16px!important;width:100%!important;min-width:0!important}
+html body #introView #hpmwHomeLayout > aside.hpmw-home-side > section.hpmw-side-card{
+ display:flex!important;flex:0 0 240px!important;flex-direction:column!important;align-items:stretch!important;
+ box-sizing:border-box!important;width:100%!important;min-width:0!important;height:240px!important;min-height:240px!important;max-height:240px!important;margin:0!important;overflow:hidden!important;
+}
+html body #introView #hpmwHomeLayout > aside.hpmw-home-side > section.hpmw-side-card > .hpmw-side-heading{display:flex!important;flex:0 0 42px!important;align-items:center!important;box-sizing:border-box!important;height:42px!important;min-height:42px!important}
+html body #introView #hpmwHomeLayout > .hpmw-home-main{min-width:0!important}
+#vacanciesView .hpmw-vacancies-panel{padding:22px!important;min-height:230px!important}
+#vacanciesView .hpmw-vacancies-empty{padding:26px 20px!important;text-align:center!important;border:1px dashed #52647d!important;border-radius:12px!important;background:rgba(15,25,40,.72)!important}
+#vacanciesView .hpmw-vacancies-empty h2{margin:0 0 8px!important;color:#f4d28a!important}
+#vacanciesView .hpmw-vacancies-empty p{margin:0!important;color:#c4cede!important}
+@media(max-width:1050px){
+ html body #introView #hpmwHomeLayout{grid-template-columns:minmax(190px,1fr) minmax(0,1fr)!important;width:calc(100% - 28px)!important;gap:14px!important}
+ html body #introView #hpmwHomeLayout > .hpmw-home-main{grid-column:1/-1!important;grid-row:1!important}
+ html body #introView #hpmwHomeLayout > .hpmw-home-left{grid-column:1!important;grid-row:2!important}
+ html body #introView #hpmwHomeLayout > .hpmw-home-right{grid-column:2!important;grid-row:2!important;display:flex!important}
+}
+@media(max-width:700px){
+ html body #introView #hpmwHomeLayout{display:flex!important;flex-direction:column!important;width:calc(100% - 20px)!important;gap:14px!important}
+ html body #introView #hpmwHomeLayout > .hpmw-home-main,html body #introView #hpmwHomeLayout > .hpmw-home-left,html body #introView #hpmwHomeLayout > .hpmw-home-right{display:flex!important;flex-direction:column!important;grid-column:auto!important;grid-row:auto!important;width:100%!important}
+ html body #introView #hpmwHomeLayout > aside.hpmw-home-side > section.hpmw-side-card{flex-basis:240px!important;height:240px!important;min-height:240px!important;max-height:240px!important}
 }
 </style>
