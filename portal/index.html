@@ -1353,7 +1353,7 @@ const found=html?readForumotionUserFromHtml(html):null;
 if(found){finish(found);return;}
 }catch(e){}
 attempt++;
-if(attempt<20)timer=setTimeout(inspect,250);else finish(null);
+if(attempt<8)timer=setTimeout(inspect,200);else finish(null);
 };
 try{
 frame=document.createElement("iframe");
@@ -1362,38 +1362,24 @@ frame.setAttribute("aria-hidden","true");
 frame.tabIndex=-1;
 frame.style.cssText="position:fixed;left:-10000px;top:0;width:1px;height:1px;border:0;opacity:0;pointer-events:none";
 frame.addEventListener("load",()=>{timer=setTimeout(inspect,50);},{once:true});
-deadline=setTimeout(()=>finish(null),7000);
+deadline=setTimeout(()=>finish(null),2200);
 frame.src=BASE+"/forum";
 document.body.appendChild(frame);
 }catch(e){finish(null);}
 });
 }
 async function resolveUser(){
-try{
-try{var saved=JSON.parse(sessionStorage.getItem('hpmw_forumotion_session')||'null');if(saved&&Date.now()-Number(saved.savedAt)<30000&&saved.logged&&Number(saved.id)>0){user={id:Number(saved.id),name:String(saved.name||'Gebruiker'),avatar:String(saved.avatar||''),logged:true};paintUser();return;}}catch(e){}
-/* De portaal-loader vervangt de oorspronkelijke Forumotion-documentcontext. Lees daarom de echte sessie vanuit een verborgen, same-origin Forumotion-pagina; zo worden de bestaande forumcookies en de door Forumotion gevulde _userdata gebruikt. */
-for(let attempt=0;attempt<24&&!window._userdata;attempt++)await new Promise(resolve=>setTimeout(resolve,250));
-if(window._userdata&&Number(window._userdata.session_logged_in)>0){
-const uid=Number(window._userdata.user_id)||0;
-if(uid){const forumName=String(window._userdata.username||window._userdata.username_clean||"").trim();user={id:uid,name:forumName||"Gebruiker",avatar:String(window._userdata.user_avatar||window._userdata.avatar||""),logged:true};paintUser();return;}
-}
-const liveUser=await readLiveForumotionUser();
-if(liveUser){user={...liveUser,logged:true};paintUser();return;}
-for(const path of ["/","/forum"]){
-try{
-const response=await fetch(BASE+path,{credentials:"include",cache:"no-store"});
-if(!response.ok)continue;
-const html=await response.text(),found=readForumotionUserFromHtml(html);
-if(found){
-let avatar="";
-try{const profile=await fetch(BASE+"/u"+found.id,{credentials:"include",cache:"no-store"});const profileHtml=await profile.text();const pd=new DOMParser().parseFromString(profileHtml,"text/html");const img=pd.querySelector(".avatar img,.profile-avatar img,.postprofile img,img[src*=avatar],meta[property=og:image]");avatar=img?.content||img?.src||"";}catch(e){}
-user={...found,name:found.name,avatar};paintUser();return;
-}
-}catch(e){}
-}
-/* Laat de bestaande accountweergave staan als Forumotion nog geen sessieantwoord geeft. */
-return;
-}catch(e){console.warn("[Hpmw] Accountstatus nog niet beschikbaar:",e);return;}
+ const readSaved=()=>{try{const s=JSON.parse(sessionStorage.getItem("hpmw_forumotion_session")||"null");if(s&&s.logged&&Number(s.id)>0&&Date.now()-Number(s.savedAt)<15*60*1000)return {id:Number(s.id),name:String(s.name||"Gebruiker"),avatar:String(s.avatar||""),logged:true};}catch(e){}return null;};
+ const saved=readSaved();
+ if(saved){user=saved;paintUser();}
+ try{
+  const d=window._userdata;
+  if(d&&Number(d.session_logged_in)<=0){sessionStorage.removeItem("hpmw_forumotion_session");if(!saved){user={id:0,name:"",logged:false};paintUser();}return;}
+  if(d&&Number(d.session_logged_in)>0&&Number(d.user_id)>0){const fresh={id:Number(d.user_id),name:String(d.username||d.username_clean||"Gebruiker").trim(),avatar:String(d.user_avatar||d.avatar||""),logged:true};user=fresh;paintUser();sessionStorage.setItem("hpmw_forumotion_session",JSON.stringify({...fresh,savedAt:Date.now()}));return;}
+  const liveUser=await Promise.race([readLiveForumotionUser(),new Promise(resolve=>setTimeout(()=>resolve(null),2200))]);
+  if(liveUser){user={...liveUser,logged:true};paintUser();sessionStorage.setItem("hpmw_forumotion_session",JSON.stringify({...user,savedAt:Date.now()}));return;}
+  if(!saved){user={id:0,name:"",logged:false};paintUser();}
+ }catch(e){console.warn("[Hpmw] Accountstatuscontrole mislukt:",e);if(!saved){user={id:0,name:"",logged:false};paintUser();}}
 }
 let forumotionLoginLoaded=false;
 function loadForumotionNativeLogin(){
