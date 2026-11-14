@@ -35,7 +35,7 @@
   function loadPortal() {
     var attempts = sources.map(function (url) {
       return fetchWithTimeout(url, 8000).then(function (html) {
-        if (!html || html.length < 10000 || !/<html[\\s>]/i.test(html) || !/<body[\\s>]/i.test(html)) {
+        if (!html || html.length < 10000 || html.indexOf("<html") === -1 || html.indexOf("<body") === -1) {
           throw new Error("Ongeldige HTML-bron: " + url);
         }
         return html;
