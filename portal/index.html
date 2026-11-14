@@ -3468,5 +3468,59 @@ html body #introView #hpmwHomeLayout .hpmw-home-side > .hpmw-side-card.hpmw-sort
 html body #introView #hpmwHomeLayout .hpmw-home-side > .hpmw-side-card.hpmw-side-note .hpmw-vacancies-image img {
   max-height: 146px !important;
 }
+
+/* Laat alle zijwidgets meer ruimte krijgen en forceer de Vacatures-afbeelding zichtbaar. */
+html body #introView #hpmwHomeLayout .hpmw-home-side > .hpmw-side-card {
+  height: 230px !important;
+  min-height: 230px !important;
+  max-height: 230px !important;
+}
+html body #introView #hpmwHomeLayout .hpmw-home-side > .hpmw-side-card .hpmw-sorting-hat-link {
+  display: flex !important;
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+}
+html body #introView #hpmwHomeLayout .hpmw-home-side > .hpmw-side-card .hpmw-sorting-hat-link img {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  max-width: 100% !important;
+  max-height: 180px !important;
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain !important;
+}
+html body #introView #hpmwHomeLayout .hpmw-home-side > .hpmw-side-card.hpmw-side-note .hpmw-vacancies-image {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+html body #introView #hpmwHomeLayout .hpmw-home-side > .hpmw-side-card.hpmw-side-note .hpmw-vacancies-image img {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: auto !important;
+  max-width: 100% !important;
+  height: auto !important;
+  max-height: 180px !important;
+  object-fit: contain !important;
+}
+@media(max-width:700px) {
+  html body #introView #hpmwHomeLayout .hpmw-home-side > .hpmw-side-card {
+    height: 230px !important;
+    min-height: 230px !important;
+    max-height: 230px !important;
+  }
+  html body #introView #hpmwHomeLayout .hpmw-home-side > .hpmw-side-card .hpmw-sorting-hat-link img {
+    max-height: 180px !important;
+  }
+}
 </style>
 </body></html>
