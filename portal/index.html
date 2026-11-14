@@ -1926,9 +1926,13 @@ html body #introView #hpmwHomeLayout .hpmw-sorting-hat-widget > button.hpmw-sort
       <label class="transfer-check" for="sortTransfer"><input id="sortTransfer" type="checkbox"> Ik wil een verhuizing naar een andere afdeling aanvragen</label>
       <div class="hint">Vink dit alleen aan als je al bij een afdeling bent ingedeeld en naar een andere afdeling wilt overstappen.</div>
       <div class="transfer-reason" id="sortTransferReason" hidden>
-       <div class="hpmw-transfer-grid">
-        <div class="field"><label for="sortFromDepartment">Huidige afdeling <b>*</b></label><select id="sortFromDepartment"><option value="">Kies je huidige afdeling</option><option>Griffoendor</option><option>Zwadderich</option><option>Huffelpuf</option><option>Ravenklauw</option></select></div>
-        <div class="field"><label for="sortNewDepartment">Nieuwe afdeling <b>*</b></label><select id="sortNewDepartment"><option value="">Kies je nieuwe afdeling</option><option>Griffoendor</option><option>Zwadderich</option><option>Huffelpuf</option><option>Ravenklauw</option></select></div>
+       <div class="field hpmw-transfer-new-department">
+        <label for="sortNewDepartment">Nieuwe afdeling <b>*</b></label>
+        <select id="sortNewDepartment"><option value="">Kies je nieuwe afdeling</option><option>Griffoendor</option><option>Zwadderich</option><option>Huffelpuf</option><option>Ravenklauw</option></select>
+       </div>
+       <div class="field hpmw-transfer-current-department">
+        <label for="sortFromDepartment">Huidige afdeling <b>*</b></label>
+        <select id="sortFromDepartment"><option value="">Kies je huidige afdeling</option><option>Griffoendor</option><option>Zwadderich</option><option>Huffelpuf</option><option>Ravenklauw</option></select>
        </div>
        <div class="field"><label for="sortReason">Waarom wil je van afdeling veranderen? <b>*</b></label><textarea id="sortReason" maxlength="1200" placeholder="Geef een duidelijke motivatie voor je verhuisaanvraag."></textarea></div>
       </div>
@@ -5398,3 +5402,18 @@ html body #sortingHatView .hpmw-sorting-ticket-panel #sortSubmit:disabled{opacit
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
 })();
 </script>
+
+
+<style id="hpmw-relocation-new-department-under-option-20261114">
+#sortingHatView #sortTransferReason .hpmw-transfer-new-department,
+#sortingHatView #sortTransferReason .hpmw-transfer-current-department{
+ display:block!important;width:100%!important;margin:0 0 13px!important;
+}
+#sortingHatView #sortTransferReason .hpmw-transfer-new-department select,
+#sortingHatView #sortTransferReason .hpmw-transfer-current-department select{
+ display:block!important;width:100%!important;min-height:44px!important;
+}
+#sortingHatView #sortTransferReason .hpmw-transfer-new-department{
+ padding-bottom:12px;border-bottom:1px solid rgba(197,160,91,.22);
+}
+</style>
