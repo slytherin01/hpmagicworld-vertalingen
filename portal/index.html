@@ -1318,12 +1318,11 @@ function paintCachedDepartmentEarly(){
 async function loadMyDepartment(){
  const card=document.querySelector("#hpmwMyDepartment"),box=card?.querySelector(".hpmw-department-content");
  if(!card||!box)return;
- card.style.display="";
- if(!user.logged||!user.id){paintDepartment(box,"Ongesorteerd");return;}
+ if(!user.logged||!user.id){card.style.display="none";return;}
  const cacheKey="hpmw_department_"+Number(user.id);
  let cached=null;
  try{cached=JSON.parse(localStorage.getItem(cacheKey)||"null");}catch(e){}
- if(cached&&cached.department&&DEPARTMENT_INFO[cached.department]&&Date.now()-Number(cached.savedAt)<30*24*60*60*1000){paintDepartment(box,cached.department);}
+ if(cached&&cached.department&&DEPARTMENT_INFO[cached.department]&&Date.now()-Number(cached.savedAt)<30*24*60*60*1000){card.style.display="";paintDepartment(box,cached.department);}
  try{
   const response=await fetch(BASE+"/u"+user.id,{credentials:"include",cache:"force-cache"});
   if(!response.ok)throw Error("Profiel niet bereikbaar");
@@ -1336,7 +1335,7 @@ async function loadMyDepartment(){
   const aliases={"griffoendor":"Griffoendor","zwadderich":"Zwadderich","huffelpuf":"Huffelpuf","ravenklauw":"Ravenklauw","ongesorteerd":"Ongesorteerd"};
   const department=(imageName==="ongeso10.png"||imageName.includes("ongeso"))?"Ongesorteerd":(aliases[normalized]||Object.keys(DEPARTMENT_INFO).find(name=>normalized.includes(name.toLocaleLowerCase("nl").normalize("NFD").replace(/[^a-z]/g,""))));
   if(!department){if(!cached)box.innerHTML='<span class="hpmw-department-status">Afdeling nog niet ingesteld.</span>';return;}
-  paintDepartment(box,department);
+  card.style.display="";paintDepartment(box,department);
   try{localStorage.setItem(cacheKey,JSON.stringify({department,savedAt:Date.now()}));}catch(e){}
  }catch(e){if(!cached)box.innerHTML='<span class="hpmw-department-status">Je afdeling kon niet worden opgehaald.</span>';console.warn("[Hpmw] Afdeling ophalen mislukt:",e);}
 }
@@ -3223,7 +3222,7 @@ s.textContent += "#introView{height:auto!important;min-height:0!important;max-he
    if(!grid){
     grid=el("div","hpmw-home-layout");grid.id="hpmwHomeLayout";
     const left=el("aside","hpmw-home-side hpmw-home-left");
-    left.innerHTML='<section class="hpmw-side-card hpmw-side-note hpmw-my-department" id="hpmwMyDepartment"><div class="hpmw-side-heading"><i class="fa-solid fa-landmark"></i> Mijn Afdeling</div><div class="hpmw-department-content"><img class="hpmw-department-animal-image" src="https://i44.servimg.com/u/f44/11/48/74/42/ongeso10.png" alt="Ongesorteerd" loading="eager" decoding="async"></div></section><section class="hpmw-side-card hpmw-side-note hpmw-coming-soon"><div class="hpmw-side-heading"><i class="fa-solid fa-wand-magic-sparkles"></i> Binnenkort</div><div class="hpmw-coming-soon-content"><i class="fa-regular fa-hourglass-half"></i><strong>Nieuwe widget in ontwikkeling</strong><span>Hier verschijnt binnenkort iets nieuws!</span></div></section>';
+    left.innerHTML='<section class="hpmw-side-card hpmw-side-note hpmw-my-department" id="hpmwMyDepartment" style="display:none"><div class="hpmw-side-heading"><i class="fa-solid fa-landmark"></i> Mijn Afdeling</div><div class="hpmw-department-content"></div></section><section class="hpmw-side-card hpmw-side-note hpmw-coming-soon"><div class="hpmw-side-heading"><i class="fa-solid fa-wand-magic-sparkles"></i> Binnenkort</div><div class="hpmw-coming-soon-content"><i class="fa-regular fa-hourglass-half"></i><strong>Nieuwe widget in ontwikkeling</strong><span>Hier verschijnt binnenkort iets nieuws!</span></div></section>';
     const center=el("div","hpmw-home-main");center.id="hpmwHomeMain";
     const right=el("aside","hpmw-home-side hpmw-home-right");
     right.innerHTML='<section class="hpmw-side-card hpmw-sorting-hat-widget"><div class="hpmw-side-heading"><i class="fa-solid fa-wand-magic-sparkles"></i> Zweinstein &gt; De Sorteerhoed</div><a class="hpmw-sorting-hat-link" href="https://testforumjoost.forumactie.com/h13-beta-de-sorteerhoed" target="_blank" rel="noopener" aria-label="Open De Sorteerhoed"><img src="https://i44.servimg.com/u/f44/11/48/74/42/sortee10.png" alt="Klik op de afbeelding om De Sorteerhoed te openen" loading="eager" decoding="async"></a></section><section class="hpmw-side-card hpmw-side-note hpmw-sorting-hat-widget"><div class="hpmw-side-heading"><i class="fa-solid fa-briefcase"></i> Vacatures</div><a class="hpmw-sorting-hat-link hpmw-vacancies-image" href="https://testforumjoost.forumactie.com/h5-dev-vacatures" target="_blank" rel="noopener" aria-label="Open Vacatures"><img src="https://i44.servimg.com/u/f44/11/48/74/42/vacatu10.png" alt="Vacatures" loading="eager" decoding="async"></a></section><section class="hpmw-side-card hpmw-side-note hpmw-sorting-hat-widget"><div class="hpmw-side-heading"><i class="fa-solid fa-book-open"></i> Encyclopedie</div><a class="hpmw-sorting-hat-link hpmw-encyclopedia-link" href="https://testforumjoost.forumactie.com/h1-dev-encyclopedie" target="_blank" rel="noopener" aria-label="Open Encyclopedie"><img src="https://i44.servimg.com/u/f44/11/48/74/42/encycl11.png" alt="Encyclopedie" loading="eager" decoding="async"></a></section>';
