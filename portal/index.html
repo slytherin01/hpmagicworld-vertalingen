@@ -4861,3 +4861,155 @@ html body #introView #hpmwHomeLayout .hpmw-forum-widget .hpmw-forum-widget-link{
  });
 })();
 </script>
+
+
+<style id="hpmw-sorting-hat-refinement-20261114">
+/* Extra visual refinement for the Sorting Hat: clearer sections, richer depth and calmer spacing. */
+html body #sortingHatView{
+  width:100%!important;max-width:none!important;
+  padding:14px 0 38px!important;
+}
+html body #sortingHatView .hpmw-sort-shell{
+  width:min(900px,calc(100% - 30px))!important;
+  max-width:900px!important;margin:0 auto!important;
+}
+html body #sortingHatView .hpmw-sort-one-card{
+  position:relative!important;
+  border:1px solid rgba(211,174,105,.62)!important;
+  border-radius:23px!important;
+  background:linear-gradient(155deg,#111e2c 0%,#0b1420 58%,#101b29 100%)!important;
+  box-shadow:0 28px 85px rgba(0,0,0,.48),0 0 0 5px rgba(197,160,91,.055),inset 0 1px rgba(255,255,255,.06)!important;
+}
+html body #sortingHatView .hpmw-sort-one-card:before{
+  content:"";position:absolute;inset:7px;z-index:0;pointer-events:none;
+  border:1px solid rgba(197,160,91,.16);border-radius:17px;
+}
+html body #sortingHatView .hpmw-sort-one-card>*{position:relative;z-index:1}
+html body #sortingHatView .hpmw-sort-hero{
+  padding:32px clamp(20px,4.5vw,44px) 0!important;
+  background:
+    radial-gradient(ellipse at 50% 0%,rgba(213,170,92,.2),transparent 52%),
+    radial-gradient(ellipse at 8% 60%,rgba(95,64,39,.13),transparent 35%),
+    linear-gradient(145deg,#1b2b3b,#101a27 68%,#172331)!important;
+}
+html body #sortingHatView .hpmw-sort-heading h1{
+  font-size:clamp(32px,4.7vw,46px)!important;
+  letter-spacing:.005em!important;
+}
+html body #sortingHatView .hpmw-sort-heading .subtitle{
+  max-width:480px!important;line-height:1.65!important;
+}
+html body #sortingHatView .hpmw-sort-kicker{
+  display:inline-flex!important;align-items:center!important;gap:12px!important;
+  margin:2px auto 0!important;padding:8px 17px!important;
+  border-top:1px solid rgba(204,170,111,.32)!important;
+  border-bottom:1px solid rgba(204,170,111,.32)!important;
+  color:#e0c58e!important;background:rgba(6,12,19,.2)!important;
+}
+html body #sortingHatView .hpmw-sort-hero>h2{
+  margin-top:19px!important;font-size:clamp(25px,3.6vw,34px)!important;
+}
+html body #sortingHatView #sortingHatQuizOpen{
+  margin:2px 0 25px!important;
+  border-color:#d9bb7d!important;
+  background:linear-gradient(135deg,#e0c58e,#b28b4f)!important;
+  color:#171b20!important;
+  box-shadow:0 8px 24px rgba(0,0,0,.25),inset 0 1px rgba(255,255,255,.35)!important;
+}
+html body #sortingHatView .hpmw-sort-form-heading{
+  display:flex!important;align-items:center!important;justify-content:space-between!important;
+  gap:14px!important;flex-wrap:wrap!important;
+  padding:20px clamp(20px,4.5vw,44px) 17px!important;
+  border-top:1px solid rgba(197,160,91,.34)!important;
+  border-bottom:1px solid rgba(197,160,91,.22)!important;
+  background:linear-gradient(90deg,rgba(197,160,91,.09),rgba(197,160,91,.015) 55%,rgba(197,160,91,.07))!important;
+}
+html body #sortingHatView .hpmw-sort-form-heading h2{
+  font-size:clamp(19px,2.4vw,23px)!important;letter-spacing:.01em!important;
+}
+html body #sortingHatView .hpmw-sort-form-heading p{
+  margin:0!important;color:#c0ad8a!important;font-size:11px!important;
+}
+html body #sortingHatView #sortingRequestForm .form-grid{
+  padding:24px clamp(20px,4.5vw,44px) 20px!important;
+  gap:20px 17px!important;
+}
+html body #sortingHatView #sortingRequestForm .field label:not(.transfer-check){
+  color:#f0dfc1!important;font-size:11px!important;
+}
+html body #sortingHatView #sortingRequestForm .field input,
+html body #sortingHatView #sortingRequestForm .field select,
+html body #sortingHatView #sortingRequestForm .field textarea{
+  border-color:#3b4e62!important;
+  background:linear-gradient(180deg,#142235,#0e1928)!important;
+  box-shadow:inset 0 1px 2px rgba(0,0,0,.22),0 1px rgba(255,255,255,.025)!important;
+}
+html body #sortingHatView #sortingRequestForm .field input:hover,
+html body #sortingHatView #sortingRequestForm .field select:hover,
+html body #sortingHatView #sortingRequestForm .field textarea:hover{
+  border-color:#7f704f!important;
+}
+html body #sortingHatView #sortingRequestForm .field input:focus,
+html body #sortingHatView #sortingRequestForm .field select:focus,
+html body #sortingHatView #sortingRequestForm .field textarea:focus{
+  border-color:#d2b477!important;
+  box-shadow:0 0 0 3px rgba(210,180,119,.16),inset 0 1px 2px rgba(0,0,0,.2)!important;
+}
+html body #sortingHatView #sortingRequestForm .field.full:has(.transfer-check){
+  border-color:rgba(197,160,91,.34)!important;
+  background:linear-gradient(120deg,rgba(197,160,91,.09),rgba(255,255,255,.018))!important;
+}
+html body #sortingHatView #sortingRequestForm .transfer-check{
+  color:#f0dfc1!important;font-size:12px!important;
+}
+html body #sortingHatView #sortingRequestForm .hint{
+  padding-left:29px!important;color:#aeb9c4!important;
+}
+html body #sortingHatView #sortTransferReason{
+  border-color:rgba(197,160,91,.42)!important;
+  background:rgba(5,11,18,.52)!important;
+}
+html body #sortingHatView #sortingRequestForm .actions{
+  justify-content:center!important;padding:4px clamp(20px,4.5vw,44px) 25px!important;
+}
+html body #sortingHatView #sortSubmit{
+  min-width:min(260px,100%)!important;
+  background:linear-gradient(135deg,#dfc184,#b58b4e)!important;
+  border-color:#e5ca91!important;color:#1a1b1d!important;
+  box-shadow:0 9px 25px rgba(0,0,0,.28),inset 0 1px rgba(255,255,255,.35)!important;
+}
+html body #sortingHatView #sortSubmit:focus-visible,
+html body #sortingHatView #sortingHatQuizOpen:focus-visible,
+html body #sortingHatView #sortingHatBack:focus-visible{
+  outline:3px solid rgba(231,203,145,.72)!important;outline-offset:3px!important;
+}
+html body #sortingHatView .form-status{
+  padding:0 clamp(20px,4.5vw,44px) 20px!important;
+}
+html body #sortQuizBackdrop .quiz-dialog{
+  max-width:600px!important;padding:clamp(20px,4vw,32px)!important;
+  background:
+    radial-gradient(ellipse at 50% 0%,rgba(197,160,91,.16),transparent 55%),
+    linear-gradient(155deg,#1a2938,#0c1520)!important;
+}
+html body #sortQuizBackdrop .quiz-option:focus-visible{
+  outline:2px solid #d8b879!important;outline-offset:2px!important;
+}
+@media(max-width:650px){
+  html body #sortingHatView{padding:4px 0 24px!important}
+  html body #sortingHatView .hpmw-sort-shell{width:calc(100% - 18px)!important}
+  html body #sortingHatView .hpmw-sort-one-card{border-radius:17px!important}
+  html body #sortingHatView .hpmw-sort-one-card:before{inset:5px;border-radius:12px}
+  html body #sortingHatView .hpmw-sort-hero{padding:24px 17px 0!important}
+  html body #sortingHatView .hpmw-sort-heading h1{font-size:34px!important}
+  html body #sortingHatView .hpmw-sort-form-heading{
+    align-items:flex-start!important;flex-direction:column!important;
+    padding:17px 19px 14px!important;gap:5px!important;
+  }
+  html body #sortingHatView #sortingRequestForm .form-grid{
+    padding:19px!important;gap:16px!important;
+  }
+  html body #sortingHatView #sortingRequestForm .hint{padding-left:0!important}
+  html body #sortingHatView #sortingRequestForm .actions{padding:0 19px 20px!important}
+}
+</style>
