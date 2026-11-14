@@ -1319,7 +1319,7 @@ async function loadMyDepartment(){
   const department=aliases[normalized]||Object.keys(DEPARTMENT_INFO).find(name=>normalized.includes(name.toLocaleLowerCase("nl").normalize("NFD").replace(/[^a-z]/g,"")));
   const info=department?DEPARTMENT_INFO[department]:null;
   if(!info){box.innerHTML='<span class="hpmw-department-status">Afdeling nog niet ingesteld.</span>';return;}
-  const animal='<span class="hpmw-department-animal" role="img" aria-label="'+esc(department)+'">'+info.animal+'</span>';
+  const animal='<div class="hpmw-department-animal" role="img" aria-label="'+esc(department)+'">'+info.animal+'</div>';
   box.innerHTML=info.url?'<a class="hpmw-department-link" href="'+info.url+'" target="_blank" rel="noopener" aria-label="Open leerlingenkamer '+esc(department)+'">'+animal+'<strong>'+esc(department)+'</strong><span>Open leerlingenkamer ↗</span></a>':'<div class="hpmw-department-unassigned">'+animal+'<strong>'+esc(department)+'</strong></div>';
  }catch(e){box.innerHTML='<span class="hpmw-department-status">Je afdeling kon niet worden opgehaald.</span>';}
 }
@@ -3652,5 +3652,19 @@ html body main.shell>.view#myTicketsView>.page-head h1{
 }
 html body main.shell>.view#myTicketsView>.page-head .subtitle{display:none!important}
 html body main.shell>.view#myTicketsView>.page-head>button{margin-left:auto!important}
+</style>
+
+<style id="hpmw-department-animal-icon-force-visible">
+#hpmwMyDepartment .hpmw-department-link .hpmw-department-animal,
+#hpmwMyDepartment .hpmw-department-unassigned .hpmw-department-animal{
+ display:flex!important;align-items:center!important;justify-content:center!important;
+ width:100%!important;min-height:82px!important;height:82px!important;
+ margin:0!important;padding:0!important;
+ font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif!important;
+ font-size:68px!important;line-height:1!important;font-weight:normal!important;
+ color:#fff!important;visibility:visible!important;opacity:1!important;
+}
+#hpmwMyDepartment .hpmw-department-link strong,
+#hpmwMyDepartment .hpmw-department-unassigned strong{display:block!important;font-size:14px!important}
 </style>
 </body></html>
