@@ -3901,103 +3901,7 @@ body{background-color:#090e18!important;background-image:url("https://i28.servim
 </style>
 
 <style id="hpmw-account-icon-restore-final">html body header.topbar.luxury-nav-v2 nav.top-actions #accountLink .lux-nav-icon{display:grid!important;visibility:visible!important;opacity:1!important;flex:0 0 28px!important;width:28px!important;height:28px!important;min-width:28px!important;min-height:28px!important;place-items:center!important;background:#1c2b3a!important;border:1px solid #425b73!important;border-radius:8px!important}html body header.topbar.luxury-nav-v2 nav.top-actions #accountLink .lux-nav-icon i{display:inline-flex!important;visibility:visible!important;opacity:1!important;font-family:"Font Awesome 6 Free"!important;font-weight:900!important;font-size:15px!important;line-height:1!important;color:#c5def7!important}html body header.topbar.luxury-nav-v2 nav.top-actions #accountLink .lux-nav-icon:before{content:"\f007"!important;font-family:"Font Awesome 6 Free"!important;font-weight:900!important;display:inline-block!important;color:#c5def7!important;font-size:15px!important;line-height:1!important}</style><style id="hpmw-department-no-reveal-animation">#hpmwMyDepartment .hpmw-department-content,#hpmwMyDepartment .hpmw-department-link,#hpmwMyDepartment .hpmw-department-animal-image{animation:none!important;transition:none!important;transform:none!important;clip-path:none!important;visibility:visible!important;opacity:1!important}#hpmwMyDepartment .hpmw-department-animal-image{object-fit:contain!important}</style>
-<style id="hpmw-final-uniform-widget-layout-20261114">
-/* Definitieve uniforme afmetingen voor alle vier de portaalwidgets. */
-html body #introView #hpmwHomeLayout{
-  display:grid!important;
-  grid-template-columns:minmax(0,1fr) minmax(0,2.15fr) minmax(0,1fr)!important;
-  align-items:start!important;
-  column-gap:20px!important;
-}
-html body #introView #hpmwHomeLayout > .hpmw-home-side{
-  display:flex!important;
-  flex-direction:column!important;
-  align-items:stretch!important;
-  gap:16px!important;
-  width:100%!important;
-  min-width:0!important;
-}
-html body #introView #hpmwHomeLayout > .hpmw-home-side > .hpmw-side-card{
-  display:flex!important;
-  flex:0 0 190px!important;
-  flex-direction:column!important;
-  align-items:stretch!important;
-  box-sizing:border-box!important;
-  width:100%!important;
-  min-width:0!important;
-  height:190px!important;
-  min-height:190px!important;
-  max-height:190px!important;
-  margin:0!important;
-  overflow:hidden!important;
-}
-html body #introView #hpmwHomeLayout > .hpmw-home-side > .hpmw-side-card > .hpmw-side-heading{
-  display:flex!important;
-  flex:0 0 40px!important;
-  align-items:center!important;
-  box-sizing:border-box!important;
-  height:40px!important;
-  min-height:40px!important;
-  margin:0!important;
-}
-html body #introView #hpmwHomeLayout > .hpmw-home-side > .hpmw-side-card > a,
-html body #introView #hpmwHomeLayout > .hpmw-home-side > .hpmw-side-card > .hpmw-department-content{
-  display:flex!important;
-  flex:1 1 0!important;
-  align-items:center!important;
-  justify-content:center!important;
-  box-sizing:border-box!important;
-  width:100%!important;
-  min-width:0!important;
-  min-height:0!important;
-  max-height:none!important;
-  margin:0!important;
-  padding:6px!important;
-  overflow:hidden!important;
-}
-html body #introView #hpmwHomeLayout > .hpmw-home-side > .hpmw-side-card > a img,
-html body #introView #hpmwHomeLayout > .hpmw-home-side > .hpmw-side-card .hpmw-department-animal-image{
-  display:block!important;
-  width:auto!important;
-  height:auto!important;
-  max-width:100%!important;
-  max-height:136px!important;
-  object-fit:contain!important;
-  object-position:center!important;
-  margin:0 auto!important;
-}
-html body #introView #hpmwHomeLayout > .hpmw-home-main{min-width:0!important}
-@media(max-width:900px){
-  html body #introView #hpmwHomeLayout{
-    grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
-    gap:14px!important;
-  }
-  html body #introView #hpmwHomeLayout > .hpmw-home-main{
-    grid-column:1/-1!important;
-    grid-row:1!important;
-  }
-  html body #introView #hpmwHomeLayout > .hpmw-home-left,
-  html body #introView #hpmwHomeLayout > .hpmw-home-right{grid-row:2!important}
-}
-@media(max-width:600px){
-  html body #introView #hpmwHomeLayout{
-    grid-template-columns:minmax(0,1fr)!important;
-    width:calc(100% - 20px)!important;
-    gap:14px!important;
-  }
-  html body #introView #hpmwHomeLayout > .hpmw-home-main,
-  html body #introView #hpmwHomeLayout > .hpmw-home-left,
-  html body #introView #hpmwHomeLayout > .hpmw-home-right{
-    grid-column:1!important;
-    grid-row:auto!important;
-  }
-  html body #introView #hpmwHomeLayout > .hpmw-home-side > .hpmw-side-card{
-    height:190px!important;
-    min-height:190px!important;
-    max-height:190px!important;
-  }
-}
-</style>
+
 
 </body></html>
 
@@ -4268,3 +4172,118 @@ html body #introView .hpmw-intro-quicklinks>button{
  html body #introView .hpmw-intro-quicklinks>button{white-space:normal!important;font-size:10px!important}
 }
 </style>
+
+<style id="hpmw-final-uniform-widget-layout-20261114-v2">
+/* Last-resort override: same card dimensions and no image cropping. */
+html body #introView #hpmwHomeLayout{
+ display:grid!important;
+ grid-template-columns:minmax(220px,1fr) minmax(0,2.15fr) minmax(220px,1fr)!important;
+ align-items:start!important;
+ gap:20px!important;
+ width:min(1480px,calc(100% - 40px))!important;
+ margin:0 auto!important;
+}
+html body #introView #hpmwHomeLayout > aside.hpmw-home-side{
+ display:flex!important;
+ flex-direction:column!important;
+ align-items:stretch!important;
+ gap:16px!important;
+ width:100%!important;
+ min-width:0!important;
+}
+html body #introView #hpmwHomeLayout > aside.hpmw-home-side > section.hpmw-side-card{
+ display:flex!important;
+ flex:0 0 230px!important;
+ flex-direction:column!important;
+ align-items:stretch!important;
+ box-sizing:border-box!important;
+ width:100%!important;
+ min-width:0!important;
+ height:230px!important;
+ min-height:230px!important;
+ max-height:230px!important;
+ margin:0!important;
+ padding:0 16px 10px!important;
+ overflow:hidden!important;
+}
+html body #introView #hpmwHomeLayout > aside.hpmw-home-side > section.hpmw-side-card > .hpmw-side-heading{
+ display:flex!important;
+ flex:0 0 42px!important;
+ align-items:center!important;
+ box-sizing:border-box!important;
+ width:calc(100% + 32px)!important;
+ height:42px!important;
+ min-height:42px!important;
+ margin:0 -16px 6px!important;
+ padding:10px 15px!important;
+}
+html body #introView #hpmwHomeLayout > aside.hpmw-home-side > section.hpmw-side-card > a.hpmw-sorting-hat-link,
+html body #introView #hpmwHomeLayout > aside.hpmw-home-side > section.hpmw-side-card > .hpmw-department-content{
+ display:flex!important;
+ flex:1 1 0!important;
+ align-items:center!important;
+ justify-content:center!important;
+ box-sizing:border-box!important;
+ width:100%!important;
+ min-width:0!important;
+ min-height:0!important;
+ height:auto!important;
+ max-height:none!important;
+ margin:0!important;
+ padding:4px 0!important;
+ overflow:hidden!important;
+ border:0!important;
+}
+html body #introView #hpmwHomeLayout > aside.hpmw-home-side > section.hpmw-side-card > a.hpmw-sorting-hat-link img,
+html body #introView #hpmwHomeLayout > aside.hpmw-home-side > section.hpmw-side-card .hpmw-department-animal-image{
+ display:block!important;
+ flex:0 1 auto!important;
+ width:auto!important;
+ height:auto!important;
+ max-width:100%!important;
+ max-height:170px!important;
+ object-fit:contain!important;
+ object-position:center center!important;
+ margin:0 auto!important;
+ padding:0!important;
+}
+html body #introView #hpmwHomeLayout > .hpmw-home-main{min-width:0!important}
+@media(max-width:1050px){
+ html body #introView #hpmwHomeLayout{
+  grid-template-columns:minmax(190px,1fr) minmax(0,1fr)!important;
+  width:calc(100% - 28px)!important;
+  gap:14px!important;
+ }
+ html body #introView #hpmwHomeLayout > .hpmw-home-main{
+  grid-column:1/-1!important;
+  grid-row:1!important;
+ }
+ html body #introView #hpmwHomeLayout > .hpmw-home-left{grid-column:1!important;grid-row:2!important}
+ html body #introView #hpmwHomeLayout > .hpmw-home-right{grid-column:2!important;grid-row:2!important;display:flex!important}
+}
+@media(max-width:700px){
+ html body #introView #hpmwHomeLayout{
+  display:flex!important;
+  flex-direction:column!important;
+  width:calc(100% - 20px)!important;
+  gap:14px!important;
+ }
+ html body #introView #hpmwHomeLayout > .hpmw-home-main,
+ html body #introView #hpmwHomeLayout > .hpmw-home-left,
+ html body #introView #hpmwHomeLayout > .hpmw-home-right{
+  display:flex!important;
+  flex-direction:column!important;
+  grid-column:auto!important;
+  grid-row:auto!important;
+  order:initial!important;
+  width:100%!important;
+ }
+ html body #introView #hpmwHomeLayout > aside.hpmw-home-side > section.hpmw-side-card{
+  flex-basis:230px!important;
+  height:230px!important;
+  min-height:230px!important;
+  max-height:230px!important;
+ }
+}
+</style>
+
