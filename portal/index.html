@@ -5355,3 +5355,46 @@ html body #sortingHatView .hpmw-sorting-ticket-panel #sortSubmit:disabled{opacit
 #sortingHatView .hpmw-sort-transfer-field .transfer-check{margin-bottom:0}
 #sortingHatView .hpmw-sort-transfer-field .transfer-reason{margin-top:12px}
 </style>
+
+
+<style id="hpmw-fix-relocation-select-20261114">
+/* Explicit visibility avoids older form styles overriding the hidden attribute. */
+#sortingHatView #sortTransferReason[hidden],
+#sortingHatView .hpmw-sorting-ticket-panel #sortTransferReason[hidden]{display:none!important}
+#sortingHatView #sortTransferReason:not([hidden]){display:block!important;visibility:visible!important;opacity:1!important}
+#sortingHatView #sortTransferReason .hpmw-transfer-grid,
+#sortingHatView #sortTransferReason .hpmw-transfer-grid .field{display:grid!important;visibility:visible!important;opacity:1!important}
+#sortingHatView #sortTransferReason .hpmw-transfer-grid select{display:block!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;position:relative!important;z-index:2!important;min-height:44px!important;cursor:pointer!important}
+#sortingHatView #sortTransferReason .field[hidden],
+#sortingHatView .hpmw-sorting-ticket-panel .field[hidden]{display:none!important}
+</style>
+<script id="hpmw-fix-relocation-select-logic-20261114">
+(()=>{"use strict";
+ const init=()=>{
+  const form=document.getElementById("sortingRequestForm");
+  const toggle=document.getElementById("sortTransfer");
+  const details=document.getElementById("sortTransferReason");
+  const from=document.getElementById("sortFromDepartment");
+  const to=document.getElementById("sortNewDepartment");
+  const reason=document.getElementById("sortReason");
+  const regular=document.getElementById("sortDepartment")?.closest(".field");
+  if(!form||!toggle||!details||!to)return;
+  const sync=()=>{
+   const active=toggle.checked;
+   details.hidden=!active;
+   details.style.display=active?"block":"none";
+   if(regular){regular.hidden=active;regular.style.display=active?"none":""}
+   if(from)from.required=active;
+   to.required=active;
+   if(reason)reason.required=active;
+  };
+  if(!toggle.dataset.relocationVisibilityFix){
+   toggle.dataset.relocationVisibilityFix="1";
+   toggle.addEventListener("change",sync);
+   form.addEventListener("reset",()=>setTimeout(sync,0));
+  }
+  sync();
+ };
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
+})();
+</script>
