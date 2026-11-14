@@ -1277,8 +1277,11 @@ question:`<i class="fa-solid fa-circle-question"></i>`
 const doc=new DOMParser().parseFromString(html,"text/html");
 const readKey=(key)=>{
 const patterns=[
-new RegExp("_userdata\\s*(?:\\[\\s*['\"]"+key+"['\"]\\s*\\]|\\.\\s*"+key+")\\s*=\\s*['\"]?([^;'\"\\s]+)['\"]?","i"),
-new RegExp("['\"]"+key+"['\"]\\s*:\\s*['\"]?([^,;'\"}\\s]+)","i")
+new RegExp("_userdata\\s*(?:\\[\\s*['\"]"+key+"['\"]\\s*\\]|\\.\\s*"+key+")\\s*=\\s*\\"([^\\"]*)\\"","i"),
+new RegExp("_userdata\\s*(?:\\[\\s*['\"]"+key+"['\"]\\s*\\]|\\.\\s*"+key+")\\s*=\\s*'([^']*)'","i"),
+new RegExp("['\"]"+key+"['\"]\\s*:\\s*\\"([^\\"]*)\\"","i"),
+new RegExp("['\"]"+key+"['\"]\\s*:\\s*'([^']*)'","i"),
+new RegExp("_userdata\\s*(?:\\[\\s*['\"]"+key+"['\"]\\s*\\]|\\.\\s*"+key+")\\s*=\\s*([^;\\s]+)","i")
 ];
 for(const re of patterns){const m=html.match(re);if(m)return m[1];}
 return "";
@@ -1330,7 +1333,7 @@ try{
 /* Forumotion kan _userdata pas na het laden van de pagina beschikbaar maken. Wacht daar kort op voordat we als gast terugvallen. */
 for(let attempt=0;attempt<24&&!window._userdata;attempt++)await new Promise(resolve=>setTimeout(resolve,250));
 if(window._userdata&&Number(window._userdata.session_logged_in)>0){
-const uid=Number(window._userdata.user_id)||0;const forumName=String(window._userdata.username||window._userdata.username_clean||"").trim();user={id:uid,name:uid===3?"Test Account 2":(forumName||"Gebruiker"),avatar:String(window._userdata.user_avatar||window._userdata.avatar||""),logged:true};paintUser();return;
+const uid=Number(window._userdata.user_id)||0;const forumName=String(window._userdata.username||window._userdata.username_clean||"").trim();user={id:uid,name:forumName||"Gebruiker",avatar:String(window._userdata.user_avatar||window._userdata.avatar||""),logged:true};paintUser();return;
 }
 for(const path of ["/","/forum"]){
 try{
@@ -1340,7 +1343,7 @@ const html=await response.text(),found=readForumotionUserFromHtml(html);
 if(found){
 let avatar="";
 try{const profile=await fetch(BASE+"/u"+found.id,{credentials:"include",cache:"no-store"});const profileHtml=await profile.text();const pd=new DOMParser().parseFromString(profileHtml,"text/html");const img=pd.querySelector(".avatar img,.profile-avatar img,.postprofile img,img[src*=avatar],meta[property=og:image]");avatar=img?.content||img?.src||"";}catch(e){}
-user={...found,name:Number(found.id)===3?"Test Account 2":found.name,avatar};paintUser();return;
+user={...found,name:found.name,avatar};paintUser();return;
 }
 }catch(e){}
 }
