@@ -3,7 +3,7 @@
   if (window.__muggleMinistryPortalLoading) return;
   window.__muggleMinistryPortalLoading = true;
 
-  var version = "20261114-96";
+  var version = "20261114-97";
   var sources = [
     "https://raw.githubusercontent.com/slytherin01/muggle-ministry/main/portal/index.html?cachebust=" + version,
     "https://slytherin01.github.io/muggle-ministry/portal/index.html?v=" + version
@@ -32,27 +32,23 @@
     if (node) node.textContent = "Het portaal kon niet worden geladen. " + String(error && error.message || error);
   }
 
-  function loadFrom(index, previousError) {
-    if (index >= sources.length) {
-      showError(previousError || new Error("Geen geldige portaalbron beschikbaar."));
-      return;
-    }
-    fetchWithTimeout(sources[index], 15000).then(function (html) {
-      if (!html || html.length < 10000 || !/<html[\s>]/i.test(html) || !/<body[\s>]/i.test(html)) {
-        throw new Error("De portaalbron gaf geen volledige HTML-pagina terug.");
-      }
-      /* Sla alleen direct beschikbare sessiegegevens op; blokkeer het portaal nooit op Forumotion. */
+  function loadPortal() {
+    var attempts = sources.map(function (url) {
+      return fetchWithTimeout(url, 8000).then(function (html) {
+        if (!html || html.length < 10000 || !/<html[\\s>]/i.test(html) || !/<body[\\s>]/i.test(html)) {
+          throw new Error("Ongeldige HTML-bron: " + url);
+        }
+        return html;
+      });
+    });
+    Promise.any(attempts).then(function (html) {
       try {
         var d = window._userdata || null;
         var id = d ? (Number(d.user_id) || 0) : 0;
-        var ok = !!(d && id > 0 && Number(d.session_logged_in) > 0);
-        if (ok) {
-          sessionStorage.setItem('hpmw_forumotion_session', JSON.stringify({
-            id: id,
-            name: String(d.username || d.username_clean || 'Gebruiker'),
-            avatar: String(d.user_avatar || d.avatar || ''),
-            logged: true,
-            savedAt: Date.now()
+        if (d && id > 0 && Number(d.session_logged_in) > 0) {
+          sessionStorage.setItem("hpmw_forumotion_session", JSON.stringify({
+            id: id, name: String(d.username || d.username_clean || "Gebruiker"),
+            avatar: String(d.user_avatar || d.avatar || ""), logged: true, savedAt: Date.now()
           }));
         }
       } catch (e) {}
@@ -60,8 +56,7 @@
       document.write(html);
       document.close();
     }).catch(function (error) {
-      console.warn("Portaalbron " + (index + 1) + " niet beschikbaar; volgende bron wordt geprobeerd.", error);
-      loadFrom(index + 1, error);
+      showError(error);
     });
   }
 
