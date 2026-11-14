@@ -4091,93 +4091,9 @@ html body #introView #hpmwHomeLayout #hpmwMyDepartment .hpmw-department-animal-i
 }
 </style>
 
-<style id="hpmw-sidebar-cards-final-uniform-height">
-/* Laat de volledige zijbalk-kaarten dezelfde maat houden; gebruik descendant-selectors omdat de widgets dynamisch worden ingevoegd. */
-html body #introView #hpmwHomeLayout aside.hpmw-home-side section.hpmw-side-card{
- display:flex!important;flex-direction:column!important;align-items:stretch!important;
- box-sizing:border-box!important;width:100%!important;min-width:0!important;
- height:170px!important;min-height:170px!important;max-height:170px!important;
- overflow:hidden!important;
-}
-html body #introView #hpmwHomeLayout aside.hpmw-home-side section.hpmw-side-card > .hpmw-side-heading{
- display:flex!important;flex:0 0 38px!important;height:38px!important;min-height:38px!important;
- box-sizing:border-box!important;align-items:center!important;
-}
-html body #introView #hpmwHomeLayout aside.hpmw-home-side section.hpmw-side-card > a{
- display:flex!important;flex:1 1 auto!important;min-height:0!important;max-height:none!important;
- width:100%!important;box-sizing:border-box!important;align-items:center!important;justify-content:center!important;
- overflow:hidden!important;margin:0!important;padding:4px 6px!important;
-}
-html body #introView #hpmwHomeLayout aside.hpmw-home-side section.hpmw-side-card > a img{
- display:block!important;visibility:visible!important;opacity:1!important;
- width:auto!important;height:auto!important;max-width:100%!important;max-height:126px!important;
- object-fit:contain!important;object-position:center!important;margin:0 auto!important;
-}
-html body #introView #hpmwHomeLayout aside.hpmw-home-side section.hpmw-forum-widget > a img{
- max-height:126px!important;
-}
-html body #introView #hpmwHomeLayout #hpmwMyDepartment{
- height:170px!important;min-height:170px!important;max-height:170px!important;
-}
-@media(max-width:700px){
- html body #introView #hpmwHomeLayout aside.hpmw-home-side section.hpmw-side-card{
-  height:170px!important;min-height:170px!important;max-height:170px!important;
- }
-}
-</style>
 
-<style id="hpmw-sidebar-and-intro-layout-polish-v2">
-/* Alle vier zijwidgets exact even hoog en even breed; afbeeldingen blijven binnen de kaart. */
-html body #introView #hpmwHomeLayout .hpmw-home-left .hpmw-side-card,
-html body #introView #hpmwHomeLayout .hpmw-home-right .hpmw-side-card{
- display:flex!important;flex-direction:column!important;align-items:stretch!important;
- box-sizing:border-box!important;width:100%!important;min-width:0!important;
- height:170px!important;min-height:170px!important;max-height:170px!important;
- overflow:hidden!important;
-}
-html body #introView #hpmwHomeLayout .hpmw-home-left .hpmw-side-card .hpmw-side-heading,
-html body #introView #hpmwHomeLayout .hpmw-home-right .hpmw-side-card .hpmw-side-heading{
- display:flex!important;flex:0 0 38px!important;height:38px!important;min-height:38px!important;
- box-sizing:border-box!important;align-items:center!important;
-}
-html body #introView #hpmwHomeLayout .hpmw-home-left .hpmw-side-card>a,
-html body #introView #hpmwHomeLayout .hpmw-home-right .hpmw-side-card>a{
- display:flex!important;flex:1 1 auto!important;min-height:0!important;max-height:none!important;
- width:100%!important;box-sizing:border-box!important;align-items:center!important;justify-content:center!important;
- overflow:hidden!important;margin:0!important;padding:4px 6px!important;
-}
-html body #introView #hpmwHomeLayout .hpmw-home-left .hpmw-side-card>a img,
-html body #introView #hpmwHomeLayout .hpmw-home-right .hpmw-side-card>a img{
- display:block!important;visibility:visible!important;opacity:1!important;
- width:auto!important;height:auto!important;max-width:100%!important;max-height:122px!important;
- object-fit:contain!important;object-position:center!important;margin:0 auto!important;
-}
-html body #introView #hpmwHomeLayout .hpmw-home-left .hpmw-forum-widget>a img{max-height:116px!important}
-html body #introView #hpmwHomeLayout #hpmwMyDepartment{height:170px!important;min-height:170px!important;max-height:170px!important}
-html body #introView #hpmwHomeLayout #hpmwMyDepartment .hpmw-department-content{flex:1 1 auto!important;min-height:0!important;overflow:hidden!important}
-html body #introView #hpmwHomeLayout #hpmwMyDepartment .hpmw-department-animal-image{max-width:116px!important;max-height:116px!important;object-fit:contain!important}
-/* Intro-snelkoppelingen in nette, gelijkmatige rijen naast elkaar. */
-html body #introView .hpmw-intro-quicklinks{
- display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;
- gap:8px!important;width:min(100%,520px)!important;max-width:520px!important;
- margin:16px auto 2px!important;align-items:stretch!important;
-}
-html body #introView .hpmw-intro-quicklinks>a,
-html body #introView .hpmw-intro-quicklinks>button{
- display:flex!important;flex-direction:row!important;justify-content:center!important;
- align-items:center!important;gap:7px!important;min-width:0!important;min-height:38px!important;
- padding:8px 9px!important;white-space:nowrap!important;font-size:11px!important;
-}
-@media(max-width:700px){
- html body #introView #hpmwHomeLayout .hpmw-home-left .hpmw-side-card,
- html body #introView #hpmwHomeLayout .hpmw-home-right .hpmw-side-card{
-  height:170px!important;min-height:170px!important;max-height:170px!important;
- }
- html body #introView .hpmw-intro-quicklinks{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:7px!important}
- html body #introView .hpmw-intro-quicklinks>a,
- html body #introView .hpmw-intro-quicklinks>button{white-space:normal!important;font-size:10px!important}
-}
-</style>
+
+
 
 
 
@@ -4199,40 +4115,41 @@ html body #introView .hpmw-intro-quicklinks>button{
 
 
 
-<style id="hpmw-final-widget-polish-20261114-v8">
-/* Hogere zijwidgets zodat de volledige afdelingsafbeelding ruim past. */
+
+
+<style id="hpmw-widget-layout-definitive-20261114-v9">
+/* Eén definitieve widgetregelset: verwijderde conflicterende 170px-regels niet opnieuw toevoegen. */
 html body #introView #hpmwHomeLayout aside.hpmw-home-side section.hpmw-side-card{
  display:flex!important;flex-direction:column!important;align-items:stretch!important;
  box-sizing:border-box!important;width:100%!important;min-width:0!important;
- height:230px!important;min-height:230px!important;max-height:230px!important;flex:0 0 230px!important;
+ height:204px!important;min-height:204px!important;max-height:204px!important;flex:0 0 204px!important;
  overflow:hidden!important;border-radius:13px!important;
 }
 html body #introView #hpmwHomeLayout aside.hpmw-home-side section.hpmw-side-card > .hpmw-side-heading{
- display:flex!important;flex:0 0 40px!important;min-height:40px!important;height:40px!important;
- align-items:center!important;box-sizing:border-box!important;white-space:nowrap!important;
+ display:flex!important;flex:0 0 40px!important;height:40px!important;min-height:40px!important;
+ box-sizing:border-box!important;align-items:center!important;white-space:normal!important;
 }
 html body #introView #hpmwHomeLayout aside.hpmw-home-side section.hpmw-side-card > a,
 html body #introView #hpmwHomeLayout aside.hpmw-home-side #hpmwMyDepartment .hpmw-department-content{
- display:flex!important;flex:1 1 auto!important;min-height:0!important;height:auto!important;max-height:none!important;
+ display:flex!important;flex:1 1 0!important;min-height:0!important;height:auto!important;max-height:none!important;
  width:100%!important;box-sizing:border-box!important;align-items:center!important;justify-content:center!important;
- overflow:visible!important;margin:0!important;padding:8px!important;
+ overflow:visible!important;margin:0!important;padding:4px 8px!important;
+}
+html body #introView #hpmwHomeLayout #hpmwMyDepartment .hpmw-department-link{
+ display:flex!important;flex:1 1 0!important;min-height:0!important;height:auto!important;max-height:none!important;
+ width:100%!important;align-items:center!important;justify-content:center!important;padding:0!important;
 }
 html body #introView #hpmwHomeLayout aside.hpmw-home-side section.hpmw-side-card > a img,
 html body #introView #hpmwHomeLayout #hpmwMyDepartment .hpmw-department-animal-image{
  display:block!important;visibility:visible!important;opacity:1!important;
- width:auto!important;height:auto!important;max-width:100%!important;max-height:146px!important;
+ width:auto!important;height:auto!important;max-width:100%!important;max-height:150px!important;
  object-fit:contain!important;object-position:center!important;margin:0 auto!important;
 }
-html body #introView #hpmwHomeLayout #hpmwMyDepartment .hpmw-department-link{
- display:flex!important;flex:1 1 auto!important;align-items:center!important;justify-content:center!important;
- width:100%!important;min-height:0!important;height:auto!important;max-height:none!important;padding:0!important;
-}
-html body #introView #hpmwHomeLayout aside.hpmw-home-side section.hpmw-side-card .hpmw-side-heading{
- overflow:hidden!important;text-overflow:ellipsis!important;
-}
+html body #introView #hpmwHomeLayout #hpmwMyDepartment .hpmw-department-content{overflow:visible!important}
+html body #introView #hpmwHomeLayout aside.hpmw-home-side section.hpmw-side-card .hpmw-side-heading{overflow:visible!important;text-overflow:clip!important}
 @media(max-width:700px){
  html body #introView #hpmwHomeLayout aside.hpmw-home-side section.hpmw-side-card{
-  height:230px!important;min-height:230px!important;max-height:230px!important;flex-basis:230px!important;
+  height:204px!important;min-height:204px!important;max-height:204px!important;flex-basis:204px!important;
  }
 }
 </style>
