@@ -3,7 +3,7 @@
   if (window.__muggleMinistryPortalLoading) return;
   window.__muggleMinistryPortalLoading = true;
 
-  var version = "20261114-93";
+  var version = "20261114-94";
   var sources = [
     "https://raw.githubusercontent.com/slytherin01/muggle-ministry/main/portal/index.html?cachebust=" + version,
     "https://slytherin01.github.io/muggle-ministry/portal/index.html?v=" + version
@@ -41,6 +41,7 @@
       if (!html || html.length < 10000 || !/<html[\s>]/i.test(html) || !/<body[\s>]/i.test(html)) {
         throw new Error("De portaalbron gaf geen volledige HTML-pagina terug.");
       }
+      try { var d=window._userdata; var id=d?(Number(d.user_id)||0):0; var ok=!!(d&&Number(d.session_logged_in)>0&&id); sessionStorage.setItem('hpmw_forumotion_session',JSON.stringify({id:ok?id:0,name:ok?String(d.username||d.username_clean||'Gebruiker'):'',avatar:ok?String(d.user_avatar||d.avatar||''):'',logged:ok,savedAt:Date.now()})); } catch(e) {}
       document.open();
       document.write(html);
       document.close();
