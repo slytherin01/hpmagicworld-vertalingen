@@ -5417,3 +5417,57 @@ html body #sortingHatView .hpmw-sorting-ticket-panel #sortSubmit:disabled{opacit
  padding-bottom:12px;border-bottom:1px solid rgba(197,160,91,.22);
 }
 </style>
+
+
+<style id="hpmw-relocation-form-visibility-final-20261114">
+/* Keep the ordinary application field separate from the relocation fields. */
+#sortingHatView #sortingRequestForm .field.hpmw-transfer-new-department,
+#sortingHatView #sortingRequestForm .field.hpmw-transfer-current-department,
+#sortingHatView #sortingRequestForm #sortTransferReason>.field{display:block!important;visibility:visible!important;opacity:1!important}
+#sortingHatView #sortingRequestForm #sortTransferReason[hidden]{display:none!important}
+</style>
+<script id="hpmw-relocation-form-visibility-final-logic-20261114">
+(()=>{"use strict";
+ const init=()=>{
+  const form=document.getElementById("sortingRequestForm");
+  const toggle=document.getElementById("sortTransfer");
+  const details=document.getElementById("sortTransferReason");
+  const ordinary=document.getElementById("sortDepartment");
+  const newWrap=form?.querySelector(".hpmw-transfer-new-department");
+  const currentWrap=form?.querySelector(".hpmw-transfer-current-department");
+  const reason=form?.querySelector("#sortReason");
+  const from=form?.querySelector("#sortFromDepartment");
+  const to=form?.querySelector("#sortNewDepartment");
+  const ordinaryWrap=ordinary?.closest(".field");
+  if(!form||!toggle||!details||!ordinaryWrap||!newWrap||!to)return;
+  const sync=()=>{
+   const moving=toggle.checked;
+   ordinaryWrap.hidden=moving;
+   ordinaryWrap.style.setProperty("display",moving?"none":"block","important");
+   details.hidden=!moving;
+   details.style.setProperty("display",moving?"block":"none","important");
+   [newWrap,currentWrap].filter(Boolean).forEach(el=>{
+    el.hidden=false;el.style.setProperty("display","block","important");
+   });
+   if(reason)reason.required=moving;
+   if(from)from.required=moving;
+   to.required=moving;
+   ordinary.required=!moving;
+   if(moving){
+    const label=ordinaryWrap.querySelector('label[for="sortDepartment"]');
+    if(label)label.innerHTML="Nieuwe afdeling <b>*</b>";
+   }else{
+    const label=ordinaryWrap.querySelector('label[for="sortDepartment"]');
+    if(label)label.innerHTML="Gewenste afdeling <b>*</b>";
+   }
+  };
+  if(!toggle.dataset.finalRelocationLayout){
+   toggle.dataset.finalRelocationLayout="1";
+   toggle.addEventListener("change",sync);
+   form.addEventListener("reset",()=>setTimeout(sync,0));
+  }
+  sync();
+ };
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
+})();
+</script>
