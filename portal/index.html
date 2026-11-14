@@ -3589,4 +3589,19 @@ html body #introView #hpmwHomeLayout .hpmw-home-side > .hpmw-side-card .hpmw-enc
 #homeView::before,#homeView::after{content:none!important;display:none!important;background:none!important;background-image:none!important;height:0!important;min-height:0!important;margin:0!important;padding:0!important;border:0!important;box-shadow:none!important}
 #homeView .support-logo-wrap,#homeView .support-logo{display:none!important}
 </style>
+
+<style id="hpmw-remove-ticket-support-duplicate-banners">
+/* Ticket Support: behoud alleen de grote banner bovenaan de pagina. */
+#homeView .support-hero::before,#homeView .support-hero::after,
+#homeView .support-categories-panel::before,#homeView .support-categories-panel::after,
+#homeView .support-categories-panel .panel-head::before,
+#homeView .support-categories-panel .panel-head::after{
+ content:none!important;display:none!important;background:none!important;background-image:none!important;
+ width:0!important;height:0!important;min-height:0!important;margin:0!important;padding:0!important;border:0!important;box-shadow:none!important
+}
+#homeView .support-hero{padding-top:0!important;margin-top:0!important;background-image:none!important;box-shadow:none!important}
+#homeView .support-hero{border:0!important;border-radius:0!important;background:transparent!important}
+#homeView .support-hero h1{margin:0 auto 16px!important}
+#homeView .support-categories-panel .panel-head{display:none!important;background:none!important;background-image:none!important}
+</style>
 </body></html>
