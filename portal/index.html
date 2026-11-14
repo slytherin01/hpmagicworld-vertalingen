@@ -1300,7 +1300,7 @@ const DEPARTMENT_INFO={
  "Zwadderich":{image:"https://i44.servimg.com/u/f44/11/48/74/42/zwadde12.png",url:"https://testforumjoost.forumactie.com/f67-de-zwadderich-leerlingenkamer"},
  "Huffelpuf":{image:"https://i44.servimg.com/u/f44/11/48/74/42/huffel11.png",url:"https://testforumjoost.forumactie.com/f68-de-huffelpuf-leerlingenkamer"},
  "Ravenklauw":{image:"https://i44.servimg.com/u/f44/11/48/74/42/ravenk11.png",url:"https://testforumjoost.forumactie.com/f69-de-ravenklauw-leerlingenkamer"},
- "Ongesorteerd":{animal:'<svg viewBox="0 0 100 100" aria-hidden="true"><path d="M50 8 91 82H9Z" fill="#d7a83f" stroke="#fff0b5" stroke-width="4"/><path d="M50 28 79 78H21Z" fill="#263b57"/><path d="M50 42v18m0 9v2" stroke="#fff2c6" stroke-width="6" stroke-linecap="round"/></svg>',url:""}
+ "Ongesorteerd":{image:"https://i44.servimg.com/u/f44/11/48/74/42/ongeso10.png",url:""}
 };
 async function loadMyDepartment(){
  const card=document.querySelector("#hpmwMyDepartment");
@@ -1313,10 +1313,12 @@ async function loadMyDepartment(){
   const doc=new DOMParser().parseFromString(await response.text(),"text/html");
   const field=doc.querySelector("#field_id3 .field_uneditable, #field_id3");
   const fieldImage=field?.querySelector("img");
+  const fieldImageSrc=fieldImage?.getAttribute("src")||fieldImage?.getAttribute("data-src")||"";
   const raw=(fieldImage?.getAttribute("alt")||fieldImage?.getAttribute("title")||field?.textContent||"").trim();
   const normalized=raw.toLocaleLowerCase("nl").normalize("NFD").replace(/[^a-z]/g,"");
+  const imageName=fieldImageSrc.toLocaleLowerCase("nl").split(/[?#]/)[0].split("/").pop()||"";
   const aliases={"griffoendor":"Griffoendor","zwadderich":"Zwadderich","huffelpuf":"Huffelpuf","ravenklauw":"Ravenklauw","ongesorteerd":"Ongesorteerd"};
-  const department=aliases[normalized]||Object.keys(DEPARTMENT_INFO).find(name=>normalized.includes(name.toLocaleLowerCase("nl").normalize("NFD").replace(/[^a-z]/g,"")));
+  const department=(imageName==="ongeso10.png"||imageName.includes("ongeso"))?"Ongesorteerd":(aliases[normalized]||Object.keys(DEPARTMENT_INFO).find(name=>normalized.includes(name.toLocaleLowerCase("nl").normalize("NFD").replace(/[^a-z]/g,""))));
   const info=department?DEPARTMENT_INFO[department]:null;
   if(!info){box.innerHTML='<span class="hpmw-department-status">Afdeling nog niet ingesteld.</span>';return;}
   const animal=info.image?'<img class="hpmw-department-animal-image" src="'+info.image+'" alt="'+esc(department)+'" style="display:block!important;visibility:visible!important;opacity:1!important;width:84px!important;height:84px!important;max-width:100%!important;object-fit:contain!important;margin:0 auto!important;border:0!important;background:transparent!important">':'<span class="hpmw-department-animal">'+info.animal+'</span>';
