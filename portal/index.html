@@ -3710,10 +3710,29 @@ async function publicJobs(){const host=$("hpmwVacancyList");if(!host)return;try{
 publicJobs();setInterval(publicJobs,60000);
 })();
 </script>
-<script id="hpmw-portal-internal-widget-navigation-v7">
+<script id="hpmw-portal-internal-widget-navigation-v8">
 (()=>{"use strict";
  document.addEventListener("click",event=>{
-  if(event.target.closest("#sortingHatBack,#vacanciesBack")){event.preventDefault();if(typeof show==="function")show("introView");}
+  const target=event.target instanceof Element?event.target:null;
+  if(!target)return;
+  if(target.closest("#sortingHatBack,#vacanciesBack")){
+   event.preventDefault();
+   if(typeof show==="function")show("introView");
+   return;
+  }
+  const vacancy=target.closest("#introView [data-open-vacancies]");
+  const sorting=target.closest("#introView [data-open-sorting-hat]");
+  if(vacancy){
+   event.preventDefault();
+   event.stopPropagation();
+   if(typeof show==="function")show("vacanciesView");
+   return;
+  }
+  if(sorting){
+   event.preventDefault();
+   event.stopPropagation();
+   if(typeof show==="function")show("sortingHatView");
+  }
  });
 })();
 </script>
