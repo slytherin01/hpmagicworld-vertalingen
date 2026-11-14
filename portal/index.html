@@ -1527,6 +1527,48 @@ html body #introView #hpmwHomeLayout .hpmw-sorting-hat-widget > button.hpmw-sort
  #sortingHatView #sortingRequestForm .form-grid{grid-template-columns:1fr!important}
  #sortingHatView .hpmw-sort-form-heading{align-items:flex-start!important;flex-direction:column!important}
 }
+</style><style id="hpmw-one-card-layout-both-pages">
+/* Both destination pages use one single continuous dark-blue card. */
+#sortingHatView .hpmw-sort-shell,
+#vacanciesView{max-width:1000px!important;margin:0 auto!important}
+#sortingHatView .hpmw-sort-hero.hpmw-sort-combined,
+#vacanciesView .hpmw-vacancies-panel.hpmw-vacancies-combined{
+ display:block!important;width:100%!important;box-sizing:border-box!important;
+ padding:28px!important;margin:0 auto 20px!important;
+ background:#101f33!important;background-image:none!important;
+ border:1px solid #344b67!important;border-radius:18px!important;
+ box-shadow:0 16px 38px rgba(0,0,0,.28)!important;overflow:hidden!important;
+}
+#sortingHatView .hpmw-sort-combined-top,
+#vacanciesView .hpmw-vacancies-heading-panel{
+ display:flex!important;align-items:center!important;justify-content:space-between!important;
+ gap:20px!important;padding:0 0 22px!important;margin:0 0 22px!important;
+ border:0!important;border-bottom:1px solid #344b67!important;border-radius:0!important;
+ background:transparent!important;background-image:none!important;box-shadow:none!important;
+}
+#sortingHatView .hpmw-sort-form-heading{
+ display:flex!important;align-items:center!important;justify-content:space-between!important;
+ gap:12px!important;margin:26px 0 14px!important;padding:18px 0 12px!important;
+ border-top:1px solid #344b67!important;border-bottom:1px solid #344b67!important;
+ background:transparent!important;
+}
+#sortingHatView #sortingRequestForm,
+#vacanciesView #hpmwVacancyList,
+#vacanciesView #hpmwVacancyDetail{
+ background:transparent!important;background-image:none!important;border:0!important;
+ border-radius:0!important;box-shadow:none!important;color:#eaf2fc!important;
+}
+#vacanciesView .hpmw-vacancies-heading-panel .eyebrow{color:#b7c9df!important}
+#vacanciesView .hpmw-vacancies-heading-panel h1{color:#f3f6fb!important}
+#vacanciesView .hpmw-vacancies-heading-panel .subtitle{color:#c2cedd!important}
+#vacanciesView .hpmw-vacancies-empty{min-height:180px!important;padding:22px 0!important}
+#vacanciesView .hpmw-vacancy-public{background:#101f33!important;background-image:none!important}
+@media(max-width:620px){
+ #sortingHatView .hpmw-sort-hero.hpmw-sort-combined,
+ #vacanciesView .hpmw-vacancies-panel.hpmw-vacancies-combined{padding:20px!important}
+ #sortingHatView .hpmw-sort-combined-top,
+ #vacanciesView .hpmw-vacancies-heading-panel{align-items:flex-start!important;flex-direction:column!important}
+}
 </style></head><body><header class="topbar luxury-nav-v2"><nav aria-label="Support navigatie" class="top-actions"><a class="lux-nav-item" href="https://testforumjoost.forumactie.com/forum" rel="noopener noreferrer" target="_blank"><span class="lux-nav-icon"><i class="fa-solid fa-comments"></i></span><span class="lux-nav-label">Forum</span></a><a class="lux-nav-item" href="https://testforumjoost.forumactie.com/h3-portaal" target="_self"><span class="lux-nav-icon"><i class="fa-solid fa-house"></i></span><span class="lux-nav-label">Portaal</span></a><button aria-expanded="false" aria-haspopup="dialog" class="lux-nav-item" id="faqLaunch" type="button"><span class="lux-nav-icon"><i class="fa-solid fa-circle-question"></i></span><span class="lux-nav-label">FAQ</span></button><button aria-expanded="false" class="lux-nav-item" id="ticketSupportLaunch" type="button"><span class="lux-nav-icon"><i class="fa-solid fa-ticket"></i></span><span class="lux-nav-label">Ticket Support</span></button>
 <button class="lux-nav-item" id="adminLaunch" type="button" style="display:none"><span class="lux-nav-icon"><i class="fa-solid fa-shield-halved"></i></span><span class="lux-nav-label">Ticketbeheer</span></button><label aria-label="Taal kiezen" class="hpmw-language-wrap" for="hpmwLanguage"><i aria-hidden="true" class="fa-solid fa-language"></i><select id="hpmwLanguage"><option selected="" value="nl">Nederlands</option><option value="en">English</option><option value="pt">Português</option></select></label><button class="lux-nav-item" data-extracted-style="2" id="myTicketsLaunch" style="display:none"><span class="lux-nav-icon"><i class="fa-solid fa-envelope"></i></span><span class="lux-nav-label">Mijn tickets</span><b class="count-badge" id="myTicketsCount">0</b></button><a class="lux-nav-item lux-user" href="/login" id="accountLink"><span class="lux-nav-icon"><i class="fa-solid fa-user"></i></span><span class="lux-nav-usertext"><small>INGELOGD ALS</small><strong id="username">Gast</strong></span></a></nav></header><div class="hpmw-global-brandbar" role="banner" aria-label="Muggle Ministry"></div><main class="shell"><section class="view active" id="introView">
 <!-- EIGEN AFBEELDING VOOR DEZE PAGINA: vervang IMAGE_URL_HIER en LINK_URL_HIER.
@@ -1586,8 +1628,8 @@ html body #introView #hpmwHomeLayout .hpmw-sorting-hat-widget > button.hpmw-sort
  </div>
 </section>
 <section class="view" id="vacanciesView">
- <div class="page-head hpmw-vacancies-heading-panel"><div class="hpmw-vacancies-heading-copy"><div class="eyebrow">Ministerie van Dreuzels</div><h1>Vacatures</h1><p class="subtitle">Vacatureoverzicht binnen het Ministerie.</p></div><button class="btn" id="vacanciesBack" type="button"><i class="fa-solid fa-arrow-left"></i> Terug naar portaal</button></div>
- <section class="panel hpmw-vacancies-panel">
+ <section class="panel hpmw-vacancies-panel hpmw-vacancies-combined">
+  <div class="page-head hpmw-vacancies-heading-panel"><div class="hpmw-vacancies-heading-copy"><div class="eyebrow">Ministerie van Dreuzels</div><h1>Vacatures</h1><p class="subtitle">Vacatureoverzicht binnen het Ministerie.</p></div><button class="btn" id="vacanciesBack" type="button"><i class="fa-solid fa-arrow-left"></i> Terug naar portaal</button></div>
   <div class="hpmw-vacancies-empty" id="hpmwVacancyList"><h2><i class="fa-solid fa-briefcase"></i> Vacatures</h2><p>Vacatures worden geladen...</p></div><article id="hpmwVacancyDetail" hidden></article>
  </section>
 </section>
