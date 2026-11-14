@@ -3536,5 +3536,26 @@ html body #introView #hpmwHomeLayout .hpmw-home-side > .hpmw-side-card .hpmw-enc
 html body #introView #hpmwHomeLayout .hpmw-home-side > .hpmw-side-card .hpmw-encyclopedia-link:hover {
   color: #e8c77d !important;
 }
+
+/* Geef alle drie de afbeeldingen exact hetzelfde afbeeldingsvlak. */
+html body #introView #hpmwHomeLayout .hpmw-home-side > .hpmw-side-card .hpmw-sorting-hat-link img {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 180px !important;
+  max-height: 180px !important;
+  object-fit: contain !important;
+  object-position: center center !important;
+  margin: 0 auto !important;
+}
+html body #introView #hpmwHomeLayout .hpmw-home-side > .hpmw-side-card .hpmw-sorting-hat-link,
+html body #introView #hpmwHomeLayout .hpmw-home-side > .hpmw-side-card .hpmw-encyclopedia-link {
+  display: flex !important;
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+}
 </style>
 </body></html>
