@@ -1,0 +1,66 @@
+name: Import portal images and deploy
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: portal-image-import
+  cancel-in-progress: false
+
+jobs:
+  import-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download portal images
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p portal/images
+          curl --fail --location --retry 3 'https://i44.servimg.com/u/f44/11/48/74/42/banner10.png' -o portal/images/banner.png
+          curl --fail --location --retry 3 'https://i44.servimg.com/u/f44/11/48/74/42/griffo11.png' -o portal/images/griffoendor.png
+          curl --fail --location --retry 3 'https://i44.servimg.com/u/f44/11/48/74/42/zwadde12.png' -o portal/images/zwadderich.png
+          curl --fail --location --retry 3 'https://i44.servimg.com/u/f44/11/48/74/42/huffel11.png' -o portal/images/huffelpuf.png
+          curl --fail --location --retry 3 'https://i44.servimg.com/u/f44/11/48/74/42/ravenk11.png' -o portal/images/ravenklauw.png
+          curl --fail --location --retry 3 'https://i44.servimg.com/u/f44/11/48/74/42/ongeso10.png' -o portal/images/ongesorteerd.png
+          curl --fail --location --retry 3 'https://i44.servimg.com/u/f44/11/48/74/42/hetfor11.png' -o portal/images/het-forum.png
+          curl --fail --location --retry 3 'https://i44.servimg.com/u/f44/11/48/74/42/sortee11.png' -o portal/images/sorteerhoed.png
+          curl --fail --location --retry 3 'https://i44.servimg.com/u/f44/11/48/74/42/vacatu12.png' -o portal/images/vacatures.png
+          file portal/images/*
+          test "$(find portal/images -maxdepth 1 -type f | wc -l)" -eq 9
+
+      - name: Commit imported images
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add portal/images/
+          if ! git diff --cached --quiet; then
+            git commit -m "Add portal images to repository"
+            git push
+          else
+            echo "Portal images are already up to date."
+          fi
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload site artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: Deploy site
+        id: deployment
+        uses: actions/deploy-pages@v4
