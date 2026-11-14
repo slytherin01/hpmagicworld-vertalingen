@@ -1631,7 +1631,10 @@ finally{btn.disabled=false;}
 window.addEventListener('hpmw:open-ticket-admin',async function(){
  try{
   await resolveUser();
-  await refreshTicketModerators();
+  const moderatorResponse=await fetch("https://vuaajsjjluwgqmneinds.supabase.co/rest/v1/ticket_moderators?select=forumotion_user_id,enabled,can_view_tickets,can_moderate_tickets,can_delete_tickets",{headers:{apikey:"sb_publishable_tto6sNxZPLv1VhUdMRlPHg_ptzg9odx",Authorization:"Bearer sb_publishable_tto6sNxZPLv1VhUdMRlPHg_ptzg9odx"},cache:"no-store"});
+  if(!moderatorResponse.ok)throw Error("Ticketbeheerrechten konden niet worden opgehaald (HTTP "+moderatorResponse.status+").");
+  const moderatorRows=await moderatorResponse.json();
+  ADMINS.splice(0,ADMINS.length,...moderatorRows.filter(x=>x.enabled&&(x.can_view_tickets||x.can_moderate_tickets||x.can_delete_tickets)).map(x=>Number(x.forumotion_user_id)).filter(x=>Number.isInteger(x)&&x>0));
   if(!isAdmin()){alert('Je Forumotion-account heeft geen Ticketbeheerrechten.');return;}
   if(!window.HpmwHelpdeskAuth||typeof window.HpmwHelpdeskAuth.ensure!=='function'){alert('De beveiligde Ticketbeheer-login is niet geladen.');return;}
   const authorized=await window.HpmwHelpdeskAuth.ensure();
