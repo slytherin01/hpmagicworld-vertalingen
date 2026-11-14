@@ -3699,4 +3699,57 @@ html body main.shell>.view#myTicketsView>.page-head>button{margin-left:auto!impo
 #hpmwMyDepartment .hpmw-department-link{display:flex!important;align-items:center!important;justify-content:center!important;width:100%!important;min-height:100px!important;padding:0!important;margin:0!important;text-decoration:none!important}
 #hpmwMyDepartment .hpmw-department-animal-image{display:block!important;width:100px!important;height:100px!important;max-width:100%!important;object-fit:contain!important;margin:0 auto!important}
 </style>
+
+<style id="hpmw-uniform-widget-artwork-v1">
+/* Alle afbeeldingen in de zijwidgets krijgen exact hetzelfde vierkante afbeeldingsvlak. */
+html body #introView #hpmwHomeLayout .hpmw-home-side > .hpmw-side-card:not(.hpmw-coming-soon) .hpmw-sorting-hat-link,
+html body #introView #hpmwHomeLayout #hpmwMyDepartment .hpmw-department-link {
+  display:flex!important;
+  flex:1 1 auto!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:100%!important;
+  min-width:0!important;
+  min-height:150px!important;
+  height:150px!important;
+  max-height:150px!important;
+  padding:4px!important;
+  margin:0!important;
+  box-sizing:border-box!important;
+}
+html body #introView #hpmwHomeLayout .hpmw-home-side > .hpmw-side-card:not(.hpmw-coming-soon) .hpmw-sorting-hat-link img,
+html body #introView #hpmwHomeLayout #hpmwMyDepartment .hpmw-department-animal-image {
+  display:block!important;
+  flex:0 0 140px!important;
+  width:140px!important;
+  min-width:140px!important;
+  max-width:140px!important;
+  height:140px!important;
+  min-height:140px!important;
+  max-height:140px!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  margin:0 auto!important;
+  padding:0!important;
+  border:0!important;
+  background:transparent!important;
+  visibility:visible!important;
+  opacity:1!important;
+}
+html body #introView #hpmwHomeLayout #hpmwMyDepartment .hpmw-department-content {
+  display:flex!important;
+  flex:1 1 auto!important;
+  align-items:center!important;
+  justify-content:center!important;
+  min-height:0!important;
+  padding:0 8px 8px!important;
+}
+@media(max-width:700px) {
+  html body #introView #hpmwHomeLayout .hpmw-home-side > .hpmw-side-card:not(.hpmw-coming-soon) .hpmw-sorting-hat-link,
+  html body #introView #hpmwHomeLayout #hpmwMyDepartment .hpmw-department-link {
+    min-height:150px!important;height:150px!important;max-height:150px!important;
+  }
+}
+</style>
+
 </body></html>
