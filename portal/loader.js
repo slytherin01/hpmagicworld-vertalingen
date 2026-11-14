@@ -3,7 +3,7 @@
   if (window.__muggleMinistryPortalLoading) return;
   window.__muggleMinistryPortalLoading = true;
 
-  var version = "20261114-103";
+  var version = "20261114-104";
   var sources = [
     "https://raw.githubusercontent.com/slytherin01/muggle-ministry/main/portal/index.html?cachebust=" + version,
     "https://slytherin01.github.io/muggle-ministry/portal/index.html?v=" + version
@@ -13,7 +13,7 @@
     var controller = new AbortController();
     var timer = setTimeout(function () { controller.abort(); }, ms);
     return fetch(url, {
-      cache: "default",
+      cache: "no-store",
       credentials: "omit",
       mode: "cors",
       signal: controller.signal
@@ -33,36 +33,42 @@
   }
 
   function loadPortal() {
-    var attempts = sources.map(function (url) {
-      return fetchWithTimeout(url, 8000).then(function (html) {
+    /* Gebruik altijd eerst de actuele raw-main versie. GitHub Pages kan nog een
+       oudere deployment bevatten; die mag nooit winnen door een snellere response. */
+    function fetchSource(index, lastError) {
+      if (index >= sources.length) {
+        showError(lastError || new Error("Geen geldige portalbron beschikbaar."));
+        return;
+      }
+      fetchWithTimeout(sources[index], 10000).then(function (html) {
         if (!html || html.length < 10000 || html.indexOf("<html") === -1 || html.indexOf("<body") === -1) {
-          throw new Error("Ongeldige HTML-bron: " + url);
+          throw new Error("Ongeldige HTML-bron: " + sources[index]);
         }
         return html;
+      }).then(function (html) {
+        try {
+          var d = window._userdata || null;
+          var id = d ? (Number(d.user_id) || 0) : 0;
+          if (d && id > 0 && Number(d.session_logged_in) > 0) {
+            sessionStorage.setItem("hpmw_forumotion_session", JSON.stringify({
+              id: id,
+              name: String(d.username || d.username_clean || d.name || "Gebruiker").trim(),
+              avatar: String(d.user_avatar || d.avatar || ""),
+              logged: true,
+              savedAt: Date.now()
+            }));
+          }
+        } catch (e) { console.warn("Forumotion-sessie kon niet vooraf worden vastgelegd:", e); }
+        console.info("[Hpmw] Portal geladen vanaf bron", sources[index], "loader", version);
+        document.open();
+        document.write(html);
+        document.close();
+      }).catch(function (error) {
+        console.warn("[Hpmw] Portalbron mislukt; probeer fallback:", sources[index], error);
+        fetchSource(index + 1, error);
       });
-    });
-    Promise.any(attempts).then(function (html) {
-      /* Sla Forumotion-gegevens alleen op als ze al beschikbaar zijn.
-         De pagina wordt nooit opgehouden door een sessiecontrole. */
-      try {
-        var d = window._userdata || null;
-        var id = d ? (Number(d.user_id) || 0) : 0;
-        if (d && id > 0 && Number(d.session_logged_in) > 0) {
-          sessionStorage.setItem("hpmw_forumotion_session", JSON.stringify({
-            id: id,
-            name: String(d.username || d.username_clean || d.name || "Gebruiker").trim(),
-            avatar: String(d.user_avatar || d.avatar || ""),
-            logged: true,
-            savedAt: Date.now()
-          }));
-        }
-      } catch (e) { console.warn("Forumotion-sessie kon niet vooraf worden vastgelegd:", e); }
-      document.open();
-      document.write(html);
-      document.close();
-    }).catch(function (error) {
-      showError(error);
-    });
+    }
+    fetchSource(0, null);
   }
 
   loadPortal();
