@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Wizarding World Encyclopedie | Muggle Ministry</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark;--bg:#090e18;--panel:#111b2a;--panel2:#172438;--line:#304158;--gold:#d7b875;--gold2:#f2d99b;--text:#edf2fa;--muted:#9baac0;--violet:#a99bff}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% -10%,#273552 0,transparent 48%),#090e18;color:var(--text);font:14px/1.6 Inter,system-ui,sans-serif}
+header{padding:24px 20px 18px;text-align:center;border-bottom:1px solid #27364a;background:#0c1320d9}
+.brand{font:700 clamp(25px,5vw,40px) Cinzel,serif;color:var(--gold2);letter-spacing:.04em}.sub{color:var(--muted);margin:7px auto 0;max-width:720px}
+.wrap{width:min(1180px,calc(100% - 28px));margin:24px auto 70px}.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+input{flex:1;min-width:220px;background:#0d1725;border:1px solid var(--line);border-radius:12px;padding:13px 15px;color:var(--text);font:inherit;outline:none}
+input:focus{border-color:var(--gold)}button,.back{border:1px solid #66583d;background:linear-gradient(135deg,#332d22,#1a2230);color:var(--gold2);border-radius:11px;padding:10px 14px;font:600 12px Inter;cursor:pointer;transition:.18s}
+button:hover,.back:hover{transform:translateY(-2px);border-color:var(--gold);background:#393326}
+.stats{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 18px;color:var(--muted);font-size:12px}.stats b{color:var(--gold2)}
+.categories{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:10px;margin-bottom:22px}
+.cat{min-height:100px;text-align:left;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(145deg,#18263a,#111a28);border-color:#33445b;padding:15px}
+.cat .emoji{font-size:23px}.cat strong{font:600 13px Cinzel,serif;color:#f0d99f}.cat small{color:var(--muted);font-size:10px}
+.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:24px 0 12px}.section-head h2{font:600 20px Cinzel,serif;color:var(--gold2);margin:0}
+.entries{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:12px}
+.entry{border:1px solid var(--line);border-radius:14px;padding:16px;background:linear-gradient(150deg,#152235,#0f1825);cursor:pointer;text-align:left;color:var(--text);min-height:130px}
+.entry:hover{border-color:var(--gold);transform:translateY(-2px)}.entry small{color:var(--violet);text-transform:uppercase;letter-spacing:.12em;font-size:9px;font-weight:700}.entry h3{font:600 16px Cinzel,serif;color:var(--gold2);margin:8px 0 5px}.entry p{color:var(--muted);font-size:12px;margin:0}
+.detail{display:none;border:1px solid #65563c;border-radius:16px;background:#111b2a;padding:22px;margin-top:20px}.detail.show{display:block}.detail h2{font:600 25px Cinzel,serif;color:var(--gold2);margin:12px 0}.detail p{color:#c2cddd}.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:9px;margin-top:18px}.fact{padding:12px;border:1px solid var(--line);border-radius:10px;background:#0c1624}.fact small{display:block;color:var(--muted);font-size:9px;text-transform:uppercase;letter-spacing:.1em}.fact b{display:block;margin-top:3px;font-size:12px;overflow-wrap:anywhere}
+.empty{padding:28px;border:1px dashed var(--line);border-radius:13px;color:var(--muted);text-align:center;grid-column:1/-1}
+footer{text-align:center;color:#75869d;font-size:10px;padding:20px}
+@media(max-width:600px){.wrap{width:calc(100% - 20px)}.categories{grid-template-columns:repeat(2,minmax(0,1fr))}.cat{min-height:92px;padding:11px}.detail{padding:15px}}
+</style>
+</head>
+<body>
+<header><div class="brand">Wizarding World</div><div class="sub">De magische encyclopedie van Muggle Ministry · Ontdek spreuken, personages, voorwerpen, wezens en locaties.</div></header>
+<main class="wrap">
+<div class="toolbar"><input id="search" type="search" placeholder="Zoek op naam, spreuk, eigenschap of alias…" aria-label="Zoeken"><button id="allBtn">Alles tonen</button><button id="backPortal" onclick="location.href='https://slytherin01.github.io/muggle-ministry/portal/'">← Terug naar portaal</button></div>
+<div class="stats"><span><b id="count">0</b> vermeldingen</span><span>·</span><span><b id="catCount">17</b> categorieën</span><span>·</span><span>Bronnen en canonstatus per item</span></div>
+<nav class="categories" id="categories" aria-label="Encyclopedie categorieën"></nav>
+<section id="resultsSection"><div class="section-head"><h2 id="resultTitle">Uitgelichte kennis</h2></div><div class="entries" id="entries"><div class="empty">Database laden…</div></div></section>
+<section class="detail" id="detail"><button class="back" id="closeDetail">← Terug naar resultaten</button><div id="detailContent"></div></section>
+</main>
+<footer>Muggle Ministry · Wizarding World Encyclopedie · Fanproject, niet officieel verbonden aan Warner Bros. of de rechthebbenden.</footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(function(){
+const SUPABASE_URL="https://vuaajsjjluwgqmneinds.supabase.co";
+const SUPABASE_KEY="sb_publishable_tto6sNxZPLv1VhUdMRlPHg_ptzg9odx";
+const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+const CATS=[
+["spreuken","✨","Spreuken","Incantaties en magie"],["personages","🧙","Personages","Heksen en tovenaars"],["voorwerpen","🪄","Voorwerpen","Artefacten en relieken"],["toverstokken","🌳","Toverstokken","Hout, kern en eigenaar"],["dranken","🧪","Dranken","Brouwsels en ingrediënten"],["fabeldieren","🐉","Fabeldieren","Magische wezens"],["planten","🌿","Planten","Magische flora"],["locaties","🏰","Locaties","Plekken en gebouwen"],["zweinstein","🎓","Zweinstein","Afdelingen en vakken"],["families","🧬","Families","Stambomen en bloedlijnen"],["beroepen","⚖️","Beroepen","Werk in de tovenaarswereld"],["geschiedenis","📜","Geschiedenis","Tijdlijn en gebeurtenissen"],["organisaties","🛡️","Organisaties","Orden en ministeries"],["quidditch","🏆","Quidditch","Teams en spelregels"],["begrippen","📚","Begrippen","Magische terminologie"],["boeken-films","🎬","Boeken & films","Verhalen en adaptaties"],["fantastic-beasts","🦄","Fantastic Beasts","Personages en kennis"]
+];
+let rows=[],activeCategory=null;
+const $=id=>document.getElementById(id);
+function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function categoryName(k){return (CATS.find(c=>c[0]===k)||[])[2]||k;}
+function drawCategories(){
+$("categories").innerHTML=CATS.map(c=>'<button class="cat" data-cat="'+c[0]+'"><span class="emoji">'+c[1]+'</span><strong>'+c[2]+'</strong><small>'+c[3]+'</small></button>').join("");
+$("categories").querySelectorAll("[data-cat]").forEach(b=>b.addEventListener("click",()=>{activeCategory=b.dataset.cat;render();$("resultTitle").textContent=categoryName(activeCategory);$("resultsSection").scrollIntoView({behavior:"smooth"});}));
+}
+function render(){
+const q=$("search").value.trim().toLocaleLowerCase("nl");
+const list=rows.filter(r=>(!activeCategory||r.category===activeCategory)&&(!q||[r.name,r.subtitle,r.description,...(r.aliases||[]),JSON.stringify(r.details||{})].join(" ").toLocaleLowerCase("nl").includes(q)));
+$("count").textContent=rows.length;
+$("entries").innerHTML=list.length?list.map(r=>'<button class="entry" data-id="'+r.id+'"><small>'+esc(categoryName(r.category))+' · '+esc(r.canon_status)+'</small><h3>'+esc(r.name)+'</h3><p>'+esc(r.subtitle||r.description)+'</p></button>').join(""):'<div class="empty">Nog geen vermeldingen in deze categorie. De database is klaar om verder gevuld te worden.</div>';
+$("entries").querySelectorAll("[data-id]").forEach(b=>b.addEventListener("click",()=>showDetail(rows.find(r=>r.id===b.dataset.id))));
+}
+function showDetail(r){
+if(!r)return;
+const facts=Object.entries(r.details||{}).map(([k,v])=>'<div class="fact"><small>'+esc(k.replace(/_/g," "))+'</small><b>'+esc(Array.isArray(v)?v.join(", "):typeof v==="object"?JSON.stringify(v):v)+'</b></div>').join("");
+$("detailContent").innerHTML='<small>'+esc(categoryName(r.category))+' · '+esc(r.universe)+' · '+esc(r.canon_status)+'</small><h2>'+esc(r.name)+'</h2><p>'+esc(r.description)+'</p>'+(r.subtitle?'<p><b>'+esc(r.subtitle)+'</b></p>':'')+'<div class="facts">'+facts+'<div class="fact"><small>Bron</small><b>'+esc(r.source_title||"Nog niet vastgelegd")+'</b></div></div>';
+$("detail").classList.add("show");$("resultsSection").style.display="none";$("categories").style.display="none";$("detail").scrollIntoView({behavior:"smooth"});
+}
+function closeDetail(){$("detail").classList.remove("show");$("resultsSection").style.display="block";$("categories").style.display="grid";}
+async function init(){
+drawCategories();$("catCount").textContent=CATS.length;
+const {data,error}=await db.from("wizarding_entries").select("*").eq("is_published",true).order("category").order("sort_order").order("name");
+if(error){$("entries").innerHTML='<div class="empty">De encyclopedie kon niet laden. Controleer de database-migratie en Data API-toegang.</div>';console.error(error);return;}
+rows=data||[];render();
+}
+$("search").addEventListener("input",render);
+$("allBtn").addEventListener("click",()=>{activeCategory=null;$("search").value="";$("resultTitle").textContent="Alle kennis";closeDetail();render();});
+$("closeDetail").addEventListener("click",closeDetail);
+init();
+})();
+</script>
+</body></html>
