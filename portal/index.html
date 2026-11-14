@@ -1193,6 +1193,37 @@ html body #introView .intro-static-card .hpmw-welcome-box.center-message {
   box-shadow: none !important;
 }
 </style>
+<style id="hpmw-forum-widget-visible-final">
+/* Definitieve zichtbaarheid en afmeting van de Het Forum-widget. */
+#introView #hpmwHomeLayout .hpmw-home-left > section.hpmw-forum-widget{
+ display:flex!important;visibility:visible!important;opacity:1!important;
+ flex-direction:column!important;align-items:stretch!important;justify-content:flex-start!important;
+ box-sizing:border-box!important;width:100%!important;height:184px!important;
+ min-height:184px!important;max-height:184px!important;overflow:hidden!important;
+}
+#introView #hpmwHomeLayout .hpmw-home-left > section.hpmw-forum-widget > .hpmw-side-heading{
+ display:flex!important;visibility:visible!important;flex:0 0 auto!important;
+}
+#introView #hpmwHomeLayout .hpmw-home-left > section.hpmw-forum-widget > a.hpmw-forum-widget-link{
+ display:flex!important;visibility:visible!important;opacity:1!important;
+ position:relative!important;flex:1 1 auto!important;align-self:stretch!important;
+ width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;
+ margin:0!important;padding:4px 8px!important;box-sizing:border-box!important;
+ align-items:center!important;justify-content:center!important;overflow:hidden!important;
+ background:transparent!important;border:0!important;box-shadow:none!important;
+}
+#introView #hpmwHomeLayout .hpmw-home-left > section.hpmw-forum-widget > a.hpmw-forum-widget-link > img{
+ display:block!important;visibility:visible!important;opacity:1!important;
+ position:static!important;flex:0 1 auto!important;
+ width:auto!important;height:auto!important;max-width:100%!important;max-height:132px!important;
+ object-fit:contain!important;object-position:center!important;
+ margin:auto!important;padding:0!important;border:0!important;transform:none!important;
+}
+@media(max-width:700px){
+ #introView #hpmwHomeLayout .hpmw-home-left > section.hpmw-forum-widget{height:184px!important;min-height:184px!important;max-height:184px!important}
+ #introView #hpmwHomeLayout .hpmw-home-left > section.hpmw-forum-widget > a.hpmw-forum-widget-link > img{max-height:118px!important}
+}
+</style>
 </head><body><header class="topbar luxury-nav-v2"><nav aria-label="Support navigatie" class="top-actions"><a class="lux-nav-item" href="https://testforumjoost.forumactie.com/forum" rel="noopener noreferrer" target="_blank"><span class="lux-nav-icon"><i class="fa-solid fa-comments"></i></span><span class="lux-nav-label">Forum</span></a><a class="lux-nav-item" href="https://testforumjoost.forumactie.com/h3-portaal" target="_self"><span class="lux-nav-icon"><i class="fa-solid fa-house"></i></span><span class="lux-nav-label">Portaal</span></a><button aria-expanded="false" aria-haspopup="dialog" class="lux-nav-item" id="faqLaunch" type="button"><span class="lux-nav-icon"><i class="fa-solid fa-circle-question"></i></span><span class="lux-nav-label">FAQ</span></button><button aria-expanded="false" class="lux-nav-item" id="ticketSupportLaunch" type="button"><span class="lux-nav-icon"><i class="fa-solid fa-ticket"></i></span><span class="lux-nav-label">Ticket Support</span></button>
 <button class="lux-nav-item" id="adminLaunch" type="button" style="display:none"><span class="lux-nav-icon"><i class="fa-solid fa-shield-halved"></i></span><span class="lux-nav-label">Ticketbeheer</span></button><label aria-label="Taal kiezen" class="hpmw-language-wrap" for="hpmwLanguage"><i aria-hidden="true" class="fa-solid fa-language"></i><select id="hpmwLanguage"><option selected="" value="nl">Nederlands</option><option value="en">English</option><option value="pt">Português</option></select></label><button class="lux-nav-item" data-extracted-style="2" id="myTicketsLaunch" style="display:none"><span class="lux-nav-icon"><i class="fa-solid fa-envelope"></i></span><span class="lux-nav-label">Mijn tickets</span><b class="count-badge" id="myTicketsCount">0</b></button><a class="lux-nav-item lux-user" href="/login" id="accountLink"><span class="lux-nav-icon"><i class="fa-solid fa-user"></i></span><span class="lux-nav-usertext"><small>INGELOGD ALS</small><strong id="username">Gast</strong></span></a></nav></header><div class="hpmw-global-brandbar" role="banner" aria-label="Muggle Ministry"></div><main class="shell"><section class="view active" id="introView">
 <!-- EIGEN AFBEELDING VOOR DEZE PAGINA: vervang IMAGE_URL_HIER en LINK_URL_HIER.
