@@ -1260,21 +1260,36 @@ html body #introView .intro-static-card .hpmw-welcome-box.center-message {
    De portal mag niet stilzwijgend doorgaan zonder de beveiligde login. */
 window.HPMW_SUPABASE={url:"https://vuaajsjjluwgqmneinds.supabase.co",anonKey:"sb_publishable_tto6sNxZPLv1VhUdMRlPHg_ptzg9odx"};
 window.HPMW_HELPDESK_BOOT=(async function(){
- const loadOne=async function(urls,label){
+ const loadOne=async function(urls,label,verify){
   let lastError;
   for(const url of urls){
-   try{await new Promise((resolve,reject)=>{const script=document.createElement("script");script.src=url;script.async=false;script.onload=resolve;script.onerror=()=>reject(new Error("Kon "+label+" niet laden vanaf "+url));document.head.appendChild(script);});return;}
-   catch(error){lastError=error;console.warn("[Hpmw] "+label+" laadfout",error);}
+   try{
+    await new Promise((resolve,reject)=>{
+     const script=document.createElement("script");
+     script.src=url;script.async=false;
+     script.onload=()=>{try{if(verify&&!verify())throw new Error(label+" bestand geladen maar initialiseert niet.");resolve();}catch(error){script.remove();reject(error);}};
+     script.onerror=()=>{script.remove();reject(new Error("Kon "+label+" niet laden vanaf "+url));};
+     document.head.appendChild(script);
+    });
+    console.info("[Hpmw] "+label+" geladen:",url);
+    return;
+   }catch(error){lastError=error;console.warn("[Hpmw] "+label+" mislukt vanaf "+url,error);}
   }
   throw lastError||new Error(label+" kon niet worden geladen.");
  };
  try{
-  await loadOne(["https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2","https://unpkg.com/@supabase/supabase-js@2"],"Supabase JS");
-  if(!window.supabase||!window.supabase.createClient)throw new Error("Supabase JS is geladen maar de client ontbreekt.");
-  await loadOne(["https://slytherin01.github.io/muggle-ministry/portal/helpdesk-auth.js?v=20261114-2","https://raw.githubusercontent.com/slytherin01/muggle-ministry/main/portal/helpdesk-auth.js?v=20261114-2"],"beveiligde Ticketbeheer-login");
-  if(!window.HpmwHelpdeskAuth||typeof window.HpmwHelpdeskAuth.ensure!=="function")throw new Error("De loginmodule is geladen maar HpmwHelpdeskAuth ontbreekt.");
-  await loadOne(["https://slytherin01.github.io/muggle-ministry/portal/helpdesk-sync.js?v=20261114-2","https://raw.githubusercontent.com/slytherin01/muggle-ministry/main/portal/helpdesk-sync.js?v=20261114-2"],"Ticketbeheer-synchronisatie");
-  console.info("[Hpmw] Supabase-auth en helpdesk-synchronisatie zijn geladen.");
+  await loadOne(["https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2","https://unpkg.com/@supabase/supabase-js@2"],"Supabase JS",()=>!!(window.supabase&&window.supabase.createClient));
+  await loadOne([
+   "https://cdn.jsdelivr.net/gh/slytherin01/muggle-ministry@main/portal/helpdesk-auth.js",
+   "https://slytherin01.github.io/muggle-ministry/portal/helpdesk-auth.js?v=20261114-3",
+   "https://raw.githubusercontent.com/slytherin01/muggle-ministry/main/portal/helpdesk-auth.js?v=20261114-3"
+  ],"beveiligde Ticketbeheer-login",()=>!!(window.HpmwHelpdeskAuth&&typeof window.HpmwHelpdeskAuth.ensure==="function"));
+  await loadOne([
+   "https://cdn.jsdelivr.net/gh/slytherin01/muggle-ministry@main/portal/helpdesk-sync.js",
+   "https://slytherin01.github.io/muggle-ministry/portal/helpdesk-sync.js?v=20261114-3",
+   "https://raw.githubusercontent.com/slytherin01/muggle-ministry/main/portal/helpdesk-sync.js?v=20261114-3"
+  ],"Ticketbeheer-synchronisatie",()=>!!window.HpmwHelpdeskSync);
+  console.info("[Hpmw] Beveiligde Ticketbeheer-login en synchronisatie zijn gereed.");
   return true;
  }catch(error){window.HPMW_HELPDESK_BOOT_ERROR=error;console.error("[Hpmw] Beveiligde Ticketbeheer-login niet beschikbaar",error);return false;}
 })();
