@@ -3780,3 +3780,29 @@ html body #introView #hpmwHomeLayout .hpmw-home-left .hpmw-forum-widget > .hpmw-
  object-fit:contain!important;object-position:50% 50%!important;margin:0!important;
 }
 </style>
+
+<style id="hpmw-widget-image-alignment-20261114-v12">
+/* Force one shared top-aligned artwork position; avoid per-card vertical centering. */
+html body #introView #hpmwHomeLayout aside.hpmw-home-side section.hpmw-side-card{
+ display:flex!important;flex-direction:column!important;
+}
+html body #introView #hpmwHomeLayout aside.hpmw-home-side section.hpmw-side-card > a,
+html body #introView #hpmwHomeLayout #hpmwMyDepartment .hpmw-department-content{
+ display:flex!important;flex:1 1 auto!important;align-items:flex-start!important;justify-content:center!important;
+ width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;
+ margin:0!important;padding:8px 0 0!important;box-sizing:border-box!important;overflow:hidden!important;
+}
+html body #introView #hpmwHomeLayout #hpmwMyDepartment .hpmw-department-link{
+ display:flex!important;flex:1 1 auto!important;align-items:flex-start!important;justify-content:center!important;
+ width:100%!important;height:100%!important;min-height:0!important;margin:0!important;padding:0!important;
+ box-sizing:border-box!important;overflow:hidden!important;
+}
+html body #introView #hpmwHomeLayout aside.hpmw-home-side section.hpmw-side-card > a img,
+html body #introView #hpmwHomeLayout #hpmwMyDepartment .hpmw-department-animal-image{
+ display:block!important;position:static!important;flex:none!important;
+ width:156px!important;min-width:156px!important;max-width:156px!important;
+ height:156px!important;min-height:156px!important;max-height:156px!important;
+ object-fit:contain!important;object-position:center top!important;
+ margin:0 auto!important;padding:0!important;border:0!important;transform:none!important;
+}
+</style>
