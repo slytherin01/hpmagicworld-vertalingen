@@ -3664,4 +3664,30 @@ html body main.shell>.view#myTicketsView .support-logo-wrap,
 html body main.shell>.view#myTicketsView .support-logo{display:none!important;visibility:hidden!important}
 html body main.shell>.view#myTicketsView>.page-head{padding-top:14px!important;margin-top:0!important}
 </style>
+
+<style id="hpmw-my-tickets-force-remove-banner-artwork-v2">
+/* Definitieve override: Mijn Tickets mag nergens een banner- of logo-afbeelding tonen. */
+body:has(#myTicketsView.active) main.shell>.view#myTicketsView,
+body:has(#myTicketsView.active) main.shell>.view#myTicketsView>.page-head{
+ background-image:none!important;background:none!important;
+}
+body:has(#myTicketsView.active) main.shell>.view#myTicketsView::before,
+body:has(#myTicketsView.active) main.shell>.view#myTicketsView::after,
+body:has(#myTicketsView.active) main.shell>.view#myTicketsView>.page-head::before,
+body:has(#myTicketsView.active) main.shell>.view#myTicketsView>.page-head::after,
+html body main.shell>.view#myTicketsView::before,
+html body main.shell>.view#myTicketsView::after,
+html body main.shell>.view#myTicketsView>.page-head::before,
+html body main.shell>.view#myTicketsView>.page-head::after{
+ content:none!important;display:none!important;visibility:hidden!important;opacity:0!important;
+ background:none!important;background-image:none!important;
+ width:0!important;height:0!important;min-height:0!important;max-height:0!important;
+ margin:0!important;padding:0!important;border:0!important;box-shadow:none!important;
+}
+html body main.shell>.view#myTicketsView *{background-image:none!important}
+html body main.shell>.view#myTicketsView img,
+html body main.shell>.view#myTicketsView picture,
+html body main.shell>.view#myTicketsView svg[aria-label*="logo" i]{display:none!important;visibility:hidden!important;opacity:0!important}
+html body main.shell>.view#myTicketsView>.page-head{padding:14px 18px!important;min-height:0!important;margin:0 0 16px!important}
+</style>
 </body></html>
