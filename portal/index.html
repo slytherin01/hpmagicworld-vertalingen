@@ -1374,6 +1374,7 @@ document.body.appendChild(frame);
 }
 async function resolveUser(){
 try{
+try{var saved=JSON.parse(sessionStorage.getItem('hpmw_forumotion_session')||'null');if(saved&&Date.now()-Number(saved.savedAt)<30000&&saved.logged&&Number(saved.id)>0){user={id:Number(saved.id),name:String(saved.name||'Gebruiker'),avatar:String(saved.avatar||''),logged:true};paintUser();return;}}catch(e){}
 /* De portaal-loader vervangt de oorspronkelijke Forumotion-documentcontext. Lees daarom de echte sessie vanuit een verborgen, same-origin Forumotion-pagina; zo worden de bestaande forumcookies en de door Forumotion gevulde _userdata gebruikt. */
 for(let attempt=0;attempt<24&&!window._userdata;attempt++)await new Promise(resolve=>setTimeout(resolve,250));
 if(window._userdata&&Number(window._userdata.session_logged_in)>0){
