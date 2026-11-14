@@ -1306,30 +1306,36 @@ const DEPARTMENT_INFO={
  "Ravenklauw":{image:"https://i44.servimg.com/u/f44/11/48/74/42/ravenk11.png",url:"https://testforumjoost.forumactie.com/f69-de-ravenklauw-leerlingenkamer"},
  "Ongesorteerd":{image:"https://i44.servimg.com/u/f44/11/48/74/42/ongeso10.png",url:""}
 };
+function paintDepartment(box,department){
+ const info=DEPARTMENT_INFO[department];
+ if(!info){box.innerHTML='<span class="hpmw-department-status">Afdeling nog niet ingesteld.</span>';return;}
+ const animal=info.image?'<img class="hpmw-department-animal-image" src="'+info.image+'" alt="'+esc(department)+'" decoding="async" fetchpriority="high" style="display:block!important;visibility:visible!important;opacity:1!important;width:84px!important;height:84px!important;max-width:100%!important;object-fit:contain!important;margin:0 auto!important;border:0!important;background:transparent!important">':'<span class="hpmw-department-animal">'+(info.animal||"")+"</span>";
+ box.innerHTML=info.url?'<a class="hpmw-department-link" href="'+info.url+'" target="_blank" rel="noopener" aria-label="Open leerlingenkamer '+esc(department)+'">'+animal+"</a>":animal;
+}
 async function loadMyDepartment(){
- /* De Home-widget bevat standaard direct het ongesorteerd-embleem. Geen wachtronde voor gasten. */
- const card=document.querySelector("#hpmwMyDepartment");
- const box=card?.querySelector(".hpmw-department-content");
+ const card=document.querySelector("#hpmwMyDepartment"),box=card?.querySelector(".hpmw-department-content");
  if(!card||!box)return;
- if(!user.logged||!user.id){card.style.display="";box.innerHTML='<img class="hpmw-department-animal-image" src="https://i44.servimg.com/u/f44/11/48/74/42/ongeso10.png" alt="Ongesorteerd">';return;}
  card.style.display="";
+ if(!user.logged||!user.id){paintDepartment(box,"Ongesorteerd");return;}
+ const cacheKey="hpmw_department_"+Number(user.id);
+ let cached=null;
+ try{cached=JSON.parse(localStorage.getItem(cacheKey)||"null");}catch(e){}
+ if(cached&&cached.department&&DEPARTMENT_INFO[cached.department]&&Date.now()-Number(cached.savedAt)<6*60*60*1000){paintDepartment(box,cached.department);}
  try{
-  const response=await fetch(BASE+"/u"+user.id,{credentials:"include",cache:"no-store"});
+  const response=await fetch(BASE+"/u"+user.id,{credentials:"include",cache:"force-cache"});
   if(!response.ok)throw Error("Profiel niet bereikbaar");
   const doc=new DOMParser().parseFromString(await response.text(),"text/html");
-  const field=doc.querySelector("#field_id3 .field_uneditable, #field_id3");
-  const fieldImage=field?.querySelector("img");
-  const fieldImageSrc=fieldImage?.getAttribute("src")||fieldImage?.getAttribute("data-src")||"";
-  const raw=(fieldImage?.getAttribute("alt")||fieldImage?.getAttribute("title")||field?.textContent||"").trim();
+  const field=doc.querySelector("#field_id3 .field_uneditable, #field_id3"),img=field?.querySelector("img");
+  const src=img?.getAttribute("src")||img?.getAttribute("data-src")||"";
+  const raw=(img?.getAttribute("alt")||img?.getAttribute("title")||field?.textContent||"").trim();
   const normalized=raw.toLocaleLowerCase("nl").normalize("NFD").replace(/[^a-z]/g,"");
-  const imageName=fieldImageSrc.toLocaleLowerCase("nl").split(/[?#]/)[0].split("/").pop()||"";
+  const imageName=src.toLocaleLowerCase("nl").split(/[?#]/)[0].split("/").pop()||"";
   const aliases={"griffoendor":"Griffoendor","zwadderich":"Zwadderich","huffelpuf":"Huffelpuf","ravenklauw":"Ravenklauw","ongesorteerd":"Ongesorteerd"};
   const department=(imageName==="ongeso10.png"||imageName.includes("ongeso"))?"Ongesorteerd":(aliases[normalized]||Object.keys(DEPARTMENT_INFO).find(name=>normalized.includes(name.toLocaleLowerCase("nl").normalize("NFD").replace(/[^a-z]/g,""))));
-  const info=department?DEPARTMENT_INFO[department]:null;
-  if(!info){box.innerHTML='<span class="hpmw-department-status">Afdeling nog niet ingesteld.</span>';return;}
-  const animal=info.image?'<img class="hpmw-department-animal-image" src="'+info.image+'" alt="'+esc(department)+'" style="display:block!important;visibility:visible!important;opacity:1!important;width:84px!important;height:84px!important;max-width:100%!important;object-fit:contain!important;margin:0 auto!important;border:0!important;background:transparent!important">':'<span class="hpmw-department-animal">'+info.animal+'</span>';
-  box.innerHTML=info.url?'<a class="hpmw-department-link" href="'+info.url+'" target="_blank" rel="noopener" aria-label="Open leerlingenkamer '+esc(department)+'">'+animal+'</a>':animal;
- }catch(e){box.innerHTML='<span class="hpmw-department-status">Je afdeling kon niet worden opgehaald.</span>';}
+  if(!department){if(!cached)box.innerHTML='<span class="hpmw-department-status">Afdeling nog niet ingesteld.</span>';return;}
+  paintDepartment(box,department);
+  try{localStorage.setItem(cacheKey,JSON.stringify({department,savedAt:Date.now()}));}catch(e){}
+ }catch(e){if(!cached)box.innerHTML='<span class="hpmw-department-status">Je afdeling kon niet worden opgehaald.</span>';console.warn("[Hpmw] Afdeling ophalen mislukt:",e);}
 }
 async function readLiveForumotionUser(){
 return await new Promise(resolve=>{
