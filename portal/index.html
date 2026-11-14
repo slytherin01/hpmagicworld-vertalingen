@@ -1569,6 +1569,60 @@ html body #introView #hpmwHomeLayout .hpmw-sorting-hat-widget > button.hpmw-sort
  #sortingHatView .hpmw-sort-combined-top,
  #vacanciesView .hpmw-vacancies-heading-panel{align-items:flex-start!important;flex-direction:column!important}
 }
+</style><style id="hpmw-real-single-card-structure">
+/* The single outer card owns the background; every inner section stays transparent. */
+#sortingHatView .hpmw-sort-one-card,
+#vacanciesView .hpmw-vacancies-combined{
+ display:block!important;box-sizing:border-box!important;width:100%!important;
+ margin:0 auto 22px!important;padding:28px!important;
+ background:#101f33!important;background-image:none!important;
+ border:1px solid #344b67!important;border-radius:18px!important;
+ box-shadow:0 16px 38px rgba(0,0,0,.28)!important;overflow:hidden!important;
+}
+#sortingHatView .hpmw-sort-one-card>.hpmw-sort-hero,
+#sortingHatView .hpmw-sort-one-card .hpmw-sort-form-heading,
+#sortingHatView .hpmw-sort-one-card #sortingRequestForm,
+#sortingHatView .hpmw-sort-one-card #sortingRequestForm .form-grid,
+#sortingHatView .hpmw-sort-one-card #sortingRequestForm .field,
+#sortingHatView .hpmw-sort-one-card #sortingRequestForm .actions,
+#vacanciesView .hpmw-vacancies-combined>.hpmw-vacancies-heading-panel,
+#vacanciesView .hpmw-vacancies-combined>#hpmwVacancyList,
+#vacanciesView .hpmw-vacancies-combined>#hpmwVacancyDetail{
+ background:transparent!important;background-color:transparent!important;background-image:none!important;
+ border-color:transparent!important;border-radius:0!important;box-shadow:none!important;
+}
+#sortingHatView .hpmw-sort-one-card>.hpmw-sort-hero{
+ width:100%!important;max-width:none!important;margin:0!important;padding:0!important;
+}
+#sortingHatView .hpmw-sort-one-card .hpmw-sort-combined-top{
+ border-bottom:1px solid #344b67!important;padding:0 0 20px!important;margin:0 0 20px!important;
+}
+#sortingHatView .hpmw-sort-one-card .hpmw-sort-form-heading{
+ border-top:1px solid #344b67!important;border-bottom:1px solid #344b67!important;
+ padding:18px 0 12px!important;margin:26px 0 14px!important;
+}
+#sortingHatView .hpmw-sort-one-card #sortingRequestForm .field input:not([type=checkbox]),
+#sortingHatView .hpmw-sort-one-card #sortingRequestForm .field select,
+#sortingHatView .hpmw-sort-one-card #sortingRequestForm .field textarea{
+ background:#101f33!important;border:1px solid #344b67!important;color:#edf4ff!important;
+}
+#vacanciesView .hpmw-vacancies-combined>.hpmw-vacancies-heading-panel{
+ padding:0 0 22px!important;margin:0 0 18px!important;border-bottom:1px solid #344b67!important;
+}
+#vacanciesView .hpmw-vacancies-combined #hpmwVacancyList,
+#vacanciesView .hpmw-vacancies-combined #hpmwVacancyDetail{
+ padding:18px 0!important;margin:0!important;min-height:140px!important;
+}
+#vacanciesView .hpmw-vacancies-combined .hpmw-vacancy-public{
+ background:#101f33!important;border:1px solid #344b67!important;
+}
+@media(max-width:620px){
+ #sortingHatView .hpmw-sort-one-card,#vacanciesView .hpmw-vacancies-combined{padding:20px!important}
+ #sortingHatView .hpmw-sort-one-card .hpmw-sort-combined-top,
+ #vacanciesView .hpmw-vacancies-combined>.hpmw-vacancies-heading-panel{
+  align-items:flex-start!important;flex-direction:column!important;
+ }
+}
 </style></head><body><header class="topbar luxury-nav-v2"><nav aria-label="Support navigatie" class="top-actions"><a class="lux-nav-item" href="https://testforumjoost.forumactie.com/forum" rel="noopener noreferrer" target="_blank"><span class="lux-nav-icon"><i class="fa-solid fa-comments"></i></span><span class="lux-nav-label">Forum</span></a><a class="lux-nav-item" href="https://testforumjoost.forumactie.com/h3-portaal" target="_self"><span class="lux-nav-icon"><i class="fa-solid fa-house"></i></span><span class="lux-nav-label">Portaal</span></a><button aria-expanded="false" aria-haspopup="dialog" class="lux-nav-item" id="faqLaunch" type="button"><span class="lux-nav-icon"><i class="fa-solid fa-circle-question"></i></span><span class="lux-nav-label">FAQ</span></button><button aria-expanded="false" class="lux-nav-item" id="ticketSupportLaunch" type="button"><span class="lux-nav-icon"><i class="fa-solid fa-ticket"></i></span><span class="lux-nav-label">Ticket Support</span></button>
 <button class="lux-nav-item" id="adminLaunch" type="button" style="display:none"><span class="lux-nav-icon"><i class="fa-solid fa-shield-halved"></i></span><span class="lux-nav-label">Ticketbeheer</span></button><label aria-label="Taal kiezen" class="hpmw-language-wrap" for="hpmwLanguage"><i aria-hidden="true" class="fa-solid fa-language"></i><select id="hpmwLanguage"><option selected="" value="nl">Nederlands</option><option value="en">English</option><option value="pt">Português</option></select></label><button class="lux-nav-item" data-extracted-style="2" id="myTicketsLaunch" style="display:none"><span class="lux-nav-icon"><i class="fa-solid fa-envelope"></i></span><span class="lux-nav-label">Mijn tickets</span><b class="count-badge" id="myTicketsCount">0</b></button><a class="lux-nav-item lux-user" href="/login" id="accountLink"><span class="lux-nav-icon"><i class="fa-solid fa-user"></i></span><span class="lux-nav-usertext"><small>INGELOGD ALS</small><strong id="username">Gast</strong></span></a></nav></header><div class="hpmw-global-brandbar" role="banner" aria-label="Muggle Ministry"></div><main class="shell"><section class="view active" id="introView">
 <!-- EIGEN AFBEELDING VOOR DEZE PAGINA: vervang IMAGE_URL_HIER en LINK_URL_HIER.
@@ -1608,7 +1662,7 @@ html body #introView #hpmwHomeLayout .hpmw-sorting-hat-widget > button.hpmw-sort
 -->
 <div class="page-head"><div><div class="eyebrow">Mijn support</div><h1>Mijn Tickets</h1><p class="subtitle">Bekijk je eigen open en gesloten tickets.</p></div><button class="btn" id="myTicketsBack"><span class="fa-button-icon"><i class="fa-solid fa-arrow-left hm-fa"></i></span> Terug</button></div><div class="panel"><div class="member-tabs"><button class="member-tab active" data-member-tab="open"><span class="fa-button-icon"><i class="fa-solid fa-folder-open hm-fa"></i></span> Open</button><button class="member-tab" data-member-tab="closed"><span class="fa-button-icon"><i class="fa-solid fa-folder hm-fa"></i></span> Gesloten</button></div><div class="ticket-list" id="myTicketsList"><div class="loading">Mijn tickets laden...</div></div><div class="member-detail" id="memberDetail"><div class="detail-head"><div data-extracted-style="4"><div class="detail-kicker">MIJN TICKET</div><div class="detail-title" id="memberDetailTitle"></div><div class="detail-facts" id="memberFacts"><div><small>Ticket ID</small><strong id="memberFactId">—</strong></div><div><small>Onderwerp</small><strong id="memberFactSubject">—</strong></div><div><small>Categorie</small><strong id="memberFactCategory">—</strong></div><div><small>Auteur</small><strong id="memberFactAuthor">—</strong></div><div><small>Datum / tijd</small><strong id="memberFactDateTime">—</strong></div></div><div class="detail-sub" id="memberDetailMeta"></div></div><button class="btn" id="memberDetailBack"><span class="fa-button-icon"><i class="fa-solid fa-arrow-left hm-fa"></i></span> Terug naar mijn tickets</button></div><div class="member-posts" id="memberPosts"></div><div class="reply-box"><h3>Reactie plaatsen</h3><textarea id="memberReply" placeholder="Schrijf je reactie..."></textarea><div class="reply-status" id="memberReplyStatus"></div><div class="reply-actions"><button class="btn primary" id="memberReplySend"><span class="fa-button-icon"><i class="fa-solid fa-paper-plane hm-fa"></i></span> Reactie versturen</button></div></div><div class="reply-box" id="memberEditBox"><h3>Bewerk je eerste bericht</h3><div class="member-edit-note" id="memberEditNote"></div><textarea id="memberEditMessage" placeholder="Pas je eerste bericht aan..."></textarea><div class="reply-status" id="memberEditStatus"></div><div class="reply-actions"><button class="btn primary" id="memberEditSend"><span class="fa-button-icon"><i class="fa-solid fa-pen-to-square hm-fa"></i></span> Wijzigingen opslaan</button></div></div><div class="close-request" id="memberCloseRequest"><strong>Ticket sluiten aanvragen</strong><p>Wil je dat support dit ticket sluit? Na bevestiging ontvangt de support moderator een melding.</p><div class="close-request-actions"><button class="btn" id="memberCloseRequestBtn"><span class="fa-button-icon"><i class="fa-solid fa-lock hm-fa"></i></span> Sluiten aanvragen</button><button class="btn primary" data-extracted-style="5" id="memberCloseConfirm"><span class="fa-button-icon"><i class="fa-solid fa-check hm-fa"></i></span> Bevestigen</button><button class="btn" data-extracted-style="6" id="memberCloseCancel"><span class="fa-button-icon"><i class="fa-solid fa-xmark hm-fa"></i></span> Annuleren</button></div><div class="reply-status" id="memberCloseStatus"></div></div></div></div></section><section class="view" id="sortingHatView">
  <div class="hpmw-sort-shell">
-  <section class="hpmw-sort-hero hpmw-sort-combined">
+  <section class="hpmw-sort-one-card"><div class="hpmw-sort-hero hpmw-sort-combined">
    <div class="hpmw-sort-combined-top">
     <div class="hpmw-sort-heading"><div class="eyebrow">Zweinstein</div><h1>De Sorteerhoed</h1><p class="subtitle">Kies je afdeling of ontdek welke afdeling bij jou past.</p></div>
     <button class="btn" id="sortingHatBack" type="button"><i class="fa-solid fa-arrow-left"></i> Terug naar portaal</button>
@@ -1624,7 +1678,7 @@ html body #introView #hpmwHomeLayout .hpmw-sorting-hat-widget > button.hpmw-sort
     <div class="field full"><label class="transfer-check" for="sortTransfer"><input id="sortTransfer" type="checkbox"> Ik vraag uitzonderlijk een verhuizing naar een andere afdeling aan</label><div class="hint">Een afdelingsverhuizing is een uitzondering. Je verzoek kan worden afgewezen als er geen duidelijke reden is.</div><div class="transfer-reason" id="sortTransferReason" hidden><label for="sortReason">Reden voor de verhuizing *</label><textarea id="sortReason" maxlength="1200" placeholder="Leg duidelijk uit waarom je naar een andere afdeling wilt verhuizen."></textarea></div></div>
     <div class="field full"><label for="sortMessage">Vragen of opmerkingen</label><textarea id="sortMessage" maxlength="1500" placeholder="Heb je vragen of wil je iets toevoegen? (optioneel)"></textarea></div>
    </div><div class="actions"><button class="btn primary" id="sortSubmit" type="submit"><i class="fa-solid fa-paper-plane"></i> Aanvraag versturen</button></div><div class="form-status" id="sortStatus" role="status" aria-live="polite"></div></form>
-  </section>
+  </div></section>
  </div>
 </section>
 <section class="view" id="vacanciesView">
