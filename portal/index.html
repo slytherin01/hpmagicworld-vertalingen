@@ -3583,4 +3583,10 @@ html body #introView #hpmwHomeLayout .hpmw-home-side > .hpmw-side-card .hpmw-enc
 .hpmw-coming-soon-content>i{font-size:32px;color:#dce5f0}.hpmw-coming-soon-content strong{font-size:13px;color:#fff}.hpmw-coming-soon-content span{font-size:11px}
 @media(max-width:700px){.hpmw-intro-quicklinks{gap:7px}.hpmw-intro-quicklinks a,.hpmw-intro-quicklinks button{flex:1 1 140px}}
 </style>
+
+<style id="hpmw-ticket-support-single-banner">
+/* Ticket Support gebruikt alleen de vaste globale banner bovenaan. Verwijder de extra bannerpseudo's binnen deze view. */
+#homeView::before,#homeView::after{content:none!important;display:none!important;background:none!important;background-image:none!important;height:0!important;min-height:0!important;margin:0!important;padding:0!important;border:0!important;box-shadow:none!important}
+#homeView .support-logo-wrap,#homeView .support-logo{display:none!important}
+</style>
 </body></html>
