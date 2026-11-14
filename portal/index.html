@@ -1491,6 +1491,42 @@ html body #introView #hpmwHomeLayout .hpmw-sorting-hat-widget > button.hpmw-sort
  #sortingHatView .hpmw-sort-hero.hpmw-sort-combined{padding:20px!important}
  #sortingHatView .hpmw-sort-combined-top{align-items:flex-start!important;flex-direction:column!important}
 }
+</style><style id="hpmw-sorting-hat-one-card-with-form">
+#sortingHatView .hpmw-sort-shell{max-width:900px!important;margin:0 auto!important}
+#sortingHatView .hpmw-sort-hero.hpmw-sort-combined{
+ background:#101f33!important;background-image:none!important;
+ border:1px solid #344b67!important;border-radius:18px!important;
+ padding:26px 30px!important;box-shadow:0 16px 38px rgba(0,0,0,.28)!important;
+}
+#sortingHatView .hpmw-sort-combined-top{padding-bottom:20px!important;margin-bottom:20px!important;border-bottom:1px solid #344b67!important}
+#sortingHatView .hpmw-sort-combined .hpmw-sort-form-heading{
+ display:flex!important;align-items:center!important;justify-content:space-between!important;gap:14px!important;
+ margin:28px 0 16px!important;padding:17px 0 12px!important;
+ border-top:1px solid #344b67!important;border-bottom:1px solid #344b67!important;
+ text-align:left!important;background:transparent!important;
+}
+#sortingHatView .hpmw-sort-form-heading h2{margin:0!important;color:#f3f6fb!important;font-size:19px!important}
+#sortingHatView .hpmw-sort-form-heading p{margin:0!important;color:#c2cedd!important;font-size:13px!important}
+#sortingHatView #sortingRequestForm{margin:0!important;padding:0!important;background:transparent!important}
+#sortingHatView #sortingRequestForm .form-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:16px!important}
+#sortingHatView #sortingRequestForm .field{min-width:0!important}
+#sortingHatView #sortingRequestForm .field.full{grid-column:1/-1!important}
+#sortingHatView #sortingRequestForm label{color:#dce8f6!important}
+#sortingHatView #sortingRequestForm .hint{background:transparent!important;border:0!important;padding:6px 0!important;color:#aebfd2!important}
+#sortingHatView #sortingRequestForm input:not([type=checkbox]),
+#sortingHatView #sortingRequestForm select,
+#sortingHatView #sortingRequestForm textarea{
+ width:100%!important;box-sizing:border-box!important;background:#101f33!important;
+ border:1px solid #344b67!important;color:#edf4ff!important;border-radius:9px!important;
+}
+#sortingHatView #sortingRequestForm .transfer-reason{background:#101f33!important;border:1px solid #344b67!important}
+#sortingHatView #sortingRequestForm .actions{display:flex!important;justify-content:flex-end!important;margin-top:16px!important}
+#sortingHatView #sortingRequestForm .btn.primary{background:#203b5b!important;border:1px solid #49617e!important;color:#fff!important}
+@media(max-width:620px){
+ #sortingHatView .hpmw-sort-hero.hpmw-sort-combined{padding:20px!important}
+ #sortingHatView #sortingRequestForm .form-grid{grid-template-columns:1fr!important}
+ #sortingHatView .hpmw-sort-form-heading{align-items:flex-start!important;flex-direction:column!important}
+}
 </style></head><body><header class="topbar luxury-nav-v2"><nav aria-label="Support navigatie" class="top-actions"><a class="lux-nav-item" href="https://testforumjoost.forumactie.com/forum" rel="noopener noreferrer" target="_blank"><span class="lux-nav-icon"><i class="fa-solid fa-comments"></i></span><span class="lux-nav-label">Forum</span></a><a class="lux-nav-item" href="https://testforumjoost.forumactie.com/h3-portaal" target="_self"><span class="lux-nav-icon"><i class="fa-solid fa-house"></i></span><span class="lux-nav-label">Portaal</span></a><button aria-expanded="false" aria-haspopup="dialog" class="lux-nav-item" id="faqLaunch" type="button"><span class="lux-nav-icon"><i class="fa-solid fa-circle-question"></i></span><span class="lux-nav-label">FAQ</span></button><button aria-expanded="false" class="lux-nav-item" id="ticketSupportLaunch" type="button"><span class="lux-nav-icon"><i class="fa-solid fa-ticket"></i></span><span class="lux-nav-label">Ticket Support</span></button>
 <button class="lux-nav-item" id="adminLaunch" type="button" style="display:none"><span class="lux-nav-icon"><i class="fa-solid fa-shield-halved"></i></span><span class="lux-nav-label">Ticketbeheer</span></button><label aria-label="Taal kiezen" class="hpmw-language-wrap" for="hpmwLanguage"><i aria-hidden="true" class="fa-solid fa-language"></i><select id="hpmwLanguage"><option selected="" value="nl">Nederlands</option><option value="en">English</option><option value="pt">Português</option></select></label><button class="lux-nav-item" data-extracted-style="2" id="myTicketsLaunch" style="display:none"><span class="lux-nav-icon"><i class="fa-solid fa-envelope"></i></span><span class="lux-nav-label">Mijn tickets</span><b class="count-badge" id="myTicketsCount">0</b></button><a class="lux-nav-item lux-user" href="/login" id="accountLink"><span class="lux-nav-icon"><i class="fa-solid fa-user"></i></span><span class="lux-nav-usertext"><small>INGELOGD ALS</small><strong id="username">Gast</strong></span></a></nav></header><div class="hpmw-global-brandbar" role="banner" aria-label="Muggle Ministry"></div><main class="shell"><section class="view active" id="introView">
 <!-- EIGEN AFBEELDING VOOR DEZE PAGINA: vervang IMAGE_URL_HIER en LINK_URL_HIER.
@@ -1540,7 +1576,7 @@ html body #introView #hpmwHomeLayout .hpmw-sorting-hat-widget > button.hpmw-sort
    <p>Vul je aanvraag in of doe eerst de afdelingsquiz.</p>
    <button class="btn" id="sortingHatQuizOpen" type="button"><i class="fa-solid fa-hat-wizard"></i> Doe de afdelingsquiz</button>
   </section>
-  <section class="panel hpmw-sort-panel"><div class="panel-head"><h2><i class="fa-solid fa-feather-pointed"></i> Aanvraagformulier</h2><p>Vul de verplichte velden in.</p></div>
+  <div class="hpmw-sort-form-heading"><h2><i class="fa-solid fa-feather-pointed"></i> Aanvraagformulier</h2><p>Vul de verplichte velden in.</p></div>
    <form id="sortingRequestForm"><div class="form-grid">
     <div class="field"><label for="sortDepartment">Gewenste afdeling *</label><select id="sortDepartment" required><option value="">Kies een afdeling</option><option>Griffoendor</option><option>Zwadderich</option><option>Huffelpuf</option><option>Ravenklauw</option></select></div>
     <div class="field"><label>Gebruikersnaam</label><input id="sortApplicant" readonly></div>
